@@ -5,8 +5,17 @@ This is a simple client-server application for face detection using YOLOv3. The 
 ## Requirements
 
 - Python 3
-- OpenCV (cv2)
-- NumPy
+- Pip
+
+## Installation
+
+- Clone the repo and install the required Python packages.
+
+    ```bash
+    git clone https://github.com/PedroDSFerreira/osm-mec.git
+    cd osm-mec/app-demo
+    pip install -r requirements.txt
+    ```
 
 ## Usage
 
