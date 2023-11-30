@@ -1,11 +1,10 @@
+import argparse
 import concurrent.futures
 import pickle
 import socket
 import struct
 
 from face_detection import count_faces
-
-PORT = 10050
 
 
 def receive_video(client_socket, _):
@@ -58,12 +57,19 @@ def handle_client(client_socket, addr):
 
 
 def main():
+    # Add a command-line argument for the port
+    parser = argparse.ArgumentParser(description="Server for Face Detection App")
+    parser.add_argument("-p", type=int, default=10050, help="Port number")
+    args = parser.parse_args()
+
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
     print("HOST IP:", host_ip)
-    socket_address = (host_ip, PORT)
-    print("Socket created")
+
+    # Use the port from the command-line argument
+    socket_address = (host_ip, args.port)
+    print(f"Socket created. Listening on port {args.port}")
 
     server_socket.bind(socket_address)
     print("Socket bind complete")

@@ -1,3 +1,4 @@
+import argparse
 import pickle
 import socket
 import struct
@@ -5,9 +6,6 @@ import sys
 import threading
 
 import cv2
-
-HOST_IP = "192.168.12.138"
-PORT = 10050
 
 
 def receive_values(client_socket):
@@ -54,8 +52,13 @@ def send_video(client_socket):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Client for Face Detection App")
+    parser.add_argument("-h", type=str, default="127.0.0.1", help="Host IP address")
+    parser.add_argument("-p", type=int, default=10050, help="Port number")
+    args = parser.parse_args()
+
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((HOST_IP, PORT))
+    client_socket.connect((args.host, args.port))
 
     try:
         # Start a thread for receiving values
