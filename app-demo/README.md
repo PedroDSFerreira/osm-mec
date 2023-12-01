@@ -5,7 +5,6 @@ This is a simple client-server application for face detection using YOLOv3. The 
 ## Requirements
 
 - Python 3
-- Pip
 
 ## Installation
 
@@ -59,8 +58,7 @@ The client will establish a connection with the server and start sending video f
 
 ## Configuration
 
-- The server IP address and port can be configured in the `server.py` script.
-- The YOLO model configuration file (`yolov3.cfg`), weights file (`yolov3.weights`), and class names file (`coco.names`) should be placed in the `yolo` directory.
+The YOLO model configuration file (`yolov3.cfg`), weights file (`yolov3.weights`), and class names file (`coco.names`) should be placed in the `yolo` directory.
 
 ## Dependencies
 
