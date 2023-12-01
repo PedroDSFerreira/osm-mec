@@ -53,12 +53,12 @@ def send_video(client_socket):
 
 def main():
     parser = argparse.ArgumentParser(description="Client for Face Detection App")
-    parser.add_argument("-h", type=str, default="127.0.0.1", help="Host IP address")
-    parser.add_argument("-p", type=int, default=10050, help="Port number")
+    parser.add_argument("--h", type=str, default="127.0.0.1", help="Host IP address")
+    parser.add_argument("--p", type=int, default=10050, help="Port number")
     args = parser.parse_args()
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((args.host, args.port))
+    client_socket.connect((args.h, args.p))
 
     try:
         # Start a thread for receiving values

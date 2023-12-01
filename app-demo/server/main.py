@@ -59,7 +59,7 @@ def handle_client(client_socket, addr):
 def main():
     # Add a command-line argument for the port
     parser = argparse.ArgumentParser(description="Server for Face Detection App")
-    parser.add_argument("-p", type=int, default=10050, help="Port number")
+    parser.add_argument("--p", type=int, default=10050, help="Port number")
     args = parser.parse_args()
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -68,8 +68,8 @@ def main():
     print("HOST IP:", host_ip)
 
     # Use the port from the command-line argument
-    socket_address = (host_ip, args.port)
-    print(f"Socket created. Listening on port {args.port}")
+    socket_address = (host_ip, args.p)
+    print(f"Socket created. Listening on port {args.p}")
 
     server_socket.bind(socket_address)
     print("Socket bind complete")
