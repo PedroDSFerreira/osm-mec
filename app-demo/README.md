@@ -1,6 +1,6 @@
-# Client-Server Face Detection Application
+# Client-Server People Detection Application
 
-This is a simple client-server application for face detection using YOLOv3. The server receives video frames from clients, processes them using YOLOv3 for face detection, and returns the count of detected faces back to the clients.
+This is a simple client-server application for people detection using YOLOv3. The server receives video frames from clients, processes them using YOLOv3 for people detection, and returns the number of detected people and their respective position back to the clients.
 
 ## Requirements
 
@@ -54,15 +54,15 @@ The server will start listening for incoming connections on the specified port.
    python client.py --h <host_ip> --p <port>
    ```
 
-The client will establish a connection with the server and start sending video frames. The server will process each frame and return the count of detected faces to the client.
+The client will establish a connection with the server and start sending video frames. The server will process each frame and return the number of detected people and positions to the client.
 
 ## Configuration
 
 - The YOLO model configuration file (`yolov3.cfg`), weights file (`yolov3.weights`), and class names file (`coco.names`) should be placed in the `yolo` directory.
-- In the 'server/face_detection.py' file, you can customize the face detection parameters:
-  - confidence_thresh: Adjust the confidence threshold for face detection. Faces with confidence below this threshold will not be counted.
+- In the 'server/face_detection.py' file, you can customize the people detection parameters:
+  - confidence_thresh: Adjust the confidence threshold for people detection. People with confidence below this threshold will not be counted.
   - NMS_thresh: Set the Non-Maximum Suppression (NMS) threshold to control the overlap of bounding boxes.
-    Feel free to experiment with these parameters to optimize face detection based on your specific use case.
+    Feel free to experiment with these parameters to optimize people detection based on your specific use case.
 
 ## Dependencies
 
