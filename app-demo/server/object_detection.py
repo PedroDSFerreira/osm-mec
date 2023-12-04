@@ -26,13 +26,13 @@ layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
-def count_faces(frame):
+def detect_objects(frame, object="person"):
     # get the frame dimensions
     h, w = frame.shape[:2]
 
     # create a blob from the frame
     blob = cv2.dnn.blobFromImage(frame, 1 / 255, (416, 416), swapRB=True, crop=False)
-    # pass the blog through the network and get the output predictions
+    # pass the blob through the network and get the output predictions
     net.setInput(blob)
     outputs = net.forward(output_layers)
 
@@ -49,19 +49,34 @@ def count_faces(frame):
             class_id = np.argmax(scores)
             confidence = scores[class_id]
 
-            # check if the detected object is a person face (class_id 0 corresponds to "person" in COCO dataset)
-            if confidence > confidence_thresh and classes[class_id] == "person":
-                # perform element-wise multiplication to get
-                # the coordinates of the bounding box
-                box = [int(a * b) for a, b in zip(detection[0:4], [w, h, w, h])]
+            # check if the detected object is a person
+            if confidence > confidence_thresh and classes[class_id] == object:
+                # get the coordinates of the bounding box
+                center_x, center_y, box_width, box_height = (
+                    detection[0] * w,
+                    detection[1] * h,
+                    detection[2] * w,
+                    detection[3] * h,
+                )
+                # calculate top-left corner coordinates
+                x = int(center_x - box_width / 2)
+                y = int(center_y - box_height / 2)
+                # calculate bottom-right corner coordinates
+                box = [x, y, x + int(box_width), y + int(box_height)]
                 boxes.append(box)
                 confidences.append(float(confidence))
 
     # apply non-maximum suppression to remove weak bounding boxes that overlap with others.
     indices = cv2.dnn.NMSBoxes(boxes, confidences, confidence_thresh, NMS_thresh)
 
+    # initialize variables to store the positions of bounding boxes
+    detected_objects = 0
+    object_positions = []
+
     if indices is not None and len(indices) > 0:
         indices = indices.flatten()
+        detected_objects = len(indices)
+        object_positions = [boxes[i] for i in indices]
 
-    # return the total number of faces detected
-    return len(indices)
+    # return the total number of objects detected and the positions of bounding boxes
+    return detected_objects, object_positions

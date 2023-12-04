@@ -1,21 +1,21 @@
 import argparse
+import json
 import logging
 import socket
 
 import cv2
 import numpy as np
-from face_detection import count_faces
+from object_detection import detect_objects
 
 DEFAULT_PORT = 10050
 DEFAULT_HOST = "127.0.0.1"
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 
 
 def handle_client(client_socket, client_address):
     try:
-        logging.info(f"{client_address}:Connection started")
+        logging.info(f"{client_address}: Connection started")
 
         while True:
             data = b""
@@ -34,19 +34,29 @@ def handle_client(client_socket, client_address):
                 )
 
                 if image_array is not None:
-                    # Count the number of faces in the frame
-                    num_faces = count_faces(image_array)
-                    # Send the number of faces to the client
-                    client_socket.sendall(str(num_faces).encode("utf-8"))
-                    logging.info(f"{client_address}:Faces: {num_faces}")
+                    # Detect people and get their positions
+                    num_people, people_positions = detect_objects(image_array)
+
+                    # Serialize the people positions
+                    people_data = {"count": num_people, "positions": people_positions}
+                    serialized_people_data = json.dumps(people_data)
+
+                    # Send the serialized people data to the client
+                    client_socket.sendall(serialized_people_data.encode("utf-8"))
+
+                    # Log the number of people detected
+                    logging.info(
+                        f"{client_address}: {num_people} people detected in the image"
+                    )
+
             else:
                 break
 
     except Exception as e:
-        logging.error(f"{client_address}:Error: {e}")
+        logging.error(f"{client_address}: Error: {e}")
 
     finally:
-        logging.info(f"{client_address}:Connection closed")
+        logging.info(f"{client_address}: Connection closed")
         client_socket.close()
 
 
@@ -69,7 +79,7 @@ def main_server(host, port):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Server for Face Detection App")
+    parser = argparse.ArgumentParser(description="Server for Object Detection App")
     parser.add_argument(
         "--h",
         type=str,
