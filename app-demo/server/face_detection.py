@@ -49,9 +49,8 @@ def count_faces(frame):
             class_id = np.argmax(scores)
             confidence = scores[class_id]
 
-            # filter out weak detections by keeping only those with a confidence
-            # above the minimum confidence threshold (0.5 in this case).
-            if confidence > confidence_thresh:
+            # check if the detected object is a person face (class_id 0 corresponds to "person" in COCO dataset)
+            if confidence > confidence_thresh and classes[class_id] == "person":
                 # perform element-wise multiplication to get
                 # the coordinates of the bounding box
                 box = [int(a * b) for a, b in zip(detection[0:4], [w, h, w, h])]

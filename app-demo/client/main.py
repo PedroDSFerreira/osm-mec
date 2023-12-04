@@ -1,77 +1,89 @@
 import argparse
-import pickle
 import socket
-import struct
-import sys
 import threading
 
 import cv2
 
-
-def receive_values(client_socket):
-    while True:
-        data = b""
-        payload_size = struct.calcsize("Q")
-
-        while len(data) < payload_size:
-            packet = client_socket.recv(4 * 1024)
-            if not packet:
-                break
-            data += packet
-
-        packed_msg_size = data[:payload_size]
-        data = data[payload_size:]
-        msg_size = struct.unpack("Q", packed_msg_size)[0]
-
-        while len(data) < msg_size:
-            data += client_socket.recv(4 * 1024)
-
-        value_data = data[:msg_size]
-        data = data[msg_size:]
-        value = pickle.loads(value_data)
-        print(f"\rReceived from server:{value}", end="")
-        sys.stdout.write("\033[K")
+DEFAULT_PORT = 10050
+DEFAULT_HOST = "127.0.0.1"
 
 
-def send_video(client_socket):
-    vid = cv2.VideoCapture(0)
-
-    while vid.isOpened():
-        _, frame = vid.read()
-        a = pickle.dumps(frame)
-        message = struct.pack("Q", len(a)) + a
-        client_socket.sendall(message)
-        cv2.imshow("Sending...", frame)
-        key = cv2.waitKey(10)
-        if key == 13:
+def receive_faces_data(client_socket, exit_event):
+    while not exit_event.is_set():
+        try:
+            # Receive the number of faces from the server
+            faces_data = client_socket.recv(4096)
+            num_faces = int(faces_data.decode())
+            print(f"Number of Faces: {num_faces}")
+        except Exception as e:
+            print(f"Error receiving faces data: {e}")
             break
 
-    vid.release()
-    cv2.destroyAllWindows()
-    client_socket.close()
 
-
-def main():
-    parser = argparse.ArgumentParser(description="Client for Face Detection App")
-    parser.add_argument("--h", type=str, default="127.0.0.1", help="Host IP address")
-    parser.add_argument("--p", type=int, default=10050, help="Port number")
-    args = parser.parse_args()
-
+def main_client(host, port):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((args.h, args.p))
+    client_socket.connect((host, port))
+    print(f"Connected to {host}:{port}")
+
+    cap = cv2.VideoCapture(0)
+
+    # Event to signal the faces thread to exit
+    exit_event = threading.Event()
+
+    # Start a separate thread to receive face count data
+    faces_thread = threading.Thread(
+        target=receive_faces_data, args=(client_socket, exit_event)
+    )
+    faces_thread.start()
 
     try:
-        # Start a thread for receiving values
-        value_thread = threading.Thread(target=receive_values, args=(client_socket,))
-        value_thread.start()
+        while True:
+            _, frame = cap.read()
 
-        # Send video to the server
-        send_video(client_socket)
-    except Exception as e:
-        print("Error:", e)
+            # Encode the image array to send it over the network
+            _, img_encoded = cv2.imencode(
+                ".jpg", frame, [int(cv2.IMWRITE_JPEG_QUALITY), 80]
+            )
+            data = img_encoded.tobytes() + b"<<END>>"
+
+            # Send the image data
+            client_socket.sendall(data)
+
+            # Display the video stream
+            cv2.imshow("Client Stream", frame)
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                data = b"<<END>>"
+                client_socket.sendall(data)
+                break
+
+    except KeyboardInterrupt:
+        pass
     finally:
+        # Signal the faces thread to exit
+        exit_event.set()
+
+        # Wait for the faces thread to complete
+        faces_thread.join()
+
+        cap.release()
         cv2.destroyAllWindows()
+        client_socket.close()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Client for Face Detection App")
+    parser.add_argument(
+        "--h",
+        type=str,
+        default=DEFAULT_HOST,
+        help=f"Host IP address (default: {DEFAULT_HOST})",
+    )
+    parser.add_argument(
+        "--p",
+        type=int,
+        default=DEFAULT_PORT,
+        help=f"Port number (default: {DEFAULT_PORT})",
+    )
+    args = parser.parse_args()
+
+    main_client(args.h, args.p)

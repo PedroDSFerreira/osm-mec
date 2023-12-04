@@ -1,88 +1,87 @@
 import argparse
-import concurrent.futures
-import pickle
+import logging
 import socket
-import struct
 
+import cv2
+import numpy as np
 from face_detection import count_faces
 
+DEFAULT_PORT = 10050
+DEFAULT_HOST = "127.0.0.1"
 
-def receive_video(client_socket, _):
-    data = b""
-    payload_size = struct.calcsize("Q")
-
-    while True:
-        while len(data) < payload_size:
-            packet = client_socket.recv(4 * 1024)
-            if not packet:
-                break
-            data += packet
-
-        packed_msg_size = data[:payload_size]
-        data = data[payload_size:]
-        msg_size = struct.unpack("Q", packed_msg_size)[0]
-
-        while len(data) < msg_size:
-            packet = client_socket.recv(4 * 1024)
-            if not packet:
-                break
-            data += packet
-
-        frame_data = data[:msg_size]
-        data = data[msg_size:]
-
-        try:
-            frame = pickle.loads(frame_data)
-
-            face_count = count_faces(frame)
-
-            # Send face count to the client
-            face_count_pickled = pickle.dumps(face_count)
-            message = struct.pack("Q", len(face_count_pickled)) + face_count_pickled
-            client_socket.sendall(message)
-
-        except Exception as e:
-            print("Error decoding frame:", e)
-            break
-
-    client_socket.close()
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 
-def handle_client(client_socket, addr):
+def handle_client(client_socket, client_address):
     try:
-        # Receive video from the client
-        receive_video(client_socket, addr)
-    except Exception as e:
-        print("Error:", e)
+        logging.info(f"{client_address}:Connection started")
 
-
-def main():
-    # Add a command-line argument for the port
-    parser = argparse.ArgumentParser(description="Server for Face Detection App")
-    parser.add_argument("--p", type=int, default=10050, help="Port number")
-    args = parser.parse_args()
-
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host_name = socket.gethostname()
-    host_ip = socket.gethostbyname(host_name)
-    print("HOST IP:", host_ip)
-
-    # Use the port from the command-line argument
-    socket_address = (host_ip, args.p)
-    print(f"Socket created. Listening on port {args.p}")
-
-    server_socket.bind(socket_address)
-    print("Socket bind complete")
-
-    server_socket.listen(5)
-    print("Socket now listening")
-
-    with concurrent.futures.ThreadPoolExecutor() as executor:
         while True:
-            client_socket, addr = server_socket.accept()
-            print("Connection from:", addr)
-            executor.submit(handle_client, client_socket, addr)
+            data = b""
+            while b"<<END>>" not in data:
+                packet = client_socket.recv(4096)
+                if not packet:
+                    break
+                data += packet
+
+            # Ensure that the received data is not empty
+            if len(data) > 7:
+                # Extract the image data from the received stream
+                image_data = data[:-7]
+                image_array = cv2.imdecode(
+                    np.frombuffer(image_data, dtype=np.uint8), cv2.IMREAD_COLOR
+                )
+
+                if image_array is not None:
+                    # Count the number of faces in the frame
+                    num_faces = count_faces(image_array)
+                    # Send the number of faces to the client
+                    client_socket.sendall(str(num_faces).encode("utf-8"))
+                    logging.info(f"{client_address}:Faces: {num_faces}")
+            else:
+                break
+
+    except Exception as e:
+        logging.error(f"{client_address}:Error: {e}")
+
+    finally:
+        logging.info(f"{client_address}:Connection closed")
+        client_socket.close()
+
+
+def main_server(host, port):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind((host, port))
+    server_socket.listen(5)  # Maximum 5 queued connections
+    logging.info(f"Server listening on {host}:{port}")
+
+    try:
+        while True:
+            client_socket, client_address = server_socket.accept()
+
+            handle_client(client_socket, client_address)
+
+    except KeyboardInterrupt:
+        logging.info("Server interrupted, closing...")
+    finally:
+        server_socket.close()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Server for Face Detection App")
+    parser.add_argument(
+        "--h",
+        type=str,
+        default=DEFAULT_HOST,
+        help=f"Host IP address (default: {DEFAULT_HOST})",
+    )
+    parser.add_argument(
+        "--p",
+        type=int,
+        default=DEFAULT_PORT,
+        help=f"Port number (default: {DEFAULT_PORT})",
+    )
+    args = parser.parse_args()
+
+    main_server(args.h, args.p)
