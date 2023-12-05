@@ -18,7 +18,7 @@ This is a simple client-server application for people detection using YOLOv3. Th
 
 ## Usage
 
-### Server
+### Server (Without Docker)
 
 1. Open a terminal and navigate to the server directory.
 
@@ -40,6 +40,28 @@ This is a simple client-server application for people detection using YOLOv3. Th
 
 The server will start listening for incoming connections on the specified port.
 
+### Server (With Docker)
+
+1. Open a terminal and navigate to the server directory.
+
+   ```bash
+   cd app-demo/server
+   ```
+
+2. Build the Docker image.
+
+   ```bash
+   docker build -t people-detection-server .
+   ```
+
+3. Run the Docker container.
+
+   ```bash
+   docker run -p <host_port>:8080 people-detection-server
+   ```
+
+   Replace `<host_port>` with the desired host port.
+
 ### Client
 
 1. Open a terminal and navigate to the client directory.
@@ -51,7 +73,7 @@ The server will start listening for incoming connections on the specified port.
 2. Run the client script.
 
    ```bash
-   python client.py --h <host_ip> --p <port>
+   python client.py --h <host_ip> --p <host_port>
    ```
 
 The client will establish a connection with the server and start sending video frames. The server will process each frame and return the number of detected people and positions to the client.
