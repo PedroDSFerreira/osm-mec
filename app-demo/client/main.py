@@ -10,17 +10,17 @@ DEFAULT_PORT = 10050
 DEFAULT_HOST = "127.0.0.1"
 
 
-def receive_people_data(client_socket, frame_queue, exit_event):
+def receive_objs_data(client_socket, frame_queue, exit_event):
     while not exit_event.is_set():
         try:
-            # Receive the people data from the server
-            people_data = client_socket.recv(4096)
-            people_data = json.loads(people_data.decode())
+            # Receive the data from the server
+            data = client_socket.recv(4096)
+            data = json.loads(data.decode())
 
-            num_people = people_data["count"]
+            num_objs = data["count"]
 
-            # Enqueue the frame with people for display
-            frame_queue.put((people_data["positions"], num_people))
+            # Enqueue the frame with objects for display
+            frame_queue.put((data["positions"], num_objs))
 
         except Exception as e:
             print(f"Error receiving data: {e}")
@@ -30,9 +30,9 @@ def receive_people_data(client_socket, frame_queue, exit_event):
     frame_queue.put(None)
 
 
-def draw_boxes(frame, people_positions):
-    for box in people_positions:
-        # Draw rectangle around the person
+def draw_boxes(frame, objs_positions):
+    for box in objs_positions:
+        # Draw rectangle around the object
         frame = cv2.rectangle(frame, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 2)
 
     return frame
@@ -48,14 +48,14 @@ def main_client(host, port):
     # Queue to pass frames from the receiving thread to the main thread
     frame_queue = queue.Queue()
 
-    # Event to signal the people_thread to exit
+    # Event to signal the recv_data_thread to exit
     exit_event = threading.Event()
 
-    # Start a separate thread to receive people data
-    people_thread = threading.Thread(
-        target=receive_people_data, args=(client_socket, frame_queue, exit_event)
+    # Start a separate thread to receive data
+    recv_data_thread = threading.Thread(
+        target=receive_objs_data, args=(client_socket, frame_queue, exit_event)
     )
-    people_thread.start()
+    recv_data_thread.start()
 
     try:
         while True:
@@ -70,30 +70,30 @@ def main_client(host, port):
             # Send the image data
             client_socket.sendall(data)
 
-            # Try to get the next frame with people from the queue
+            # Try to get the next frame with boxes from the queue
             try:
-                people_data = frame_queue.get_nowait()
-                if people_data is None:
+                objs_data = frame_queue.get_nowait()
+                if objs_data is None:
                     # receiving thread has stopped
                     break
 
-                people_positions, num_people = people_data
+                objs_positions, num_objs = objs_data
 
                 # Draw boxes on the video stream
-                frame_with_people = draw_boxes(frame, people_positions)
+                frame_with_boxes = draw_boxes(frame, objs_positions)
 
-                # Display the number of people
+                # Display the number of objects
                 cv2.putText(
-                    frame_with_people,
-                    f"Number of People: {num_people}",
+                    frame_with_boxes,
+                    f"Objects Detected: {num_objs}",
                     (10, 30),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.8,
                     (0, 255, 0),
                     2,
                 )
-                # Display the video stream with people
-                cv2.imshow("Client Stream", frame_with_people)
+                # Display the video stream with objects
+                cv2.imshow("Client Stream", frame_with_boxes)
 
             except queue.Empty:
                 pass
@@ -110,7 +110,7 @@ def main_client(host, port):
     finally:
         # Signal the thread to exit
         exit_event.set()
-        people_thread.join()
+        recv_data_thread.join()
 
         cap.release()
         cv2.destroyAllWindows()

@@ -1,11 +1,6 @@
 import cv2
 import numpy as np
 
-# define the minimum confidence (to filter weak detections),
-# Non-Maximum Suppression (NMS) threshold
-confidence_thresh = 0.7
-NMS_thresh = 0.3
-
 # load the class labels the model was trained on
 classes_path = "yolo/coco.names"
 with open(classes_path, "r") as f:
@@ -26,7 +21,7 @@ layer_names = net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
-def detect_objects(frame, object="person"):
+def detect_objects(frame, object, confidence_thresh=0.7, NMS_thresh=0.3):
     # get the frame dimensions
     h, w = frame.shape[:2]
 

@@ -9,11 +9,13 @@ from object_detection import detect_objects
 
 DEFAULT_PORT = 10050
 DEFAULT_HOST = "127.0.0.1"
+DEFAULT_CONF_THRESH = 0.7
+DEFAULT_NMS_THRESH = 0.3
 
 logging.basicConfig(level=logging.INFO)
 
 
-def handle_client(client_socket, client_address):
+def handle_client(client_socket, client_address, opts):
     try:
         logging.info(f"{client_address}: Connection started")
 
@@ -34,19 +36,24 @@ def handle_client(client_socket, client_address):
                 )
 
                 if image_array is not None:
-                    # Detect people and get their positions
-                    num_people, people_positions = detect_objects(image_array)
+                    # Detect objects and get their positions
+                    num_objs, objs_positions = detect_objects(
+                        frame=image_array,
+                        object=opts[0],
+                        confidence_thresh=opts[1],
+                        NMS_thresh=opts[2],
+                    )
 
-                    # Serialize the people positions
-                    people_data = {"count": num_people, "positions": people_positions}
-                    serialized_people_data = json.dumps(people_data)
+                    # Serialize the objects positions
+                    objs_data = {"count": num_objs, "positions": objs_positions}
+                    serialized_objs_data = json.dumps(objs_data)
 
-                    # Send the serialized people data to the client
-                    client_socket.sendall(serialized_people_data.encode("utf-8"))
+                    # Send the serialized objects data to the client
+                    client_socket.sendall(serialized_objs_data.encode("utf-8"))
 
-                    # Log the number of people detected
+                    # Log the number of objects detected
                     logging.info(
-                        f"{client_address}: {num_people} people detected in the image"
+                        f"{client_address}: {num_objs} objects detected in the image"
                     )
 
             else:
@@ -60,17 +67,17 @@ def handle_client(client_socket, client_address):
         client_socket.close()
 
 
-def main_server(host, port):
+def main_server(host, port, opts):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
-    server_socket.listen(5)  # Maximum 5 queued connections
+    server_socket.listen(5)
     logging.info(f"Server listening on {host}:{port}")
 
     try:
         while True:
             client_socket, client_address = server_socket.accept()
 
-            handle_client(client_socket, client_address)
+            handle_client(client_socket, client_address, opts)
 
     except KeyboardInterrupt:
         logging.info("Server interrupted, closing...")
@@ -92,6 +99,24 @@ if __name__ == "__main__":
         default=DEFAULT_PORT,
         help=f"Port number (default: {DEFAULT_PORT})",
     )
+    parser.add_argument(
+        "--o",
+        type=str,
+        default="person",
+        help="Object to detect (default: person)",
+    )
+    parser.add_argument(
+        "--conf",
+        type=float,
+        default=DEFAULT_CONF_THRESH,
+        help=f"Confidence threshold (default: {DEFAULT_CONF_THRESH})",
+    )
+    parser.add_argument(
+        "--nms",
+        type=float,
+        default=DEFAULT_NMS_THRESH,
+        help=f"NMS threshold (default: {DEFAULT_NMS_THRESH})",
+    )
     args = parser.parse_args()
 
-    main_server(args.h, args.p)
+    main_server(args.h, args.p, (args.o, args.conf, args.nms))
