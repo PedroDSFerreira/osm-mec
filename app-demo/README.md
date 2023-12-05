@@ -62,7 +62,8 @@ The client will establish a connection with the server and start sending video f
 - In the 'server/face_detection.py' file, you can customize the people detection parameters:
   - confidence_thresh: Adjust the confidence threshold for people detection. People with confidence below this threshold will not be counted.
   - NMS_thresh: Set the Non-Maximum Suppression (NMS) threshold to control the overlap of bounding boxes.
-    Feel free to experiment with these parameters to optimize people detection based on your specific use case.
+
+Feel free to experiment with these parameters to optimize people detection based on your specific use case.
 
 ## Dependencies
 
