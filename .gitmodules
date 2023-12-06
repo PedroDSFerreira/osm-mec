@@ -1,0 +1,3 @@
+[submodule "app-demo"]
+	path = app-demo
+	url = git@github.com:PedroDSFerreira/video-object-detection.git
