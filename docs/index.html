@@ -55,19 +55,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#osm-mec" style="font-size: 30px;">Introduction <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#osm-mec" style="font-size: 25px;">Intro <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#our-work" style="font-size: 30px;">Our Work</a>
+                  <a class="nav-link" href="#our-work" style="font-size: 25px;">Our Work</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#about-us" style="font-size: 30px;">About</a>
+                  <a class="nav-link" href="#about-us" style="font-size: 25px;">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#our-team" style="font-size: 30px;"> Team </a>
+                  <a class="nav-link" href="#our-team" style="font-size: 25px;"> Team </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#used-tech" style="font-size: 30px;"> Technologies</a>
+                  <a class="nav-link" href="#used-tech" style="font-size: 25px;"> Technologies</a>
                 </li>
               </ul>
             </div>
@@ -153,14 +153,14 @@
   <section class="service_section layout_padding pb-0">
     <div class="container" id="osm-mec">
       <div class="heading_container heading_center">
-        <h2 class="mb-3" style="font-size: 40px;">
+        <h2 class="mb-3" style="font-size: 45px;">
           Introduction
         </h2>
-        <p class="col-lg-8 px-0" style="font-size: 20px;">
+        <p class="col-8 px-0" style="font-size: 25px;">
           Welcome to OSM-MEC. In a world dominated by data consumption, 
           efficiency and low-latency computing are non-negotiable. That's where Multi-access Edge Computing (MEC) steps in.
         </p>
-        <p class="col-lg-8 px-0" style="font-size: 20px;">
+        <p class="col-8 px-0" style="font-size: 25px;">
           Our focus is clear - to bridge the gap between MEC and Network Functions Virtualization (NFV)
               We will develop a MEC Application Orchestrator (MEAO), along with a MEC-platform for showcasing purposes and a monitoring platform for bothe MEC and MEC applications.
         </p>
@@ -251,7 +251,7 @@
       </div>
       
       <div class="heading_container heading_center my-5" id="our-work">
-        <h2 class="text-center justify-content-center mb-3" style="font-size: 40px;">
+        <h2 class="text-center justify-content-center mb-3" style="font-size: 45px;">
           Our Work
         </h2>
         <div class="col-md-12 col-sm-12 mx-auto">
@@ -262,12 +262,13 @@
             </div>
           </div>
         </div>
-        <p class="col-lg-12 px-0 my-3 text-justify" style="font-size: 25px; text-align: justify;">
-          The reasons behind this project are clear. MEC is a promising technology that lacks standardization. Questions on how 
+        <p class="col-12 px-0 my-3 text-justify" style="font-size: 25px; text-align: justify;">
+          MEC is a promising technology that lacks standardization. Questions on how 
           this technology should be implemented are risen from this. MEC through NFV gives some good advantages, such as less power
           consumption, less expensive than hardware dedicated devices, easier to scale and reduced maintenance costs.
         </p>
-        <p class="col-lg-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
+        <h1 class="my-5">Project Description</h1>
+        <p class="col-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
           Our Work consists on the developement of the System Level of Multi-access Edge Computing. This system is composed
           by two main components:
           <ul class="text-justify" style="font-size: 25px; align-self:self-start;">
@@ -275,38 +276,62 @@
             <li>MEAO (MEC Application Orchestrator)</li>
           </ul>
         </p>
+        <p class="col-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
+          Let's give you a description of these components along with one key tool we used: OSM
+        </p>
         <div class="row my-3">
           <div class="col-md-4 mx-auto">
             <div class="info-card">
-              <h3 class="my-3">OSM</h3>
-              <p class="px-0 text-justify m-2" style="font-size: 20px;">
-                OSM, or Open Source MANO, is an ETSI-hosted open-source project for robust NFV Management and Orchestration. It offers accessible information
-                models for all Virtual Infrastructure Managers. Not only is OSM a "tool to deal with NFVs", but also it is hosted by ETSI, a key MEC standardizer, making OSM-MEC a potential proposal for a consensual global MEC implementation.     
-              </p>
+              <div class="detail-box">
+                <h2>
+                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
+                    cloud_upload
+                    </span>
+                  OSM
+                </h2>
+              </div>
+              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
+                <li>Open Source Project for NFV Management and Orchestration</li>
+                <li>Information Models for all Virtual Instruction Managers</li>
+                <li>Hosted by ETSI, a key MEC standardizer</li>
+              </ul>
             </div>
           </div>
           <div class="col-md-4 mx-auto">
             <div class="info-card">
-              <h3 class="my-3">MEAO</h3>
-              <p class="px-0 text-justify m-2" style="font-size: 20px; text-align: justify;">
-                MEAO, the Multi-Access Edge Application Orchestrator, processes information about the MEC apps, ensuring integrity,
-                authenticity, application rules, requirements and resource utilization. The MEAO's role in the architecture ensures a seamless integration with the underlying Virtual Network Function
-                Infrastructure for optimal performance.
-              </p>
+              <div class="detail-box">
+                <h2>
+                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
+                    hub
+                    </span>
+                  MEAO
+                </h2>
+              </div>
+              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
+                <li>Processes information about MEC apps</li>
+                <li>Ensures integrity, authenticity, application rules, resources, etc</li>
+                <li>Seamless integration for optimal performance</li>
+              </ul>
             </div>
           </div>
           <div class="col-md-4 mx-auto">
             <div class="info-card">
-              <h3 class="my-3">OSS</h3>
-            <p class="px-0 text-justify m-2" style="font-size: 20px;">
-              The OSS is the system that receives requests from device applications or the portal for instantiation and termination of MEC
-              apps and decides wether these requests are accepted, forwarding them if so to the MEAO. The interface should allow
-              seamless interaction with the MEAO for operations related to MEC applications, including lifecycle management.
-            </p>
+              <div class="detail-box">
+                <h2>
+                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
+                    captive_portal
+                    </span>
+                  OSS
+                </h2>
+              </div>
+              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
+                <li>Receives requests from the device apps or the portal for instantiation/termination of MEC apps</li>
+                <li>Seamless interaction with the MEAO for operations related to MEC apps</li>
+              </ul>
             </div>
           </div>
         </div>
-        <h3 class="my-5" style="font-size: 35px;">Non Functional Requirements</h3>
+        <h1 class="my-5">Non Functional Requirements</h1>
         <p class="col-12 px-0 text-justify" style="font-size: 25px;">
           The previous description talks about the functional requirements of the components. But, for optimal results, we need more than just
           the basic. Those are described above:
@@ -334,15 +359,15 @@
         <div class="col-md-5 offset-md-1">
           <div class="detail-box pr-md-2">
             <div class="heading_container">
-              <h2 class="mb-3" style="font-size: 40px;">
+              <h2 class="mb-3" style="font-size: 45px;">
                 About Us
               </h2>
             </div>
-            <p class="detail_p_mt text-justify" style="font-size: 20px;"> <!-- FONT SIZE CHANGED BY SAMUEL-->
+            <p class="detail_p_mt text-justify" style="font-size: 25px;"> <!-- FONT SIZE CHANGED BY SAMUEL-->
               Our work was born in a proposal for Projeto em Engenharia de Computadores e Informática (PECI) course project made by Professor Diogo Gomes.
-              It's noticeable that we only developped a MEAO, which is a part of the MEC architecture. The rest of the MEC platform was done by students from
+              It's noticeable that we only developed a part of the MEC architecture. The rest of the MEC platform was done by students from
               the Masters Degree in Computers and Telematics Engineering, as well as one Phd student, all guided by Prof. Diogo.
-            <p class = "detail_p_mt text-justify" style="font-size: 20px;">
+            <p class = "detail_p_mt text-justify" style="font-size: 25px;">
               What made us choose this proposal was the fact that this project was (in our opinion) more relevant than the others in terms of value to 
               society. Not only that, we actually like the area of Networking.
             </p>
@@ -366,7 +391,7 @@
   <section class="team_section layout_padding" id="our-team">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2 style="font-size: 40px;">
+        <h2 style="font-size: 45px;">
           Our Team <!-- CHANGE TEAM DATA HERE!!!-->
         </h2>
       </div>
@@ -474,17 +499,17 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-md-7 col-sm-8 px-0">
+        <div class="col-md-6 col-sm-12 px-0">
           <div class="box">
             <div class="img-box ">
               <img src="images/technologies.jpg" class="box_img" alt="about img">
             </div>
           </div>
         </div>
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-5 offset-md-1">
           <div class="detail-box pr-md-2">
             <div class="heading_container ">
-              <h2 class="mb-5" style="font-size: 40px;">Used Technologies</h2>
+              <h2 class="mb-5" style="font-size: 45px;">Technologies</h2>
               <p style="font-size: 30px;">Back-end</p>
               <ul style="font-size:25px;">
                 <li>MongoDB</li>

@@ -538,6 +538,15 @@ a:focus {
   border-style: solid;
   border-color: #2c7873;
   overflow: hidden;
+  margin-top: 30px;
+}
+
+.service_section .info-card .detail-box{
+  width: 100%;
+  color: #ffffff;
+  background-color: #2c7873;
+  padding: 25px 15px;
+  text-align: center;
 }
 
 .service_section .box .detail-box {
