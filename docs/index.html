@@ -150,7 +150,7 @@
 
   <!-- service section -->
 
-  <section class="service_section layout_padding">
+  <section class="service_section layout_padding pb-0">
     <div class="container" id="osm-mec">
       <div class="heading_container heading_center">
         <h2 class="mb-3" style="font-size: 40px;">
@@ -254,61 +254,70 @@
         <h2 class="text-center justify-content-center mb-3" style="font-size: 40px;">
           Our Work
         </h2>
-        <div class="img-box" style="justify-content: center;">
-          <figure class="justify-content-center">
-            <img src="images/mec.png" alt="">
-            <figcaption>Figure 1 - Architecture of MEC</figcaption>
-          </figure>
+        <div class="col-md-12 col-sm-12 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <img src="images/architecture.png" alt="">
+              <figcaption>Figure 1 - Architecture of MEC through NFV</figcaption>
+            </div>
+          </div>
         </div>
-        <p class="col-lg-12 px-0 my-3 text-justify" style="font-size: 20px; text-align: justify;">
+        <p class="col-lg-12 px-0 my-3 text-justify" style="font-size: 25px; text-align: justify;">
           The reasons behind this project are clear. MEC is a promising technology that lacks standardization. Questions on how 
           this technology should be implemented are risen from this. MEC through NFV gives some good advantages, such as less power
           consumption, less expensive than hardware dedicated devices, easier to scale and reduced maintenance costs.
         </p>
-        <h3 class="my-3">OSM</h3>
-        <p class="col-lg-12 px-0 text-justify" style="font-size: 20px;">
-          OSM stands for Open Source MANO (Management and Orchestration). This is a open-source ETSI-hosted project
-          dedicated to providing a robust Management and Orchestration stack for NFV, capable of consuming
-          information models accessible to everyone and suitable for all Virtual Infrastructure Managers (VIM).
-          The reason why OSM might be the best platform to implement this components is due to the fact, not only is OSM
-          "a too to deal with NFVs", but also it is hosted by ETSI (European Telecommunications Standards Institute), 
-          which is probably the organization that is performing the biggest efforts to standardize MEC. Standardization
-          will give to the World a consensual implementation of MEC.     
-        </p>
-        <p class="col-lg-12 px-0 m-5 text-left text-justify" style="font-size: 20px;">
-          Our Work will consist on the developement of the System Level of Multi-access Edge Computing. This system is composed
-          by three main components:
-          <ul class="text-justify" style="font-size: 20px; align-self:self-start;">
+        <p class="col-lg-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
+          Our Work consists on the developement of the System Level of Multi-access Edge Computing. This system is composed
+          by two main components:
+          <ul class="text-justify" style="font-size: 25px; align-self:self-start;">
             <li>OSS (Operations Support System)</li>
             <li>MEAO (MEC Application Orchestrator)</li>
-            <li>User application lifecycle management proxy (not MVP)</li>
           </ul>
         </p>
-        <h3 class="my-3">MEAO</h3>
-        <p class="col-lg-12 px-0 text-justify" style="font-size: 20px; text-align: justify;">
-          The MEAO is the core of MEC's System level Management. It's responsible for tasks such as processing information about the MEC apps
-          (such as application packages and their integratity and authenticity, application rules, requirements, performance metrics, resource utilization, etc...)
-          , translating MEC functionalities onto the corresponding VNF's, generating and sending Virtual Network Function Descriptors (VNFDs) and NetworkService
-          Descriptors (NSDs) to the OSM platform for further deployment and orchestration, ensuring a smooth integration with the underlying VNF infrastructure.
-        </p>
-        <h3 class="my-3">OSS</h3>
-        <p class="col-lg-12 px-0 text-justify" style="font-size: 20px;">
-          The OSS is the system that receives requests from device applications or the portal for instantiation and termination of MEC
-          apps and decides wether these requests are accepted, forwarding them if so to the MEAO. The interface should allow
-          seamless interaction with the MEAO for operations related to MEC applications, including lifecycle management.
-        </p>
-        <h3 class="my-3">Non Functional Requirements</h3>
-        <p class="col-lg-12 px-0 text-left text-justify" style="font-size: 20px;">
+        <div class="row my-3">
+          <div class="col-md-4 mx-auto">
+            <div class="info-card">
+              <h3 class="my-3">OSM</h3>
+              <p class="px-0 text-justify m-2" style="font-size: 20px;">
+                OSM, or Open Source MANO, is an ETSI-hosted open-source project for robust NFV Management and Orchestration. It offers accessible information
+                models for all Virtual Infrastructure Managers. Not only is OSM a "tool to deal with NFVs", but also it is hosted by ETSI, a key MEC standardizer, making OSM-MEC a potential proposal for a consensual global MEC implementation.     
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 mx-auto">
+            <div class="info-card">
+              <h3 class="my-3">MEAO</h3>
+              <p class="px-0 text-justify m-2" style="font-size: 20px; text-align: justify;">
+                MEAO, the Multi-Access Edge Application Orchestrator, processes information about the MEC apps, ensuring integrity,
+                authenticity, application rules, requirements and resource utilization. The MEAO's role in the architecture ensures a seamless integration with the underlying Virtual Network Function
+                Infrastructure for optimal performance.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 mx-auto">
+            <div class="info-card">
+              <h3 class="my-3">OSS</h3>
+            <p class="px-0 text-justify m-2" style="font-size: 20px;">
+              The OSS is the system that receives requests from device applications or the portal for instantiation and termination of MEC
+              apps and decides wether these requests are accepted, forwarding them if so to the MEAO. The interface should allow
+              seamless interaction with the MEAO for operations related to MEC applications, including lifecycle management.
+            </p>
+            </div>
+          </div>
+        </div>
+        <h3 class="my-5" style="font-size: 35px;">Non Functional Requirements</h3>
+        <p class="col-12 px-0 text-justify" style="font-size: 25px;">
           The previous description talks about the functional requirements of the components. But, for optimal results, we need more than just
           the basic. Those are described above:
 
-          <ul class="text-justify" style="font-size: 20px; align-self:self-start;">
-            <li>Both components should have a modular implementation to improve flexibility and scalability</li>
-            <li>The OSS must have an user friendly interface, ensuring good understanding of the system</li>
-            <li>Good Documentation of our work for developers, operators and administratos</li>
-            <li>Encryption must be used between channels of communication through the system</li>
+          <ul class="text-justify" style="font-size: 25px; align-self:self-start;">
+            <li>Modular implementation to improve flexibility and scalability</li>
+            <li>The OSS must have an user friendly interface for good understanding</li>
+            <li>Good Documentation for developers, operators and administrators</li>
+            <li>Encryption between channels of communication through the system</li>
             <li>Performance and resource utilization must be as optimal as possible</li>
-            <li>A video processing application with signal details will be developed to show the functionality of the Orchestrator</li>
+            <li>An application with signal details to show the functionality of the Orchestrator</li>
           </ul>
         </p>
       </div>
@@ -339,9 +348,11 @@
             </p>
           </div>
         </div>
-        <div class="col-md-6 px-0">
-          <div class="img-box ">
-            <img src="images/people.jpg" class="box_img" alt="about img">
+        <div class="col-md-6 col-sm-12">
+          <div class="box">
+            <div class="img-box ">
+              <img src="images/people.jpg" class="box_img" alt="about img">
+            </div>
           </div>
         </div>
       </div>
@@ -393,7 +404,7 @@
         <div class="col-md-4 col-sm-6 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="images/t3.jpg" alt="">
+              <img src="images/mec.png" alt="">
             </div>
             <div class="detail-box">
               <h5>
@@ -463,9 +474,11 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col-md-6 px-0">
-          <div class="img-box ">
-            <img src="images/technologies.jpg" class="box_img" alt="about img">
+        <div class="col-md-7 col-sm-8 px-0">
+          <div class="box">
+            <div class="img-box ">
+              <img src="images/technologies.jpg" class="box_img" alt="about img">
+            </div>
           </div>
         </div>
         <div class="col-md-4 mx-auto">

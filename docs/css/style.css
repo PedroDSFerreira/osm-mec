@@ -479,7 +479,22 @@ a:focus {
   margin-bottom: 35px;
 }
 
+/*This section was changed to the same code as the team_sections's box*/
 .service_section .box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 45px;
+}
+
+/*Class added*/
+.service_section .item .box{
   margin: 10px;
   text-align: center;
   -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.15);
@@ -499,25 +514,30 @@ a:focus {
           align-items: center;
 }
 
+/*This section was changed to the same code as the team_sections's box img-box*/
+
 .service_section .box .img-box {
-  width: 65px;
-  height: 65px;
+  width: 100%;
+}
+
+/*This section was changed to the same code as the team_sections's box img-box img*/
+.service_section .box .img-box img {
+  width: 100%;
+}
+
+/*Added class*/
+.service_section .info-card{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.service_section .box .img-box img {
-  max-height: 100%;
-  max-width: 100%;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #2c7873;
+  overflow: hidden;
 }
 
 .service_section .box .detail-box {
@@ -615,13 +635,23 @@ a:focus {
           align-items: center;
 }
 
-.about_section .img-box {
-  position: relative;
+.about_section .box{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 10px;
   overflow: hidden;
-  height: 100%;
+  margin-top: 45px;
+}
+.about_section .box .img-box {
+  width: 100%
 }
 
-.about_section .img-box img {
+.about_section .box .img-box img {
   width: 100%;
 }
 
@@ -715,6 +745,27 @@ a:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.contact_section .box{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #004445;
+  overflow: hidden;
+  margin-top: 45px;
+}
+
+.contact_section .box .img-box{
+  width: 100%;
+}
+
+.contact_section .box .img-box img{
+  width: 100%;
 }
 
 .contact_section .form_container {
