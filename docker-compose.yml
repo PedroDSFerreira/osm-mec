@@ -1,0 +1,19 @@
+version: "3"
+services:
+  meao:
+    build: ./meao
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+
+  oss:
+    build: ./oss
+    ports:
+      - "3000:3000"
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
