@@ -6,22 +6,21 @@ CherryPy-based webservice
 
 import cherrypy
 import cherrypy_cors
-from routes import set_routes
+from app_routes import set_routes
 from utils import jsonify_error
 
 
 def main():
     cherrypy_cors.install()
 
-    dispatcher = cherrypy.dispatch.RoutesDispatcher()
-    set_routes()
+    dispatcher = set_routes()
 
     config = {
-        "/api/v1/": {
+        "/": {
             "request.dispatch": dispatcher,
             "error_page.default": jsonify_error,
             "cors.expose.on": True,
-            "tools.auth_basic.on": True,
+            # "tools.auth_basic.on": True,
             "tools.auth_basic.realm": "localhost",
         },
     }

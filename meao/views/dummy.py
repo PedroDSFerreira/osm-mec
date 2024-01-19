@@ -1,3 +1,3 @@
 class DummyView:
-    def render(msg):
-        return [{"msg": msg}]
+    def name_view(self, obj):
+        return {"name": obj.name}
