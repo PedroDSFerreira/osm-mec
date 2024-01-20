@@ -8,13 +8,7 @@ endpoints = {
     "/api/v1": [
         ("index_test", "/dummy", "index", "DummyController", "GET"),
         ("hello", "/dummy/hello/{name}", "hello", "DummyController", "GET"),
-        ("index_test", "/dummy", "index", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "hello", "DummyController", "GET"),
-        ("create_vim", "/api/v1/vims/", "vims", "VIMController", "POST"),
-        ("get_vim", "/api/v1/vims/{vimId}", "vims", "VIMController", "GET"),
-        ("update_vim", "/api/v1/vims/{vimId}", "vims", "VIMController", "PATCH"),
-        ("delete_vim", "/api/v1/vims/{vimId}", "vims", "VIMController", "DELETE"),
-    ]
+    ],
 }
 
 
