@@ -3,7 +3,7 @@ from controllers import load_controllers
 
 controllers = load_controllers()
 
-# {prefix: [(name, route, controller, method),...]}
+# {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
         ("index", "/dummy", "DummyController", "GET"),
