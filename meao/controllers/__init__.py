@@ -12,7 +12,8 @@ def load_controllers():
         if filename.endswith(".py") and not filename.startswith("__"):
             module_name = filename[:-3]
             module = importlib.import_module(f"controllers.{module_name}")
-            class_name = f"{module_name.capitalize()}Controller"
+            module_name = [name.capitalize() for name in module_name.split("_")]
+            class_name = f"{''.join(module_name)}Controller"
             controllers[class_name] = getattr(module, class_name)
 
     return controllers
