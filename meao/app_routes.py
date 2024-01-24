@@ -3,11 +3,23 @@ from controllers import load_controllers
 
 controllers = load_controllers()
 
-# {prefix: [(name, route, action, controller, method),...]}
+# {prefix: [(name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index_test", "/dummy", "index", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "hello", "DummyController", "GET"),
+        ("index", "/dummy", "DummyController", "GET"),
+        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        (
+            "get_packages",
+            "/vnf_packages",
+            "VnfPackageController",
+            "GET",
+        ),
+        (
+            "get_package",
+            "/vnf_packages/{packageId}",
+            "VnfPackageController",
+            "GET",
+        ),
     ],
 }
 
@@ -20,9 +32,9 @@ def set_routes():
             dispatcher.connect(
                 name=route_info[0],
                 route=prefix + route_info[1],
-                action=route_info[2],
-                controller=controllers[route_info[3]](),
-                conditions={"method": [route_info[4]]},
+                action=route_info[0],
+                controller=controllers[route_info[2]](),
+                conditions={"method": [route_info[3]]},
             )
 
     return dispatcher
