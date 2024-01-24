@@ -16,7 +16,7 @@ endpoints = {
         ),
         (
             "get_package",
-            "/vnf_packages/{packageId}",
+            "/vnf_packages/{package_id}",
             "VnfPackageController",
             "GET",
         ),
