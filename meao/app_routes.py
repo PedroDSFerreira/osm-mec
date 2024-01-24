@@ -20,6 +20,18 @@ endpoints = {
             "VnfPackageController",
             "GET",
         ),
+        (
+            "new_package",
+            "/vnf_packages",
+            "VnfPackageController",
+            "POST",
+        ),
+        (
+            "delete_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
+            "DELETE",
+        ),
     ],
 }
 
