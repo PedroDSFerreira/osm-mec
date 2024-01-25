@@ -32,6 +32,12 @@ endpoints = {
             "VnfPackageController",
             "DELETE",
         ),
+        (
+            "update_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
+            "PATCH",
+        ),
     ],
 }
 

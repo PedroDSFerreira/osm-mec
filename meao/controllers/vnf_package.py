@@ -39,7 +39,7 @@ class VnfPackageController:
         return response.json()
 
     @cherrypy.tools.json_out()
-    def get_package(self, package_id):
+    def get_package(self, package_id=None):
         """
         /vnf_packages/{packageId} (GET)
         """
@@ -55,7 +55,7 @@ class VnfPackageController:
         return response.json()
 
     @cherrypy.tools.json_out()
-    def delete_package(self, package_id):
+    def delete_package(self, package_id=None):
         """
         /vnf_packages/{packageId} (DELETE)
         """
@@ -64,6 +64,28 @@ class VnfPackageController:
         response = requests.delete(
             f"{cherrypy.config.get('OSM_HOST')}/osm/vnfpkgm/v1/vnf_packages/{package_id}",
             headers={"Authorization": token, "Accept": "application/json"},
+        )
+
+        cherrypy.response.status = response.status_code
+
+        if response.status_code == 204:
+            return
+        else:
+            return response.json()
+
+    @cherrypy.tools.json_in()
+    @cherrypy.tools.json_out()
+    def update_package(self, package_id=None):
+        """
+        /vnf_packages/{packageId} (PATCH)
+        """
+
+        token = cherrypy.request.headers["Authorization"]
+        data = cherrypy.request.json
+        response = requests.patch(
+            f"{cherrypy.config.get('OSM_HOST')}/osm/vnfpkgm/v1/vnf_packages/{package_id}",
+            headers={"Authorization": token, "Accept": "application/json"},
+            json=data,
         )
 
         cherrypy.response.status = response.status_code
