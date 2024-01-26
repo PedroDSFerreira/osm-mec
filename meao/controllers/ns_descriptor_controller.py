@@ -2,7 +2,7 @@ import cherrypy
 import requests
 
 
-class VnfPackageController:
+class NsDescriptorController:
     @cherrypy.tools.json_out()
     def get_ns_descriptors(self):
         """
