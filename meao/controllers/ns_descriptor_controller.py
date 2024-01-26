@@ -46,7 +46,7 @@ class VnfPackageController:
 
         token = cherrypy.request.headers["Authorization"]
         response = requests.get(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/vnfpkgm/v1/vnf_packages/{nsd_info_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/nsd/v1/ns_descriptors/{nsd_info_id}",
             headers={"Authorization": token, "Accept": "application/json"},
         )
 
@@ -62,7 +62,7 @@ class VnfPackageController:
 
         token = cherrypy.request.headers["Authorization"]
         response = requests.delete(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/vnfpkgm/v1/vnf_packages/{nsd_info_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/nsd/v1/ns_descriptors/{nsd_info_id}",
             headers={"Authorization": token, "Accept": "application/json"},
         )
 
@@ -83,7 +83,7 @@ class VnfPackageController:
         token = cherrypy.request.headers["Authorization"]
         data = cherrypy.request.json
         response = requests.patch(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/vnfpkgm/v1/vnf_packages/{nsd_info_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/nsd/v1/ns_descriptors/{nsd_info_id}",
             headers={"Authorization": token, "Accept": "application/json"},
             json=data,
         )
