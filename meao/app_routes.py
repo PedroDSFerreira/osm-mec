@@ -1,4 +1,3 @@
-# copy paste from main branch, solve on merging
 import cherrypy
 from controllers import load_controllers
 
@@ -7,8 +6,38 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index_test", "/dummy", "index", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "hello", "DummyController", "GET"),
+        ("index", "/dummy", "DummyController", "GET"),
+        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        (
+            "get_packages",
+            "/vnf_packages",
+            "VnfPackageController",
+            "GET",
+        ),
+        (
+            "get_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
+            "GET",
+        ),
+        (
+            "new_package",
+            "/vnf_packages",
+            "VnfPackageController",
+            "POST",
+        ),
+        (
+            "delete_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
+            "DELETE",
+        ),
+        (
+            "update_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
+            "PATCH",
+        ),
     ],
 }
 
@@ -26,3 +55,4 @@ def set_routes():
                 conditions={"method": [route_info[3]]},
             )
 
+    return dispatcher
