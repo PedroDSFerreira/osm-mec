@@ -6,37 +6,37 @@ controllers = load_controllers()
 
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
-    "/api/nsd/v1": [
+    "/api/v1": [
         ("index", "/dummy", "DummyController", "GET"),
         ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
         (
-            "get_ns_descriptors",
-            "/ns_descriptors",
-            "NsDescriptorsController",
+            "get_packages",
+            "/vnf_packages",
+            "VnfPackageController",
             "GET",
         ),
         (
-            "get_ns_descriptor",
-            "/ns_descriptors/{nsd_info_id}",
-            "NsDescriptorsController",
+            "get_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
             "GET",
         ),
         (
-            "new_ns_descriptor",
-            "/ns_descriptors",
-            "NsDescriptorsController",
+            "new_package",
+            "/vnf_packages",
+            "VnfPackageController",
             "POST",
         ),
         (
-            "delete_ns_descriptor",
-            "/ns_descriptors/{nsd_info_id}",
-            "NsDescriptorsController",
+            "delete_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
             "DELETE",
         ),
         (
-            "update_ns_descriptor",
-            "/ns_descriptors/{nsd_info_id}",
-            "NsDescriptorsController",
+            "update_package",
+            "/vnf_packages/{package_id}",
+            "VnfPackageController",
             "PATCH",
         ),
     ],
