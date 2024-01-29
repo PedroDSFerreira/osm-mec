@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# copy paste from main branch, solve on merging
 
 """
 CherryPy-based webservice
@@ -7,7 +8,7 @@ CherryPy-based webservice
 import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
-from utils import jsonify_error
+from utils import jsonify_error, load_env
 
 
 def main():
@@ -27,12 +28,7 @@ def main():
 
     cherrypy.tree.mount(root=None, config=config)
 
-    cherrypy.config.update(
-        {
-            "server.socket_host": "0.0.0.0",
-            "server.socket_port": 8080,
-        }
-    )
+    cherrypy.config.update(load_env(".env"))
 
     cherrypy.engine.start()
     cherrypy.engine.block()
