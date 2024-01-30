@@ -6,10 +6,35 @@ controllers = load_controllers()
 # {prefix: [(name, route, action, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index_test", "/dummy", "index", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "hello", "DummyController", "GET"),
+        ("index", "/dummy", "DummyController", "GET"),
+        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        (
+            "get_vim",
+            "/vims/{vimID}",
+            "VimsController",
+            "GET",
+        ),
+        (
+            "new_vim",
+            "/vims",
+            "VimsController",
+            "POST",
+        ),
+        (
+            "delete_vim",
+            "/vims/{vimID}",
+            "VimsController",
+            "DELETE",
+        ),
+        (
+            "update_vim",
+            "/vims/{vimID}",
+            "VimsController",
+            "PATCH",
+        ),
     ],
 }
+
 
 
 def set_routes():
@@ -20,9 +45,9 @@ def set_routes():
             dispatcher.connect(
                 name=route_info[0],
                 route=prefix + route_info[1],
-                action=route_info[2],
-                controller=controllers[route_info[3]](),
-                conditions={"method": [route_info[4]]},
+                action=route_info[0],
+                controller=controllers[route_info[2]](),
+                conditions={"method": [route_info[3]]},
             )
 
     return dispatcher
