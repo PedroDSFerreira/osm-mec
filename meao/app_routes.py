@@ -8,6 +8,9 @@ endpoints = {
     "/api/v1": [
         ("index", "/dummy", "DummyController", "GET"),
         ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # ------------------------------------------------------------
+        #------------------------ VIM ROUTES -------------------------
+        # ------------------------------------------------------------
         (
             "get_vim",
             "/vims/{vimID}",
@@ -32,6 +35,34 @@ endpoints = {
             "VimsController",
             "PATCH",
         ),
+        # ------------------------------------------------------------
+        #--------------------- VIM ACCOUNT ROUTES --------------------
+        # ------------------------------------------------------------
+        (
+            "get_vim_account",
+            "/vim_accounts/{vimID}",
+            "VimsAccountsController",
+            "GET",
+        ),
+        (
+            "new_vim_account",
+            "/vim_accounts",
+            "VimsAccountsController",
+            "POST",
+        ),
+        (
+            "delete_vim_account",
+            "/vim_accounts/{vimID}",
+            "VimsAccountsController",
+            "DELETE",
+        ),
+        (
+            "update_vim_account",
+            "/vim_accounts/{vimID}",
+            "VimsAccountsController",
+            "PATCH",
+        ),
+
     ],
 }
 

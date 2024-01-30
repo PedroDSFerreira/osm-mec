@@ -7,13 +7,13 @@ class VimsAccountsController:
     @cherrypy.tools.json_out()
     def new_vim_account(self):
         """
-        /vims (POST)
+        /vim_accounts (POST)
         """
 
         token = cherrypy.request.headers["Authorization"]
         data = cherrypy.request.json
         response = requests.post(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vims",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vim_accounts",
             headers={"Authorization": token, "Accept": "application/json"},
             json=data
         )
@@ -26,12 +26,12 @@ class VimsAccountsController:
     @cherrypy.tools.json_out()
     def get_vim_account(self, vim_id=None):
         """
-        /vims/{vimID} (GET)
+        /vim_accounts/{vimID} (GET)
         """
 
         token = cherrypy.request.headers["Authorization"]
         response = requests.get(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vims/{vim_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vim_accounts/{vim_id}",
             headers={"Authorization": token, "Accept": "application/json"},
         )
 
@@ -41,14 +41,14 @@ class VimsAccountsController:
 
 
     @cherrypy.tools.json_out()
-    def delete_package(self, vim_id=None):
+    def delete_vim_account(self, vim_id=None):
         """
-        /vims/{vimID} (DELETE)
+        /vim_accounts/{vimID} (DELETE)
         """
 
         token = cherrypy.request.headers["Authorization"]
         response = requests.delete(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vims/{vim_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vim_accounts/{vim_id}",
             headers={"Authorization": token, "Accept": "application/json"},
         )
 
@@ -58,15 +58,15 @@ class VimsAccountsController:
 
     @cherrypy.tools.json_in()
     @cherrypy.tools.json_out()
-    def update_vim(self, vim_id=None):
+    def update_vim_account(self, vim_id=None):
         """
-        /vims/{vimID} (PATCH)
+        /vim_accounts/{vimID} (PATCH)
         """
 
         token = cherrypy.request.headers["Authorization"]
         data = cherrypy.request.json
         response = requests.patch(
-            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vims/{vim_id}",
+            f"{cherrypy.config.get('OSM_HOST')}/osm/admin/v1/vim_accounts/{vim_id}",
             headers={"Authorization": token, "Accept": "application/json"},
             json=data,
         )
