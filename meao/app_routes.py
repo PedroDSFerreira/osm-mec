@@ -15,8 +15,8 @@ endpoints = {
             "GET",
         ),
         (
-            "get_package",
-            "/vnf_packages/{package_id}",
+            "get_ns_instance",
+            "/ns_instances_content",
             "NsInstancesController",
             "GET",
         ),
@@ -31,12 +31,6 @@ endpoints = {
             "/ns_instances_content",
             "NsInstancesController",
             "DELETE",
-        ),
-        (
-            "update_package",
-            "/vnf_packages/{package_id}",
-            "NsInstancesController",
-            "PATCH",
         ),
     ],
 }
