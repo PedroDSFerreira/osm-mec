@@ -27,7 +27,7 @@ def main():
 
     cherrypy.tree.mount(root=None, config=config)
 
-    cherrypy.config.update(load_env(".env"))
+    cherrypy.config.update(load_env(".env-template"))
 
     cherrypy.engine.start()
     cherrypy.engine.block()
