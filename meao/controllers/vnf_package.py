@@ -21,23 +21,40 @@ class VnfPackageController:
             return {"error": str(e)}
 
     @cherrypy.tools.json_out()
-    def new_vnf_package_content(self, config_file_path):
+    def new_vnf_package_content(self, file):
         """
         /vnf_packages_content (POST)
         """
         print("Making POST vnf_packages_content")
 
+        save_file_path = os.path.join(os.getcwd(), "vnf_package_configurations")
+
+        if not os.path.exists(save_file_path):
+            os.makedirs(save_file_path)
+
+        filename = file.filename
+        print(f"File Name: {filename}")
+        #filename = file.name
+        file_path = os.path.join(save_file_path, filename)
+        
+        with open(file_path, 'wb') as f:
+            while True:
+                data = file.file.read(8192)
+                if not data:
+                    break
+                f.write(data)
+
         try:
             #create function returns null, so we need to capture the output from stdout stream
             backup = sys.stdout
             sys.stdout = io.StringIO()
-            myclient.vnfd.create(filename=config_file_path) 
+            myclient.vnfd.create(filename=file_path) 
             out = sys.stdout.getvalue()
             sys.stdout.close()
             sys.stdout = backup
             return {"response": out}
         except ClientException as e:
-            return {"error": str(e)}   
+            return {"error": str(e)}     
 
     def get_vnf_package_content(self, vnf_package_id=None):
         """

@@ -28,6 +28,13 @@ def main():
     cherrypy.tree.mount(root=None, config=config)
 
     cherrypy.config.update(load_env(".env-template"))
+    #In a container when using 127.0.0.1 it does not allow communication outside
+    #that container since 127.0.0.1 is loopback
+    #Remove the comments if needed
+    #cherrypy.config.update({
+    #    'server.socket_host': '0.0.0.0',  # Bind to all available interfaces
+    #    'server.socket_port': 8080,        # Use port 8080
+    #})
 
     cherrypy.engine.start()
     cherrypy.engine.block()
