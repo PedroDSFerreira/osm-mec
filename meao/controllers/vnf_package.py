@@ -5,10 +5,14 @@ import json
 import requests
 import os
 import io, sys
+from utils import save_file
+
 
 myclient = client.Client(host="10.255.41.31", sol005=True)
 
 class VnfPackageController:
+    configuration_file_paths="vnf_package_configurations"
+
     @cherrypy.tools.json_out()
     def get_vnf_packages_content(self):
         """
@@ -27,22 +31,7 @@ class VnfPackageController:
         """
         print("Making POST vnf_packages_content")
 
-        save_file_path = os.path.join(os.getcwd(), "vnf_package_configurations")
-
-        if not os.path.exists(save_file_path):
-            os.makedirs(save_file_path)
-
-        filename = file.filename
-        print(f"File Name: {filename}")
-        #filename = file.name
-        file_path = os.path.join(save_file_path, filename)
-        
-        with open(file_path, 'wb') as f:
-            while True:
-                data = file.file.read(8192)
-                if not data:
-                    break
-                f.write(data)
+        file_path = save_file(self.configuration_file_paths, file)
 
         try:
             #create function returns null, so we need to capture the output from stdout stream
@@ -54,7 +43,11 @@ class VnfPackageController:
             sys.stdout = backup
             return {"response": out}
         except ClientException as e:
-            return {"error": str(e)}     
+            return {"error": str(e)}
+        finally:
+            # Delete configuration file after use
+            if os.path.exists(file_path):
+                os.remove(file_path)     
 
     def get_vnf_package_content(self, vnf_package_id=None):
         """
