@@ -8,12 +8,13 @@ import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
 from utils import jsonify_error, load_env
+from osmclient import client
 
 
 def main():
     cherrypy_cors.install()
 
-    dispatcher = set_routes()
+    dispatcher = set_routes(client=client.Client(host="10.255.41.31", sol005=True))
 
     config = {
         "/": {

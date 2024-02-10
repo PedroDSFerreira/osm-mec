@@ -47,8 +47,7 @@ endpoints = {
     ],
 }
 
-
-def set_routes():
+def set_routes(client):
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -57,7 +56,7 @@ def set_routes():
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](),
+                controller=controllers[route_info[2]](client),
                 conditions={"method": [route_info[3]]},
             )
 
