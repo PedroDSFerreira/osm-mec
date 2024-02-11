@@ -6,43 +6,43 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index", "/dummy", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # ("index", "/dummy", "DummyController", "GET"),
+        # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
         (
-            "get_packages",
-            "/vnf_packages",
-            "VnfPackageController",
+            "get_vnf_pkgs",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "get_package",
-            "/vnf_packages/{package_id}",
-            "VnfPackageController",
+            "get_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "new_package",
-            "/vnf_packages",
-            "VnfPackageController",
+            "new_vnf_pkg",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "POST",
         ),
         (
-            "delete_package",
-            "/vnf_packages/{package_id}",
-            "VnfPackageController",
-            "DELETE",
+            "update_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "PATCH",
         ),
         (
-            "update_package",
-            "/vnf_packages/{package_id}",
-            "VnfPackageController",
-            "PATCH",
+            "delete_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "DELETE",
         ),
     ],
 }
 
 
-def set_routes():
+def set_routes(client):
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -51,7 +51,7 @@ def set_routes():
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](),
+                controller=controllers[route_info[2]](client),
                 conditions={"method": [route_info[3]]},
             )
 
