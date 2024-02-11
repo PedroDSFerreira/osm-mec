@@ -4,6 +4,8 @@
 CherryPy-based webservice
 """
 
+import os
+
 import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
@@ -16,7 +18,7 @@ def main():
 
     # cherrypy.config.update(load_env(".env-template"))
 
-    dispatcher = set_routes(client=client.Client(sol005=True))
+    dispatcher = set_routes(client=client.Client(host=os.getenv("OSM_HOSTNAME"), sol005=True)
 
     config = {
         "/": {
