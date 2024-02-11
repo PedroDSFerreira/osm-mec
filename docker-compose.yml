@@ -3,7 +3,7 @@ services:
   meao:
     build: ./meao
     ports:
-      - "8080:8080"
+      - "${MEAO_PORT}:${MEAO_PORT}"
     networks:
       - network
     environment:
