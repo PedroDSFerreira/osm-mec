@@ -7,14 +7,19 @@ CherryPy-based webservice
 import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
-from utils import jsonify_error, load_env
 from osmclient import client
+from utils import jsonify_error, load_env
 
 
 def main():
     cherrypy_cors.install()
 
-    dispatcher = set_routes(client=client.Client(host="10.255.41.31", sol005=True))
+    cherrypy.tree.mount(root=None, config={})
+    cherrypy.config.update(load_env(".env-template"))
+
+    dispatcher = set_routes(
+        client=client.Client(host=cherrypy.config.get("OSM_HOST"), sol005=True)
+    )
 
     config = {
         "/": {
@@ -24,19 +29,11 @@ def main():
             # "tools.auth_basic.on": True,
             "tools.auth_basic.realm": "localhost",
         },
+        "server.socket_host": "0.0.0.0",
+        "server.socket_port": 8080,
     }
 
-    cherrypy.tree.mount(root=None, config=config)
-
-    cherrypy.config.update(load_env(".env-template"))
-    #In a container when using 127.0.0.1 it does not allow communication outside
-    #that container since 127.0.0.1 is loopback
-    #Remove the comments if needed
-    #cherrypy.config.update({
-    #    'server.socket_host': '0.0.0.0',  # Bind to all available interfaces
-    #    'server.socket_port': 8080,        # Use port 8080
-    #})
-
+    cherrypy.config.update(config)
     cherrypy.engine.start()
     cherrypy.engine.block()
 
