@@ -6,6 +6,10 @@ services:
       - "8080:8080"
     networks:
       - network
+    environment:
+      - OSM_HOSTNAME=${OSM_HOSTNAME}
+      - MEAO_HOSTNAME=${MEAO_HOSTNAME}
+      - MEAO_PORT=${MEAO_PORT}
 
   oss:
     build: ./oss
