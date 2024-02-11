@@ -9,8 +9,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY osmclient-install.sh osmclient-install.sh
 RUN sh osmclient-install.sh
 
 CMD ["python", "app.py"]
-

@@ -10,7 +10,7 @@ import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
 from osmclient import client
-from utils import jsonify_error, load_env
+from utils import jsonify_error
 
 
 def main():
@@ -34,7 +34,7 @@ def main():
     cherrypy.config.update(
         {
             "server.socket_host": os.getenv("MEAO_HOSTNAME"),
-            "server.socket_port": os.getenv("MEAO_PORT"),
+            "server.socket_port": int(os.getenv("MEAO_PORT")),
         }
     )
     cherrypy.engine.start()
