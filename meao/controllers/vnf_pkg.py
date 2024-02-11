@@ -57,16 +57,15 @@ class VnfPkgController:
         finally:
             delete_file(file_path)
 
-    @cherrypy.tools.json_out()
     def update_vnf_pkg(self, vnf_pkg_id, vnfd):
         """
-        /vnf_pkgs/{vnf_pkg_id} (PUT)
+        /vnf_pkgs/{vnf_pkg_id} (PATCH)
         """
 
         file_path = save_file(self.descriptors_dir, vnfd)
 
         try:
-            return self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
+            self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
         except ClientException as e:
             raise cherrypy.HTTPError(400, str(e))
         finally:

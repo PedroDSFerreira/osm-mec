@@ -30,7 +30,7 @@ endpoints = {
             "update_vnf_pkg",
             "/vnf_pkgs/{vnf_pkg_id}",
             "VnfPkgController",
-            "PUT",
+            "PATCH",
         ),
         (
             "delete_vnf_pkg",
