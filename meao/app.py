@@ -33,8 +33,8 @@ def main():
     cherrypy.tree.mount(root=None, config=config)
     cherrypy.config.update(
         {
-            "server.socket_host": "0.0.0.0",
-            "server.socket_port": 8080,
+            "server.socket_host": os.getenv("MEAO_HOSTNAME"),
+            "server.socket_port": os.getenv("MEAO_PORT"),
         }
     )
     cherrypy.engine.start()
