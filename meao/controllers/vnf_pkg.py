@@ -9,11 +9,11 @@ class VnfPkgController:
         self.client = client
 
     @cherrypy.tools.json_out()
-    def get_vnf_pkgs(self):
+    def get_vnf_pkgs(self, filter=None):
         """
         /vnf_pkgs (GET)
         """
-        return self.client.vnfd.list()
+        return self.client.vnfd.list(filter=filter)
 
     @cherrypy.tools.json_out()
     def get_vnf_pkg(self, vnf_pkg_id):
@@ -23,7 +23,15 @@ class VnfPkgController:
         return self.client.vnfd.get(name=vnf_pkg_id)
 
     @cherrypy.tools.json_out()
-    def new_vnf_pkg(self, vnfd):
+    def new_vnf_pkg(
+        self,
+        vnfd,
+        overwrite=None,
+        skip_charm_build=False,
+        override_epa=False,
+        override_nonepa=False,
+        override_paravirt=False,
+    ):
         """
         /vnf_pkgs (POST)
         """
@@ -32,7 +40,14 @@ class VnfPkgController:
 
         try:
             with CaptureIO() as out:
-                self.client.vnfd.create(filename=file_path)
+                self.client.vnfd.create(
+                    filename=file_path,
+                    overwrite=overwrite,
+                    skip_charm_build=skip_charm_build,
+                    override_epa=override_epa,
+                    override_nonepa=override_nonepa,
+                    override_paravirt=override_paravirt,
+                )
 
             cherrypy.response.status = 201
             return {"id": out}
@@ -51,7 +66,6 @@ class VnfPkgController:
         file_path = save_file(self.descriptors_dir, vnfd)
 
         try:
-            cherrypy.response.status = 200
             return self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
         except ClientException as e:
             return {"error": str(e)}
@@ -59,9 +73,9 @@ class VnfPkgController:
             delete_file(file_path)
 
     @cherrypy.tools.json_out()
-    def delete_vnf_pkg(self, vnf_pkg_id):
+    def delete_vnf_pkg(self, vnf_pkg_id, force=False):
         """
         /vnf_pkgs/{vnf_pkg_id} (DELETE)
         """
         cherrypy.response.status = 204
-        return self.client.vnfd.delete(name=vnf_pkg_id)
+        return self.client.vnfd.delete(name=vnf_pkg_id, force=force)
