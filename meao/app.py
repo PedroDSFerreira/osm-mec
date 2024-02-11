@@ -14,12 +14,9 @@ from utils import jsonify_error, load_env
 def main():
     cherrypy_cors.install()
 
-    cherrypy.tree.mount(root=None, config={})
-    cherrypy.config.update(load_env(".env-template"))
+    # cherrypy.config.update(load_env(".env-template"))
 
-    dispatcher = set_routes(
-        client=client.Client(host=cherrypy.config.get("OSM_HOST"), sol005=True)
-    )
+    dispatcher = set_routes(client=client.Client(sol005=True))
 
     config = {
         "/": {
@@ -33,7 +30,7 @@ def main():
         "server.socket_port": 8080,
     }
 
-    cherrypy.config.update(config)
+    cherrypy.tree.mount(root=None, config=config)
     cherrypy.engine.start()
     cherrypy.engine.block()
 
