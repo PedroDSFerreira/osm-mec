@@ -4,8 +4,9 @@ from views.dummy import DummyView
 
 
 class DummyController:
-    def __init__(self):
+    def __init__(self, client):
         self.view = DummyView()
+        self.client = client
 
     @cherrypy.tools.json_out()
     def index(self):
