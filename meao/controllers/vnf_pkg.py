@@ -53,7 +53,7 @@ class VnfPkgController:
             return {"id": out}
 
         except ClientException as e:
-            return {"error": str(e)}
+            raise cherrypy.HTTPError(400, str(e))
         finally:
             delete_file(file_path)
 
@@ -68,7 +68,7 @@ class VnfPkgController:
         try:
             return self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
         except ClientException as e:
-            return {"error": str(e)}
+            raise cherrypy.HTTPError(400, str(e))
         finally:
             delete_file(file_path)
 
