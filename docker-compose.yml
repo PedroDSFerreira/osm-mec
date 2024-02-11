@@ -5,7 +5,7 @@ services:
     ports:
       - "${MEAO_PORT}:${MEAO_PORT}"
     volumes:
-      - ./meao:/app
+      - ./meao:/usr/app
     networks:
       - network
     environment:
@@ -18,8 +18,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /app/node_modules
-      - ./oss:/app
+      - /usr/app/node_modules
+      - ./oss:/usr/app
     networks:
       - network
     environment:

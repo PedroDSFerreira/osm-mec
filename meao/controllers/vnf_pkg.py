@@ -72,7 +72,6 @@ class VnfPkgController:
         finally:
             delete_file(file_path)
 
-    @cherrypy.tools.json_out()
     def delete_vnf_pkg(self, vnf_pkg_id, force=False):
         """
         /vnf_pkgs/{vnf_pkg_id} (DELETE)
