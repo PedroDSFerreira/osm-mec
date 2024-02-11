@@ -6,46 +6,41 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index", "/dummy", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # ("index", "/dummy", "DummyController", "GET"),
+        # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
         (
-            "get_vnf_packages_content",
-            "/vnf_packages_content",
-            "VnfPackageController",
+            "get_vnf_pkgs",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "new_vnf_package_content",
-            "/vnf_packages_content",
-            "VnfPackageController",
+            "get_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "GET",
+        ),
+        (
+            "new_vnf_pkg",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "POST",
         ),
         (
-            "get_vnf_package_content",
-            "/vnf_packages/{vnf_package_id}/package_content",
-            "VnfPackageController",
-            "GET",
-        ),
-        (
-            "update_vnf_package_content",
-            "/vnf_packages/{vnf_package_id}/package_content",
-            "VnfPackageController",
+            "update_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "PUT",
         ),
         (
-            "get_vnfd",
-            "/vnf_packages/{vnf_package_id}/vnfd",
-            "VnfPackageController",
-            "GET",
-        ),
-        (
-            "delete_vnf_package_content",
-            "/vnf_packages_content/{package_content_id}",
-            "VnfPackageController",
+            "delete_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "DELETE",
         ),
     ],
 }
+
 
 def set_routes(client):
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
