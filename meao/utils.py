@@ -30,3 +30,19 @@ def load_env(env_file):
             tuple(line.strip().split("=")) for line in f if not line.startswith("#")
         )
     return env
+
+
+import sys
+from io import StringIO
+
+
+class CaptureIO(list):
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        del self._stringio  # free up some memory
+        sys.stdout = self._stdout

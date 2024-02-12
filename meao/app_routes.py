@@ -16,7 +16,7 @@ endpoints = {
         ),
         (
             "get_ns_instance",
-            "/ns_instances_content",
+            "/ns_instances_content/{ns_id}",
             "NsInstancesController",
             "GET",
         ),
@@ -28,7 +28,7 @@ endpoints = {
         ),
         (
             "delete_ns_instance",
-            "/ns_instances_content",
+            "/ns_instances_content/{ns_id}",
             "NsInstancesController",
             "DELETE",
         ),
