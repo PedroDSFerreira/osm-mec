@@ -1,6 +1,5 @@
 import cherrypy
-from osmclient.common.exceptions import ClientException
-from utils import CaptureIO, delete_file, save_file
+from utils import handle_osm_exceptions
 
 
 class VnfInstancesController:
@@ -9,6 +8,7 @@ class VnfInstancesController:
         self.client = client
 
     @cherrypy.tools.json_out()
+    @handle_osm_exceptions
     def get_vnf_instances(self, ns=None, filter=None):
         """
         /vnf_instances (GET)
@@ -16,6 +16,7 @@ class VnfInstancesController:
         return self.client.vnf.list(ns=ns, filter=filter)
 
     @cherrypy.tools.json_out()
+    @handle_osm_exceptions
     def get_vnf_instance(self, vnf_instance_id):
         """
         /vnf_instances/{vnf_instance_id} (GET)

@@ -8,8 +8,7 @@ endpoints = {
     "/api/v1": [
         # ("index", "/dummy", "DummyController", "GET"),
         # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
-        
-        #VNF PACKAGES
+        # VNF PACKAGES
         (
             "get_vnf_pkgs",
             "/vnf_pkgs",
@@ -40,7 +39,7 @@ endpoints = {
             "VnfPkgController",
             "DELETE",
         ),
-        #VNF INSTANCES
+        # VNF INSTANCES
         (
             "get_vnf_instances",
             "/vnf_instances",
