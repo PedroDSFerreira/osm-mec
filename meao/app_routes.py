@@ -7,49 +7,43 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index", "/dummy", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # ("index", "/dummy", "DummyController", "GET"),
+        # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
         (
-            "get_ns_descriptors",
-            "/ns_descriptors_content",
-            "NsDescriptorsController",
+            "get_vnf_pkgs",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "new_ns_descriptor",
-            "/ns_descriptors_content",
-            "NsDescriptorsController",
+            "get_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "GET",
+        ),
+        (
+            "new_vnf_pkg",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "POST",
         ),
         (
-            "get_ns_descriptor",
-            "/ns_descriptors/nsd_content",
-            "NsDescriptorsController",
-            "GET",
+            "update_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "PATCH",
         ),
         (
-            "update_ns_descriptor",
-            "/ns_descriptors/{nsd_info_id}/nsd_content",
-            "NsDescriptorsController",
-            "PUT",
-        ),
-        (
-            "get_nsd",
-            "/ns_descriptors/nsd",
-            "NsDescriptorsController",
-            "GET",
-        ),
-        (
-            "delete_ns_descriptor",
-            "/ns_descriptors_content/{nsd_info_id}",
-            "NsDescriptorsController",
+            "delete_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "DELETE",
         ),
     ],
 }
 
 
-def set_routes():
+def set_routes(client):
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -58,7 +52,7 @@ def set_routes():
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](),
+                controller=controllers[route_info[2]](client),
                 conditions={"method": [route_info[3]]},
             )
 
