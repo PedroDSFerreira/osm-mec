@@ -39,6 +39,42 @@ endpoints = {
             "VnfPkgController",
             "DELETE",
         ),
+        (
+            "get_ns_pkgs",
+            "/ns_pkgs",
+            "NsPkgController",
+            "GET",
+        ),
+        (
+            "new_ns_pkg",
+            "/ns_pkg",
+            "NsPkgController",
+            "POST",
+        ),
+        (
+            "get_ns_pkg",
+            "/ns_pkg/{ns_pkg_id}",
+            "NsPkgController",
+            "GET",
+        ),
+        (
+            "update_ns_pkg",
+            "/ns_pkgs/{ns_pkg_id}",
+            "NsPkgController",
+            "PUT",
+        ),
+        (
+            "get_nsd",
+            "/nsd/{ns_pkg_id}",
+            "NsPkgController",
+            "GET",
+        ),
+        (
+            "delete_ns_pkg",
+            "/ns_pkg/{ns_pkg_id}",
+            "NsPkgController",
+            "DELETE",
+        ),
     ],
 }
 
