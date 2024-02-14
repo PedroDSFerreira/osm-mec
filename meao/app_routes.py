@@ -47,22 +47,22 @@ endpoints = {
             "GET",
         ),
         (
-            "new_nsd",
-            "/nsd",
-            "NsdController",
-            "POST",
-        ),
-        (
             "get_nsd",
             "/nsd/{nsd_id}",
             "NsdController",
             "GET",
         ),
         (
+            "new_nsd",
+            "/nsd",
+            "NsdController",
+            "POST",
+        ),
+        (
             "update_nsd",
             "/nsd/{nsd_id}",
             "NsdController",
-            "PUT",
+            "PATCH",
         ),
         (
             "delete_nsd",

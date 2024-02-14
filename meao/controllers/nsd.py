@@ -9,25 +9,11 @@ class NsdController:
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_nsds(self):
+    def get_nsds(self, filter=None):
         """
         /nsd (GET)
         """
-
-        return self.client.nsd.list()
-
-    @cherrypy.tools.json_out()
-    @handle_osm_exceptions
-    def new_nsd(self, nsd):
-        """
-        /nsd (POST)
-        """
-
-        file_path = save_file(self.descriptors_dir, nsd)
-
-        with CaptureIO() as out:
-            self.client.nsd.create(filename=file_path)
-        return {"id": out}
+        return self.client.nsd.list(filter=filter)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
@@ -35,26 +21,38 @@ class NsdController:
         """
         /nsd/{nsd_id} (GET)
         """
-
         return self.client.nsd.get(name=nsd_id)
 
     @cherrypy.tools.json_out()
+    @handle_osm_exceptions
+    def new_nsd(self, nsd, overwrite=None, skip_charm_build=False):
+        """
+        /nsd (POST)
+        """
+        file_path = save_file(self.descriptors_dir, nsd)
+
+        with CaptureIO() as out:
+            self.client.nsd.create(
+                filename=file_path,
+                overwrite=overwrite,
+                skip_charm_build=skip_charm_build,
+            )
+
+        cherrypy.response.status = 201
+        return {"id": out}
+
     @handle_osm_exceptions
     def update_nsd(self, nsd_id, nsd):
         """
         /nsd/{nsd_id} (PATCH)
         """
-
         file_path = save_file(self.descriptors_dir, nsd)
+        self.client.nsd.update(name=nsd_id, filename=file_path)
 
-        self.client.nsd.update(nsd_id, file_path)
-        return {"response": "NSD updated"}
-
-    @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def delete_nsd(self, nsd_id):
+    def delete_nsd(self, nsd_id, force=False):
         """
         /nsd/{nsd_id} (DELETE)
         """
-
-        return self.client.nsd.delete(name=nsd_id)
+        cherrypy.response.status = 204
+        self.client.nsd.delete(name=nsd_id, force=force)
