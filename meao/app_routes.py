@@ -39,6 +39,37 @@ endpoints = {
             "VnfPkgController",
             "DELETE",
         ),
+        # NS PACKAGES
+        (
+            "get_nsds",
+            "/nsd",
+            "NsdController",
+            "GET",
+        ),
+        (
+            "get_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "GET",
+        ),
+        (
+            "new_nsd",
+            "/nsd",
+            "NsdController",
+            "POST",
+        ),
+        (
+            "update_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "PATCH",
+        ),
+        (
+            "delete_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "DELETE",
+        ),
         # VNF INSTANCES
         (
             "get_vnf_instances",

@@ -37,7 +37,6 @@ class VnfPkgController:
         """
         /vnf_pkgs (POST)
         """
-
         file_path = save_file(self.descriptors_dir, vnfd)
 
         with CaptureIO() as out:
@@ -60,7 +59,6 @@ class VnfPkgController:
         """
 
         file_path = save_file(self.descriptors_dir, vnfd)
-
         self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
 
     @handle_osm_exceptions
@@ -69,4 +67,4 @@ class VnfPkgController:
         /vnf_pkgs/{vnf_pkg_id} (DELETE)
         """
         cherrypy.response.status = 204
-        return self.client.vnfd.delete(name=vnf_pkg_id, force=force)
+        self.client.vnfd.delete(name=vnf_pkg_id, force=force)
