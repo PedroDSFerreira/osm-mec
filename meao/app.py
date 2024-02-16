@@ -1,19 +1,25 @@
 #!/usr/bin/env python
+# copy paste from main branch, solve on merging
 
 """
 CherryPy-based webservice
 """
 
+import os
+
 import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
-from utils import jsonify_error, load_env
+from osmclient import client
+from utils import jsonify_error
 
 
 def main():
     cherrypy_cors.install()
 
-    dispatcher = set_routes()
+    dispatcher = set_routes(
+        client=client.Client(host=os.getenv("OSM_HOSTNAME"), sol005=True)
+    )
 
     config = {
         "/": {
@@ -22,20 +28,16 @@ def main():
             "cors.expose.on": True,
             # "tools.auth_basic.on": True,
             "tools.auth_basic.realm": "localhost",
-        },
+        }
     }
 
     cherrypy.tree.mount(root=None, config=config)
-
-    cherrypy.config.update(load_env(".env-template"))
-    #In a container when using 127.0.0.1 it does not allow communication outside
-    #that container since 127.0.0.1 is loopback
-    #Remove the comments if needed
-    cherrypy.config.update({
-        'server.socket_host': '0.0.0.0',  # Bind to all available interfaces
-        'server.socket_port': 8080,        # Use port 8080
-    })
-
+    cherrypy.config.update(
+        {
+            "server.socket_host": os.getenv("MEAO_HOSTNAME"),
+            "server.socket_port": int(os.getenv("MEAO_PORT")),
+        }
+    )
     cherrypy.engine.start()
     cherrypy.engine.block()
 

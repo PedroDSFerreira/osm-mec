@@ -6,37 +6,88 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        ("index", "/dummy", "DummyController", "GET"),
-        ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # ("index", "/dummy", "DummyController", "GET"),
+        # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
+        # VNF PACKAGES
         (
-            "get_ns_instances",
-            "/ns_instances",
-            "NsInstancesController",
+            "get_vnf_pkgs",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "get_ns_instance",
-            "/ns_instances_content/{ns_id}",
-            "NsInstancesController",
+            "get_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "GET",
         ),
         (
-            "new_ns_instance",
-            "/ns_instances_content",
-            "NsInstancesController",
+            "new_vnf_pkg",
+            "/vnf_pkgs",
+            "VnfPkgController",
             "POST",
         ),
         (
-            "delete_ns_instance",
-            "/ns_instances_content/{ns_id}",
-            "NsInstancesController",
+            "update_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
+            "PATCH",
+        ),
+        (
+            "delete_vnf_pkg",
+            "/vnf_pkgs/{vnf_pkg_id}",
+            "VnfPkgController",
             "DELETE",
+        ),
+        # NS PACKAGES
+        (
+            "get_nsds",
+            "/nsd",
+            "NsdController",
+            "GET",
+        ),
+        (
+            "get_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "GET",
+        ),
+        (
+            "new_nsd",
+            "/nsd",
+            "NsdController",
+            "POST",
+        ),
+        (
+            "update_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "PATCH",
+        ),
+        (
+            "delete_nsd",
+            "/nsd/{nsd_id}",
+            "NsdController",
+            "DELETE",
+        ),
+        # VNF INSTANCES
+        (
+            "get_vnf_instances",
+            "/vnf_instances",
+            "VnfInstancesController",
+            "GET",
+        ),
+        (
+            "get_vnf_instance",
+            "/vnf_instances/{vnf_instance_id}",
+            "VnfInstancesController",
+            "GET",
         ),
     ],
 }
 
 
-def set_routes():
+def set_routes(client):
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -45,7 +96,7 @@ def set_routes():
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](),
+                controller=controllers[route_info[2]](client),
                 conditions={"method": [route_info[3]]},
             )
 
