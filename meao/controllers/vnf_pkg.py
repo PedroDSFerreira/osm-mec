@@ -9,7 +9,7 @@ class VnfPkgController:
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_vnf_pkgs(self, filter=None):
+    def list_vnf_pkgs(self, filter=None):
         """
         /vnf_pkgs (GET)
         """

@@ -9,9 +9,9 @@ class NsdController:
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_nsds(self, filter=None):
+    def list_nsds(self, filter=None):
         """
-        /nsd (GET)
+        /nsds (GET)
         """
         return self.client.nsd.list(filter=filter)
 
@@ -19,7 +19,7 @@ class NsdController:
     @handle_osm_exceptions
     def get_nsd(self, nsd_id):
         """
-        /nsd/{nsd_id} (GET)
+        /nsds/{nsd_id} (GET)
         """
         return self.client.nsd.get(name=nsd_id)
 
@@ -27,7 +27,7 @@ class NsdController:
     @handle_osm_exceptions
     def new_nsd(self, nsd, overwrite=None, skip_charm_build=False):
         """
-        /nsd (POST)
+        /nsds (POST)
         """
         file_path = save_file(self.descriptors_dir, nsd)
 
@@ -44,7 +44,7 @@ class NsdController:
     @handle_osm_exceptions
     def update_nsd(self, nsd_id, nsd):
         """
-        /nsd/{nsd_id} (PATCH)
+        /nsds/{nsd_id} (PATCH)
         """
         file_path = save_file(self.descriptors_dir, nsd)
         self.client.nsd.update(name=nsd_id, filename=file_path)
@@ -52,7 +52,7 @@ class NsdController:
     @handle_osm_exceptions
     def delete_nsd(self, nsd_id, force=False):
         """
-        /nsd/{nsd_id} (DELETE)
+        /nsds/{nsd_id} (DELETE)
         """
         cherrypy.response.status = 204
         self.client.nsd.delete(name=nsd_id, force=force)

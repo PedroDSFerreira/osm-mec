@@ -6,11 +6,9 @@ controllers = load_controllers()
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
     "/api/v1": [
-        # ("index", "/dummy", "DummyController", "GET"),
-        # ("hello", "/dummy/hello/{name}", "DummyController", "GET"),
         # VNF PACKAGES
         (
-            "get_vnf_pkgs",
+            "list_vnf_pkgs",
             "/vnf_pkgs",
             "VnfPkgController",
             "GET",
@@ -41,47 +39,72 @@ endpoints = {
         ),
         # NS PACKAGES
         (
-            "get_nsds",
-            "/nsd",
+            "list_nsds",
+            "/nsds",
             "NsdController",
             "GET",
         ),
         (
             "get_nsd",
-            "/nsd/{nsd_id}",
+            "/nsds/{nsd_id}",
             "NsdController",
             "GET",
         ),
         (
             "new_nsd",
-            "/nsd",
+            "/nsds",
             "NsdController",
             "POST",
         ),
         (
             "update_nsd",
-            "/nsd/{nsd_id}",
+            "/nsds/{nsd_id}",
             "NsdController",
             "PATCH",
         ),
         (
             "delete_nsd",
-            "/nsd/{nsd_id}",
+            "/nsds/{nsd_id}",
             "NsdController",
             "DELETE",
         ),
         # VNF INSTANCES
         (
-            "get_vnf_instances",
-            "/vnf_instances",
-            "VnfInstancesController",
+            "list_vnfis",
+            "/vnfis",
+            "VnfiController",
             "GET",
         ),
         (
-            "get_vnf_instance",
-            "/vnf_instances/{vnf_instance_id}",
-            "VnfInstancesController",
+            "get_vnfi",
+            "/vnfis/{vnfi_id}",
+            "VnfiController",
             "GET",
+        ),
+        # NS INSTANCES
+        (
+            "list_nsis",
+            "/nsis",
+            "NsiController",
+            "GET",
+        ),
+        (
+            "new_nsi",
+            "/nsis",
+            "NsiController",
+            "POST",
+        ),
+        (
+            "get_nsi",
+            "/nsis/{nsi_id}",
+            "NsiController",
+            "GET",
+        ),
+        (
+            "delete_nsi",
+            "/nsis/{nsi_id}",
+            "NsiController",
+            "DELETE",
         ),
     ],
 }
