@@ -64,3 +64,12 @@ class NsiController:
         """
         cherrypy.response.status = 204
         return self.client.ns.delete(name=nsi_id, force=force, config=config, wait=wait)
+
+    @cherrypy.tools.json_out()
+    @handle_osm_exceptions
+    def update_nsi(self, nsi_id, data=None, wait=False):
+        """
+        /ns_instances/{ns_id} (UPDATE)
+        """
+        self.client.ns.update(ns_name=str(nsi_id), data=data, wait=wait)
+        return "NS instance updated"

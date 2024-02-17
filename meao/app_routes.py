@@ -106,6 +106,12 @@ endpoints = {
             "NsiController",
             "DELETE",
         ),
+        (
+            "update_nsi",
+            "/nsis/{nsi_id}",
+            "NsiController",
+            "PUT",
+        ),
     ],
 }
 
