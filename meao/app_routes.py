@@ -89,28 +89,28 @@ endpoints = {
             "GET",
         ),
         (
-            "new_nsi",
-            "/nsis",
-            "NsiController",
-            "POST",
-        ),
-        (
             "get_nsi",
             "/nsis/{nsi_id}",
             "NsiController",
             "GET",
         ),
         (
-            "delete_nsi",
-            "/nsis/{nsi_id}",
+            "new_nsi",
+            "/nsis",
             "NsiController",
-            "DELETE",
+            "POST",
         ),
         (
             "update_nsi",
             "/nsis/{nsi_id}",
             "NsiController",
-            "PUT",
+            "PATCH",
+        ),
+        (
+            "delete_nsi",
+            "/nsis/{nsi_id}",
+            "NsiController",
+            "DELETE",
         ),
     ],
 }
