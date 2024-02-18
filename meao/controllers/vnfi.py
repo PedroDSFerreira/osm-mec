@@ -2,23 +2,22 @@ import cherrypy
 from utils import handle_osm_exceptions
 
 
-class VnfInstancesController:
+class VnfiController:
     def __init__(self, client):
-        self.descriptors_dir = "vnf_instances"
         self.client = client
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_vnf_instances(self, ns=None, filter=None):
+    def list_vnfis(self, ns=None, filter=None):
         """
-        /vnf_instances (GET)
+        /vnfis (GET)
         """
         return self.client.vnf.list(ns=ns, filter=filter)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_vnf_instance(self, vnf_instance_id):
+    def get_vnfi(self, vnfi_id):
         """
-        /vnf_instances/{vnf_instance_id} (GET)
+        /vnfis/{vnfi_id} (GET)
         """
-        return self.client.vnf.get(name=vnf_instance_id)
+        return self.client.vnf.get(name=vnfi_id)
