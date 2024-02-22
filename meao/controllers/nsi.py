@@ -61,11 +61,13 @@ class NsiController:
         cherrypy.response.status = 201
         return {"id": out}
 
+    @cherrypy.tools.json_in()
     @handle_osm_exceptions
-    def update_nsi(self, nsi_id, data, wait=False):
+    def update_nsi(self, nsi_id, wait=False):
         """
         /ns_instances/{ns_id} (PATCH)
         """
+        data = cherrypy.request.json
         self.client.ns.update(ns_name=nsi_id, data=data, wait=wait)
 
     @handle_osm_exceptions
