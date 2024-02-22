@@ -29,6 +29,6 @@ def handle_osm_exceptions(f):
         try:
             return f(*args, **kw)
         except ClientException as e:
-            raise cherrypy.HTTPError(500, str(e))
+            raise cherrypy.HTTPError(500, "OSM: " + str(e))
 
     return wrapper
