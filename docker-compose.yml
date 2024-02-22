@@ -1,25 +1,25 @@
 version: "3"
 services:
-  meao:
-    build: ./meao
+  oss:
+    build: ./oss
     ports:
-      - "${MEAO_PORT}:${MEAO_PORT}"
+      - "${OSS_PORT}:${OSS_PORT}"
     volumes:
-      - ./meao:/usr/app
+      - ./oss:/usr/app
     networks:
       - network
     environment:
       - OSM_HOSTNAME=${OSM_HOSTNAME}
-      - MEAO_HOSTNAME=${MEAO_HOSTNAME}
-      - MEAO_PORT=${MEAO_PORT}
+      - OSS_HOSTNAME=${OSS_HOSTNAME}
+      - OSS_PORT=${OSS_PORT}
 
-  oss:
-    build: ./oss
+  cfs-portal:
+    build: ./cfs-portal
     ports:
       - "3000:3000"
     volumes:
       - /usr/app/node_modules
-      - ./oss:/usr/app
+      - ./cfs-portal:/usr/app
     networks:
       - network
     environment:

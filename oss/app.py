@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# copy paste from main branch, solve on merging
 
 """
 CherryPy-based webservice
@@ -34,8 +33,8 @@ def main():
     cherrypy.tree.mount(root=None, config=config)
     cherrypy.config.update(
         {
-            "server.socket_host": os.getenv("MEAO_HOSTNAME"),
-            "server.socket_port": int(os.getenv("MEAO_PORT")),
+            "server.socket_host": os.getenv("OSS_HOSTNAME"),
+            "server.socket_port": int(os.getenv("OSS_PORT")),
         }
     )
     cherrypy.engine.start()
