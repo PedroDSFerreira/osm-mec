@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -13,21 +14,22 @@ def main():
         group_id="group",
         auto_offset_reset="earliest",  # Consume from the beginning of the topic
         # enable_auto_commit=False,  # Disable auto-committing offsets
+        value_deserializer=lambda x: json.loads(x.decode("utf-8")),
     )
 
-    topics = ["callback1"]
-    consumer.subscribe(topics=topics)
-
     callbacks = load_callback_functions()
+
+    topics = list(callbacks.keys())
+    consumer.subscribe(topics=topics)
 
     logging.info(f"Listening for messages on topics: {topics}")
     try:
         for message in consumer:
-            logging.info(f"Received message: {message.value.decode('utf-8')}")
+            logging.info(f"Received message: {message.value}")
             topic = message.topic
             if topic in callbacks:
                 callback_function = callbacks[topic]
-                callback_function(message.value.decode("utf-8"))
+                callback_function(message.value)
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")

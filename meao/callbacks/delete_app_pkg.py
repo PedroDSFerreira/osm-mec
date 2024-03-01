@@ -1,0 +1,2 @@
+def callback(message):
+    pass
