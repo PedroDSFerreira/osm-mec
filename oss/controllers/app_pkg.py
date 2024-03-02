@@ -2,32 +2,32 @@ import cherrypy
 from utils import CaptureIO, handle_osm_exceptions, save_file
 
 
-class VnfPkgController:
+class AppPkgController:
     def __init__(self, client):
-        self.descriptors_dir = "vnf_pkgs"
+        self.descriptors_dir = "app_pkgs"
         self.client = client
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def list_vnf_pkgs(self, filter=None):
+    def list_app_pkgs(self, filter=None):
         """
-        /vnf_pkgs (GET)
+        /app_pkgs (GET)
         """
         return self.client.vnfd.list(filter=filter)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_vnf_pkg(self, vnf_pkg_id):
+    def get_app_pkg(self, app_pkg_id):
         """
-        /vnf_pkgs/{vnf_pkg_id} (GET)
+        /app_pkgs/{app_pkg_id} (GET)
         """
-        return self.client.vnfd.get(name=vnf_pkg_id)
+        return self.client.vnfd.get(name=app_pkg_id)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def new_vnf_pkg(
+    def new_app_pkg(
         self,
-        vnfd,
+        appd,
         overwrite=None,
         skip_charm_build=False,
         override_epa=False,
@@ -35,9 +35,9 @@ class VnfPkgController:
         override_paravirt=False,
     ):
         """
-        /vnf_pkgs (POST)
+        /app_pkgs (POST)
         """
-        file_path = save_file(self.descriptors_dir, vnfd)
+        file_path = save_file(self.descriptors_dir, appd)
 
         with CaptureIO() as out:
             self.client.vnfd.create(
@@ -53,18 +53,18 @@ class VnfPkgController:
         return {"id": out}
 
     @handle_osm_exceptions
-    def update_vnf_pkg(self, vnf_pkg_id, vnfd):
+    def update_app_pkg(self, app_pkg_id, appd):
         """
-        /vnf_pkgs/{vnf_pkg_id} (PATCH)
+        /app_pkgs/{app_pkg_id} (PATCH)
         """
 
-        file_path = save_file(self.descriptors_dir, vnfd)
-        self.client.vnfd.update(name=vnf_pkg_id, filename=file_path)
+        file_path = save_file(self.descriptors_dir, appd)
+        self.client.vnfd.update(name=app_pkg_id, filename=file_path)
 
     @handle_osm_exceptions
-    def delete_vnf_pkg(self, vnf_pkg_id, force=False):
+    def delete_app_pkg(self, app_pkg_id, force=False):
         """
-        /vnf_pkgs/{vnf_pkg_id} (DELETE)
+        /app_pkgs/{app_pkg_id} (DELETE)
         """
         cherrypy.response.status = 204
-        self.client.vnfd.delete(name=vnf_pkg_id, force=force)
+        self.client.vnfd.delete(name=app_pkg_id, force=force)

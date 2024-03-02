@@ -2,22 +2,22 @@ import cherrypy
 from utils import handle_osm_exceptions
 
 
-class VnfiController:
+class AppiController:
     def __init__(self, client):
         self.client = client
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def list_vnfis(self, ns=None, filter=None):
+    def list_appis(self, ns=None, filter=None):
         """
-        /vnfis (GET)
+        /appis (GET)
         """
         return self.client.vnf.list(ns=ns, filter=filter)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_vnfi(self, vnfi_id):
+    def get_appi(self, appi_id):
         """
-        /vnfis/{vnfi_id} (GET)
+        /appis/{appi_id} (GET)
         """
-        return self.client.vnf.get(name=vnfi_id)
+        return self.client.vnf.get(name=appi_id)

@@ -2,32 +2,32 @@ import cherrypy
 from utils import CaptureIO, handle_osm_exceptions, save_file
 
 
-class NsdController:
+class NsPkgController:
     def __init__(self, client):
-        self.descriptors_dir = "nsd"
+        self.descriptors_dir = "ns_pkgs"
         self.client = client
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def list_nsds(self, filter=None):
+    def list_ns_pkgs(self, filter=None):
         """
-        /nsds (GET)
+        /ns_pkgs (GET)
         """
         return self.client.nsd.list(filter=filter)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def get_nsd(self, nsd_id):
+    def get_ns_pkg(self, ns_pkg_id):
         """
-        /nsds/{nsd_id} (GET)
+        /ns_pkgs/{ns_pkg_id} (GET)
         """
-        return self.client.nsd.get(name=nsd_id)
+        return self.client.nsd.get(name=ns_pkg_id)
 
     @cherrypy.tools.json_out()
     @handle_osm_exceptions
-    def new_nsd(self, nsd, overwrite=None, skip_charm_build=False):
+    def new_ns_pkg(self, nsd, overwrite=None, skip_charm_build=False):
         """
-        /nsds (POST)
+        /ns_pkgs (POST)
         """
         file_path = save_file(self.descriptors_dir, nsd)
 
@@ -42,17 +42,17 @@ class NsdController:
         return {"id": out}
 
     @handle_osm_exceptions
-    def update_nsd(self, nsd_id, nsd):
+    def update_ns_pkg(self, ns_pkg_id, nsd):
         """
-        /nsds/{nsd_id} (PATCH)
+        /ns_pkgs/{ns_pkg_id} (PATCH)
         """
         file_path = save_file(self.descriptors_dir, nsd)
-        self.client.nsd.update(name=nsd_id, filename=file_path)
+        self.client.nsd.update(name=ns_pkg_id, filename=file_path)
 
     @handle_osm_exceptions
-    def delete_nsd(self, nsd_id, force=False):
+    def delete_ns_pkg(self, ns_pkg_id, force=False):
         """
-        /nsds/{nsd_id} (DELETE)
+        /ns_pkgs/{ns_pkg_id} (DELETE)
         """
         cherrypy.response.status = 204
-        self.client.nsd.delete(name=nsd_id, force=force)
+        self.client.nsd.delete(name=ns_pkg_id, force=force)
