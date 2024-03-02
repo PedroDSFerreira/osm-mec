@@ -5,7 +5,7 @@ controllers = load_controllers()
 
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
-    "/api/v1": [
+    "/oss/v1": [
         # APP PACKAGES
         (
             "list_app_pkgs",
