@@ -16,10 +16,18 @@ services:
       - "${OSS_PORT}:${OSS_PORT}"
     volumes:
       - ./oss:/usr/app
+    depends_on:
+      - kafka
+      - zookeeper
+      - mongo
     environment:
       - OSM_HOSTNAME=${OSM_HOSTNAME}
       - OSS_HOSTNAME=${OSS_HOSTNAME}
       - OSS_PORT=${OSS_PORT}
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:${KAFKA_PORT}
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+    restart: on-failure
 
   meao:
     build: ./meao
@@ -28,9 +36,13 @@ services:
     depends_on:
       - kafka
       - zookeeper
+      - mongo
     environment:
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-    restart: always
+      - OSM_HOSTNAME=${OSM_HOSTNAME}
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:${KAFKA_PORT}
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+    restart: on-failure
 
   mongo:
     image: mongo
@@ -64,6 +76,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
       ALLOW_ANONYMOUS_LOGIN: yes
+    restart: on-failure
 
   kafka:
     image: "wurstmeister/kafka:latest"
@@ -77,6 +90,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+    restart: on-failure
 
 volumes:
   app-mongo-db-data:
