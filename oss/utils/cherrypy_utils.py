@@ -1,7 +1,5 @@
 import json
-
 import cherrypy
-from osmclient.common.exceptions import ClientException
 
 
 def jsonify_error(status, message, traceback, version):
@@ -22,13 +20,3 @@ def jsonify_error(status, message, traceback, version):
     cherrypy.response.status = status
 
     return response_body
-
-
-def handle_osm_exceptions(f):
-    def wrapper(*args, **kw):
-        try:
-            return f(*args, **kw)
-        except ClientException as e:
-            raise cherrypy.HTTPError(500, "OSM: " + str(e))
-
-    return wrapper
