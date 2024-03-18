@@ -94,29 +94,29 @@ endpoints = {
             "NsiController",
             "GET",
         ),
-        (
-            "new_nsi",
-            "/nsis",
-            "NsiController",
-            "POST",
-        ),
-        (
-            "update_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "PATCH",
-        ),
-        (
-            "delete_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "DELETE",
-        ),
+        # (
+        #     "new_nsi",
+        #     "/nsis",
+        #     "NsiController",
+        #     "POST",
+        # ),
+        # (
+        #     "update_nsi",
+        #     "/nsis/{nsi_id}",
+        #     "NsiController",
+        #     "PATCH",
+        # ),
+        # (
+        #     "delete_nsi",
+        #     "/nsis/{nsi_id}",
+        #     "NsiController",
+        #     "DELETE",
+        # ),
     ],
 }
 
 
-def set_routes(client):
+def set_routes():
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -125,7 +125,7 @@ def set_routes(client):
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](client),
+                controller=controllers[route_info[2]](),
                 conditions={"method": [route_info[3]]},
             )
 
