@@ -10,11 +10,17 @@ import Typography from '@mui/material/Typography';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import Logout from '@mui/icons-material/Logout';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 import { useSidebar } from '../../contexts/sidebarContext';
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 export const TopBar = () => {
     const { sidebarOpen, toggleSidebar } = useSidebar();
@@ -42,12 +48,6 @@ export const TopBar = () => {
             onClose={handleMenuClose}
             keepMounted
         >
-            <MenuItem onClick={handleMenuClose}>
-                <ListItemIcon>
-                    <ManageAccountsIcon fontSize="small" />
-                </ListItemIcon>
-                User Settings
-            </MenuItem>
             <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
@@ -58,44 +58,47 @@ export const TopBar = () => {
     );
 
     return (
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} color='primary' >
-            <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open/close sidebar"
-                    onClick={toggleSidebar}
-                    edge="start"
-                >
-                    {sidebarOpen ? <MenuOpenIcon /> : <MenuIcon />}
-                </IconButton>
-                <Typography
-                    variant="h6"
-                    noWrap
-                    sx={{ display: { xs: 'none', sm: 'block' } }}
-                >
-                    MEC Portal
-                </Typography>
-                <Box sx={{ marginLeft: 'auto' }}>
-                    <Button
+        <ThemeProvider theme={theme}>
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}  >
+                <Toolbar>
+                    <IconButton
                         color="inherit"
-                        aria-controls="account-menu"
-                        aria-haspopup="true"
-                        onClick={handleMenuOpen}
+                        aria-label="open/close sidebar"
+                        onClick={toggleSidebar}
+                        edge="start"
+                        sx={{ marginRight: theme => theme.spacing(3) }}
                     >
-                        <AccountCircle />
-                        &nbsp;&nbsp;
-                        <Typography
-                            variant='h6'
-                            textTransform='none'
-                            sx={{ display: { xs: 'none', md: 'flex' } }}
+                        {sidebarOpen ? <MenuOpenIcon /> : <MenuIcon />}
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                    >
+                        MEC Portal
+                    </Typography>
+                    <Box sx={{ marginLeft: 'auto' }}>
+                        <Button
+                            color="inherit"
+                            aria-controls="account-menu"
+                            aria-haspopup="true"
+                            onClick={handleMenuOpen}
                         >
-                            Admin
-                        </Typography>
-                    </Button>
-                </Box>
-            </Toolbar>
-            {renderMenu}
-        </AppBar>
+                            <AccountCircle />
+                            &nbsp;&nbsp;
+                            <Typography
+                                variant='h6'
+                                textTransform='none'
+                                sx={{ display: { xs: 'none', md: 'flex' } }}
+                            >
+                                Admin
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Toolbar>
+                {renderMenu}
+            </AppBar>
+        </ThemeProvider>
     );
 };
 
