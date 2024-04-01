@@ -1,0 +1,15 @@
+vnfd:
+  description: A dummy descriptor
+  df:
+    - id: default-df
+      instantiation-level: []
+      vdu-profile: []
+  ext-cpd: []
+  id: dummy-vnf
+  product-name: dummy-vnf
+  provider: CFS Portal
+  sw-image-desc: []
+  vdu: []
+  version: '1.0'
+  virtual-storage-desc: []
+
