@@ -123,35 +123,103 @@
             <!--==================== STEPS ====================-->
             <section class="steps section container">
                 <div class="steps__bg">
-                    <h2 class="section__title-center steps__title">
+                    <h1 class="section__title-center">
                         Our Journey
-                    </h2>
+                    </h1>
+
+                    <h1 class="sections__title-centersteps__title">
+                        Front-End
+                    </h1>
 
                     <div class="steps__container grid">
                         <div class="steps__card">
                             <div class="steps__card-number">01</div>
-                            <h3 class="steps__card-title">Teorethical Knowledge</h3>
+                            <h3 class="steps__card-title">Wireframes and Project Structure</h3>
                             <p class="steps__card-description">
-                                We started with understanding the MEC architecture, as well as the Open 
-                                Source MANO Project
+                                For a start, we planned a well structured design of the pages necessary for our CFS Portal,
+                                based on the OSM's aesthetics
                             </p>
                         </div>
 
                         <div class="steps__card">
                             <div class="steps__card-number">02</div>
-                            <h3 class="steps__card-title">Object Detection App</h3>
+                            <h3 class="steps__card-title">Pages Development</h3>
                             <p class="steps__card-description">
-                                we created an app that functions as a simple client-server system 
-                                dedicated to object detection.
+                                We then developped the pages using React.js (components and interactions between them)
                             </p>
                         </div>
 
                         <div class="steps__card">
                             <div class="steps__card-number">03</div>
-                            <h3 class="steps__card-title">Design and Development</h3>
+                            <h3 class="steps__card-title">API Integration and Authentication</h3>
                             <p class="steps__card-description">
-                                Finally, we developped all the components meant to exist in the design 
-                                (CFS Portal, OSS, MEAO)
+                                The final step was to integrate the API endpoints with our interface accordingly, as well as 
+                                user authentication
+                            </p>
+                        </div>
+                    </div>
+
+                    <h1 class="sections__title-centersteps__title">
+                        Object Detection App
+                    </h1>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Client/Server Integration</h3>
+                            <p class="steps__card-description">
+                                Development of a client-server application for object detection using YOLOv3 algorithm
+
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">Containerization and Publish</h3>
+                            <p class="steps__card-description">
+                                Using Docker and K3s, the app was containerized and published on the K3s Cluster.
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">Onboarding as CNF</h3>
+                            <p class="steps__card-description">
+                                The Object Detection App (MEC App) was onboarded as a Containerized Network Function 
+                            </p>
+                        </div>
+                    </div>
+
+                    <h1 class="sections__title-centersteps__title">
+                        Back-End
+                    </h1>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Endpoints and REST Server</h3>
+                            <p class="steps__card-description">
+                                The first back-end step was to create a REST Server that would request
+                                OSM's services via endpoint calling. The endpoints were made by us and
+                                were based on OSM's "needs" using cherrypy.
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">OSS-MEAO connectivity</h3>
+                            <p class="steps__card-description">
+                                We then created the OSS and the MEAO (without the MEC App logic) and made
+                                it possible for them to communicate with each other using Kafka and MongoDB.
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">MEC App Yang Model and MEAO</h3>
+                            <p class="steps__card-description">
+                                The MEC App YANG Model was built, based on ETSI's documentation and then MEAO's
+                                translation capabilities were implemented.
                             </p>
                         </div>
                     </div>

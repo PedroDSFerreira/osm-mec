@@ -321,6 +321,7 @@ the website, in dark theme
 
 .home__description{
   margin-bottom: var(--mb-2-5);
+  text-align: justify;
 }
 
 .home__social{
@@ -420,6 +421,7 @@ the website, in dark theme
 
 .about__description{
   margin-bottom: var(--mb-2);
+  text-align: justify;
 }
 
 .about__details{
@@ -449,7 +451,8 @@ the website, in dark theme
 
 .steps__container{
   gap: 2rem;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem; /*ADDED*/
 }
 
 .steps__title{
@@ -480,6 +483,7 @@ the website, in dark theme
 
 .steps__card-description{
   font-size: var(--small-font-size);
+  text-align: justify;
 }
 
 .steps__card:hover .steps__card-number{
@@ -583,6 +587,7 @@ the website, in dark theme
 .questions__description{
   font-size: var(--smaller-font-size);
   padding: 0 1.25rem 1.25rem 2.5rem;
+  text-align: justify;
 }
 
 .questions__header{
@@ -650,6 +655,7 @@ the website, in dark theme
   column-gap: .5rem;
   color: var(--title-color);
   font-weight: var(--font-medium);
+  text-align: justify;
 }
 
 .contact__icon{
