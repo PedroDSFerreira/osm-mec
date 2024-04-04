@@ -48,7 +48,7 @@
 }
 
 /* Responsive typography */
-@media screen and (min-width: 968px) {
+@media screen and (min-width: 1200px) {
   :root {
     --big-font-size: 3.5rem;
     --h1-font-size: 2.25rem;
@@ -169,7 +169,7 @@ the website, in dark theme
 }
 
 .container{
-  max-width: 968px;
+  max-width: 1200px;
   margin-left: var(--mb-1-5);
   margin-right: var(--mb-1-5);
 }
@@ -433,7 +433,7 @@ the website, in dark theme
 .about__details-description{
   display: inline-flex;
   column-gap: .5rem;
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-si);
 }
 
 .about__details-icon{
@@ -835,7 +835,7 @@ the website, in dark theme
 }
 
 .scrollup:hover{
-  background-color: var(--first-color-alt);
+  background-color: var(--first-colautoor-alt);
   opacity: 1;
 }
 
@@ -959,7 +959,7 @@ the website, in dark theme
 }
 
 /* For large devices */
-@media screen and (min-width: 992px){
+@media screen and (min-width: 1200px){
   .container{
     margin-left: auto;
     margin-right: auto;
