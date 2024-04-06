@@ -1,0 +1,122 @@
+module virtual-storage-descriptor {
+  namespace "urn:etsi:nfv:virtual-storage-descriptor";
+  prefix vsd;
+
+  grouping virtual-storage-descriptor {
+    description "Describes virtual storage resources to be used by the VNF";
+
+    leaf id {
+      type string;
+      description "Unique identifier for this VirtualStorageDesc";
+    }
+
+    leaf type-of-storage {
+      type enumeration {
+        enum BLOCK;
+        enum OBJECT;
+        enum FILE;
+      }
+      mandatory true;
+      description "Type of virtualised storage resource";
+    }
+
+    choice storage {
+      description "Virtualised storage resource";
+      mandatory true;
+
+      container block-storage {
+        description "Block storage data, applicable only if typeOfStorage=BLOCK";
+        uses block-storage-data;
+      }
+
+      container object-storage {
+        description "Object storage data, applicable only if typeOfStorage=OBJECT";
+        uses object-storage-data;
+      }
+
+      container file-storage {
+        description "File storage data, applicable only if typeOfStorage=FILE";
+        uses file-storage-data;
+      }
+    }
+
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of virtualised storage resource (e.g. size of block storage device)";
+    }
+
+    leaf-list operation-status {
+      type string;
+      description "Operation status of the virtualised storage resource";
+    }
+
+  }
+
+  grouping block-storage-data {
+    description "Describes block storage data";
+
+    leaf hosting-provides-iops {
+      type boolean;
+      mandatory true;
+      description "If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource";
+    }
+
+    leaf guaranteed-iops {
+      when "../hosting-provides-iops = 'true'";
+      type uint64;
+      units "IOPS";
+      mandatory true;
+      description "Minimum IOPS that the NFVI provides to the virtualised block storage resource";
+    }
+
+    leaf max-iops {
+      type uint64;
+      units "IOPS";
+      description "Maximum IOPS that the NFVI provides to the virtualised block storage resource";
+    }
+  }
+
+  grouping object-storage-data {
+    description "Describes object storage data";
+
+    leaf max-size-of-object {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Maximum size of object that can be stored in the object storage resource";
+    }
+
+    leaf max-concurrent-incoming-transfers {
+      type uint64;
+      description "Maximum number of concurrent incoming transfers (downloads) that the object storage resource can handle";
+    }
+
+    leaf max-concurrent-outgoing-transfers {
+      type uint64;
+      description "Maximum number of concurrent outgoing transfers (uploads) that the object storage resource can handle";
+    }
+  }
+
+  grouping file-storage-data {
+    description "Describes file storage data";
+
+    leaf max-size-of-file {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Maximum size of file that can be stored in the file storage resource";
+    }
+
+    leaf max-concurrent-incoming-transfers {
+      type uint64;
+      description "Maximum number of concurrent incoming transfers (downloads) that the file storage resource can handle";
+    }
+
+    leaf max-concurrent-outgoing-transfers {
+      type uint64;
+      description "Maximum number of concurrent outgoing transfers (uploads) that the file storage resource can handle";
+    }
+  }
+}

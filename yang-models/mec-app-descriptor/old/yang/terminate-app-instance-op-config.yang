@@ -1,0 +1,40 @@
+module terminate-app-instance-op-config {
+  namespace "http://example.com/ns/terminate-app-instance-op-config";
+  prefix taio;
+
+  description "YANG module for Terminate Application Instance Operation Configuration.";
+
+  grouping terminate-app-instance-op-config-grouping {
+    description "Grouping for Terminate Application Instance Operation Configuration.";
+
+    container terminate-app-instance-op-config {
+      description "Configuration parameters for the terminate application instance operation.";
+
+      leaf minGracefulStopTimeout {
+        type uint32;
+        mandatory true;
+        description "Minimum timeout value for graceful stop of a VNF instance.";
+      }
+
+      leaf maxRecommendedGracefulStopTimeout {
+        type uint32;
+        description "Maximum recommended timeout value that can be needed to gracefully stop a VNF instance of a particular type under certain conditions, such as maximum load condition.";
+      }
+
+      list parameter {
+        key "key";
+        description "Array of KVP requirements for VNF-specific parameters to be passed when invoking the OperateVnf operation.";
+
+        leaf key {
+          type string;
+          description "Key of the VNF-specific parameter.";
+        }
+
+        leaf value {
+          type string;
+          description "Value of the VNF-specific parameter.";
+        }
+      }
+    }
+  }
+}

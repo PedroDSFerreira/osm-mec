@@ -1,0 +1,42 @@
+app-descriptor:
+  id: "dummyAppID"
+  name: "Dummy App"
+  provider: "Dummy Provider"
+  soft-version: "1.0"
+  version: "1.0"
+  sw-image:
+      id: "dummyImageID"
+      name: "Dummy Image"
+      version: "1.0"
+      checksum: "dummyChecksum"
+      container-format: "Docker"
+      size: 102400
+      supported-virtualisation-environment:
+        - "test1"
+        - "test2"
+        - "test3"
+  dns-rule:
+    - id: "dummyDNSRuleID"
+      domain-name: "example.com"
+      ip-address-type: "IP_V4"
+      ip-address: "192.0.2.1"
+  latency:
+    max-latency: 100
+  network-policy:
+    cellular-network: true
+    wifi-network: true
+    fixed-access-network: false
+  virtual-storage:
+    - id: "dummyStorageID"
+      type-of-storage: "BLOCK"
+      size-of-storage: 2048
+      block-storage:
+        hosting-provides-iops: true
+        guaranteed-iops: 2048
+        max-iops: 2048
+  feature-dependency:
+    name: "DummyFeature"
+    version: "1.0"
+  user-context-transfer-capability:
+    stateful-application: true
+    user-context-transfer-support: true

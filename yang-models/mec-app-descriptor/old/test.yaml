@@ -1,0 +1,81 @@
+#
+#
+#
+
+app-descriptor:
+  appDId: "dummyAppID"
+  appName: "Dummy App"
+  appProvider: "Dummy Provider"
+  appSoftVersion: "1.0"
+  appDVersion: "1.0"
+  VirtualComputeDesc:
+    virtualCompute:
+      - id: "dummyComputeID"
+        logicalNode:
+          - logicalNodeId: "dummyLogicalNodeID"
+        virtualMemory:
+          virtualMemSize: 1024
+        virtualCpu:
+          cpuArchitecture: "x86"
+          numVirtualCpu: 2
+  SwImageDescriptor:
+    sw-image-descriptor:
+      id: "dummyImageID"
+      name: "Dummy Image"
+      version: "1.0"
+      checksum: "dummyChecksum"
+      containerFormat: "Docker"
+      size: 102400
+  VirtualStorageDesc:
+    virtualStorage:
+      - id: "dummyStorageID"
+        typeOfStorage: "BLOCK"
+        sizeOfStorage: 2048
+  appServiceRequired:
+    - serviceId: "dummyServiceID"
+FeatureDependency:
+  feature-dependency:
+    - featureName: "dummyFeature"
+      version: "1.0"
+TransportDependency:
+  transportDependency:
+    - id: "dummyTransportID"
+      transport:
+        id: "dummyTransportID"
+        name: "Dummy Transport"
+        type: "tcp"
+        protocol: "HTTP"
+TrafficRuleDescriptor:
+  trafficRule:
+    - trafficRuleId: "dummyRuleID"
+      filterType: "ip"
+      priority: 1
+      action: "allow"
+      dstInterface:
+        - interfaceId: "dummyInterfaceID"
+          interfaceType: "ethernet"
+DNSRuleDescriptor:
+  dns-rule-descriptor:
+    dnsRuleId: "dummyDNSRuleID"
+    domainName: "example.com"
+    ipAddressType: "IPv4"
+    ipAddress: "192.0.2.1"
+LatencyDescriptor:
+  latency-descriptor:
+    maxLatency: 100
+TerminateAppInstanceOpConfig:
+  terminate-app-instance-op-config:
+    minGracefulStopTimeout: 60
+ChangeAppInstanceStateOpConfig:
+  change-app-instance-state-op-config:
+    minGracefulStopTimeout: 60
+UserContextTransferCapability:
+  user-context-transfer-capability:
+    statefulApplication: true
+    userContextTransferSupport: true
+appNetworkPolicy:
+  app-network-policy:
+    cellularNetwork: true
+    wi-fiNetwork: true
+    fixedAccessNetwork: false
+

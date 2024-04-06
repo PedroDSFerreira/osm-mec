@@ -1,0 +1,46 @@
+module dns-rule-descriptor {
+  namespace "http://example.com/ns/dns-rule-descriptor";
+  prefix drd;
+
+  description "YANG module for DNS Rule Descriptor.";
+
+  grouping dns-rule-descriptor-grouping {
+    description "Grouping for DNS Rule Descriptor.";
+
+    container dns-rule-descriptor {
+      description "Container for DNS rule descriptor attributes.";
+
+      leaf dnsRuleId {
+        type string;
+        description "Identifies the DNS Rule.";
+      }
+
+      leaf domainName {
+        type string;
+        description "FQDN of the DNS rule.";
+      }
+
+      leaf ipAddressType {
+        type enumeration {
+          enum IP_V4 {
+            description "IPv4 address type.";
+          }
+          enum IP_V6 {
+            description "IPv6 address type.";
+          }
+        }
+        description "Specifies the IP address type, value: IP_V6, IP_V4.";
+      }
+
+      leaf ipAddress {
+        type string;
+        description "IP address given by the DNS rule.";
+      }
+
+      leaf ttl {
+        type uint32;
+        description "Time-to-live value.";
+      }
+    }
+  }
+}

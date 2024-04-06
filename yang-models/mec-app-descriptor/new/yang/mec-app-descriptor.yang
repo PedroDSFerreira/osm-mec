@@ -1,0 +1,79 @@
+module mec-app-descriptor {
+  namespace "http://example.com/ns/mec-app-descriptor";
+  prefix mad;
+
+  import user-context-transfer-capability-descriptor { prefix uctc; }
+  import network-policy-descriptor { prefix np; }
+  import dns-rule-descriptor { prefix dr; }
+  import latency-descriptor { prefix l; }
+  import sw-image-descriptor { prefix si; }
+  import virtual-storage-descriptor { prefix vs; }
+  import feature-dependency-descriptor { prefix fd; }
+
+  description "YANG module for MEC Application Descriptors based on ETSI GS MEC 010-2 V2.2.1.";
+
+  container app-descriptor {
+    leaf id {
+      type string;
+      description "Identifier of this MEC application descriptor. This attribute shall be globally unique.";
+    }
+    leaf name {
+      type string;
+      description "Name to identify the MEC application.";
+    }
+    leaf provider {
+      type string;
+      description "Provider of the application and of the AppD.";
+    }
+    leaf soft-version {
+      type string;
+      description "Identifies the version of software of the MEC application.";
+    }
+    leaf version {
+      type string;
+      description "Identifies the version of the application descriptor.";
+    }
+    leaf mec-version {
+      type string;
+      description "Identifies version(s) of MEC system compatible with the MEC application described in this version of the AppD. The value shall be formatted as comma-separated list of strings.";
+    }
+    leaf info-name {
+      type string;
+      description "Human readable name for the MEC application.";
+    }
+    leaf description {
+      type string;
+      description "Human readable description of the MEC application.";
+    }
+    container network-policy {
+      description "Application network policy.";
+      uses np:network-policy-descriptor;
+    }
+    container sw-image {
+      description "Incorporates the Software Image Descriptor into the MEC application descriptor.";
+      uses si:sw-image-descriptor;
+    }
+    list dns-rule {
+      description "Incorporates the DNS Rule Descriptor into the MEC application descriptor.";
+      key "id";
+      uses dr:dns-rule-descriptor;
+    }
+    container latency {
+      description "Incorporates the Latency Descriptor into the MEC application descriptor.";
+      uses l:latency-descriptor;
+    }
+    list virtual-storage {
+      description "Incorporates Virtual Storage Descriptor into the MEC application descriptor.";
+      key "id";
+      uses vs:virtual-storage-descriptor;
+    }
+    container user-context-transfer-capability {
+      description "Incorporates the user context transfer capability attributes into the MEC application descriptor.";
+      uses uctc:user-context-transfer-capability-descriptor;
+    }
+    container feature-dependency {
+      description "Incorporates the Feature Dependency into the MEC application descriptor.";
+      uses fd:feature-dependency-descriptor;
+    }
+  }
+}

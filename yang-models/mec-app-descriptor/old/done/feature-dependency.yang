@@ -1,0 +1,26 @@
+module feature-dependency {
+  namespace "http://example.com/ns/feature-dependency";
+  prefix fd;
+
+  description "YANG module for Feature Dependency.";
+
+  grouping FeatureDependency {
+    description "Grouping for Feature Dependency.";
+
+    container FeatureDependencyId {
+      description "Container for feature dependency attributes.";
+
+      leaf featureName {
+        type string;
+        mandatory true;
+        description "The name of the feature, for example, UserApps, UEIdentity, etc.";
+      }
+
+      leaf version {
+        type string;
+        mandatory true;
+        description "The version of the feature.";
+      }
+    }
+  }
+}

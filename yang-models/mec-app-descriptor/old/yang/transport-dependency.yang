@@ -1,0 +1,244 @@
+module transport-dependency {
+  namespace "urn:etsi:mec:transport-dependency";
+  prefix td;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  organization "ETSI MEC ISG";
+  description "Data model for ETSI MEC Transport Dependency";
+
+  revision 2024-03-11 {
+    description "Initial revision";
+  }
+
+  container transports {
+    description "Available transports";
+    list transport {
+      key id;
+      uses TransportDescriptor;
+    }
+  }
+
+  grouping TransportDependency {
+    description
+      "Describes transport dependencies related to a MEC app";
+    
+    list transportDependency {
+      key "id";
+      min-elements 1;
+      description
+        "List of transport dependencies";
+      
+      leaf id {
+        type string;
+        description
+          "Unique identifier for the transport dependency";
+      }
+      
+      container transport {
+        description
+          "Information about the transport in this transport binding";
+        uses TransportDescriptor;
+      }
+      
+      list serializers {
+        key "serializerType";
+        min-elements 1;
+        description
+          "Information about the serializers in this transport binding";
+        
+        leaf serializerType {
+          type SerializerType;
+          description
+            "Type of serializer";
+        }
+      }
+      
+      leaf-list labels {
+        type string;
+        min-elements 1;
+        description
+          "Set of labels that allow to define groups of transport bindings";
+      }
+    }
+  }
+
+  grouping TransportDescriptor {
+    description
+      "Describes a transport";
+    
+    leaf id {
+      type string;
+      mandatory true;
+      description
+        "The identifier of this transport";
+    }
+    
+    leaf name {
+      type string;
+      mandatory true;
+      description
+        "The name of this transport";
+    }
+    
+    leaf description {
+      type string;
+      description
+        "Human-readable description of this transport";
+    }
+    
+    leaf type {
+      type TransportType;
+      mandatory true;
+      description
+        "Type of the transport";
+    }
+    
+    leaf protocol {
+      type string;
+      mandatory true;
+      description
+        "The name of the protocol used";
+    }
+    
+    leaf version {
+      type string;
+      mandatory true;
+      description
+        "The version of the protocol used";
+    }
+    
+    container endpoint {
+      description
+        "Information about the endpoint to access the transport";
+      uses EndPointInfo;
+    }
+    
+    container security {
+      description
+        "Information about the security used by the transport";
+      uses SecurityInfo;
+    }
+    
+    container implSpecificInfo {
+      description
+        "Additional implementation specific details of the transport";
+    }
+  }
+
+  grouping EndPointInfo {
+    description
+      "Information about a transport endpoint";
+    
+    leaf-list uris {
+      type inet:uri;
+      description
+        "Entry point information of the service as URI";
+    }
+    
+    list addresses {
+      key "host";
+      description
+        "Entry point information as IP address and port";
+      
+      leaf host {
+        type inet:host;
+        description
+          "IP address of the entry point";
+      }
+      
+      leaf port {
+        type inet:port-number;
+        description
+          "Port of the entry point";
+      }
+    }
+  }
+
+  grouping SecurityInfo {
+    description
+      "Information about the security used by a transport";
+    
+    container oAuth2Info {
+      description
+        "Information about OAuth2 based security";
+      
+      leaf-list grantTypes {
+        type enumeration {
+          enum OAUTH2_AUTHORIZATION_CODE;
+          enum OAUTH2_IMPLICIT_GRANT;
+          enum OAUTH2_RESOURCE_OWNER;
+          enum OAUTH2_CLIENT_CREDENTIALS;
+        }
+        min-elements 1;
+        max-elements 4;
+        description
+          "Supported OAuth2 grant types";
+      }
+      
+      leaf tokenEndpoint {
+        when "not(../grantTypes[.='OAUTH2_IMPLICIT_GRANT'])";
+        type inet:uri;
+        mandatory true;
+        description
+          "The token endpoint";
+      }
+    }
+  }
+
+  typedef SerializerType {
+    type enumeration {
+      enum JSON {
+        description
+          "JavaScript Object Notation as defined in RFC 8259";
+      }
+      enum XML {
+        description
+          "Extensible Markup Language as defined in W3C REC-xml-20081126";
+      }
+      enum PROTOBUF3 {
+        description
+          "Protocol Buffers version 3 as defined in https://developers.google.com/protocol-buffers/docs/reference/proto3-spec";
+      }
+    }
+    description
+      "Types of serializers";
+  }
+
+  typedef TransportType {
+    type enumeration {
+      enum REST_HTTP {
+        description
+          "REST API using HTTP";
+      }
+      enum MB_TOPIC_BASED {
+        description
+          "Topic-based message bus";
+      }
+      enum MB_ROUTING {
+        description
+          "Routing-based message bus";
+      }
+      enum MB_PUBSUB {
+        description
+          "Publish-subscribe message bus";
+      }
+      enum RPC {
+        description
+          "Remote procedure call";
+      }
+      enum RPC_STREAMING {
+        description
+          "Streaming remote procedure call";
+      }
+      enum WEBSOCKET {
+        description
+          "WebSocket protocol as defined in RFC 6455";
+      }
+    }
+    description
+      "Types of transports";
+  }
+}

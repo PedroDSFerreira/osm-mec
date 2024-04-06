@@ -1,0 +1,20 @@
+module feature-dependency-descriptor {
+  namespace "http://example.com/ns/feature-dependency";
+  prefix fd;
+
+  grouping feature-dependency-descriptor {
+    description "Feature dependency attributes.";
+
+    leaf name {
+      type string;
+      mandatory true;
+      description "The name of the feature, for example, UserApps, UEIdentity, etc.";
+    }
+
+    leaf version {
+      type string;
+      mandatory true;
+      description "The version of the feature.";
+    }
+  }
+}

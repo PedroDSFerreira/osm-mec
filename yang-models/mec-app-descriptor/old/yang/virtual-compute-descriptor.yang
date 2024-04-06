@@ -1,0 +1,200 @@
+module virtual-compute-descriptor {
+  namespace "urn:etsi:nfv:virtual-compute-descriptor";
+  prefix vcd;
+
+  organization "ETSI NFV IFA";
+  description "Data model for ETSI GS NFV-IFA 011 VirtualComputeDesc";
+
+  revision 2021-05-01 {
+    description "Initial revision";
+  }
+
+  grouping VirtualComputeDesc {
+    description "Describes virtual compute resources to be used by the VNF";
+
+    leaf id {
+      type string;
+      description "Unique identifier for this VirtualComputeDesc";
+    }
+    
+    container virtualComputeDescId {
+      leaf value {
+        type string;
+        description "Unique identifier of this VirtualComputeDesc in the VNFD";
+      }
+      description "Identifier of this VirtualComputeDesc in the VNFD";
+    }
+    
+    list logicalNode {
+      key "logicalNodeId";
+      uses LogicalNodeRequirements;
+      description "The logical node requirements";
+    }
+    
+    list requestAdditionalCapabilities {
+      key "requestedAdditionalCapabilityName";
+      uses RequestedAdditionalCapabilityData;
+      description "Specifies requirements for additional capabilities";
+    }
+    
+    list computeRequirements {
+      key "computeReqId";
+      description "Specifies compute requirements";
+      uses ComputeRequirements;
+    }
+    
+    container virtualMemory {
+      description "The virtual memory of the virtualised compute";
+      uses VirtualMemoryData;
+    }
+    
+    container virtualCpu {
+      description "The virtual CPU(s) of the virtualised compute";
+      uses VirtualCpuData;
+    }
+    
+    list virtualDisk {
+      key "id";
+      description "The local or ephemeral disk(s) of the virtualised compute";
+      uses BlockStorageData;
+    }
+  }
+
+  grouping ComputeRequirements {
+    leaf computeReqId {
+      type string;
+      description "Unique identifier for these compute requirements";
+    }
+    uses KeyValuePairs;
+  }
+
+  grouping VirtualMemoryData {
+    leaf virtualMemSize {
+      type uint64;
+      units "MB";
+      mandatory true;
+      description "Amount of virtual Memory (e.g. in MB)";
+    }
+    leaf virtualMemOversubscriptionPolicy {
+      type string;
+      description "The memory core oversubscription policy in terms of virtual memory to physical memory on the platform";
+    }
+    uses KeyValuePairs;
+    leaf numaEnabled {
+      type boolean;
+      description "It specifies the memory allocation to be cognisant of the relevant process/core allocation";
+    }
+  }
+
+  grouping VirtualCpuData {
+    leaf cpuArchitecture {
+      type string;
+      description "CPU architecture type. Examples are x86, ARM";
+    }
+    leaf numVirtualCpu {
+      type uint16;
+      mandatory true;
+      description "Number of virtual CPUs";
+    }
+    leaf virtualCpuClock {
+      type uint64;
+      units "MHz";
+      description "Minimum virtual CPU clock rate (e.g. in MHz)";
+    }
+    leaf virtualCpuOversubscriptionPolicy {
+      type string;
+      description "The CPU core oversubscription policy e.g. the relation of virtual CPU cores to physical CPU cores/threads";
+    }
+    uses KeyValuePairs;
+    uses VirtualCpuPinningData;
+  }
+
+  grouping VirtualCpuPinningData {
+    leaf virtualCpuPinningPolicy {
+      type enumeration {
+        enum STATIC;
+        enum DYNAMIC;
+      }
+      description "Indicates the policy for CPU pinning";
+    }
+    list virtualCpuPinningRule {
+      key "id";
+      description "List of rules that should be considered during the allocation of the virtual CPUs to logical CPUs in case of 'STATIC' virtualCpuPinningPolicy";
+      uses KeyValuePairs;
+    }
+  }
+
+  grouping BlockStorageData {
+    leaf id {
+      type string;
+      description "Unique identifier for this block storage data";
+    }
+    leaf hostingProvidesIops {
+      type boolean;
+      mandatory true;
+      description "If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource";
+    }
+    leaf guaranteedIops {
+      when "../hostingProvidesIops = 'true'";
+      type uint64;
+      units "IOPS";
+      mandatory true;
+      description "Minimum IOPS that the NFVI provides to the virtualised block storage resource";
+    }
+    leaf maxIops {
+      type uint64;
+      units "IOPS";
+      description "Maximum IOPS that the NFVI provides to the virtualised block storage resource";
+    }
+  }
+
+  grouping LogicalNodeRequirements {
+    leaf logicalNodeId {
+      type string;
+      description "Unique identifier for these logical node requirements";
+    }
+    uses KeyValuePairs;
+  }
+
+  grouping RequestedAdditionalCapabilityData {
+    leaf requestedAdditionalCapabilityName {
+      type string;
+      description "Specifies a requested additional capability for the VDU";
+    }
+    leaf supportMandatory {
+      type boolean;
+      mandatory true;
+      description "Indicates whether the requested additional capability is mandatory for successful operation";
+    }
+    leaf minRequestedAdditionalCapabilityVersion {
+      type string;
+      description "Specifies the minimum version of the requested additional capability";
+    }
+    leaf preferredRequestedAdditionalCapabilityVersion {
+      type string;
+      description "Specifies the preferred version of the requested additional capability";
+    }
+    uses KeyValuePairs;
+  }
+
+  grouping KeyValuePairs {
+    leaf id {
+      type string;
+      description "Unique identifier for this key-value pair";
+    }
+
+    list keyValuePair {
+      key "key";
+      leaf key {
+        type string;
+        description "Key in the key-value pair";
+      }
+      leaf value {
+        type string;
+        description "Value in the key-value pair";
+      }
+      description "A key-value pair";
+    }
+    description "A list of key-value pairs";
+  }
+}
