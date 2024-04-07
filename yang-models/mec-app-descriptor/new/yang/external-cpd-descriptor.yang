@@ -1,0 +1,164 @@
+module external-cpd-descriptor {
+  namespace "urn:etsi:mec:external-cpd-descriptor";
+  prefix ecpd;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  description "Data model for ETSI MEC Application External CPD";
+
+  grouping external-cpd-descriptor {
+    description "Describes an external connection point of a MEC application";
+
+    leaf id {
+      type string;
+      description "Identifier of the external connection point";
+    }
+
+    list virtual-network-interface-requirements {
+      key name;
+      description "Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.";
+      uses virtual-network-interface-requirements;
+    }
+
+    uses cpd;
+  }
+
+  grouping virtual-network-interface-requirements {
+    description "Specifies requirements on a virtual network interface";
+    reference "ETSI GS NFV-IFA 011: Network Functions Virtualisation (NFV) Release 3;
+               Management and Orchestration;
+               VNF Descriptor and Packaging Specification, clause 7.1.6.6";
+
+    leaf name {
+      type string;
+      description "Provides a human readable name for the requirement.";
+    }
+    leaf description {
+      type string;
+      description "Provides a human readable description of the requirement.";
+    }
+    leaf support-mandatory {
+      type boolean;
+      default true;
+      description "Indicates whether fulfilling the constraint is mandatory (true) for successful operation.";
+    }
+    container network-interface-requirement {
+      description "The network interface requirement. An element from an array of key-value pairs that articulate the network interface deployment requirements.";
+      leaf key {
+        mandatory true;
+        type string;
+        description "The key of the requirement";
+      }
+      leaf value {
+        mandatory true;
+        type string;
+        description "The value of the requirement";
+      }
+    }
+    container niclo-requirements {
+      description "This references (couples) the CPD with any logical node I/O requirements (for network devices) that may have been created. Linking these attributes is necessary so that I/O requirements that need to be articulated at the logical node level can be associated with the network interface requirements associated with the CPD.";
+      uses logical-node-requirements;
+    }
+  }
+
+  grouping logical-node-requirements {
+    leaf id {
+      type string;
+      description "Identifier of the logical node requirement";
+    }
+    leaf-list logical-node-requirement-detail {
+      type string;
+      description "The logical node-level compute, memory and I/O requirements. An array of key-value pairs that articulate the deployment requirements. This could include the number of CPU cores on this logical node, a memory configuration specific to a logical node (e.g. such as available in the Linux kernel via the libnuma library) or a requirement related to the association of an I/O device with the logical node.";
+    }
+  }
+
+  grouping cpd {
+    description "Describes a Connection Point";
+    reference "ETSI GS NFV-IFA 011: Network Functions Virtualisation (NFV) Release 3;
+               Management and Orchestration;
+               VNF Descriptor and Packaging Specification, clause 7.1.6.3";
+
+    leaf cpd-id {
+      type string;
+      description "Identifier of this Cpd information element.";
+    }
+    leaf layer-protocol {
+      type enumeration {
+        enum ETHERNET;
+        enum MPLS;
+        enum ODU2;
+        enum IPV4;
+        enum IPV6;
+        enum PSEUDO_WIRE;
+      }
+      description "Identifies which protocol the CP uses for connectivity purposes.";
+    }
+    leaf cp-role {
+      type string;
+      description "Identifies the role of the CP in the context of the traffic flow patterns in the VNF or parent NS.";
+    }
+    leaf description {
+      type string;
+      description "Provides human-readable information on the purpose of the CP.";
+    }
+    list address-data {
+      key "address-type";
+      description "Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.";
+
+      leaf address-type {
+        type enumeration {
+          enum MAC_ADDRESS;
+          enum IP_ADDRESS;
+        }
+        description "Describes the type of the address to be assigned to the CP instantiated from this CPD.";
+      }
+
+      leaf l2-address-data {
+        when "../address-type = 'MAC_ADDRESS'";
+        type yang:mac-address;
+        description "Specifies the L2 address to be assigned to the CP instantiated from this CPD.";
+      }
+
+      container l3-address-data {
+        when "../address-type = 'IP_ADDRESS'";
+        description "The L3 address data for the CP instantiated from this CPD.";
+
+        leaf ip-address-type {
+          type enumeration {
+            enum IPV4;
+            enum IPV6;
+          }
+          description "The type of the IP address.";
+        }
+
+        leaf number-of-ip-addresses {
+          type uint32;
+          description "The number of IP addresses to assign to the CP instantiated from this CPD.";
+        }
+
+        leaf-list ip-address-assignment {
+          type enumeration {
+            enum DYNAMIC;
+            enum STATIC;
+          }
+          description "Specifies how the IP address(es) will be assigned.";
+        }
+
+        leaf-list floating-ip-activated {
+          type boolean;
+          description "Specify if the floating IP scheme is activated on the CP instantiated from this CPD.";
+        }
+
+        leaf-list ip-address-reservation {
+          type inet:ip-address;
+          description "Specifies the IP addresses to be assigned.";
+        }
+      }
+    }
+  }
+}

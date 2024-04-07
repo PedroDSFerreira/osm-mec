@@ -2,6 +2,11 @@ module mec-app-descriptor {
   namespace "http://example.com/ns/mec-app-descriptor";
   prefix mad;
 
+  import external-cpd-descriptor { prefix ecpd; }
+  import terminate-app-instance-op-config-descriptor { prefix taio; }
+  import transport-dependency-descriptor {prefix td; }
+  import traffic-rule-descriptor { prefix trd; }
+  import change-app-instance-state-op-config-descriptor { prefix caisoc; }
   import user-context-transfer-capability-descriptor { prefix uctc; }
   import network-policy-descriptor { prefix np; }
   import dns-rule-descriptor { prefix dr; }
@@ -9,6 +14,8 @@ module mec-app-descriptor {
   import sw-image-descriptor { prefix si; }
   import virtual-storage-descriptor { prefix vs; }
   import feature-dependency-descriptor { prefix fd; }
+  import service-dependency-descriptor { prefix srv; }
+  import service-descriptor { prefix sd; }
 
   description "YANG module for MEC Application Descriptors based on ETSI GS MEC 010-2 V2.2.1.";
 
@@ -74,6 +81,41 @@ module mec-app-descriptor {
     container feature-dependency {
       description "Incorporates the Feature Dependency into the MEC application descriptor.";
       uses fd:feature-dependency-descriptor;
+    }
+    container change-app-instance-state-op-config {
+      description "Incorporates the Change Application Instance State Operation Configuration into the MEC application descriptor.";
+      uses caisoc:change-app-instance-state-op-config-descriptor;
+    }
+    container terminate-app-instance-op-config {
+      description "Incorporates the Terminate Application Instance Operation Configuration into the MEC application descriptor.";
+      uses taio:terminate-app-instance-op-config-descriptor;
+    }
+    list traffic-rule {
+      description "Incorporates the Traffic Rule Descriptor into the MEC application descriptor.";
+      key "id";
+      uses trd:traffic-rule-descriptor;
+    }
+    list transport-dependency {
+      key "id";
+      min-elements 1;
+      description
+          "List of transport dependencies";
+      uses td:transport-dependency-descriptor;
+    }
+    list ext-cpd{
+      key id;
+      description "Describes an external connection point of a MEC application";
+      uses ecpd:external-cpd-descriptor;
+    }
+    list service-required {
+      description "Describes service dependencies of the MEC app";
+      key "name";
+      uses srv:service-dependency-descriptor;
+    }
+    list service-produced {
+      description "Describes services a MEC application is able to produce to the platform or other MEC applications. Only relevant for service producing apps.";
+      key "name";
+      uses sd:service-descriptor;
     }
   }
 }

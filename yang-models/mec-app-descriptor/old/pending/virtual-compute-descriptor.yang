@@ -2,21 +2,16 @@ module virtual-compute-descriptor {
   namespace "urn:etsi:nfv:virtual-compute-descriptor";
   prefix vcd;
 
-  organization "ETSI NFV IFA";
   description "Data model for ETSI GS NFV-IFA 011 VirtualComputeDesc";
 
-  revision 2021-05-01 {
-    description "Initial revision";
-  }
-
-  grouping VirtualComputeDesc {
+  grouping virtual-compute-desc {
     description "Describes virtual compute resources to be used by the VNF";
 
     leaf id {
       type string;
       description "Unique identifier for this VirtualComputeDesc";
     }
-    
+
     container virtualComputeDescId {
       leaf value {
         type string;
@@ -24,35 +19,36 @@ module virtual-compute-descriptor {
       }
       description "Identifier of this VirtualComputeDesc in the VNFD";
     }
-    
+
+        //
     list logicalNode {
       key "logicalNodeId";
       uses LogicalNodeRequirements;
       description "The logical node requirements";
     }
-    
+
     list requestAdditionalCapabilities {
       key "requestedAdditionalCapabilityName";
       uses RequestedAdditionalCapabilityData;
       description "Specifies requirements for additional capabilities";
     }
-    
+
     list computeRequirements {
       key "computeReqId";
       description "Specifies compute requirements";
       uses ComputeRequirements;
     }
-    
+
     container virtualMemory {
       description "The virtual memory of the virtualised compute";
       uses VirtualMemoryData;
     }
-    
+
     container virtualCpu {
       description "The virtual CPU(s) of the virtualised compute";
       uses VirtualCpuData;
     }
-    
+
     list virtualDisk {
       key "id";
       description "The local or ephemeral disk(s) of the virtualised compute";

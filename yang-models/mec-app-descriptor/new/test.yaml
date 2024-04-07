@@ -1,20 +1,20 @@
 app-descriptor:
-  id: "dummyAppID"
+  id: "dummy-appID"
   name: "Dummy App"
   provider: "Dummy Provider"
   soft-version: "1.0"
   version: "1.0"
   sw-image:
-      id: "dummyImageID"
-      name: "Dummy Image"
-      version: "1.0"
-      checksum: "dummyChecksum"
-      container-format: "Docker"
-      size: 102400
-      supported-virtualisation-environment:
-        - "test1"
-        - "test2"
-        - "test3"
+    id: "dummyImageID"
+    name: "Dummy Image"
+    version: "1.0"
+    checksum: "dummyChecksum"
+    container-format: "Docker"
+    size: 102400
+    supported-virtualisation-environment:
+      - "test1"
+      - "test2"
+      - "test3"
   dns-rule:
     - id: "dummyDNSRuleID"
       domain-name: "example.com"
@@ -40,3 +40,141 @@ app-descriptor:
   user-context-transfer-capability:
     stateful-application: true
     user-context-transfer-support: true
+  change-app-instance-state-op-config:
+    min-graceful-stop-timeout: 60
+    max-recommended-graceful-stop-timeout: 5000
+    vnf-parameters:
+      - key: "dummyVnfParameter"
+        value: "dummyValue"
+  terminate-app-instance-op-config:
+    min-graceful-termination-timeout: 60
+    max-recommended-graceful-termination-timeout: 5000
+    vnf-parameters:
+      - key: "dummyVnfParameter"
+        value: "dummyValue"
+  traffic-rule:
+    - id: "dummyRuleID"
+      filter-type: "PACKET"
+      priority: 1
+      action: "PASSTHROUGH"
+      traffic-filter:
+        - id: "trafficFilterID"
+          src-address: "192.0.2.1"
+          dst-address: "192.0.2.1"
+          src-port: "8080"
+          dst-port: "8080"
+          protocol: "dummyProtocol"
+          tag: "dummyTag"
+          uri: "www.dummy.com/dummyTag"
+          packet-label: "dummyLabel"
+          src-tunnel-address: "192.0.2.1"
+          tgt-tunnel-address: "192.0.2.1"
+          src-tunnel-port: "8080"
+          dst-tunnel-port: "8080"
+          qci: 69
+          dscp: 40
+          tc: 1
+      dst-interface:
+        - id: "dummyInterfaceID"
+          interface-type: "IP"
+          dst-ip-address: "190.0.0.1"
+  transport-dependency:
+    - id: "dummyTransportID"
+      transport:
+        name: "Dummy Transport"
+        description: "Dummy Description"
+        type: "REST_HTTP"
+        protocol: "HTTP"
+        version: "1.0"
+        security:
+          oauth2-info:
+            grant-types:
+              - "OAUTH2_AUTHORIZATION_CODE"
+              - "OAUTH2_CLIENT_CREDENTIALS"
+            token-endpoint: "www.dummy.com/token"
+      serializers:
+        - "JSON"
+        - "XML"
+      labels:
+        - "label1"
+        - "label2"
+  ext-cpd:
+    - id: "dummyCPDID"
+      virtual-network-interface-requirements:
+        - name: "Dummy Interface"
+          description: "Dummy Description"
+          support-mandatory: true
+          network-interface-requirement:
+            key: "dummyKey"
+            value: "dummyValue"
+          niclo-requirements:
+            id: nodeRequirementID
+            logical-node-requirement-detail: "dummyDetail"
+      cpd-id: "dummyCPDID"
+      layer-protocol: "IPV4"
+      cp-role: "dummyRole"
+      description: "Dummy Description"
+      address-data:
+        - address-type: "IP_ADDRESS"
+          l3-address-data:
+            ip-address-type: "IPV4"
+            number-of-ip-addresses: 1
+            ip-address-assignment: "STATIC"
+            floating-ip-activated: true
+            ip-address-reservation: "10.255.0.125"
+  service-required:
+    - name: "Dummy Service"
+      category:
+        href: "www.dummy.com/category"
+        id: "dummyCategoryID"
+        name: "Dummy Category"
+        version: "1.0"
+      version: "1.0"
+      transport-dependencies:
+        - id: "dummyTransportID"
+          transport:
+            name: "Dummy Transport"
+            description: "Dummy Description"
+            type: "REST_HTTP"
+            protocol: "HTTP"
+            version: "1.0"
+            security:
+              oauth2-info:
+                grant-types:
+                  - "OAUTH2_AUTHORIZATION_CODE"
+                  - "OAUTH2_CLIENT_CREDENTIALS"
+                token-endpoint: "www.dummy.com/token"
+          serializers:
+            - "JSON"
+            - "XML"
+          labels:
+            - "label1"
+            - "label2"
+      requested-permissions:
+        - "permission1"
+        - "permission2"
+  service-produced:
+    - name: "Dummy Service"
+      category:
+        href: "www.dummy.com/category"
+        id: "dummyCategoryID"
+        name: "Dummy Category"
+        version: "1.0"
+      version: "1.0"
+      transports-supported:
+        - id: "dummyTransportID"
+          transport:
+            name: "Dummy Transport"
+            description: "Dummy Description"
+            type: "REST_HTTP"
+            protocol: "HTTP"
+            version: "1.0"
+            security:
+              oauth2-info:
+                grant-types:
+                  - "OAUTH2_AUTHORIZATION_CODE"
+                  - "OAUTH2_CLIENT_CREDENTIALS"
+                token-endpoint: "www.dummy.com/token"
+          serializers:
+            - "JSON"
+            - "XML"
