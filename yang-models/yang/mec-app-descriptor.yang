@@ -1,0 +1,146 @@
+module mec-app-descriptor {
+  namespace "http://example.com/ns/mec-app-descriptor";
+  prefix mad;
+
+  import artifact-descriptor { prefix ad; }
+  import change-app-instance-state-op-config-descriptor { prefix caisoc; }
+  import dns-rule-descriptor { prefix dr; }
+  import external-cpd-descriptor { prefix ecpd; }
+  import feature-dependency-descriptor { prefix fd; }
+  import latency-descriptor { prefix l; }
+  import network-policy-descriptor { prefix np; }
+  import service-dependency-descriptor { prefix srv; }
+  import service-descriptor { prefix sd; }
+  import sw-image-descriptor { prefix si; }
+  import terminate-app-instance-op-config-descriptor { prefix taio; }
+  import traffic-rule-descriptor { prefix trd; }
+  import transport-dependency-descriptor {prefix td; }
+  import user-context-transfer-capability-descriptor { prefix uctc; }
+  import virtual-compute-descriptor { prefix vc; }
+  import virtual-storage-descriptor { prefix vs; }
+
+  description "YANG module for MEC Application Descriptors based on ETSI GS MEC 010-2 V2.2.1.";
+
+  container app-descriptor {
+    leaf id {
+      type string;
+      mandatory true;
+      description "Identifier of this MEC application descriptor. This attribute shall be globally unique.";
+    }
+    leaf name {
+      type string;
+      mandatory true;
+      description "Name to identify the MEC application.";
+    }
+    leaf provider {
+      type string;
+      mandatory true;
+      description "Provider of the application and of the AppD.";
+    }
+    leaf soft-version {
+      type string;
+      mandatory true;
+      description "Identifies the version of software of the MEC application.";
+    }
+    leaf version {
+      type string;
+      mandatory true;
+      description "Identifies the version of the application descriptor.";
+    }
+    leaf mec-version {
+      type string;
+      mandatory true;
+      description "Identifies version(s) of MEC system compatible with the MEC application described in this version of the AppD. The value shall be formatted as comma-separated list of strings.";
+    }
+    leaf info-name {
+      type string;
+      description "Human readable name for the MEC application.";
+    }
+    leaf description {
+      type string;
+      mandatory true;
+      description "Human readable description of the MEC application.";
+    }
+    container virtual-compute {
+      description "";
+      uses vc:virtual-compute-descriptor;
+    }
+    container sw-image {
+      description "";
+      uses si:sw-image-descriptor;
+    }
+    list virtual-storage {
+      description "";
+      key "id";
+      uses vs:virtual-storage-descriptor;
+    }
+    list ext-cpd{
+      key id;
+      description "";
+      uses ecpd:external-cpd-descriptor;
+    }
+    list service-required {
+      description "";
+      key "name";
+      uses srv:service-dependency-descriptor;
+    }
+    list service-optional {
+      description "";
+      key "name";
+      uses srv:service-dependency-descriptor;
+    }
+    list service-produced {
+      description "";
+      key "name";
+      uses sd:service-descriptor;
+    }
+    container feature-required {
+      description "";
+      uses fd:feature-dependency-descriptor;
+    }
+    container feature-optional {
+      description "";
+      uses fd:feature-dependency-descriptor;
+    }
+    list transport-dependencies {
+      key "id";
+      min-elements 1;
+      description "";
+      uses td:transport-dependency-descriptor;
+    }
+    list traffic-rule {
+      description "";
+      key "id";
+      uses trd:traffic-rule-descriptor;
+    }
+    list dns-rule {
+      description "";
+      key "id";
+      uses dr:dns-rule-descriptor;
+    }
+    container latency {
+      description "";
+      uses l:latency-descriptor;
+    }
+    container terminate-app-instance-op-config {
+      description "";
+      uses taio:terminate-app-instance-op-config-descriptor;
+    }
+    container change-app-instance-state-op-config {
+      description "";
+      uses caisoc:change-app-instance-state-op-config-descriptor;
+    }
+    container user-context-transfer-capability {
+      description "";
+      uses uctc:user-context-transfer-capability-descriptor;
+    }
+    container network-policy {
+      description "";
+      uses np:network-policy-descriptor;
+    }
+    container artifacts {
+      description "Incorporates the Artifact Descriptor into the MEC application descriptor.";
+      uses ad:artifact-descriptor;
+    }
+  }
+}

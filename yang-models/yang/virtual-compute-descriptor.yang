@@ -1,29 +1,25 @@
 module virtual-compute-descriptor {
   namespace "urn:etsi:nfv:virtual-compute-descriptor";
-  prefix vcd;
+  prefix vc;
 
-  description "Data model for ETSI GS NFV-IFA 011 VirtualComputeDesc";
+  import external-cpd-descriptor { prefix ecpd; }
+  import virtual-storage-descriptor { prefix vs; }
+  import common { prefix comm; }
 
-  grouping virtual-compute-desc {
+  description "Data model for ETSI GS NFV-IFA 011 virtual-compute-desc";
+
+  grouping virtual-compute-descriptor {
     description "Describes virtual compute resources to be used by the VNF";
 
     leaf id {
       type string;
-      description "Unique identifier for this VirtualComputeDesc";
+      mandatory true;
+      description "Unique identifier of this virtual-compute-descriptor in the VNFD";
     }
 
-    container virtual-compute-desc-id {
-      leaf value {
-        type string;
-        description "Unique identifier of this VirtualComputeDesc in the VNFD";
-      }
-      description "Identifier of this VirtualComputeDesc in the VNFD";
-    }
-
-        // external cpd descriptor
-    list logical-node {
-      key "logical-nodeId";
-      uses logical-node-requirements;
+    list logical-node-reqs {
+      key "id";
+      uses ecpd:logical-node-requirements;
       description "The logical node requirements";
     }
 
@@ -34,9 +30,9 @@ module virtual-compute-descriptor {
     }
 
     list compute-requirements {
-      key "id";
+      key "key";
       description "Specifies compute requirements";
-      uses compute-requirements;
+      uses comm:key-value-pair;
     }
 
     container virtual-memory {
@@ -49,34 +45,36 @@ module virtual-compute-descriptor {
       uses virtual-cpu-data;
     }
 
-        // virtual storage descriptor
     list virtual-disk {
       key "id";
       description "The local or ephemeral disk(s) of the virtualised compute";
-      uses block-storage-data;
-    }
-  }
 
-  grouping compute-requirements {
-    leaf compute-req-id {
-      type string;
-      description "Unique identifier for these compute requirements";
+      leaf id {
+        type string;
+        mandatory true;
+        description "Unique identifier of the virtual disk in the VNFD";
+      }
+
+      uses vs:block-storage-data;
     }
-    uses key-value-pairs;
   }
 
   grouping virtual-memory-data {
-    leaf virtual-mem-size {
+    leaf mem-size {
       type uint64;
       units "MB";
       mandatory true;
       description "Amount of virtual Memory (e.g. in MB)";
     }
-    leaf virtual-mem-oversubscription-policy {
+    leaf mem-oversubscription-policy {
       type string;
       description "The memory core oversubscription policy in terms of virtual memory to physical memory on the platform";
     }
-    uses key-value-pairs;
+    list vdu-mem-requirements {
+      key "key";
+      description "Specifies the memory requirements for the VDU";
+      uses comm:key-value-pair;
+    }
     leaf numa-enabled {
       type boolean;
       description "It specifies the memory allocation to be cognisant of the relevant process/core allocation";
@@ -84,46 +82,54 @@ module virtual-compute-descriptor {
   }
 
   grouping virtual-cpu-data {
-    leaf cpu-architecture {
+    leaf architecture {
       type string;
       description "CPU architecture type. Examples are x86, ARM";
     }
-    leaf num-virtual-cpu {
+    leaf num-cpus {
       type uint16;
       mandatory true;
       description "Number of virtual CPUs";
     }
-    leaf virtual-cpu-clock {
+    leaf cpu-clock {
       type uint64;
       units "MHz";
       description "Minimum virtual CPU clock rate (e.g. in MHz)";
     }
-    leaf virtual-cpu-oversubscription-policy {
+    leaf cpu-oversubscription-policy {
       type string;
       description "The CPU core oversubscription policy e.g. the relation of virtual CPU cores to physical CPU cores/threads";
     }
-    uses key-value-pairs;
-    uses virtual-cpu-pinning-data;
+    list vdu-cpu-requirements {
+      key "key";
+      description "Specifies the CPU requirements for the VDU";
+      uses comm:key-value-pair;
+    }
+    container cpu-pinning {
+      description "The virtual CPU pinning configuration";
+      uses virtual-cpu-pinning-data;
+    }
   }
 
   grouping virtual-cpu-pinning-data {
-    leaf virtual-cpu-pinning-policy {
+    leaf pinning-policy {
       type enumeration {
         enum STATIC;
         enum DYNAMIC;
       }
       description "Indicates the policy for CPU pinning";
     }
-    list virtual-cpu-pinning-rule {
-      key "id";
+    list pinning-rule {
+      key "key";
       description "List of rules that should be considered during the allocation of the virtual CPUs to logical CPUs in case of 'STATIC' virtualCpuPinningPolicy";
-      uses key-value-pairs;
+      uses comm:key-value-pair;
     }
   }
 
   grouping requested-additional-capability-data {
-    leaf requested-additional-capability-name {
+    leaf name {
       type string;
+      mandatory true;
       description "Specifies a requested additional capability for the VDU";
     }
     leaf support-mandatory {
@@ -139,27 +145,11 @@ module virtual-compute-descriptor {
       type string;
       description "Specifies the preferred version of the requested additional capability";
     }
-    uses key-value-pairs;
-  }
-
-  grouping key-value-pairs {
-    leaf id {
-      type string;
-      description "Unique identifier for this key-value pair";
-    }
-
-    list key-value-pair {
+    list target-performance-parameters {
       key "key";
-      leaf key {
-        type string;
-        description "Key in the key-value pair";
-      }
-      leaf value {
-        type string;
-        description "Value in the key-value pair";
-      }
-      description "A key-value pair";
+      description "Specifies especific attributes, dependent on the requested additional capability type.";
+      uses comm:key-value-pair;
     }
-    description "A list of key-value pairs";
   }
+
 }

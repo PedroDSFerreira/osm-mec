@@ -34,7 +34,7 @@ app-descriptor:
         hosting-provides-iops: true
         guaranteed-iops: 2048
         max-iops: 2048
-  feature-dependency:
+  feature-required:
     name: "DummyFeature"
     version: "1.0"
   user-context-transfer-capability:
@@ -46,6 +46,12 @@ app-descriptor:
     vnf-parameters:
       - key: "dummyVnfParameter"
         value: "dummyValue"
+  artifacts:
+    opendb_helm:
+      description: "Helm Chart for opendb Pod"
+      type: "tosca.artifacts.nvf.HelmChart"
+      file: "Artifacts/Scripts/openbd.tgz"
+
   terminate-app-instance-op-config:
     min-graceful-termination-timeout: 60
     max-recommended-graceful-termination-timeout: 5000
@@ -78,7 +84,7 @@ app-descriptor:
         - id: "dummyInterfaceID"
           interface-type: "IP"
           dst-ip-address: "190.0.0.1"
-  transport-dependency:
+  transport-dependencies:
     - id: "dummyTransportID"
       transport:
         name: "Dummy Transport"
@@ -178,3 +184,44 @@ app-descriptor:
           serializers:
             - "JSON"
             - "XML"
+  virtual-compute:
+    id: "dummyComputeID"
+    logical-node-reqs:
+      - id: "dummyNodeReqID"
+        logical-node-requirement-detail: "dummyDetail"
+    request-additional-capabilities:
+      - name: "DummyCapability"
+        support-mandatory: true
+        min-requested-additional-capability-version: "1.0"
+        preferred-requested-additional-capability-version: "1.0"
+        target-performance-parameters:
+          - key: "dummyKey"
+            value: "dummyValue"
+    compute-requirements:
+      - key: "dummyKey"
+        value: "dummyValue"
+    virtual-memory:
+      mem-size: 1024
+      mem-oversubscription-policy: "dummyPolicy"
+      vdu-mem-requirements:
+        - key: "dummyKey"
+          value: "dummyValue"
+      numa-enabled: true
+    virtual-cpu:
+      architecture: "x86"
+      num-cpus: 1
+      cpu-clock: 1000
+      cpu-oversubscription-policy: "dummyPolicy"
+      vdu-cpu-requirements:
+        - key: "dummyKey"
+          value: "dummyValue"
+      cpu-pinning:
+        pinning-policy: "STATIC"
+        pinning-rule:
+          - key: "dummyKey"
+            value: "dummyValue"
+    virtual-disk:
+      - id: "dummyDiskID"
+        hosting-provides-iops: true
+        guaranteed-iops: 2048
+        max-iops: 2048
