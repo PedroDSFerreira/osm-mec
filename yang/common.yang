@@ -1,0 +1,18 @@
+module common {
+  namespace "urn:etsi:mec:common";
+  prefix comm;
+
+  description "Common types for yang modules";
+
+  grouping key-value-pair {
+    description "A key-value pair";
+    leaf key {
+      type string;
+      description "Key in the key-value pair";
+    }
+    leaf value {
+      type string;
+      description "Value in the key-value pair";
+    }
+  }
+}

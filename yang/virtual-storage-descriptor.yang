@@ -1,0 +1,171 @@
+module virtual-storage-descriptor {
+  namespace "urn:etsi:nfv:virtual-storage-descriptor";
+  prefix vs;
+
+  import common { prefix comm; }
+
+  grouping virtual-storage-descriptor {
+    description "Describes virtual storage resources to be used by the VNF";
+
+    leaf id {
+      type string;
+      description "Unique identifier for this VirtualStorageDesc";
+    }
+
+    leaf type-of-storage {
+      type enumeration {
+        enum BLOCK;
+        enum OBJECT;
+        enum FILE;
+      }
+      mandatory true;
+      description "Type of virtualised storage resource";
+    }
+
+    choice storage {
+      description "Virtualised storage resource";
+      mandatory true;
+
+      container block-storage {
+        description "Block storage data, applicable only if typeOfStorage=BLOCK";
+        uses block-storage-data;
+      }
+
+      container object-storage {
+        description "Object storage data, applicable only if typeOfStorage=OBJECT";
+        uses object-storage-data;
+      }
+
+      container file-storage {
+        description "File storage data, applicable only if typeOfStorage=FILE";
+        uses file-storage-data;
+      }
+    }
+
+    container nfvi-maintenance-info {
+      description "";
+      uses nfvi-maintenance-info-descriptor;
+    }
+
+    leaf per-vnfc-instance {
+      type boolean;
+      description "Indicates if the storage resource is dedicated to a VNFC instance";
+    }
+  }
+
+  grouping nfvi-maintenance-info-descriptor {
+    description "Describes NFVI maintenance information";
+
+    leaf impact-notification-lead-time {
+      type uint32;
+      mandatory true;
+      units seconds;
+      description "Time before maintenance activity that the VNF should be notified";
+    }
+
+    leaf is-impact-mitigation-requested {
+      type boolean;
+      description "Indicates if the VNF provider has requested impact mitigation";
+    }
+
+    leaf-list supported-migration-time {
+      type enumeration {
+        enum NO_MIGRATION;
+        enum OFFLINE_MIGRATION;
+        enum LIVE_MIGRATION;
+      }
+      description "List of the allowed migration times";
+    }
+
+    leaf max-undetectable-interruption-time {
+      type uint32;
+      units seconds;
+      description "Maximum time that the VNF can tolerate an undetectable interruption";
+    }
+
+    leaf min-recovery-time-between-impacts {
+      type uint32;
+      units seconds;
+      description "";
+    }
+
+    list max-number-of-impacted-instances {
+      description "List of the maximum number of impacted instances";
+      key "id";
+      leaf id {
+        type string;
+        description "Identifier of the impacted instances";
+      }
+      leaf group-size {
+        type uint32;
+        description "Number of impacted instances in a group";
+      }
+
+      leaf max-number-of-impacted-instances {
+        type uint32;
+        mandatory true;
+        description "Maximum number of impacted instances";
+      }
+    }
+  }
+
+  grouping block-storage-data {
+    description "Describes block storage data";
+
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of block storage resource";
+    }
+
+    list vdu-storage-requirements {
+      description "Describes storage requirements for a VDU";
+      key "key";
+      uses comm:key-value-pair;
+    }
+
+    leaf rdma-enabled {
+      type boolean;
+      description "Indicates if RDMA is enabled for the block storage resource";
+    }
+
+    leaf sw-image-id {
+      type string;
+      description "Identifier of the software image to be used to configure the block storage resource";
+    }
+  }
+
+  grouping object-storage-data {
+    description "Describes object storage data";
+
+    leaf max-size-of-storage {
+      type uint64;
+      units bytes;
+      description "";
+    }
+  }
+
+  grouping file-storage-data {
+    description "Describes file storage data";
+
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of file storage resource";
+    }
+
+    leaf file-system-protocol {
+      type string;
+      mandatory true;
+      description "";
+    }
+
+    leaf int-virtual-link-id {
+      type string;
+      mandatory true;
+      description "Identifier referencing VNF virtual linkd descriptor.";
+    }
+  }
+}

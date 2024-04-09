@@ -1,0 +1,17 @@
+module latency-descriptor {
+  namespace "http://example.com/ns/latency-descriptor";
+  prefix ld;
+
+  description "YANG module for Latency Descriptor.";
+
+  grouping latency-descriptor {
+    description "Latency descriptor attributes.";
+
+    leaf max-latency {
+      type uint32;
+      units "ns";
+      mandatory true;
+      description "The value of the maximum latency in nano seconds tolerated by the MEC application.";
+    }
+  }
+}

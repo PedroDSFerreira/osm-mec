@@ -1,0 +1,179 @@
+module transport-dependency-descriptor {
+  namespace "urn:etsi:mec:transport-dependency-descriptor";
+  prefix td;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  description "Data model for MEC Transport Dependency";
+
+  grouping transport-dependency-descriptor {
+    description
+      "Describes transport dependencies related to a MEC app";
+
+      leaf id {
+        type string;
+        description
+          "Unique identifier for the transport dependency";
+      }
+
+      container transport {
+        description
+          "Information about the transport in this transport binding";
+        uses transport-descriptor;
+      }
+
+      leaf-list serializers {
+        type serializer-type;
+        min-elements 1;
+        description
+          "Type of serializers used in this transport binding";
+      }
+
+      leaf-list labels {
+        type string;
+        min-elements 1;
+        description
+          "Set of labels that allow to define groups of transport bindings";
+      }
+    }
+
+  grouping transport-descriptor {
+    description
+      "Describes a transport";
+
+    leaf name {
+      type string;
+      mandatory true;
+      description
+        "The name of this transport";
+    }
+
+    leaf description {
+      type string;
+      description
+        "Human-readable description of this transport";
+    }
+
+    leaf type {
+      type transport-type;
+      mandatory true;
+      description
+        "Type of the transport";
+    }
+
+    leaf protocol {
+      type string;
+      mandatory true;
+      description
+        "The name of the protocol used";
+    }
+
+    leaf version {
+      type string;
+      mandatory true;
+      description
+        "The version of the protocol used";
+    }
+
+    container security {
+      description
+        "Information about the security used by the transport";
+      uses security-info;
+    }
+
+    container impl-specific-info {
+      description
+        "Additional implementation specific details of the transport";
+    }
+  }
+
+  grouping security-info {
+    description
+      "Information about the security used by a transport";
+
+    container oauth2-info {
+      description
+        "Information about OAuth2 based security";
+
+      leaf-list grant-types {
+        type enumeration {
+          enum OAUTH2_AUTHORIZATION_CODE;
+          enum OAUTH2_IMPLICIT_GRANT;
+          enum OAUTH2_RESOURCE_OWNER;
+          enum OAUTH2_CLIENT_CREDENTIALS;
+        }
+        min-elements 1;
+        max-elements 4;
+        description
+          "Supported OAuth2 grant types";
+      }
+
+      leaf token-endpoint {
+        when "not(../grant-types[.='OAUTH2_IMPLICIT_GRANT'])";
+        type inet:uri;
+        mandatory true;
+        description
+          "The token endpoint";
+      }
+    }
+  }
+
+  typedef serializer-type {
+    type enumeration {
+      enum JSON {
+        description
+          "JavaScript Object Notation as defined in RFC 8259";
+        value 0;
+      }
+      enum XML {
+        description
+          "Extensible Markup Language as defined in W3C REC-xml-20081126";
+        value 1;
+      }
+      enum PROTOBUF3 {
+        description
+          "Protocol Buffers version 3 as defined in https://developers.google.com/protocol-buffers/docs/reference/proto3-spec";
+        value 2;
+      }
+    }
+    description
+      "Types of serializers";
+  }
+
+  typedef transport-type {
+    type enumeration {
+      enum REST_HTTP {
+        description
+          "REST API using HTTP";
+      }
+      enum MB_TOPIC_BASED {
+        description
+          "Topic-based message bus";
+      }
+      enum MB_ROUTING {
+        description
+          "Routing-based message bus";
+      }
+      enum MB_PUBSUB {
+        description
+          "Publish-subscribe message bus";
+      }
+      enum RPC {
+        description
+          "Remote procedure call";
+      }
+      enum RPC_STREAMING {
+        description
+          "Streaming remote procedure call";
+      }
+      enum WEBSOCKET {
+        description
+          "WebSocket protocol as defined in RFC 6455";
+      }
+    }
+    description
+      "Types of transports";
+  }
+}

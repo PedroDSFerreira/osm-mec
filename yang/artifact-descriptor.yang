@@ -1,0 +1,35 @@
+module artifact-descriptor {
+  namespace "http://example.com/ns/artifact-descriptor";
+  prefix ad;
+
+  description "YANG module for Artifact Descriptor.";
+
+  grouping artifact-descriptor {
+    description "Artifact descriptor attributes.";
+
+    container opendb_helm {
+      description "";
+      uses artifact;
+    }
+  }
+
+  grouping artifact {
+    description "Artifact attributes.";
+    leaf description {
+      type string;
+      description "Description of the artifact.";
+    }
+
+    leaf type {
+      type string;
+      mandatory true;
+      description "Type of the artifact.";
+    }
+
+    leaf file {
+      type string;
+      mandatory true;
+      description "File name of the artifact.";
+    }
+  }
+}
