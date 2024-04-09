@@ -59,7 +59,7 @@ const Dashboard = () => {
 
     const getAppData = async () => {
         try {
-            const data = await getAppPkg();
+            const { data } = await getAppPkg();
             setAppData(data);
         } catch (error) {
             setAppData([]);
