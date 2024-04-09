@@ -6,6 +6,7 @@ from app_routes import set_routes
 from utils.cherrypy_utils import jsonify_error
 from utils.error_handler import BackgroundThread
 
+
 def main():
     cherrypy_cors.install()
 

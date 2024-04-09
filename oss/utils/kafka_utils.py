@@ -1,15 +1,17 @@
-from kafka import KafkaProducer, KafkaConsumer
 import json
 import os
 import uuid
+
 import cherrypy
+from kafka import KafkaConsumer, KafkaProducer
 
 responses = {}
 
 producer = KafkaProducer(
-        bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS"),
-        value_serializer=lambda v: json.dumps(v).encode("utf-8"),
-        )
+    bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS"),
+    value_serializer=lambda v: json.dumps(v).encode("utf-8"),
+)
+
 
 class KafkaUtils:
     @staticmethod
@@ -27,7 +29,7 @@ class KafkaUtils:
     def send_message(producer, topic, message):
         #  inject a unique message id
         msg_id = str(uuid.uuid4())
-        message['msg_id'] = msg_id
+        message["msg_id"] = msg_id
         producer.send(topic, message)
         return msg_id
 
@@ -36,7 +38,7 @@ class KafkaUtils:
         for message in consumer:
             response = message.value
 
-            msg_id = response.pop('msg_id')
+            msg_id = response.pop("msg_id")
             responses[msg_id] = response
 
     @staticmethod
@@ -48,8 +50,8 @@ class KafkaUtils:
                 pass
 
             response = responses.pop(msg_id)
-            if response.get('error'):
-                raise cherrypy.HTTPError(response['status'], response['error'])
+            if response.get("error"):
+                raise cherrypy.HTTPError(response["status"], response["error"])
             return response
         else:
-            raise cherrypy.HTTPError(400, 'msg_id not found')
+            raise cherrypy.HTTPError(400, "msg_id not found")

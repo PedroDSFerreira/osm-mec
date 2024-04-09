@@ -1,7 +1,10 @@
 import threading
-from cherrypy.process import plugins
-from .kafka_utils import KafkaUtils
 import time
+
+from cherrypy.process import plugins
+
+from .kafka_utils import KafkaUtils
+
 
 class BackgroundThread(plugins.SimplePlugin):
     """CherryPy plugin to create a background worker thread"""
@@ -17,6 +20,7 @@ class BackgroundThread(plugins.SimplePlugin):
         self.t = threading.Thread(target=consume_messages)
         self.t.daemon = True
         self.t.start()
+
 
 def consume_messages():
     """Background worker thread"""

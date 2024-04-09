@@ -22,11 +22,7 @@ class AppPkgController:
         return osm_client.vnfd.get(name=app_pkg_id)
 
     @cherrypy.tools.json_out()
-    def new_app_pkg(
-        self,
-        appd,
-        overwrite=None
-    ):
+    def new_app_pkg(self, appd, overwrite=None):
         """
         /app_pkgs (POST)
         """

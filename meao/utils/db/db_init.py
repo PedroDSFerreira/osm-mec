@@ -9,7 +9,7 @@ class DatabaseInitializer:
                 db.create_collection(collection)
 
     def insert_default_data(self):
-        db['ns_pkgs'].insert_one({'osm_id': 'ff97b85b-251f-43f0-82f1-f52429847e23'})
+        db["ns_pkgs"].insert_one({"osm_id": "ff97b85b-251f-43f0-82f1-f52429847e23"})
 
     @classmethod
     def initialize_database(cls):

@@ -1,8 +1,9 @@
 import cherrypy
 from utils.db import DB
+from utils.file_management import *
 from utils.kafka_utils import KafkaUtils, producer
 from utils.osm import osm_client
-from utils.file_management import *
+
 
 class NsPkgController:
     def __init__(self):
@@ -10,7 +11,6 @@ class NsPkgController:
         self.topics = ["new_ns_pkg", "delete_ns_pkg", "update_ns_pkg"]
         self.producer = producer
         self.consumer = KafkaUtils.create_consumer(self.topics)
-
 
     @cherrypy.tools.json_out()
     def list_ns_pkgs(self, filter=None):
@@ -25,7 +25,7 @@ class NsPkgController:
         /ns_pkgs/{ns_pkg_id} (GET)
         """
         ns_pkg = DB._get(ns_pkg_id, self.collection)
-        return osm_client.nsd.get(name=ns_pkg.get('osm_id'))
+        return osm_client.nsd.get(name=ns_pkg.get("osm_id"))
 
     @cherrypy.tools.json_out()
     def new_ns_pkg(self, nsd):
@@ -33,16 +33,20 @@ class NsPkgController:
         /ns_pkgs (POST)
         """
         file = stream_to_binary(nsd.file)
-        ns_pkg_id = DB._add(collection=self.collection, data={'nsd': file})
+        ns_pkg_id = DB._add(collection=self.collection, data={"nsd": file})
 
         try:
             file_name = get_file_name(ns_pkg_id, nsd.filename)
 
-            msg_id = KafkaUtils.send_message(self.producer, 'new_ns_pkg', {'ns_pkg_id': ns_pkg_id, 'file_name': file_name})
+            msg_id = KafkaUtils.send_message(
+                self.producer,
+                "new_ns_pkg",
+                {"ns_pkg_id": ns_pkg_id, "file_name": file_name},
+            )
             response = KafkaUtils.wait_for_response(msg_id)
 
-            cherrypy.response.status = response['status']
-            return {'id': ns_pkg_id}
+            cherrypy.response.status = response["status"]
+            return {"id": ns_pkg_id}
         finally:
             delete_file(file_name)
             DB._delete(ns_pkg_id, self.collection)
@@ -58,8 +62,10 @@ class NsPkgController:
         /ns_pkgs/{ns_pkg_id} (DELETE)
         """
         if not DB._exists(ns_pkg_id, self.collection):
-            cherrypy.HTTPError(404, 'ns_pkg_id not found')
+            cherrypy.HTTPError(404, "ns_pkg_id not found")
 
-        msg_id = KafkaUtils.send_message(self.producer, 'delete_ns_pkg', {'ns_pkg_id': ns_pkg_id, 'force': force})
+        msg_id = KafkaUtils.send_message(
+            self.producer, "delete_ns_pkg", {"ns_pkg_id": ns_pkg_id, "force": force}
+        )
         response = KafkaUtils.wait_for_response(msg_id)
-        cherrypy.response.status = response['status']
+        cherrypy.response.status = response["status"]
