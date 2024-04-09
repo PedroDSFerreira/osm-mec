@@ -75,7 +75,7 @@ module mec-app-descriptor {
       uses vs:virtual-storage-descriptor;
     }
     list ext-cpd{
-      key id;
+      key "id";
       description "";
       uses ecpd:external-cpd-descriptor;
     }

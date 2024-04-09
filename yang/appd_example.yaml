@@ -4,224 +4,303 @@ app-descriptor:
   provider: "Dummy Provider"
   soft-version: "1.0"
   version: "1.0"
+  mec-version: "1.0"
+  # info-name: "Dummy Info"
+  description: "Dummy Description"
+  virtual-compute:
+    id: "dummyComputeID"
+    # logical-node-reqs:
+    #   - id: "dummyNodeReqID"
+    #     logical-node-requirement-detail: "dummyDetail"
+    # request-additional-capabilities:
+    #   - name: "DummyCapability"
+    #     support-mandatory: true
+    #     # min-requested-additional-capability-version: "1.0"
+    #     # preferred-requested-additional-capability-version: "1.0"
+    #     target-performance-parameters:
+    #       - key: "dummyKey"
+    #         value: "dummyValue"
+    # compute-requirements:
+    #   - key: "dummyKey"
+    #     value: "dummyValue"
+    virtual-memory:
+      mem-size: 1024
+      # mem-oversubscription-policy: "dummyPolicy"
+      # vdu-mem-requirements:
+      #   - key: "dummyKey"
+      #     value: "dummyValue"
+      # numa-enabled: true
+    virtual-cpu:
+      # architecture: "x86"
+      cpu-count: 1
+      # cpu-clock: 1000
+      # cpu-oversubscription-policy: "dummyPolicy"
+      # vdu-cpu-requirements:
+      #   - key: "dummyKey"
+      #     value: "dummyValue"
+      # cpu-pinning:
+      #   # pinning-policy: "STATIC"
+      #   # pinning-rule:
+      #   #   - key: "dummyKey"
+      #   #     value: "dummyValue"
+    # virtual-disk:
+    #   - id: "dummyDiskID"
+    #     size-of-storage: 2048
+    #     # vdu-storage-requirements:
+    #     #   - key: "dummyKey"
+    #     #     value: "dummyValue"
+    #     # rdma-enabled: true
+    #     # sw-image-id: "swImageID"
   sw-image:
     id: "dummyImageID"
     name: "Dummy Image"
     version: "1.0"
     checksum: "dummyChecksum"
     container-format: "Docker"
+    # disk-format: "dummyFormat"
+    # min-disk: 2048
+    # min-ram: 1024
     size: 102400
-    supported-virtualisation-environment:
-      - "test1"
-      - "test2"
-      - "test3"
-  dns-rule:
-    - id: "dummyDNSRuleID"
-      domain-name: "example.com"
-      ip-address-type: "IP_V4"
-      ip-address: "192.0.2.1"
-  latency:
-    max-latency: 100
-  network-policy:
-    cellular-network: true
-    wifi-network: true
-    fixed-access-network: false
+    sw-image: "dummyImagePath"
+    # operating-system: "Linux"
+    # supported-virtualisation-environment:
+    #   - "test1"
+    #   - "test2"
+    #   - "test3"
   virtual-storage:
     - id: "dummyStorageID"
       type-of-storage: "BLOCK"
-      size-of-storage: 2048
-      block-storage:
-        hosting-provides-iops: true
-        guaranteed-iops: 2048
-        max-iops: 2048
-  feature-required:
-    name: "DummyFeature"
-    version: "1.0"
-  user-context-transfer-capability:
-    stateful-application: true
-    user-context-transfer-support: true
-  change-app-instance-state-op-config:
-    min-graceful-stop-timeout: 60
-    max-recommended-graceful-stop-timeout: 5000
-    vnf-parameters:
-      - key: "dummyVnfParameter"
-        value: "dummyValue"
-  artifacts:
-    opendb_helm:
-      description: "Helm Chart for opendb Pod"
-      type: "tosca.artifacts.nvf.HelmChart"
-      file: "Artifacts/Scripts/openbd.tgz"
-
-  terminate-app-instance-op-config:
-    min-graceful-termination-timeout: 60
-    max-recommended-graceful-termination-timeout: 5000
-    vnf-parameters:
-      - key: "dummyVnfParameter"
-        value: "dummyValue"
-  traffic-rule:
-    - id: "dummyRuleID"
-      filter-type: "PACKET"
-      priority: 1
-      action: "PASSTHROUGH"
-      traffic-filter:
-        - id: "trafficFilterID"
-          src-address: "192.0.2.1"
-          dst-address: "192.0.2.1"
-          src-port: "8080"
-          dst-port: "8080"
-          protocol: "dummyProtocol"
-          tag: "dummyTag"
-          uri: "www.dummy.com/dummyTag"
-          packet-label: "dummyLabel"
-          src-tunnel-address: "192.0.2.1"
-          tgt-tunnel-address: "192.0.2.1"
-          src-tunnel-port: "8080"
-          dst-tunnel-port: "8080"
-          qci: 69
-          dscp: 40
-          tc: 1
-      dst-interface:
-        - id: "dummyInterfaceID"
-          interface-type: "IP"
-          dst-ip-address: "190.0.0.1"
-  transport-dependencies:
-    - id: "dummyTransportID"
-      transport:
-        name: "Dummy Transport"
-        description: "Dummy Description"
-        type: "REST_HTTP"
-        protocol: "HTTP"
-        version: "1.0"
-        security:
-          oauth2-info:
-            grant-types:
-              - "OAUTH2_AUTHORIZATION_CODE"
-              - "OAUTH2_CLIENT_CREDENTIALS"
-            token-endpoint: "www.dummy.com/token"
-      serializers:
-        - "JSON"
-        - "XML"
-      labels:
-        - "label1"
-        - "label2"
-  ext-cpd:
-    - id: "dummyCPDID"
-      virtual-network-interface-requirements:
-        - name: "Dummy Interface"
-          description: "Dummy Description"
-          support-mandatory: true
-          network-interface-requirement:
-            key: "dummyKey"
-            value: "dummyValue"
-          niclo-requirements:
-            id: nodeRequirementID
-            logical-node-requirement-detail: "dummyDetail"
-      cpd-id: "dummyCPDID"
-      layer-protocol: "IPV4"
-      cp-role: "dummyRole"
-      description: "Dummy Description"
-      address-data:
-        - address-type: "IP_ADDRESS"
-          l3-address-data:
-            ip-address-type: "IPV4"
-            number-of-ip-addresses: 1
-            ip-address-assignment: "STATIC"
-            floating-ip-activated: true
-            ip-address-reservation: "10.255.0.125"
-  service-required:
-    - name: "Dummy Service"
-      category:
-        href: "www.dummy.com/category"
-        id: "dummyCategoryID"
-        name: "Dummy Category"
-        version: "1.0"
-      version: "1.0"
-      transport-dependencies:
-        - id: "dummyTransportID"
-          transport:
-            name: "Dummy Transport"
-            description: "Dummy Description"
-            type: "REST_HTTP"
-            protocol: "HTTP"
-            version: "1.0"
-            security:
-              oauth2-info:
-                grant-types:
-                  - "OAUTH2_AUTHORIZATION_CODE"
-                  - "OAUTH2_CLIENT_CREDENTIALS"
-                token-endpoint: "www.dummy.com/token"
-          serializers:
-            - "JSON"
-            - "XML"
-          labels:
-            - "label1"
-            - "label2"
-      requested-permissions:
-        - "permission1"
-        - "permission2"
-  service-produced:
-    - name: "Dummy Service"
-      category:
-        href: "www.dummy.com/category"
-        id: "dummyCategoryID"
-        name: "Dummy Category"
-        version: "1.0"
-      version: "1.0"
-      transports-supported:
-        - id: "dummyTransportID"
-          transport:
-            name: "Dummy Transport"
-            description: "Dummy Description"
-            type: "REST_HTTP"
-            protocol: "HTTP"
-            version: "1.0"
-            security:
-              oauth2-info:
-                grant-types:
-                  - "OAUTH2_AUTHORIZATION_CODE"
-                  - "OAUTH2_CLIENT_CREDENTIALS"
-                token-endpoint: "www.dummy.com/token"
-          serializers:
-            - "JSON"
-            - "XML"
-  virtual-compute:
-    id: "dummyComputeID"
-    logical-node-reqs:
-      - id: "dummyNodeReqID"
-        logical-node-requirement-detail: "dummyDetail"
-    request-additional-capabilities:
-      - name: "DummyCapability"
-        support-mandatory: true
-        min-requested-additional-capability-version: "1.0"
-        preferred-requested-additional-capability-version: "1.0"
-        target-performance-parameters:
-          - key: "dummyKey"
-            value: "dummyValue"
-    compute-requirements:
-      - key: "dummyKey"
-        value: "dummyValue"
-    virtual-memory:
-      mem-size: 1024
-      mem-oversubscription-policy: "dummyPolicy"
-      vdu-mem-requirements:
-        - key: "dummyKey"
-          value: "dummyValue"
-      numa-enabled: true
-    virtual-cpu:
-      architecture: "x86"
-      num-cpus: 1
-      cpu-clock: 1000
-      cpu-oversubscription-policy: "dummyPolicy"
-      vdu-cpu-requirements:
-        - key: "dummyKey"
-          value: "dummyValue"
-      cpu-pinning:
-        pinning-policy: "STATIC"
-        pinning-rule:
-          - key: "dummyKey"
-            value: "dummyValue"
-    virtual-disk:
-      - id: "dummyDiskID"
-        hosting-provides-iops: true
-        guaranteed-iops: 2048
-        max-iops: 2048
+      # block-storage:
+      #   size-of-storage: 2048
+      #   # vdu-storage-requirements:
+      #   #   - key: "dummyKey"
+      #   #     value: "dummyValue"
+      #   # rdma-enabled: true
+      #   # sw-image-id: "swImageID"
+      # object-storage:
+      #   max-size-of-storage: 2048
+      # file-storage:
+      #   size-of-storage: 2048
+      #   file-system-protocol: "dummyProtocol"
+      #   int-virtual-link-id: "dummyLinkID"
+      # nfvi-maintenance-info:
+      #   impact-notification-lead-time: 60
+      #   # is-impact-mitigation-requested: true
+      #   # supported-migration-time: NO_MIGRATION
+      #   # max-undetectable-interruption-time: 60
+      #   # min-recovery-time-between-impacts: 60
+      #   # max-number-of-impacted-instances:
+      #   #   - id: "dummyInstanceID"
+      #   #     # group-size: 1
+      #   #     max-number-of-impacted-instances: 1
+  # ext-cpd:
+  #   - id: "dummyCPDID"
+  #     # virtual-network-interface-requirements:
+  #     #   - id: "dummyInterfaceID"
+  #     #     # name: "Dummy Interface"
+  #     #     # description: "Dummy Description"
+  #     #     support-mandatory: true
+  #     #     network-interface-requirement:
+  #     #       key: "dummyKey"
+  #     #       value: "dummyValue"
+  #     #     # niclo-requirements:
+  #     #     #   id: nodeRequirementID
+  #     #     #   logical-node-requirement-detail: "dummyDetail"
+  #     layer-protocol:
+  #       - "IPV4"
+  #     # cp-role: "dummyRole"
+  #     # description: "Dummy Description"
+  #     # trunk-mode: true
+  #     # security-group-rule-id:
+  #     #   - "dummyRuleID"
+  #     # cp-protocol:
+  #     #   - associated-layer-protocol: "IPV4"
+  #     #     # address-data:
+  #     #     #   - id: "dummyAddressID"
+  #     #     #     address-type: "IP_ADDRESS"
+  #     #     #     # l2-address-data: "00:00:00:00:00:00"
+  #     #     #     # l3-address-data:
+  #     #     #     #   ip-address-assignment: "STATIC"
+  #     #     #     #   # ip-address-type: "IPV4"
+  #     #     #     #   # number-of-ip-addresses: 1
+  #     #     #     #   # floating-ip-activated: true
+  #     #     #     #   # fixed-ip-address:
+  #     #     #     #   #   - "10.255.0.125"
+  # service-required:
+  #   - name: "Dummy Service"
+  #     # category:
+  #     #   href: "www.dummy.com/category"
+  #     #   id: "dummyCategoryID"
+  #     #   name: "Dummy Category"
+  #     #   version: "1.0"
+  #     version: "1.0"
+  #     # transport-dependencies:
+  #     #   - id: "dummyTransportID"
+  #     #     transport:
+  #     #       name: "Dummy Transport"
+  #     #       # description: "Dummy Description"
+  #     #       type: "REST_HTTP"
+  #     #       protocol: "HTTP"
+  #     #       version: "1.0"
+  #     #       security:
+  #     #         oauth2-info:
+  #     #           grant-types:
+  #     #             - "OAUTH2_AUTHORIZATION_CODE"
+  #     #             - "OAUTH2_CLIENT_CREDENTIALS"
+  #     #           # token-endpoint: "www.dummy.com/token"
+  #     #     serializers:
+  #     #       - "JSON"
+  #     #       - "XML"
+  #     #     labels:
+  #     #       - "label1"
+  #     #       - "label2"
+  #     # requested-permissions:
+  #     #   - "permission1"
+  #     #   - "permission2"
+  # service-optional:
+  #   - name: "Dummy Service"
+  #     # category:
+  #     #   href: "www.dummy.com/category"
+  #     #   id: "dummyCategoryID"
+  #     #   name: "Dummy Category"
+  #     #   version: "1.0"
+  #     version: "1.0"
+  #     # transport-dependencies:
+  #     #   - id: "dummyTransportID"
+  #     #     transport:
+  #     #       name: "Dummy Transport"
+  #     #       # description: "Dummy Description"
+  #     #       type: "REST_HTTP"
+  #     #       protocol: "HTTP"
+  #     #       version: "1.0"
+  #     #       security:
+  #     #         oauth2-info:
+  #     #           grant-types:
+  #     #             - "OAUTH2_AUTHORIZATION_CODE"
+  #     #             - "OAUTH2_CLIENT_CREDENTIALS"
+  #     #           # token-endpoint: "www.dummy.com/token"
+  #     #     serializers:
+  #     #       - "JSON"
+  #     #       - "XML"
+  #     #     labels:
+  #     #       - "label1"
+  #     #       - "label2"
+  #     # requested-permissions:
+  #     #   - "permission1"
+  #     #   - "permission2"
+  # service-produced:
+  #   - name: "Dummy Service"
+  #     # category:
+  #     #   href: "www.dummy.com/category"
+  #     #   id: "dummyCategoryID"
+  #     #   name: "Dummy Category"
+  #     #   version: "1.0"
+  #     version: "1.0"
+  #     # transports-supported:
+  #     #   - id: "dummyTransportID"
+  #     #     transport:
+  #     #       name: "Dummy Transport"
+  #     #       # description: "Dummy Description"
+  #     #       type: "REST_HTTP"
+  #     #       protocol: "HTTP"
+  #     #       version: "1.0"
+  #     #       security:
+  #     #         oauth2-info:
+  #     #           grant-types:
+  #     #             - "OAUTH2_AUTHORIZATION_CODE"
+  #     #             - "OAUTH2_CLIENT_CREDENTIALS"
+  #     #           # token-endpoint: "www.dummy.com/token"
+  #     #     serializers:
+  #     #       - "json"
+  #     #       - "xml"
+  # feature-required:
+  #   name: "dummyfeature"
+  #   version: "1.0"
+  # feature-optional:
+  #   name: "dummyfeature"
+  #   version: "1.0"
+  # transport-dependencies:
+  #   - id: "dummytransportid"
+  #     transport:
+  #       name: "Dummy Transport"
+  #       # description: "Dummy Description"
+  #       type: "REST_HTTP"
+  #       protocol: "HTTP"
+  #       version: "1.0"
+  #       security:
+  #         oauth2-info:
+  #           grant-types:
+  #             - "OAUTH2_AUTHORIZATION_CODE"
+  #             - "OAUTH2_CLIENT_CREDENTIALS"
+  #           # token-endpoint: "www.dummy.com/token"
+  #     serializers:
+  #       - "JSON"
+  #       - "XML"
+  #     labels:
+  #       - "label1"
+  #       - "label2"
+  # traffic-rule:
+  #   - id: "dummyRuleID"
+  #     filter-type: "PACKET"
+  #     priority: 1
+  #     traffic-filter:
+  #       - id: "trafficFilterID"
+  #         # src-address: "192.0.2.1"
+  #         # dst-address: "192.0.2.1"
+  #         # src-port: "8080"
+  #         # dst-port: "8080"
+  #         # protocol: "dummyProtocol"
+  #         # tag: "dummyTag"
+  #         # uri: "www.dummy.com/dummyTag"
+  #         # packet-label: "dummyLabel"
+  #         # src-tunnel-address: "192.0.2.1"
+  #         # tgt-tunnel-address: "192.0.2.1"
+  #         # src-tunnel-port: "8080"
+  #         # dst-tunnel-port: "8080"
+  #         # qci: 69
+  #         # dscp: 40
+  #         # tc: 1
+  #     action: "PASSTHROUGH"
+  #     # dst-interface:
+  #     #   - id: "dummyInterfaceID"
+  #     #     interface-type: "IP"
+  #     #     # tunnel-info:
+  #     #     #   tunnel-type: GTP-U
+  #     #     #   tunnel-dst-address: "190.0.0.1"
+  #     #     #   tunnel-src-address: "190.0.0.1"
+  #     #     # src-mac-address: "00:00:00:00:00:00"
+  #     #     # dst-mac-address: "00:00:00:00:00:00"
+  #     #     # dst-ip-address: "190.0.0.1"
+  # dns-rule:
+  #   - id: "dummyDNSRuleID"
+  #     domain-name: "example.com"
+  #     ip-address-type: "IP_V4"
+  #     ip-address: "192.0.2.1"
+  #     # ttl: 60
+  # latency:
+  #   max-latency: 100
+  # terminate-app-instance-op-config:
+  #   min-graceful-termination-timeout: 60
+  #   # max-recommended-graceful-termination-timeout: 5000
+  #   # vnf-parameters:
+  #   #   - key: "dummyVnfParameter"
+  #   #     value: "dummyValue"
+  # change-app-instance-state-op-config:
+  #   min-graceful-stop-timeout: 60
+  #   # max-recommended-graceful-stop-timeout: 5000
+  #   # vnf-parameters:
+  #   #   - key: "dummyVnfParameter"
+  #   #     value: "dummyValue"
+  # user-context-transfer-capability:
+  #   stateful-application: true
+  #   # user-context-transfer-support: true
+  # network-policy:
+  #   steered-network:
+  #     # cellular-network: true
+  #     # wifi-network: true
+  #     # fixed-access-network: false
+  # artifacts:
+  #   # opendb_helm:
+  #   #   description: "Helm Chart for opendb Pod"
+  #   #   type: "tosca.artifacts.nvf.HelmChart"
+  #   #   file: "Artifacts/Scripts/openbd.tgz"

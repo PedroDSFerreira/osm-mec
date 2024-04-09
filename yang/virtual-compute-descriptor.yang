@@ -86,7 +86,7 @@ module virtual-compute-descriptor {
       type string;
       description "CPU architecture type. Examples are x86, ARM";
     }
-    leaf num-cpus {
+    leaf cpu-count {
       type uint16;
       mandatory true;
       description "Number of virtual CPUs";

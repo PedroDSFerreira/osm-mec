@@ -1439,7 +1439,7 @@ class yc_virtual_cpu_mec_app_descriptor__app_descriptor_virtual_compute_virtual_
 
   YANG Description: The virtual CPU(s) of the virtualised compute
   """
-  __slots__ = ('_path_helper', '_extmethods', '__architecture','__num_cpus','__cpu_clock','__cpu_oversubscription_policy','__vdu_cpu_requirements','__cpu_pinning',)
+  __slots__ = ('_path_helper', '_extmethods', '__architecture','__cpu_count','__cpu_clock','__cpu_oversubscription_policy','__vdu_cpu_requirements','__cpu_pinning',)
 
   _yang_name = 'virtual-cpu'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -1452,7 +1452,7 @@ class yc_virtual_cpu_mec_app_descriptor__app_descriptor_virtual_compute_virtual_
 
     self._extmethods = False
     self.__architecture = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="architecture", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    self.__num_cpus = YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="num-cpus", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
+    self.__cpu_count = YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="cpu-count", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
     self.__cpu_clock = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="cpu-clock", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
     self.__cpu_oversubscription_policy = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="cpu-oversubscription-policy", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     self.__vdu_cpu_requirements = YANGDynClass(base=YANGListType("key",yc_vdu_cpu_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_cpu_vdu_cpu_requirements, yang_name="vdu-cpu-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None), is_container='list', yang_name="vdu-cpu-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
@@ -1522,41 +1522,41 @@ class yc_virtual_cpu_mec_app_descriptor__app_descriptor_virtual_compute_virtual_
     self.__architecture = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="architecture", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
-  def _get_num_cpus(self):
+  def _get_cpu_count(self):
     """
-    Getter method for num_cpus, mapped from YANG variable /app_descriptor/virtual_compute/virtual_cpu/num_cpus (uint16)
+    Getter method for cpu_count, mapped from YANG variable /app_descriptor/virtual_compute/virtual_cpu/cpu_count (uint16)
 
     YANG Description: Number of virtual CPUs
     """
-    return self.__num_cpus
+    return self.__cpu_count
       
-  def _set_num_cpus(self, v, load=False):
+  def _set_cpu_count(self, v, load=False):
     """
-    Setter method for num_cpus, mapped from YANG variable /app_descriptor/virtual_compute/virtual_cpu/num_cpus (uint16)
+    Setter method for cpu_count, mapped from YANG variable /app_descriptor/virtual_compute/virtual_cpu/cpu_count (uint16)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_num_cpus is considered as a private
+    source YANG file, then _set_cpu_count is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_num_cpus() directly.
+    do so via calling thisObj._set_cpu_count() directly.
 
     YANG Description: Number of virtual CPUs
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="num-cpus", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="cpu-count", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """num_cpus must be of a type compatible with uint16""",
+          'error-string': """cpu_count must be of a type compatible with uint16""",
           'defined-type': "uint16",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="num-cpus", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)""",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="cpu-count", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)""",
         })
 
-    self.__num_cpus = t
+    self.__cpu_count = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_num_cpus(self):
-    self.__num_cpus = YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="num-cpus", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
+  def _unset_cpu_count(self):
+    self.__cpu_count = YANGDynClass(base=RestrictedClassType(base_type=int, restriction_dict={'range': ['0..65535']},int_size=16), is_leaf=True, yang_name="cpu-count", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint16', is_config=True)
 
 
   def _get_cpu_clock(self):
@@ -1707,14 +1707,150 @@ class yc_virtual_cpu_mec_app_descriptor__app_descriptor_virtual_compute_virtual_
     self.__cpu_pinning = YANGDynClass(base=yc_cpu_pinning_mec_app_descriptor__app_descriptor_virtual_compute_virtual_cpu_cpu_pinning, is_container='container', yang_name="cpu-pinning", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
   architecture = __builtin__.property(_get_architecture, _set_architecture)
-  num_cpus = __builtin__.property(_get_num_cpus, _set_num_cpus)
+  cpu_count = __builtin__.property(_get_cpu_count, _set_cpu_count)
   cpu_clock = __builtin__.property(_get_cpu_clock, _set_cpu_clock)
   cpu_oversubscription_policy = __builtin__.property(_get_cpu_oversubscription_policy, _set_cpu_oversubscription_policy)
   vdu_cpu_requirements = __builtin__.property(_get_vdu_cpu_requirements, _set_vdu_cpu_requirements)
   cpu_pinning = __builtin__.property(_get_cpu_pinning, _set_cpu_pinning)
 
 
-  _pyangbind_elements = OrderedDict([('architecture', architecture), ('num_cpus', num_cpus), ('cpu_clock', cpu_clock), ('cpu_oversubscription_policy', cpu_oversubscription_policy), ('vdu_cpu_requirements', vdu_cpu_requirements), ('cpu_pinning', cpu_pinning), ])
+  _pyangbind_elements = OrderedDict([('architecture', architecture), ('cpu_count', cpu_count), ('cpu_clock', cpu_clock), ('cpu_oversubscription_policy', cpu_oversubscription_policy), ('vdu_cpu_requirements', vdu_cpu_requirements), ('cpu_pinning', cpu_pinning), ])
+
+
+class yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk_vdu_storage_requirements(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/virtual-compute/virtual-disk/vdu-storage-requirements. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+
+  YANG Description: Describes storage requirements for a VDU
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__key','__value',)
+
+  _yang_name = 'vdu-storage-requirements'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__key = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__value = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'virtual-compute', 'virtual-disk', 'vdu-storage-requirements']
+
+  def _get_key(self):
+    """
+    Getter method for key, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements/key (string)
+
+    YANG Description: Key in the key-value pair
+    """
+    return self.__key
+      
+  def _set_key(self, v, load=False):
+    """
+    Setter method for key, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements/key (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_key is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_key() directly.
+
+    YANG Description: Key in the key-value pair
+    """
+    parent = getattr(self, "_parent", None)
+    if parent is not None and load is False:
+      raise AttributeError("Cannot set keys directly when" +
+                             " within an instantiated list")
+
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="key", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """key must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__key = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_key(self):
+    self.__key = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
+  def _get_value(self):
+    """
+    Getter method for value, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements/value (string)
+
+    YANG Description: Value in the key-value pair
+    """
+    return self.__value
+      
+  def _set_value(self, v, load=False):
+    """
+    Setter method for value, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements/value (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_value is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_value() directly.
+
+    YANG Description: Value in the key-value pair
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="value", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """value must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__value = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_value(self):
+    self.__value = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+  key = __builtin__.property(_get_key, _set_key)
+  value = __builtin__.property(_get_value, _set_value)
+
+
+  _pyangbind_elements = OrderedDict([('key', key), ('value', value), ])
 
 
 class yc_virtual_disk_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk(PybindBase):
@@ -1726,7 +1862,7 @@ class yc_virtual_disk_mec_app_descriptor__app_descriptor_virtual_compute_virtual
 
   YANG Description: The local or ephemeral disk(s) of the virtualised compute
   """
-  __slots__ = ('_path_helper', '_extmethods', '__id','__hosting_provides_iops','__guaranteed_iops','__max_iops',)
+  __slots__ = ('_path_helper', '_extmethods', '__id','__size_of_storage','__vdu_storage_requirements','__rdma_enabled','__sw_image_id',)
 
   _yang_name = 'virtual-disk'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -1739,9 +1875,10 @@ class yc_virtual_disk_mec_app_descriptor__app_descriptor_virtual_compute_virtual
 
     self._extmethods = False
     self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    self.__hosting_provides_iops = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
-    self.__guaranteed_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__vdu_storage_requirements = YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None), is_container='list', yang_name="vdu-storage-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    self.__rdma_enabled = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    self.__sw_image_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -1812,123 +1949,161 @@ class yc_virtual_disk_mec_app_descriptor__app_descriptor_virtual_compute_virtual
     self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
-  def _get_hosting_provides_iops(self):
+  def _get_size_of_storage(self):
     """
-    Getter method for hosting_provides_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/hosting_provides_iops (boolean)
+    Getter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/size_of_storage (uint64)
 
-    YANG Description: If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource
+    YANG Description: Size of block storage resource
     """
-    return self.__hosting_provides_iops
+    return self.__size_of_storage
       
-  def _set_hosting_provides_iops(self, v, load=False):
+  def _set_size_of_storage(self, v, load=False):
     """
-    Setter method for hosting_provides_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/hosting_provides_iops (boolean)
+    Setter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/size_of_storage (uint64)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_hosting_provides_iops is considered as a private
+    source YANG file, then _set_size_of_storage is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_hosting_provides_iops() directly.
+    do so via calling thisObj._set_size_of_storage() directly.
 
-    YANG Description: If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource
+    YANG Description: Size of block storage resource
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """hosting_provides_iops must be of a type compatible with boolean""",
+          'error-string': """size_of_storage must be of a type compatible with uint64""",
+          'defined-type': "uint64",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+        })
+
+    self.__size_of_storage = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_size_of_storage(self):
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+
+
+  def _get_vdu_storage_requirements(self):
+    """
+    Getter method for vdu_storage_requirements, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements (list)
+
+    YANG Description: Describes storage requirements for a VDU
+    """
+    return self.__vdu_storage_requirements
+      
+  def _set_vdu_storage_requirements(self, v, load=False):
+    """
+    Setter method for vdu_storage_requirements, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/vdu_storage_requirements (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_vdu_storage_requirements is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_vdu_storage_requirements() directly.
+
+    YANG Description: Describes storage requirements for a VDU
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None), is_container='list', yang_name="vdu-storage-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """vdu_storage_requirements must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None), is_container='list', yang_name="vdu-storage-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__vdu_storage_requirements = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_vdu_storage_requirements(self):
+    self.__vdu_storage_requirements = YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_compute_virtual_disk_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None), is_container='list', yang_name="vdu-storage-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+
+  def _get_rdma_enabled(self):
+    """
+    Getter method for rdma_enabled, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/rdma_enabled (boolean)
+
+    YANG Description: Indicates if RDMA is enabled for the block storage resource
+    """
+    return self.__rdma_enabled
+      
+  def _set_rdma_enabled(self, v, load=False):
+    """
+    Setter method for rdma_enabled, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/rdma_enabled (boolean)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_rdma_enabled is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_rdma_enabled() directly.
+
+    YANG Description: Indicates if RDMA is enabled for the block storage resource
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """rdma_enabled must be of a type compatible with boolean""",
           'defined-type': "boolean",
-          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
+          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
         })
 
-    self.__hosting_provides_iops = t
+    self.__rdma_enabled = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_hosting_provides_iops(self):
-    self.__hosting_provides_iops = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+  def _unset_rdma_enabled(self):
+    self.__rdma_enabled = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
 
-  def _get_guaranteed_iops(self):
+  def _get_sw_image_id(self):
     """
-    Getter method for guaranteed_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/guaranteed_iops (uint64)
+    Getter method for sw_image_id, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/sw_image_id (string)
 
-    YANG Description: Minimum IOPS that the NFVI provides to the virtualised block storage resource
+    YANG Description: Identifier of the software image to be used to configure the block storage resource
     """
-    return self.__guaranteed_iops
+    return self.__sw_image_id
       
-  def _set_guaranteed_iops(self, v, load=False):
+  def _set_sw_image_id(self, v, load=False):
     """
-    Setter method for guaranteed_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/guaranteed_iops (uint64)
+    Setter method for sw_image_id, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/sw_image_id (string)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_guaranteed_iops is considered as a private
+    source YANG file, then _set_sw_image_id is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_guaranteed_iops() directly.
+    do so via calling thisObj._set_sw_image_id() directly.
 
-    YANG Description: Minimum IOPS that the NFVI provides to the virtualised block storage resource
+    YANG Description: Identifier of the software image to be used to configure the block storage resource
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """guaranteed_iops must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'error-string': """sw_image_id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
         })
 
-    self.__guaranteed_iops = t
+    self.__sw_image_id = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_guaranteed_iops(self):
-    self.__guaranteed_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-
-
-  def _get_max_iops(self):
-    """
-    Getter method for max_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/max_iops (uint64)
-
-    YANG Description: Maximum IOPS that the NFVI provides to the virtualised block storage resource
-    """
-    return self.__max_iops
-      
-  def _set_max_iops(self, v, load=False):
-    """
-    Setter method for max_iops, mapped from YANG variable /app_descriptor/virtual_compute/virtual_disk/max_iops (uint64)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_iops is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_iops() directly.
-
-    YANG Description: Maximum IOPS that the NFVI provides to the virtualised block storage resource
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """max_iops must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
-        })
-
-    self.__max_iops = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_max_iops(self):
-    self.__max_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_sw_image_id(self):
+    self.__sw_image_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
   id = __builtin__.property(_get_id, _set_id)
-  hosting_provides_iops = __builtin__.property(_get_hosting_provides_iops, _set_hosting_provides_iops)
-  guaranteed_iops = __builtin__.property(_get_guaranteed_iops, _set_guaranteed_iops)
-  max_iops = __builtin__.property(_get_max_iops, _set_max_iops)
+  size_of_storage = __builtin__.property(_get_size_of_storage, _set_size_of_storage)
+  vdu_storage_requirements = __builtin__.property(_get_vdu_storage_requirements, _set_vdu_storage_requirements)
+  rdma_enabled = __builtin__.property(_get_rdma_enabled, _set_rdma_enabled)
+  sw_image_id = __builtin__.property(_get_sw_image_id, _set_sw_image_id)
 
 
-  _pyangbind_elements = OrderedDict([('id', id), ('hosting_provides_iops', hosting_provides_iops), ('guaranteed_iops', guaranteed_iops), ('max_iops', max_iops), ])
+  _pyangbind_elements = OrderedDict([('id', id), ('size_of_storage', size_of_storage), ('vdu_storage_requirements', vdu_storage_requirements), ('rdma_enabled', rdma_enabled), ('sw_image_id', sw_image_id), ])
 
 
 class yc_virtual_compute_mec_app_descriptor__app_descriptor_virtual_compute(PybindBase):
@@ -2778,6 +2953,142 @@ class yc_sw_image_mec_app_descriptor__app_descriptor_sw_image(PybindBase):
   _pyangbind_elements = OrderedDict([('id', id), ('name', name), ('version', version), ('checksum', checksum), ('container_format', container_format), ('disk_format', disk_format), ('min_disk', min_disk), ('min_ram', min_ram), ('size', size), ('sw_image', sw_image), ('operating_system', operating_system), ('supported_virtualisation_environment', supported_virtualisation_environment), ])
 
 
+class yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_storage_block_storage_vdu_storage_requirements(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/virtual-storage/block-storage/vdu-storage-requirements. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+
+  YANG Description: Describes storage requirements for a VDU
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__key','__value',)
+
+  _yang_name = 'vdu-storage-requirements'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__key = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__value = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'virtual-storage', 'block-storage', 'vdu-storage-requirements']
+
+  def _get_key(self):
+    """
+    Getter method for key, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements/key (string)
+
+    YANG Description: Key in the key-value pair
+    """
+    return self.__key
+      
+  def _set_key(self, v, load=False):
+    """
+    Setter method for key, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements/key (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_key is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_key() directly.
+
+    YANG Description: Key in the key-value pair
+    """
+    parent = getattr(self, "_parent", None)
+    if parent is not None and load is False:
+      raise AttributeError("Cannot set keys directly when" +
+                             " within an instantiated list")
+
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="key", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """key must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__key = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_key(self):
+    self.__key = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="key", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
+  def _get_value(self):
+    """
+    Getter method for value, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements/value (string)
+
+    YANG Description: Value in the key-value pair
+    """
+    return self.__value
+      
+  def _set_value(self, v, load=False):
+    """
+    Setter method for value, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements/value (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_value is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_value() directly.
+
+    YANG Description: Value in the key-value pair
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="value", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """value must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__value = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_value(self):
+    self.__value = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="value", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+  key = __builtin__.property(_get_key, _set_key)
+  value = __builtin__.property(_get_value, _set_value)
+
+  __choices__ = {'storage': {'block-storage': ['key', 'value']}}
+  _pyangbind_elements = OrderedDict([('key', key), ('value', value), ])
+
+
 class yc_block_storage_mec_app_descriptor__app_descriptor_virtual_storage_block_storage(PybindBase):
   """
   This class was auto-generated by the PythonClass plugin for PYANG
@@ -2787,7 +3098,7 @@ class yc_block_storage_mec_app_descriptor__app_descriptor_virtual_storage_block_
 
   YANG Description: Block storage data, applicable only if typeOfStorage=BLOCK
   """
-  __slots__ = ('_path_helper', '_extmethods', '__hosting_provides_iops','__guaranteed_iops','__max_iops',)
+  __slots__ = ('_path_helper', '_extmethods', '__size_of_storage','__vdu_storage_requirements','__rdma_enabled','__sw_image_id',)
 
   _yang_name = 'block-storage'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -2799,9 +3110,10 @@ class yc_block_storage_mec_app_descriptor__app_descriptor_virtual_storage_block_
     self._path_helper = False
 
     self._extmethods = False
-    self.__hosting_provides_iops = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
-    self.__guaranteed_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__vdu_storage_requirements = YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_storage_block_storage_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None, choice=('storage', 'block-storage')), is_container='list', yang_name="vdu-storage-requirements", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    self.__rdma_enabled = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    self.__sw_image_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -2830,122 +3142,160 @@ class yc_block_storage_mec_app_descriptor__app_descriptor_virtual_storage_block_
     else:
       return ['app-descriptor', 'virtual-storage', 'block-storage']
 
-  def _get_hosting_provides_iops(self):
+  def _get_size_of_storage(self):
     """
-    Getter method for hosting_provides_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/hosting_provides_iops (boolean)
+    Getter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/size_of_storage (uint64)
 
-    YANG Description: If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource
+    YANG Description: Size of block storage resource
     """
-    return self.__hosting_provides_iops
+    return self.__size_of_storage
       
-  def _set_hosting_provides_iops(self, v, load=False):
+  def _set_size_of_storage(self, v, load=False):
     """
-    Setter method for hosting_provides_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/hosting_provides_iops (boolean)
+    Setter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/size_of_storage (uint64)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_hosting_provides_iops is considered as a private
+    source YANG file, then _set_size_of_storage is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_hosting_provides_iops() directly.
+    do so via calling thisObj._set_size_of_storage() directly.
 
-    YANG Description: If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource
+    YANG Description: Size of block storage resource
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """hosting_provides_iops must be of a type compatible with boolean""",
+          'error-string': """size_of_storage must be of a type compatible with uint64""",
+          'defined-type': "uint64",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+        })
+
+    self.__size_of_storage = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_size_of_storage(self):
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+
+
+  def _get_vdu_storage_requirements(self):
+    """
+    Getter method for vdu_storage_requirements, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements (list)
+
+    YANG Description: Describes storage requirements for a VDU
+    """
+    return self.__vdu_storage_requirements
+      
+  def _set_vdu_storage_requirements(self, v, load=False):
+    """
+    Setter method for vdu_storage_requirements, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/vdu_storage_requirements (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_vdu_storage_requirements is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_vdu_storage_requirements() directly.
+
+    YANG Description: Describes storage requirements for a VDU
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_storage_block_storage_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None, choice=('storage', 'block-storage')), is_container='list', yang_name="vdu-storage-requirements", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """vdu_storage_requirements must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_storage_block_storage_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None, choice=('storage', 'block-storage')), is_container='list', yang_name="vdu-storage-requirements", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__vdu_storage_requirements = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_vdu_storage_requirements(self):
+    self.__vdu_storage_requirements = YANGDynClass(base=YANGListType("key",yc_vdu_storage_requirements_mec_app_descriptor__app_descriptor_virtual_storage_block_storage_vdu_storage_requirements, yang_name="vdu-storage-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='key', extensions=None, choice=('storage', 'block-storage')), is_container='list', yang_name="vdu-storage-requirements", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+
+  def _get_rdma_enabled(self):
+    """
+    Getter method for rdma_enabled, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/rdma_enabled (boolean)
+
+    YANG Description: Indicates if RDMA is enabled for the block storage resource
+    """
+    return self.__rdma_enabled
+      
+  def _set_rdma_enabled(self, v, load=False):
+    """
+    Setter method for rdma_enabled, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/rdma_enabled (boolean)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_rdma_enabled is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_rdma_enabled() directly.
+
+    YANG Description: Indicates if RDMA is enabled for the block storage resource
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """rdma_enabled must be of a type compatible with boolean""",
           'defined-type': "boolean",
-          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
+          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
         })
 
-    self.__hosting_provides_iops = t
+    self.__rdma_enabled = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_hosting_provides_iops(self):
-    self.__hosting_provides_iops = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="hosting-provides-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+  def _unset_rdma_enabled(self):
+    self.__rdma_enabled = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="rdma-enabled", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
 
-  def _get_guaranteed_iops(self):
+  def _get_sw_image_id(self):
     """
-    Getter method for guaranteed_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/guaranteed_iops (uint64)
+    Getter method for sw_image_id, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/sw_image_id (string)
 
-    YANG Description: Minimum IOPS that the NFVI provides to the virtualised block storage resource
+    YANG Description: Identifier of the software image to be used to configure the block storage resource
     """
-    return self.__guaranteed_iops
+    return self.__sw_image_id
       
-  def _set_guaranteed_iops(self, v, load=False):
+  def _set_sw_image_id(self, v, load=False):
     """
-    Setter method for guaranteed_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/guaranteed_iops (uint64)
+    Setter method for sw_image_id, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/sw_image_id (string)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_guaranteed_iops is considered as a private
+    source YANG file, then _set_sw_image_id is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_guaranteed_iops() directly.
+    do so via calling thisObj._set_sw_image_id() directly.
 
-    YANG Description: Minimum IOPS that the NFVI provides to the virtualised block storage resource
+    YANG Description: Identifier of the software image to be used to configure the block storage resource
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """guaranteed_iops must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'error-string': """sw_image_id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
         })
 
-    self.__guaranteed_iops = t
+    self.__sw_image_id = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_guaranteed_iops(self):
-    self.__guaranteed_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="guaranteed-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_sw_image_id(self):
+    self.__sw_image_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="sw-image-id", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
+  size_of_storage = __builtin__.property(_get_size_of_storage, _set_size_of_storage)
+  vdu_storage_requirements = __builtin__.property(_get_vdu_storage_requirements, _set_vdu_storage_requirements)
+  rdma_enabled = __builtin__.property(_get_rdma_enabled, _set_rdma_enabled)
+  sw_image_id = __builtin__.property(_get_sw_image_id, _set_sw_image_id)
 
-  def _get_max_iops(self):
-    """
-    Getter method for max_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/max_iops (uint64)
-
-    YANG Description: Maximum IOPS that the NFVI provides to the virtualised block storage resource
-    """
-    return self.__max_iops
-      
-  def _set_max_iops(self, v, load=False):
-    """
-    Setter method for max_iops, mapped from YANG variable /app_descriptor/virtual_storage/block_storage/max_iops (uint64)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_iops is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_iops() directly.
-
-    YANG Description: Maximum IOPS that the NFVI provides to the virtualised block storage resource
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """max_iops must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
-        })
-
-    self.__max_iops = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_max_iops(self):
-    self.__max_iops = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-iops", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-
-  hosting_provides_iops = __builtin__.property(_get_hosting_provides_iops, _set_hosting_provides_iops)
-  guaranteed_iops = __builtin__.property(_get_guaranteed_iops, _set_guaranteed_iops)
-  max_iops = __builtin__.property(_get_max_iops, _set_max_iops)
-
-  __choices__ = {'storage': {'block-storage': ['hosting_provides_iops', 'guaranteed_iops', 'max_iops']}}
-  _pyangbind_elements = OrderedDict([('hosting_provides_iops', hosting_provides_iops), ('guaranteed_iops', guaranteed_iops), ('max_iops', max_iops), ])
+  __choices__ = {'storage': {'block-storage': ['size_of_storage', 'vdu_storage_requirements', 'rdma_enabled', 'sw_image_id']}}
+  _pyangbind_elements = OrderedDict([('size_of_storage', size_of_storage), ('vdu_storage_requirements', vdu_storage_requirements), ('rdma_enabled', rdma_enabled), ('sw_image_id', sw_image_id), ])
 
 
 class yc_object_storage_mec_app_descriptor__app_descriptor_virtual_storage_object_storage(PybindBase):
@@ -2957,7 +3307,7 @@ class yc_object_storage_mec_app_descriptor__app_descriptor_virtual_storage_objec
 
   YANG Description: Object storage data, applicable only if typeOfStorage=OBJECT
   """
-  __slots__ = ('_path_helper', '_extmethods', '__max_size_of_object','__max_concurrent_incoming_transfers','__max_concurrent_outgoing_transfers',)
+  __slots__ = ('_path_helper', '_extmethods', '__max_size_of_storage',)
 
   _yang_name = 'object-storage'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -2969,9 +3319,7 @@ class yc_object_storage_mec_app_descriptor__app_descriptor_virtual_storage_objec
     self._path_helper = False
 
     self._extmethods = False
-    self.__max_size_of_object = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-object", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_concurrent_incoming_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_concurrent_outgoing_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__max_size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-storage", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -3000,122 +3348,42 @@ class yc_object_storage_mec_app_descriptor__app_descriptor_virtual_storage_objec
     else:
       return ['app-descriptor', 'virtual-storage', 'object-storage']
 
-  def _get_max_size_of_object(self):
+  def _get_max_size_of_storage(self):
     """
-    Getter method for max_size_of_object, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_size_of_object (uint64)
-
-    YANG Description: Maximum size of object that can be stored in the object storage resource
+    Getter method for max_size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_size_of_storage (uint64)
     """
-    return self.__max_size_of_object
+    return self.__max_size_of_storage
       
-  def _set_max_size_of_object(self, v, load=False):
+  def _set_max_size_of_storage(self, v, load=False):
     """
-    Setter method for max_size_of_object, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_size_of_object (uint64)
+    Setter method for max_size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_size_of_storage (uint64)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_size_of_object is considered as a private
+    source YANG file, then _set_max_size_of_storage is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_size_of_object() directly.
-
-    YANG Description: Maximum size of object that can be stored in the object storage resource
+    do so via calling thisObj._set_max_size_of_storage() directly.
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-object", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-storage", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """max_size_of_object must be of a type compatible with uint64""",
+          'error-string': """max_size_of_storage must be of a type compatible with uint64""",
           'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-object", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-storage", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
         })
 
-    self.__max_size_of_object = t
+    self.__max_size_of_storage = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_max_size_of_object(self):
-    self.__max_size_of_object = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-object", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_max_size_of_storage(self):
+    self.__max_size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-storage", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
 
+  max_size_of_storage = __builtin__.property(_get_max_size_of_storage, _set_max_size_of_storage)
 
-  def _get_max_concurrent_incoming_transfers(self):
-    """
-    Getter method for max_concurrent_incoming_transfers, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_concurrent_incoming_transfers (uint64)
-
-    YANG Description: Maximum number of concurrent incoming transfers (downloads) that the object storage resource can handle
-    """
-    return self.__max_concurrent_incoming_transfers
-      
-  def _set_max_concurrent_incoming_transfers(self, v, load=False):
-    """
-    Setter method for max_concurrent_incoming_transfers, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_concurrent_incoming_transfers (uint64)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_concurrent_incoming_transfers is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_concurrent_incoming_transfers() directly.
-
-    YANG Description: Maximum number of concurrent incoming transfers (downloads) that the object storage resource can handle
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """max_concurrent_incoming_transfers must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
-        })
-
-    self.__max_concurrent_incoming_transfers = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_max_concurrent_incoming_transfers(self):
-    self.__max_concurrent_incoming_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-
-
-  def _get_max_concurrent_outgoing_transfers(self):
-    """
-    Getter method for max_concurrent_outgoing_transfers, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_concurrent_outgoing_transfers (uint64)
-
-    YANG Description: Maximum number of concurrent outgoing transfers (uploads) that the object storage resource can handle
-    """
-    return self.__max_concurrent_outgoing_transfers
-      
-  def _set_max_concurrent_outgoing_transfers(self, v, load=False):
-    """
-    Setter method for max_concurrent_outgoing_transfers, mapped from YANG variable /app_descriptor/virtual_storage/object_storage/max_concurrent_outgoing_transfers (uint64)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_concurrent_outgoing_transfers is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_concurrent_outgoing_transfers() directly.
-
-    YANG Description: Maximum number of concurrent outgoing transfers (uploads) that the object storage resource can handle
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """max_concurrent_outgoing_transfers must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
-        })
-
-    self.__max_concurrent_outgoing_transfers = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_max_concurrent_outgoing_transfers(self):
-    self.__max_concurrent_outgoing_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-
-  max_size_of_object = __builtin__.property(_get_max_size_of_object, _set_max_size_of_object)
-  max_concurrent_incoming_transfers = __builtin__.property(_get_max_concurrent_incoming_transfers, _set_max_concurrent_incoming_transfers)
-  max_concurrent_outgoing_transfers = __builtin__.property(_get_max_concurrent_outgoing_transfers, _set_max_concurrent_outgoing_transfers)
-
-  __choices__ = {'storage': {'object-storage': ['max_size_of_object', 'max_concurrent_incoming_transfers', 'max_concurrent_outgoing_transfers']}}
-  _pyangbind_elements = OrderedDict([('max_size_of_object', max_size_of_object), ('max_concurrent_incoming_transfers', max_concurrent_incoming_transfers), ('max_concurrent_outgoing_transfers', max_concurrent_outgoing_transfers), ])
+  __choices__ = {'storage': {'object-storage': ['max_size_of_storage']}}
+  _pyangbind_elements = OrderedDict([('max_size_of_storage', max_size_of_storage), ])
 
 
 class yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_storage(PybindBase):
@@ -3127,7 +3395,7 @@ class yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_st
 
   YANG Description: File storage data, applicable only if typeOfStorage=FILE
   """
-  __slots__ = ('_path_helper', '_extmethods', '__max_size_of_file','__max_concurrent_incoming_transfers','__max_concurrent_outgoing_transfers',)
+  __slots__ = ('_path_helper', '_extmethods', '__size_of_storage','__file_system_protocol','__int_virtual_link_id',)
 
   _yang_name = 'file-storage'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -3139,9 +3407,9 @@ class yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_st
     self._path_helper = False
 
     self._extmethods = False
-    self.__max_size_of_file = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-file", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_concurrent_incoming_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__max_concurrent_outgoing_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+    self.__file_system_protocol = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="file-system-protocol", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__int_virtual_link_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="int-virtual-link-id", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -3170,122 +3438,576 @@ class yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_st
     else:
       return ['app-descriptor', 'virtual-storage', 'file-storage']
 
-  def _get_max_size_of_file(self):
+  def _get_size_of_storage(self):
     """
-    Getter method for max_size_of_file, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_size_of_file (uint64)
+    Getter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/size_of_storage (uint64)
 
-    YANG Description: Maximum size of file that can be stored in the file storage resource
+    YANG Description: Size of file storage resource
     """
-    return self.__max_size_of_file
+    return self.__size_of_storage
       
-  def _set_max_size_of_file(self, v, load=False):
+  def _set_size_of_storage(self, v, load=False):
     """
-    Setter method for max_size_of_file, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_size_of_file (uint64)
+    Setter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/size_of_storage (uint64)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_size_of_file is considered as a private
+    source YANG file, then _set_size_of_storage is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_size_of_file() directly.
+    do so via calling thisObj._set_size_of_storage() directly.
 
-    YANG Description: Maximum size of file that can be stored in the file storage resource
+    YANG Description: Size of file storage resource
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-file", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """max_size_of_file must be of a type compatible with uint64""",
+          'error-string': """size_of_storage must be of a type compatible with uint64""",
           'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-file", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
         })
 
-    self.__max_size_of_file = t
+    self.__size_of_storage = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_max_size_of_file(self):
-    self.__max_size_of_file = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-size-of-file", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_size_of_storage(self):
+    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
 
 
-  def _get_max_concurrent_incoming_transfers(self):
+  def _get_file_system_protocol(self):
     """
-    Getter method for max_concurrent_incoming_transfers, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_concurrent_incoming_transfers (uint64)
-
-    YANG Description: Maximum number of concurrent incoming transfers (downloads) that the file storage resource can handle
+    Getter method for file_system_protocol, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/file_system_protocol (string)
     """
-    return self.__max_concurrent_incoming_transfers
+    return self.__file_system_protocol
       
-  def _set_max_concurrent_incoming_transfers(self, v, load=False):
+  def _set_file_system_protocol(self, v, load=False):
     """
-    Setter method for max_concurrent_incoming_transfers, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_concurrent_incoming_transfers (uint64)
+    Setter method for file_system_protocol, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/file_system_protocol (string)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_concurrent_incoming_transfers is considered as a private
+    source YANG file, then _set_file_system_protocol is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_concurrent_incoming_transfers() directly.
-
-    YANG Description: Maximum number of concurrent incoming transfers (downloads) that the file storage resource can handle
+    do so via calling thisObj._set_file_system_protocol() directly.
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="file-system-protocol", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """max_concurrent_incoming_transfers must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'error-string': """file_system_protocol must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="file-system-protocol", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
         })
 
-    self.__max_concurrent_incoming_transfers = t
+    self.__file_system_protocol = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_max_concurrent_incoming_transfers(self):
-    self.__max_concurrent_incoming_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-incoming-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_file_system_protocol(self):
+    self.__file_system_protocol = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="file-system-protocol", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
-  def _get_max_concurrent_outgoing_transfers(self):
+  def _get_int_virtual_link_id(self):
     """
-    Getter method for max_concurrent_outgoing_transfers, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_concurrent_outgoing_transfers (uint64)
+    Getter method for int_virtual_link_id, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/int_virtual_link_id (string)
 
-    YANG Description: Maximum number of concurrent outgoing transfers (uploads) that the file storage resource can handle
+    YANG Description: Identifier referencing VNF virtual linkd descriptor.
     """
-    return self.__max_concurrent_outgoing_transfers
+    return self.__int_virtual_link_id
       
-  def _set_max_concurrent_outgoing_transfers(self, v, load=False):
+  def _set_int_virtual_link_id(self, v, load=False):
     """
-    Setter method for max_concurrent_outgoing_transfers, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/max_concurrent_outgoing_transfers (uint64)
+    Setter method for int_virtual_link_id, mapped from YANG variable /app_descriptor/virtual_storage/file_storage/int_virtual_link_id (string)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_max_concurrent_outgoing_transfers is considered as a private
+    source YANG file, then _set_int_virtual_link_id is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_max_concurrent_outgoing_transfers() directly.
+    do so via calling thisObj._set_int_virtual_link_id() directly.
 
-    YANG Description: Maximum number of concurrent outgoing transfers (uploads) that the file storage resource can handle
+    YANG Description: Identifier referencing VNF virtual linkd descriptor.
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="int-virtual-link-id", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """max_concurrent_outgoing_transfers must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'error-string': """int_virtual_link_id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="int-virtual-link-id", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
         })
 
-    self.__max_concurrent_outgoing_transfers = t
+    self.__int_virtual_link_id = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_max_concurrent_outgoing_transfers(self):
-    self.__max_concurrent_outgoing_transfers = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="max-concurrent-outgoing-transfers", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_int_virtual_link_id(self):
+    self.__int_virtual_link_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="int-virtual-link-id", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
-  max_size_of_file = __builtin__.property(_get_max_size_of_file, _set_max_size_of_file)
-  max_concurrent_incoming_transfers = __builtin__.property(_get_max_concurrent_incoming_transfers, _set_max_concurrent_incoming_transfers)
-  max_concurrent_outgoing_transfers = __builtin__.property(_get_max_concurrent_outgoing_transfers, _set_max_concurrent_outgoing_transfers)
+  size_of_storage = __builtin__.property(_get_size_of_storage, _set_size_of_storage)
+  file_system_protocol = __builtin__.property(_get_file_system_protocol, _set_file_system_protocol)
+  int_virtual_link_id = __builtin__.property(_get_int_virtual_link_id, _set_int_virtual_link_id)
 
-  __choices__ = {'storage': {'file-storage': ['max_size_of_file', 'max_concurrent_incoming_transfers', 'max_concurrent_outgoing_transfers']}}
-  _pyangbind_elements = OrderedDict([('max_size_of_file', max_size_of_file), ('max_concurrent_incoming_transfers', max_concurrent_incoming_transfers), ('max_concurrent_outgoing_transfers', max_concurrent_outgoing_transfers), ])
+  __choices__ = {'storage': {'file-storage': ['size_of_storage', 'file_system_protocol', 'int_virtual_link_id']}}
+  _pyangbind_elements = OrderedDict([('size_of_storage', size_of_storage), ('file_system_protocol', file_system_protocol), ('int_virtual_link_id', int_virtual_link_id), ])
+
+
+class yc_max_number_of_impacted_instances_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info_max_number_of_impacted_instances(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/virtual-storage/nfvi-maintenance-info/max-number-of-impacted-instances. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+
+  YANG Description: List of the maximum number of impacted instances
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__id','__group_size','__max_number_of_impacted_instances',)
+
+  _yang_name = 'max-number-of-impacted-instances'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__group_size = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="group-size", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    self.__max_number_of_impacted_instances = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'virtual-storage', 'nfvi-maintenance-info', 'max-number-of-impacted-instances']
+
+  def _get_id(self):
+    """
+    Getter method for id, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/id (string)
+
+    YANG Description: Identifier of the impacted instances
+    """
+    return self.__id
+      
+  def _set_id(self, v, load=False):
+    """
+    Setter method for id, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/id (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_id is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_id() directly.
+
+    YANG Description: Identifier of the impacted instances
+    """
+    parent = getattr(self, "_parent", None)
+    if parent is not None and load is False:
+      raise AttributeError("Cannot set keys directly when" +
+                             " within an instantiated list")
+
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__id = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_id(self):
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
+  def _get_group_size(self):
+    """
+    Getter method for group_size, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/group_size (uint32)
+
+    YANG Description: Number of impacted instances in a group
+    """
+    return self.__group_size
+      
+  def _set_group_size(self, v, load=False):
+    """
+    Setter method for group_size, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/group_size (uint32)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_group_size is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_group_size() directly.
+
+    YANG Description: Number of impacted instances in a group
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="group-size", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """group_size must be of a type compatible with uint32""",
+          'defined-type': "uint32",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="group-size", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)""",
+        })
+
+    self.__group_size = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_group_size(self):
+    self.__group_size = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="group-size", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+
+  def _get_max_number_of_impacted_instances(self):
+    """
+    Getter method for max_number_of_impacted_instances, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/max_number_of_impacted_instances (uint32)
+
+    YANG Description: Maximum number of impacted instances
+    """
+    return self.__max_number_of_impacted_instances
+      
+  def _set_max_number_of_impacted_instances(self, v, load=False):
+    """
+    Setter method for max_number_of_impacted_instances, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances/max_number_of_impacted_instances (uint32)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_max_number_of_impacted_instances is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_max_number_of_impacted_instances() directly.
+
+    YANG Description: Maximum number of impacted instances
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """max_number_of_impacted_instances must be of a type compatible with uint32""",
+          'defined-type': "uint32",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)""",
+        })
+
+    self.__max_number_of_impacted_instances = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_max_number_of_impacted_instances(self):
+    self.__max_number_of_impacted_instances = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+  id = __builtin__.property(_get_id, _set_id)
+  group_size = __builtin__.property(_get_group_size, _set_group_size)
+  max_number_of_impacted_instances = __builtin__.property(_get_max_number_of_impacted_instances, _set_max_number_of_impacted_instances)
+
+
+  _pyangbind_elements = OrderedDict([('id', id), ('group_size', group_size), ('max_number_of_impacted_instances', max_number_of_impacted_instances), ])
+
+
+class yc_nfvi_maintenance_info_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/virtual-storage/nfvi-maintenance-info. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+
+  YANG Description: 
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__impact_notification_lead_time','__is_impact_mitigation_requested','__supported_migration_time','__max_undetectable_interruption_time','__min_recovery_time_between_impacts','__max_number_of_impacted_instances',)
+
+  _yang_name = 'nfvi-maintenance-info'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__impact_notification_lead_time = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="impact-notification-lead-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    self.__is_impact_mitigation_requested = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="is-impact-mitigation-requested", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    self.__supported_migration_time = YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'NO_MIGRATION': {}, 'OFFLINE_MIGRATION': {}, 'LIVE_MIGRATION': {}},)), is_leaf=False, yang_name="supported-migration-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    self.__max_undetectable_interruption_time = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-undetectable-interruption-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    self.__min_recovery_time_between_impacts = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="min-recovery-time-between-impacts", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    self.__max_number_of_impacted_instances = YANGDynClass(base=YANGListType("id",yc_max_number_of_impacted_instances_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info_max_number_of_impacted_instances, yang_name="max-number-of-impacted-instances", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'virtual-storage', 'nfvi-maintenance-info']
+
+  def _get_impact_notification_lead_time(self):
+    """
+    Getter method for impact_notification_lead_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/impact_notification_lead_time (uint32)
+
+    YANG Description: Time before maintenance activity that the VNF should be notified
+    """
+    return self.__impact_notification_lead_time
+      
+  def _set_impact_notification_lead_time(self, v, load=False):
+    """
+    Setter method for impact_notification_lead_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/impact_notification_lead_time (uint32)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_impact_notification_lead_time is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_impact_notification_lead_time() directly.
+
+    YANG Description: Time before maintenance activity that the VNF should be notified
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="impact-notification-lead-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """impact_notification_lead_time must be of a type compatible with uint32""",
+          'defined-type': "uint32",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="impact-notification-lead-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)""",
+        })
+
+    self.__impact_notification_lead_time = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_impact_notification_lead_time(self):
+    self.__impact_notification_lead_time = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="impact-notification-lead-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+
+  def _get_is_impact_mitigation_requested(self):
+    """
+    Getter method for is_impact_mitigation_requested, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/is_impact_mitigation_requested (boolean)
+
+    YANG Description: Indicates if the VNF provider has requested impact mitigation
+    """
+    return self.__is_impact_mitigation_requested
+      
+  def _set_is_impact_mitigation_requested(self, v, load=False):
+    """
+    Setter method for is_impact_mitigation_requested, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/is_impact_mitigation_requested (boolean)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_is_impact_mitigation_requested is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_is_impact_mitigation_requested() directly.
+
+    YANG Description: Indicates if the VNF provider has requested impact mitigation
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="is-impact-mitigation-requested", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """is_impact_mitigation_requested must be of a type compatible with boolean""",
+          'defined-type': "boolean",
+          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="is-impact-mitigation-requested", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
+        })
+
+    self.__is_impact_mitigation_requested = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_is_impact_mitigation_requested(self):
+    self.__is_impact_mitigation_requested = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="is-impact-mitigation-requested", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+
+
+  def _get_supported_migration_time(self):
+    """
+    Getter method for supported_migration_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/supported_migration_time (enumeration)
+
+    YANG Description: List of the allowed migration times
+    """
+    return self.__supported_migration_time
+      
+  def _set_supported_migration_time(self, v, load=False):
+    """
+    Setter method for supported_migration_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/supported_migration_time (enumeration)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_supported_migration_time is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_supported_migration_time() directly.
+
+    YANG Description: List of the allowed migration times
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'NO_MIGRATION': {}, 'OFFLINE_MIGRATION': {}, 'LIVE_MIGRATION': {}},)), is_leaf=False, yang_name="supported-migration-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """supported_migration_time must be of a type compatible with enumeration""",
+          'defined-type': "mec-app-descriptor:enumeration",
+          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'NO_MIGRATION': {}, 'OFFLINE_MIGRATION': {}, 'LIVE_MIGRATION': {}},)), is_leaf=False, yang_name="supported-migration-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)""",
+        })
+
+    self.__supported_migration_time = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_supported_migration_time(self):
+    self.__supported_migration_time = YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'NO_MIGRATION': {}, 'OFFLINE_MIGRATION': {}, 'LIVE_MIGRATION': {}},)), is_leaf=False, yang_name="supported-migration-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+
+
+  def _get_max_undetectable_interruption_time(self):
+    """
+    Getter method for max_undetectable_interruption_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_undetectable_interruption_time (uint32)
+
+    YANG Description: Maximum time that the VNF can tolerate an undetectable interruption
+    """
+    return self.__max_undetectable_interruption_time
+      
+  def _set_max_undetectable_interruption_time(self, v, load=False):
+    """
+    Setter method for max_undetectable_interruption_time, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_undetectable_interruption_time (uint32)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_max_undetectable_interruption_time is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_max_undetectable_interruption_time() directly.
+
+    YANG Description: Maximum time that the VNF can tolerate an undetectable interruption
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-undetectable-interruption-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """max_undetectable_interruption_time must be of a type compatible with uint32""",
+          'defined-type': "uint32",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-undetectable-interruption-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)""",
+        })
+
+    self.__max_undetectable_interruption_time = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_max_undetectable_interruption_time(self):
+    self.__max_undetectable_interruption_time = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="max-undetectable-interruption-time", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+
+  def _get_min_recovery_time_between_impacts(self):
+    """
+    Getter method for min_recovery_time_between_impacts, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/min_recovery_time_between_impacts (uint32)
+    """
+    return self.__min_recovery_time_between_impacts
+      
+  def _set_min_recovery_time_between_impacts(self, v, load=False):
+    """
+    Setter method for min_recovery_time_between_impacts, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/min_recovery_time_between_impacts (uint32)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_min_recovery_time_between_impacts is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_min_recovery_time_between_impacts() directly.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="min-recovery-time-between-impacts", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """min_recovery_time_between_impacts must be of a type compatible with uint32""",
+          'defined-type': "uint32",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="min-recovery-time-between-impacts", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)""",
+        })
+
+    self.__min_recovery_time_between_impacts = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_min_recovery_time_between_impacts(self):
+    self.__min_recovery_time_between_impacts = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="min-recovery-time-between-impacts", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
+
+
+  def _get_max_number_of_impacted_instances(self):
+    """
+    Getter method for max_number_of_impacted_instances, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances (list)
+
+    YANG Description: List of the maximum number of impacted instances
+    """
+    return self.__max_number_of_impacted_instances
+      
+  def _set_max_number_of_impacted_instances(self, v, load=False):
+    """
+    Setter method for max_number_of_impacted_instances, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info/max_number_of_impacted_instances (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_max_number_of_impacted_instances is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_max_number_of_impacted_instances() directly.
+
+    YANG Description: List of the maximum number of impacted instances
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("id",yc_max_number_of_impacted_instances_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info_max_number_of_impacted_instances, yang_name="max-number-of-impacted-instances", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """max_number_of_impacted_instances must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("id",yc_max_number_of_impacted_instances_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info_max_number_of_impacted_instances, yang_name="max-number-of-impacted-instances", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__max_number_of_impacted_instances = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_max_number_of_impacted_instances(self):
+    self.__max_number_of_impacted_instances = YANGDynClass(base=YANGListType("id",yc_max_number_of_impacted_instances_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info_max_number_of_impacted_instances, yang_name="max-number-of-impacted-instances", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="max-number-of-impacted-instances", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+  impact_notification_lead_time = __builtin__.property(_get_impact_notification_lead_time, _set_impact_notification_lead_time)
+  is_impact_mitigation_requested = __builtin__.property(_get_is_impact_mitigation_requested, _set_is_impact_mitigation_requested)
+  supported_migration_time = __builtin__.property(_get_supported_migration_time, _set_supported_migration_time)
+  max_undetectable_interruption_time = __builtin__.property(_get_max_undetectable_interruption_time, _set_max_undetectable_interruption_time)
+  min_recovery_time_between_impacts = __builtin__.property(_get_min_recovery_time_between_impacts, _set_min_recovery_time_between_impacts)
+  max_number_of_impacted_instances = __builtin__.property(_get_max_number_of_impacted_instances, _set_max_number_of_impacted_instances)
+
+
+  _pyangbind_elements = OrderedDict([('impact_notification_lead_time', impact_notification_lead_time), ('is_impact_mitigation_requested', is_impact_mitigation_requested), ('supported_migration_time', supported_migration_time), ('max_undetectable_interruption_time', max_undetectable_interruption_time), ('min_recovery_time_between_impacts', min_recovery_time_between_impacts), ('max_number_of_impacted_instances', max_number_of_impacted_instances), ])
 
 
 class yc_virtual_storage_mec_app_descriptor__app_descriptor_virtual_storage(PybindBase):
@@ -3297,7 +4019,7 @@ class yc_virtual_storage_mec_app_descriptor__app_descriptor_virtual_storage(Pybi
 
   YANG Description: 
   """
-  __slots__ = ('_path_helper', '_extmethods', '__id','__type_of_storage','__block_storage','__object_storage','__file_storage','__size_of_storage','__operation_status',)
+  __slots__ = ('_path_helper', '_extmethods', '__id','__type_of_storage','__block_storage','__object_storage','__file_storage','__nfvi_maintenance_info','__per_vnfc_instance',)
 
   _yang_name = 'virtual-storage'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -3314,8 +4036,8 @@ class yc_virtual_storage_mec_app_descriptor__app_descriptor_virtual_storage(Pybi
     self.__block_storage = YANGDynClass(base=yc_block_storage_mec_app_descriptor__app_descriptor_virtual_storage_block_storage, is_container='container', yang_name="block-storage", parent=self, choice=('storage', 'block-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
     self.__object_storage = YANGDynClass(base=yc_object_storage_mec_app_descriptor__app_descriptor_virtual_storage_object_storage, is_container='container', yang_name="object-storage", parent=self, choice=('storage', 'object-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
     self.__file_storage = YANGDynClass(base=yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_storage, is_container='container', yang_name="file-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
-    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
-    self.__operation_status = YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="operation-status", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__nfvi_maintenance_info = YANGDynClass(base=yc_nfvi_maintenance_info_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info, is_container='container', yang_name="nfvi-maintenance-info", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+    self.__per_vnfc_instance = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="per-vnfc-instance", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -3534,89 +4256,85 @@ class yc_virtual_storage_mec_app_descriptor__app_descriptor_virtual_storage(Pybi
     self.__file_storage = YANGDynClass(base=yc_file_storage_mec_app_descriptor__app_descriptor_virtual_storage_file_storage, is_container='container', yang_name="file-storage", parent=self, choice=('storage', 'file-storage'), path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
 
-  def _get_size_of_storage(self):
+  def _get_nfvi_maintenance_info(self):
     """
-    Getter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/size_of_storage (uint64)
-
-    YANG Description: Size of virtualised storage resource (e.g. size of block storage device)
+    Getter method for nfvi_maintenance_info, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info (container)
     """
-    return self.__size_of_storage
+    return self.__nfvi_maintenance_info
       
-  def _set_size_of_storage(self, v, load=False):
+  def _set_nfvi_maintenance_info(self, v, load=False):
     """
-    Setter method for size_of_storage, mapped from YANG variable /app_descriptor/virtual_storage/size_of_storage (uint64)
+    Setter method for nfvi_maintenance_info, mapped from YANG variable /app_descriptor/virtual_storage/nfvi_maintenance_info (container)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_size_of_storage is considered as a private
+    source YANG file, then _set_nfvi_maintenance_info is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_size_of_storage() directly.
-
-    YANG Description: Size of virtualised storage resource (e.g. size of block storage device)
+    do so via calling thisObj._set_nfvi_maintenance_info() directly.
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+      t = YANGDynClass(v,base=yc_nfvi_maintenance_info_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info, is_container='container', yang_name="nfvi-maintenance-info", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """size_of_storage must be of a type compatible with uint64""",
-          'defined-type': "uint64",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)""",
+          'error-string': """nfvi_maintenance_info must be of a type compatible with container""",
+          'defined-type': "container",
+          'generated-type': """YANGDynClass(base=yc_nfvi_maintenance_info_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info, is_container='container', yang_name="nfvi-maintenance-info", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)""",
         })
 
-    self.__size_of_storage = t
+    self.__nfvi_maintenance_info = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_size_of_storage(self):
-    self.__size_of_storage = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range':  ['0..18446744073709551615']}, int_size=64), is_leaf=True, yang_name="size-of-storage", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint64', is_config=True)
+  def _unset_nfvi_maintenance_info(self):
+    self.__nfvi_maintenance_info = YANGDynClass(base=yc_nfvi_maintenance_info_mec_app_descriptor__app_descriptor_virtual_storage_nfvi_maintenance_info, is_container='container', yang_name="nfvi-maintenance-info", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
 
-  def _get_operation_status(self):
+  def _get_per_vnfc_instance(self):
     """
-    Getter method for operation_status, mapped from YANG variable /app_descriptor/virtual_storage/operation_status (string)
+    Getter method for per_vnfc_instance, mapped from YANG variable /app_descriptor/virtual_storage/per_vnfc_instance (boolean)
 
-    YANG Description: Operation status of the virtualised storage resource
+    YANG Description: Indicates if the storage resource is dedicated to a VNFC instance
     """
-    return self.__operation_status
+    return self.__per_vnfc_instance
       
-  def _set_operation_status(self, v, load=False):
+  def _set_per_vnfc_instance(self, v, load=False):
     """
-    Setter method for operation_status, mapped from YANG variable /app_descriptor/virtual_storage/operation_status (string)
+    Setter method for per_vnfc_instance, mapped from YANG variable /app_descriptor/virtual_storage/per_vnfc_instance (boolean)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_operation_status is considered as a private
+    source YANG file, then _set_per_vnfc_instance is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_operation_status() directly.
+    do so via calling thisObj._set_per_vnfc_instance() directly.
 
-    YANG Description: Operation status of the virtualised storage resource
+    YANG Description: Indicates if the storage resource is dedicated to a VNFC instance
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="operation-status", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="per-vnfc-instance", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """operation_status must be of a type compatible with string""",
-          'defined-type': "string",
-          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="operation-status", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+          'error-string': """per_vnfc_instance must be of a type compatible with boolean""",
+          'defined-type': "boolean",
+          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="per-vnfc-instance", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
         })
 
-    self.__operation_status = t
+    self.__per_vnfc_instance = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_operation_status(self):
-    self.__operation_status = YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="operation-status", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+  def _unset_per_vnfc_instance(self):
+    self.__per_vnfc_instance = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="per-vnfc-instance", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
   id = __builtin__.property(_get_id, _set_id)
   type_of_storage = __builtin__.property(_get_type_of_storage, _set_type_of_storage)
   block_storage = __builtin__.property(_get_block_storage, _set_block_storage)
   object_storage = __builtin__.property(_get_object_storage, _set_object_storage)
   file_storage = __builtin__.property(_get_file_storage, _set_file_storage)
-  size_of_storage = __builtin__.property(_get_size_of_storage, _set_size_of_storage)
-  operation_status = __builtin__.property(_get_operation_status, _set_operation_status)
+  nfvi_maintenance_info = __builtin__.property(_get_nfvi_maintenance_info, _set_nfvi_maintenance_info)
+  per_vnfc_instance = __builtin__.property(_get_per_vnfc_instance, _set_per_vnfc_instance)
 
   __choices__ = {'storage': {'block-storage': ['block_storage'], 'object-storage': ['object_storage'], 'file-storage': ['file_storage']}}
-  _pyangbind_elements = OrderedDict([('id', id), ('type_of_storage', type_of_storage), ('block_storage', block_storage), ('object_storage', object_storage), ('file_storage', file_storage), ('size_of_storage', size_of_storage), ('operation_status', operation_status), ])
+  _pyangbind_elements = OrderedDict([('id', id), ('type_of_storage', type_of_storage), ('block_storage', block_storage), ('object_storage', object_storage), ('file_storage', file_storage), ('nfvi_maintenance_info', nfvi_maintenance_info), ('per_vnfc_instance', per_vnfc_instance), ])
 
 
 class yc_network_interface_requirement_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements_network_interface_requirement(PybindBase):
@@ -3890,7 +4608,7 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
 
   YANG Description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
   """
-  __slots__ = ('_path_helper', '_extmethods', '__name','__description','__support_mandatory','__network_interface_requirement','__niclo_requirements',)
+  __slots__ = ('_path_helper', '_extmethods', '__id','__name','__description','__support_mandatory','__network_interface_requirement','__niclo_requirements',)
 
   _yang_name = 'virtual-network-interface-requirements'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -3902,7 +4620,8 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
     self._path_helper = False
 
     self._extmethods = False
-    self.__name = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__name = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     self.__description = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="description", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     self.__support_mandatory = YANGDynClass(base=YANGBool, default=YANGBool("true"), is_leaf=True, yang_name="support-mandatory", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
     self.__network_interface_requirement = YANGDynClass(base=yc_network_interface_requirement_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements_network_interface_requirement, is_container='container', yang_name="network-interface-requirement", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
@@ -3935,6 +4654,48 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
     else:
       return ['app-descriptor', 'ext-cpd', 'virtual-network-interface-requirements']
 
+  def _get_id(self):
+    """
+    Getter method for id, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements/id (string)
+
+    YANG Description: Identifier of the virtual network interface requirement
+    """
+    return self.__id
+      
+  def _set_id(self, v, load=False):
+    """
+    Setter method for id, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements/id (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_id is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_id() directly.
+
+    YANG Description: Identifier of the virtual network interface requirement
+    """
+    parent = getattr(self, "_parent", None)
+    if parent is not None and load is False:
+      raise AttributeError("Cannot set keys directly when" +
+                             " within an instantiated list")
+
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__id = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_id(self):
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
   def _get_name(self):
     """
     Getter method for name, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements/name (string)
@@ -3953,20 +4714,15 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
 
     YANG Description: Provides a human readable name for the requirement.
     """
-    parent = getattr(self, "_parent", None)
-    if parent is not None and load is False:
-      raise AttributeError("Cannot set keys directly when" +
-                             " within an instantiated list")
-
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
           'error-string': """name must be of a type compatible with string""",
           'defined-type': "string",
-          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
         })
 
     self.__name = t
@@ -3974,7 +4730,7 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
       self._set()
 
   def _unset_name(self):
-    self.__name = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__name = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="name", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
   def _get_description(self):
@@ -4124,6 +4880,7 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
   def _unset_niclo_requirements(self):
     self.__niclo_requirements = YANGDynClass(base=yc_niclo_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements_niclo_requirements, is_container='container', yang_name="niclo-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
+  id = __builtin__.property(_get_id, _set_id)
   name = __builtin__.property(_get_name, _set_name)
   description = __builtin__.property(_get_description, _set_description)
   support_mandatory = __builtin__.property(_get_support_mandatory, _set_support_mandatory)
@@ -4131,19 +4888,19 @@ class yc_virtual_network_interface_requirements_mec_app_descriptor__app_descript
   niclo_requirements = __builtin__.property(_get_niclo_requirements, _set_niclo_requirements)
 
 
-  _pyangbind_elements = OrderedDict([('name', name), ('description', description), ('support_mandatory', support_mandatory), ('network_interface_requirement', network_interface_requirement), ('niclo_requirements', niclo_requirements), ])
+  _pyangbind_elements = OrderedDict([('id', id), ('name', name), ('description', description), ('support_mandatory', support_mandatory), ('network_interface_requirement', network_interface_requirement), ('niclo_requirements', niclo_requirements), ])
 
 
-class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data_l3_address_data(PybindBase):
+class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data_l3_address_data(PybindBase):
   """
   This class was auto-generated by the PythonClass plugin for PYANG
-  from YANG module mec-app-descriptor - based on the path /app-descriptor/ext-cpd/address-data/l3-address-data. Each member element of
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/ext-cpd/cp-protocol/address-data/l3-address-data. Each member element of
   the container is represented as a class variable - with a specific
   YANG type.
 
   YANG Description: The L3 address data for the CP instantiated from this CPD.
   """
-  __slots__ = ('_path_helper', '_extmethods', '__ip_address_type','__number_of_ip_addresses','__ip_address_assignment','__floating_ip_activated','__ip_address_reservation',)
+  __slots__ = ('_path_helper', '_extmethods', '__ip_address_type','__number_of_ip_addresses','__ip_address_assignment','__floating_ip_activated','__fixed_ip_address',)
 
   _yang_name = 'l3-address-data'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -4159,7 +4916,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
     self.__number_of_ip_addresses = YANGDynClass(base=RestrictedClassType(base_type=long, restriction_dict={'range': ['0..4294967295']}, int_size=32), is_leaf=True, yang_name="number-of-ip-addresses", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='uint32', is_config=True)
     self.__ip_address_assignment = YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'DYNAMIC': {}, 'STATIC': {}},)), is_leaf=False, yang_name="ip-address-assignment", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
     self.__floating_ip_activated = YANGDynClass(unique=True, base=TypedListType(allowed_type=YANGBool), is_leaf=False, yang_name="floating-ip-activated", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
-    self.__ip_address_reservation = YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="ip-address-reservation", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
+    self.__fixed_ip_address = YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="fixed-ip-address", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -4186,11 +4943,11 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
     if hasattr(self, "_parent"):
       return self._parent._path()+[self._yang_name]
     else:
-      return ['app-descriptor', 'ext-cpd', 'address-data', 'l3-address-data']
+      return ['app-descriptor', 'ext-cpd', 'cp-protocol', 'address-data', 'l3-address-data']
 
   def _get_ip_address_type(self):
     """
-    Getter method for ip_address_type, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_type (enumeration)
+    Getter method for ip_address_type, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/ip_address_type (enumeration)
 
     YANG Description: The type of the IP address.
     """
@@ -4198,7 +4955,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
       
   def _set_ip_address_type(self, v, load=False):
     """
-    Setter method for ip_address_type, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_type (enumeration)
+    Setter method for ip_address_type, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/ip_address_type (enumeration)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_ip_address_type is considered as a private
     method. Backends looking to populate this variable should
@@ -4227,7 +4984,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
 
   def _get_number_of_ip_addresses(self):
     """
-    Getter method for number_of_ip_addresses, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/number_of_ip_addresses (uint32)
+    Getter method for number_of_ip_addresses, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/number_of_ip_addresses (uint32)
 
     YANG Description: The number of IP addresses to assign to the CP instantiated from this CPD.
     """
@@ -4235,7 +4992,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
       
   def _set_number_of_ip_addresses(self, v, load=False):
     """
-    Setter method for number_of_ip_addresses, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/number_of_ip_addresses (uint32)
+    Setter method for number_of_ip_addresses, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/number_of_ip_addresses (uint32)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_number_of_ip_addresses is considered as a private
     method. Backends looking to populate this variable should
@@ -4264,7 +5021,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
 
   def _get_ip_address_assignment(self):
     """
-    Getter method for ip_address_assignment, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_assignment (enumeration)
+    Getter method for ip_address_assignment, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/ip_address_assignment (enumeration)
 
     YANG Description: Specifies how the IP address(es) will be assigned.
     """
@@ -4272,7 +5029,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
       
   def _set_ip_address_assignment(self, v, load=False):
     """
-    Setter method for ip_address_assignment, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_assignment (enumeration)
+    Setter method for ip_address_assignment, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/ip_address_assignment (enumeration)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_ip_address_assignment is considered as a private
     method. Backends looking to populate this variable should
@@ -4301,7 +5058,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
 
   def _get_floating_ip_activated(self):
     """
-    Getter method for floating_ip_activated, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/floating_ip_activated (boolean)
+    Getter method for floating_ip_activated, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/floating_ip_activated (boolean)
 
     YANG Description: Specify if the floating IP scheme is activated on the CP instantiated from this CPD.
     """
@@ -4309,7 +5066,7 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
       
   def _set_floating_ip_activated(self, v, load=False):
     """
-    Setter method for floating_ip_activated, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/floating_ip_activated (boolean)
+    Setter method for floating_ip_activated, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/floating_ip_activated (boolean)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_floating_ip_activated is considered as a private
     method. Backends looking to populate this variable should
@@ -4336,62 +5093,62 @@ class yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data
     self.__floating_ip_activated = YANGDynClass(unique=True, base=TypedListType(allowed_type=YANGBool), is_leaf=False, yang_name="floating-ip-activated", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
 
-  def _get_ip_address_reservation(self):
+  def _get_fixed_ip_address(self):
     """
-    Getter method for ip_address_reservation, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_reservation (inet:ip-address)
+    Getter method for fixed_ip_address, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/fixed_ip_address (inet:ip-address)
 
-    YANG Description: Specifies the IP addresses to be assigned.
+    YANG Description: Specifies the fixed IP address(es) to assign to the CP instantiated from this CPD.
     """
-    return self.__ip_address_reservation
+    return self.__fixed_ip_address
       
-  def _set_ip_address_reservation(self, v, load=False):
+  def _set_fixed_ip_address(self, v, load=False):
     """
-    Setter method for ip_address_reservation, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data/ip_address_reservation (inet:ip-address)
+    Setter method for fixed_ip_address, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data/fixed_ip_address (inet:ip-address)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_ip_address_reservation is considered as a private
+    source YANG file, then _set_fixed_ip_address is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_ip_address_reservation() directly.
+    do so via calling thisObj._set_fixed_ip_address() directly.
 
-    YANG Description: Specifies the IP addresses to be assigned.
+    YANG Description: Specifies the fixed IP address(es) to assign to the CP instantiated from this CPD.
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="ip-address-reservation", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
+      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="fixed-ip-address", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """ip_address_reservation must be of a type compatible with inet:ip-address""",
+          'error-string': """fixed_ip_address must be of a type compatible with inet:ip-address""",
           'defined-type': "inet:ip-address",
-          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="ip-address-reservation", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)""",
+          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="fixed-ip-address", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)""",
         })
 
-    self.__ip_address_reservation = t
+    self.__fixed_ip_address = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_ip_address_reservation(self):
-    self.__ip_address_reservation = YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="ip-address-reservation", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
+  def _unset_fixed_ip_address(self):
+    self.__fixed_ip_address = YANGDynClass(unique=True, base=TypedListType(allowed_type=[RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(%[\\p{N}\\p{L}]+)?'}),RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))(%[\\p{N}\\p{L}]+)?'}),]), is_leaf=False, yang_name="fixed-ip-address", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='inet:ip-address', is_config=True)
 
   ip_address_type = __builtin__.property(_get_ip_address_type, _set_ip_address_type)
   number_of_ip_addresses = __builtin__.property(_get_number_of_ip_addresses, _set_number_of_ip_addresses)
   ip_address_assignment = __builtin__.property(_get_ip_address_assignment, _set_ip_address_assignment)
   floating_ip_activated = __builtin__.property(_get_floating_ip_activated, _set_floating_ip_activated)
-  ip_address_reservation = __builtin__.property(_get_ip_address_reservation, _set_ip_address_reservation)
+  fixed_ip_address = __builtin__.property(_get_fixed_ip_address, _set_fixed_ip_address)
 
 
-  _pyangbind_elements = OrderedDict([('ip_address_type', ip_address_type), ('number_of_ip_addresses', number_of_ip_addresses), ('ip_address_assignment', ip_address_assignment), ('floating_ip_activated', floating_ip_activated), ('ip_address_reservation', ip_address_reservation), ])
+  _pyangbind_elements = OrderedDict([('ip_address_type', ip_address_type), ('number_of_ip_addresses', number_of_ip_addresses), ('ip_address_assignment', ip_address_assignment), ('floating_ip_activated', floating_ip_activated), ('fixed_ip_address', fixed_ip_address), ])
 
 
-class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(PybindBase):
+class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data(PybindBase):
   """
   This class was auto-generated by the PythonClass plugin for PYANG
-  from YANG module mec-app-descriptor - based on the path /app-descriptor/ext-cpd/address-data. Each member element of
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/ext-cpd/cp-protocol/address-data. Each member element of
   the container is represented as a class variable - with a specific
   YANG type.
 
   YANG Description: Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.
   """
-  __slots__ = ('_path_helper', '_extmethods', '__address_type','__l2_address_data','__l3_address_data',)
+  __slots__ = ('_path_helper', '_extmethods', '__id','__address_type','__l2_address_data','__l3_address_data',)
 
   _yang_name = 'address-data'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -4403,9 +5160,10 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
     self._path_helper = False
 
     self._extmethods = False
-    self.__address_type = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__address_type = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
     self.__l2_address_data = YANGDynClass(base=RestrictedClassType(base_type=six.text_type, restriction_dict={'pattern': '[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}'}), is_leaf=True, yang_name="l2-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='yang:mac-address', is_config=True)
-    self.__l3_address_data = YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+    self.__l3_address_data = YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -4432,25 +5190,25 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
     if hasattr(self, "_parent"):
       return self._parent._path()+[self._yang_name]
     else:
-      return ['app-descriptor', 'ext-cpd', 'address-data']
+      return ['app-descriptor', 'ext-cpd', 'cp-protocol', 'address-data']
 
-  def _get_address_type(self):
+  def _get_id(self):
     """
-    Getter method for address_type, mapped from YANG variable /app_descriptor/ext_cpd/address_data/address_type (enumeration)
+    Getter method for id, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/id (string)
 
-    YANG Description: Describes the type of the address to be assigned to the CP instantiated from this CPD.
+    YANG Description: Identifier of this address data information element.
     """
-    return self.__address_type
+    return self.__id
       
-  def _set_address_type(self, v, load=False):
+  def _set_id(self, v, load=False):
     """
-    Setter method for address_type, mapped from YANG variable /app_descriptor/ext_cpd/address_data/address_type (enumeration)
+    Setter method for id, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/id (string)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_address_type is considered as a private
+    source YANG file, then _set_id is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_address_type() directly.
+    do so via calling thisObj._set_id() directly.
 
-    YANG Description: Describes the type of the address to be assigned to the CP instantiated from this CPD.
+    YANG Description: Identifier of this address data information element.
     """
     parent = getattr(self, "_parent", None)
     if parent is not None and load is False:
@@ -4460,12 +5218,49 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__id = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_id(self):
+    self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
+  def _get_address_type(self):
+    """
+    Getter method for address_type, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/address_type (enumeration)
+
+    YANG Description: Describes the type of the address to be assigned to the CP instantiated from this CPD.
+    """
+    return self.__address_type
+      
+  def _set_address_type(self, v, load=False):
+    """
+    Setter method for address_type, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/address_type (enumeration)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_address_type is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_address_type() directly.
+
+    YANG Description: Describes the type of the address to be assigned to the CP instantiated from this CPD.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
           'error-string': """address_type must be of a type compatible with enumeration""",
           'defined-type': "mec-app-descriptor:enumeration",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)""",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)""",
         })
 
     self.__address_type = t
@@ -4473,12 +5268,12 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
       self._set()
 
   def _unset_address_type(self):
-    self.__address_type = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    self.__address_type = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'MAC_ADDRESS': {}, 'IP_ADDRESS': {}},), is_leaf=True, yang_name="address-type", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
 
 
   def _get_l2_address_data(self):
     """
-    Getter method for l2_address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l2_address_data (yang:mac-address)
+    Getter method for l2_address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l2_address_data (yang:mac-address)
 
     YANG Description: Specifies the L2 address to be assigned to the CP instantiated from this CPD.
     """
@@ -4486,7 +5281,7 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
       
   def _set_l2_address_data(self, v, load=False):
     """
-    Setter method for l2_address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l2_address_data (yang:mac-address)
+    Setter method for l2_address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l2_address_data (yang:mac-address)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_l2_address_data is considered as a private
     method. Backends looking to populate this variable should
@@ -4515,7 +5310,7 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
 
   def _get_l3_address_data(self):
     """
-    Getter method for l3_address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data (container)
+    Getter method for l3_address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data (container)
 
     YANG Description: The L3 address data for the CP instantiated from this CPD.
     """
@@ -4523,7 +5318,7 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
       
   def _set_l3_address_data(self, v, load=False):
     """
-    Setter method for l3_address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data/l3_address_data (container)
+    Setter method for l3_address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data/l3_address_data (container)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_l3_address_data is considered as a private
     method. Backends looking to populate this variable should
@@ -4534,12 +5329,12 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+      t = YANGDynClass(v,base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
           'error-string': """l3_address_data must be of a type compatible with container""",
           'defined-type': "container",
-          'generated-type': """YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)""",
+          'generated-type': """YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)""",
         })
 
     self.__l3_address_data = t
@@ -4547,14 +5342,149 @@ class yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data(Py
       self._set()
 
   def _unset_l3_address_data(self):
-    self.__l3_address_data = YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+    self.__l3_address_data = YANGDynClass(base=yc_l3_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data_l3_address_data, is_container='container', yang_name="l3-address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
 
+  id = __builtin__.property(_get_id, _set_id)
   address_type = __builtin__.property(_get_address_type, _set_address_type)
   l2_address_data = __builtin__.property(_get_l2_address_data, _set_l2_address_data)
   l3_address_data = __builtin__.property(_get_l3_address_data, _set_l3_address_data)
 
 
-  _pyangbind_elements = OrderedDict([('address_type', address_type), ('l2_address_data', l2_address_data), ('l3_address_data', l3_address_data), ])
+  _pyangbind_elements = OrderedDict([('id', id), ('address_type', address_type), ('l2_address_data', l2_address_data), ('l3_address_data', l3_address_data), ])
+
+
+class yc_cp_protocol_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/ext-cpd/cp-protocol. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__associated_layer_protocol','__address_data',)
+
+  _yang_name = 'cp-protocol'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__associated_layer_protocol = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},), is_leaf=True, yang_name="associated-layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
+    self.__address_data = YANGDynClass(base=YANGListType("id",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'ext-cpd', 'cp-protocol']
+
+  def _get_associated_layer_protocol(self):
+    """
+    Getter method for associated_layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/associated_layer_protocol (layer-protocol-type)
+
+    YANG Description: Identifies the layer protocol associated with the CP.
+    """
+    return self.__associated_layer_protocol
+      
+  def _set_associated_layer_protocol(self, v, load=False):
+    """
+    Setter method for associated_layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/associated_layer_protocol (layer-protocol-type)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_associated_layer_protocol is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_associated_layer_protocol() directly.
+
+    YANG Description: Identifies the layer protocol associated with the CP.
+    """
+    parent = getattr(self, "_parent", None)
+    if parent is not None and load is False:
+      raise AttributeError("Cannot set keys directly when" +
+                             " within an instantiated list")
+
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},), is_leaf=True, yang_name="associated-layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """associated_layer_protocol must be of a type compatible with layer-protocol-type""",
+          'defined-type': "mec-app-descriptor:layer-protocol-type",
+          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},), is_leaf=True, yang_name="associated-layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)""",
+        })
+
+    self.__associated_layer_protocol = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_associated_layer_protocol(self):
+    self.__associated_layer_protocol = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},), is_leaf=True, yang_name="associated-layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
+
+
+  def _get_address_data(self):
+    """
+    Getter method for address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data (list)
+
+    YANG Description: Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.
+    """
+    return self.__address_data
+      
+  def _set_address_data(self, v, load=False):
+    """
+    Setter method for address_data, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol/address_data (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_address_data is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_address_data() directly.
+
+    YANG Description: Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("id",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """address_data must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("id",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__address_data = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_address_data(self):
+    self.__address_data = YANGDynClass(base=YANGListType("id",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+  associated_layer_protocol = __builtin__.property(_get_associated_layer_protocol, _set_associated_layer_protocol)
+  address_data = __builtin__.property(_get_address_data, _set_address_data)
+
+
+  _pyangbind_elements = OrderedDict([('associated_layer_protocol', associated_layer_protocol), ('address_data', address_data), ])
 
 
 class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
@@ -4566,7 +5496,7 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
 
   YANG Description: 
   """
-  __slots__ = ('_path_helper', '_extmethods', '__id','__virtual_network_interface_requirements','__cpd_id','__layer_protocol','__cp_role','__description','__address_data',)
+  __slots__ = ('_path_helper', '_extmethods', '__virtual_network_interface_requirements','__id','__layer_protocol','__cp_role','__description','__trunk_mode','__security_group_rule_id','__cp_protocol',)
 
   _yang_name = 'ext-cpd'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
@@ -4578,13 +5508,14 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     self._path_helper = False
 
     self._extmethods = False
+    self.__virtual_network_interface_requirements = YANGDynClass(base=YANGListType("id",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
     self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    self.__virtual_network_interface_requirements = YANGDynClass(base=YANGListType("name",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='name', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
-    self.__cpd_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="cpd-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    self.__layer_protocol = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {}, 'MPLS': {}, 'ODU2': {}, 'IPV4': {}, 'IPV6': {}, 'PSEUDO_WIRE': {}},), is_leaf=True, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    self.__layer_protocol = YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},)), is_leaf=False, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
     self.__cp_role = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="cp-role", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
     self.__description = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="description", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    self.__address_data = YANGDynClass(base=YANGListType("address_type",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='address-type', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    self.__trunk_mode = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="trunk-mode", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
+    self.__security_group_rule_id = YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="security-group-rule-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    self.__cp_protocol = YANGDynClass(base=YANGListType("associated_layer_protocol",yc_cp_protocol_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol, yang_name="cp-protocol", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='associated-layer-protocol', extensions=None), is_container='list', yang_name="cp-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
 
     load = kwargs.pop("load", None)
     if args:
@@ -4613,11 +5544,48 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     else:
       return ['app-descriptor', 'ext-cpd']
 
+  def _get_virtual_network_interface_requirements(self):
+    """
+    Getter method for virtual_network_interface_requirements, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements (list)
+
+    YANG Description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
+    """
+    return self.__virtual_network_interface_requirements
+      
+  def _set_virtual_network_interface_requirements(self, v, load=False):
+    """
+    Setter method for virtual_network_interface_requirements, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_virtual_network_interface_requirements is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_virtual_network_interface_requirements() directly.
+
+    YANG Description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("id",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """virtual_network_interface_requirements must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("id",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__virtual_network_interface_requirements = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_virtual_network_interface_requirements(self):
+    self.__virtual_network_interface_requirements = YANGDynClass(base=YANGListType("id",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='id', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
+
   def _get_id(self):
     """
     Getter method for id, mapped from YANG variable /app_descriptor/ext_cpd/id (string)
 
-    YANG Description: Identifier of the external connection point
+    YANG Description: Identifier of this Cpd information element.
     """
     return self.__id
       
@@ -4629,7 +5597,7 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     method. Backends looking to populate this variable should
     do so via calling thisObj._set_id() directly.
 
-    YANG Description: Identifier of the external connection point
+    YANG Description: Identifier of this Cpd information element.
     """
     parent = getattr(self, "_parent", None)
     if parent is not None and load is False:
@@ -4655,83 +5623,9 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     self.__id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, is_keyval=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
-  def _get_virtual_network_interface_requirements(self):
-    """
-    Getter method for virtual_network_interface_requirements, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements (list)
-
-    YANG Description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
-    """
-    return self.__virtual_network_interface_requirements
-      
-  def _set_virtual_network_interface_requirements(self, v, load=False):
-    """
-    Setter method for virtual_network_interface_requirements, mapped from YANG variable /app_descriptor/ext_cpd/virtual_network_interface_requirements (list)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_virtual_network_interface_requirements is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_virtual_network_interface_requirements() directly.
-
-    YANG Description: Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=YANGListType("name",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='name', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """virtual_network_interface_requirements must be of a type compatible with list""",
-          'defined-type': "list",
-          'generated-type': """YANGDynClass(base=YANGListType("name",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='name', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
-        })
-
-    self.__virtual_network_interface_requirements = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_virtual_network_interface_requirements(self):
-    self.__virtual_network_interface_requirements = YANGDynClass(base=YANGListType("name",yc_virtual_network_interface_requirements_mec_app_descriptor__app_descriptor_ext_cpd_virtual_network_interface_requirements, yang_name="virtual-network-interface-requirements", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='name', extensions=None), is_container='list', yang_name="virtual-network-interface-requirements", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
-
-
-  def _get_cpd_id(self):
-    """
-    Getter method for cpd_id, mapped from YANG variable /app_descriptor/ext_cpd/cpd_id (string)
-
-    YANG Description: Identifier of this Cpd information element.
-    """
-    return self.__cpd_id
-      
-  def _set_cpd_id(self, v, load=False):
-    """
-    Setter method for cpd_id, mapped from YANG variable /app_descriptor/ext_cpd/cpd_id (string)
-    If this variable is read-only (config: false) in the
-    source YANG file, then _set_cpd_id is considered as a private
-    method. Backends looking to populate this variable should
-    do so via calling thisObj._set_cpd_id() directly.
-
-    YANG Description: Identifier of this Cpd information element.
-    """
-    if hasattr(v, "_utype"):
-      v = v._utype(v)
-    try:
-      t = YANGDynClass(v,base=six.text_type, is_leaf=True, yang_name="cpd-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-    except (TypeError, ValueError):
-      raise ValueError({
-          'error-string': """cpd_id must be of a type compatible with string""",
-          'defined-type': "string",
-          'generated-type': """YANGDynClass(base=six.text_type, is_leaf=True, yang_name="cpd-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
-        })
-
-    self.__cpd_id = t
-    if hasattr(self, '_set'):
-      self._set()
-
-  def _unset_cpd_id(self):
-    self.__cpd_id = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="cpd-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
-
-
   def _get_layer_protocol(self):
     """
-    Getter method for layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/layer_protocol (enumeration)
+    Getter method for layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/layer_protocol (layer-protocol-type)
 
     YANG Description: Identifies which protocol the CP uses for connectivity purposes.
     """
@@ -4739,7 +5633,7 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
       
   def _set_layer_protocol(self, v, load=False):
     """
-    Setter method for layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/layer_protocol (enumeration)
+    Setter method for layer_protocol, mapped from YANG variable /app_descriptor/ext_cpd/layer_protocol (layer-protocol-type)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_layer_protocol is considered as a private
     method. Backends looking to populate this variable should
@@ -4750,12 +5644,12 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {}, 'MPLS': {}, 'ODU2': {}, 'IPV4': {}, 'IPV6': {}, 'PSEUDO_WIRE': {}},), is_leaf=True, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},)), is_leaf=False, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """layer_protocol must be of a type compatible with enumeration""",
-          'defined-type': "mec-app-descriptor:enumeration",
-          'generated-type': """YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {}, 'MPLS': {}, 'ODU2': {}, 'IPV4': {}, 'IPV6': {}, 'PSEUDO_WIRE': {}},), is_leaf=True, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)""",
+          'error-string': """layer_protocol must be of a type compatible with layer-protocol-type""",
+          'defined-type': "mec-app-descriptor:layer-protocol-type",
+          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},)), is_leaf=False, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)""",
         })
 
     self.__layer_protocol = t
@@ -4763,7 +5657,7 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
       self._set()
 
   def _unset_layer_protocol(self):
-    self.__layer_protocol = YANGDynClass(base=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {}, 'MPLS': {}, 'ODU2': {}, 'IPV4': {}, 'IPV6': {}, 'PSEUDO_WIRE': {}},), is_leaf=True, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='enumeration', is_config=True)
+    self.__layer_protocol = YANGDynClass(unique=True, base=TypedListType(allowed_type=RestrictedClassType(base_type=six.text_type,                                     restriction_type="dict_key",                                     restriction_arg={'ETHERNET': {'value': 0}, 'MPLS': {'value': 1}, 'ODU2': {'value': 2}, 'IPV4': {'value': 3}, 'IPV6': {'value': 4}, 'PSEUDO_WIRE': {'value': 5}},)), is_leaf=False, yang_name="layer-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='layer-protocol-type', is_config=True)
 
 
   def _get_cp_role(self):
@@ -4840,52 +5734,123 @@ class yc_ext_cpd_mec_app_descriptor__app_descriptor_ext_cpd(PybindBase):
     self.__description = YANGDynClass(base=six.text_type, is_leaf=True, yang_name="description", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
 
 
-  def _get_address_data(self):
+  def _get_trunk_mode(self):
     """
-    Getter method for address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data (list)
+    Getter method for trunk_mode, mapped from YANG variable /app_descriptor/ext_cpd/trunk_mode (boolean)
 
-    YANG Description: Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.
+    YANG Description: Specifies whether the CP is a trunk port (true) or not (false).
     """
-    return self.__address_data
+    return self.__trunk_mode
       
-  def _set_address_data(self, v, load=False):
+  def _set_trunk_mode(self, v, load=False):
     """
-    Setter method for address_data, mapped from YANG variable /app_descriptor/ext_cpd/address_data (list)
+    Setter method for trunk_mode, mapped from YANG variable /app_descriptor/ext_cpd/trunk_mode (boolean)
     If this variable is read-only (config: false) in the
-    source YANG file, then _set_address_data is considered as a private
+    source YANG file, then _set_trunk_mode is considered as a private
     method. Backends looking to populate this variable should
-    do so via calling thisObj._set_address_data() directly.
+    do so via calling thisObj._set_trunk_mode() directly.
 
-    YANG Description: Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.
+    YANG Description: Specifies whether the CP is a trunk port (true) or not (false).
     """
     if hasattr(v, "_utype"):
       v = v._utype(v)
     try:
-      t = YANGDynClass(v,base=YANGListType("address_type",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='address-type', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+      t = YANGDynClass(v,base=YANGBool, is_leaf=True, yang_name="trunk-mode", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
     except (TypeError, ValueError):
       raise ValueError({
-          'error-string': """address_data must be of a type compatible with list""",
-          'defined-type': "list",
-          'generated-type': """YANGDynClass(base=YANGListType("address_type",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='address-type', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+          'error-string': """trunk_mode must be of a type compatible with boolean""",
+          'defined-type': "boolean",
+          'generated-type': """YANGDynClass(base=YANGBool, is_leaf=True, yang_name="trunk-mode", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)""",
         })
 
-    self.__address_data = t
+    self.__trunk_mode = t
     if hasattr(self, '_set'):
       self._set()
 
-  def _unset_address_data(self):
-    self.__address_data = YANGDynClass(base=YANGListType("address_type",yc_address_data_mec_app_descriptor__app_descriptor_ext_cpd_address_data, yang_name="address-data", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='address-type', extensions=None), is_container='list', yang_name="address-data", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+  def _unset_trunk_mode(self):
+    self.__trunk_mode = YANGDynClass(base=YANGBool, is_leaf=True, yang_name="trunk-mode", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='boolean', is_config=True)
 
-  id = __builtin__.property(_get_id, _set_id)
+
+  def _get_security_group_rule_id(self):
+    """
+    Getter method for security_group_rule_id, mapped from YANG variable /app_descriptor/ext_cpd/security_group_rule_id (string)
+
+    YANG Description: Identifies the security group rules bound to the CP.
+    """
+    return self.__security_group_rule_id
+      
+  def _set_security_group_rule_id(self, v, load=False):
+    """
+    Setter method for security_group_rule_id, mapped from YANG variable /app_descriptor/ext_cpd/security_group_rule_id (string)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_security_group_rule_id is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_security_group_rule_id() directly.
+
+    YANG Description: Identifies the security group rules bound to the CP.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="security-group-rule-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """security_group_rule_id must be of a type compatible with string""",
+          'defined-type': "string",
+          'generated-type': """YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="security-group-rule-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)""",
+        })
+
+    self.__security_group_rule_id = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_security_group_rule_id(self):
+    self.__security_group_rule_id = YANGDynClass(unique=True, base=TypedListType(allowed_type=six.text_type), is_leaf=False, yang_name="security-group-rule-id", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='string', is_config=True)
+
+
+  def _get_cp_protocol(self):
+    """
+    Getter method for cp_protocol, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol (list)
+    """
+    return self.__cp_protocol
+      
+  def _set_cp_protocol(self, v, load=False):
+    """
+    Setter method for cp_protocol, mapped from YANG variable /app_descriptor/ext_cpd/cp_protocol (list)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_cp_protocol is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_cp_protocol() directly.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=YANGListType("associated_layer_protocol",yc_cp_protocol_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol, yang_name="cp-protocol", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='associated-layer-protocol', extensions=None), is_container='list', yang_name="cp-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """cp_protocol must be of a type compatible with list""",
+          'defined-type': "list",
+          'generated-type': """YANGDynClass(base=YANGListType("associated_layer_protocol",yc_cp_protocol_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol, yang_name="cp-protocol", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='associated-layer-protocol', extensions=None), is_container='list', yang_name="cp-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)""",
+        })
+
+    self.__cp_protocol = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_cp_protocol(self):
+    self.__cp_protocol = YANGDynClass(base=YANGListType("associated_layer_protocol",yc_cp_protocol_mec_app_descriptor__app_descriptor_ext_cpd_cp_protocol, yang_name="cp-protocol", parent=self, is_container='list', user_ordered=False, path_helper=self._path_helper, yang_keys='associated-layer-protocol', extensions=None), is_container='list', yang_name="cp-protocol", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='list', is_config=True)
+
   virtual_network_interface_requirements = __builtin__.property(_get_virtual_network_interface_requirements, _set_virtual_network_interface_requirements)
-  cpd_id = __builtin__.property(_get_cpd_id, _set_cpd_id)
+  id = __builtin__.property(_get_id, _set_id)
   layer_protocol = __builtin__.property(_get_layer_protocol, _set_layer_protocol)
   cp_role = __builtin__.property(_get_cp_role, _set_cp_role)
   description = __builtin__.property(_get_description, _set_description)
-  address_data = __builtin__.property(_get_address_data, _set_address_data)
+  trunk_mode = __builtin__.property(_get_trunk_mode, _set_trunk_mode)
+  security_group_rule_id = __builtin__.property(_get_security_group_rule_id, _set_security_group_rule_id)
+  cp_protocol = __builtin__.property(_get_cp_protocol, _set_cp_protocol)
 
 
-  _pyangbind_elements = OrderedDict([('id', id), ('virtual_network_interface_requirements', virtual_network_interface_requirements), ('cpd_id', cpd_id), ('layer_protocol', layer_protocol), ('cp_role', cp_role), ('description', description), ('address_data', address_data), ])
+  _pyangbind_elements = OrderedDict([('virtual_network_interface_requirements', virtual_network_interface_requirements), ('id', id), ('layer_protocol', layer_protocol), ('cp_role', cp_role), ('description', description), ('trunk_mode', trunk_mode), ('security_group_rule_id', security_group_rule_id), ('cp_protocol', cp_protocol), ])
 
 
 class yc_oauth2_info_mec_app_descriptor__app_descriptor_service_required_transport_dependencies_transport_security_oauth2_info(PybindBase):
@@ -11878,18 +12843,16 @@ class yc_user_context_transfer_capability_mec_app_descriptor__app_descriptor_use
   _pyangbind_elements = OrderedDict([('stateful_application', stateful_application), ('user_context_transfer_support', user_context_transfer_support), ])
 
 
-class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(PybindBase):
+class yc_steered_network_mec_app_descriptor__app_descriptor_network_policy_steered_network(PybindBase):
   """
   This class was auto-generated by the PythonClass plugin for PYANG
-  from YANG module mec-app-descriptor - based on the path /app-descriptor/network-policy. Each member element of
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/network-policy/steered-network. Each member element of
   the container is represented as a class variable - with a specific
   YANG type.
-
-  YANG Description: 
   """
   __slots__ = ('_path_helper', '_extmethods', '__cellular_network','__wifi_network','__fixed_access_network',)
 
-  _yang_name = 'network-policy'
+  _yang_name = 'steered-network'
   _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
 
   _pybind_generated_by = 'container'
@@ -11928,11 +12891,11 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
     if hasattr(self, "_parent"):
       return self._parent._path()+[self._yang_name]
     else:
-      return ['app-descriptor', 'network-policy']
+      return ['app-descriptor', 'network-policy', 'steered-network']
 
   def _get_cellular_network(self):
     """
-    Getter method for cellular_network, mapped from YANG variable /app_descriptor/network_policy/cellular_network (boolean)
+    Getter method for cellular_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/cellular_network (boolean)
 
     YANG Description: If present, and the application prefers to a cellular network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.
     """
@@ -11940,7 +12903,7 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
       
   def _set_cellular_network(self, v, load=False):
     """
-    Setter method for cellular_network, mapped from YANG variable /app_descriptor/network_policy/cellular_network (boolean)
+    Setter method for cellular_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/cellular_network (boolean)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_cellular_network is considered as a private
     method. Backends looking to populate this variable should
@@ -11969,7 +12932,7 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
 
   def _get_wifi_network(self):
     """
-    Getter method for wifi_network, mapped from YANG variable /app_descriptor/network_policy/wifi_network (boolean)
+    Getter method for wifi_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/wifi_network (boolean)
 
     YANG Description: If present, and the application prefers to a Wi-Fi network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.
     """
@@ -11977,7 +12940,7 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
       
   def _set_wifi_network(self, v, load=False):
     """
-    Setter method for wifi_network, mapped from YANG variable /app_descriptor/network_policy/wifi_network (boolean)
+    Setter method for wifi_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/wifi_network (boolean)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_wifi_network is considered as a private
     method. Backends looking to populate this variable should
@@ -12006,7 +12969,7 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
 
   def _get_fixed_access_network(self):
     """
-    Getter method for fixed_access_network, mapped from YANG variable /app_descriptor/network_policy/fixed_access_network (boolean)
+    Getter method for fixed_access_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/fixed_access_network (boolean)
 
     YANG Description: If present, and the application prefers to a fixed access network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.
     """
@@ -12014,7 +12977,7 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
       
   def _set_fixed_access_network(self, v, load=False):
     """
-    Setter method for fixed_access_network, mapped from YANG variable /app_descriptor/network_policy/fixed_access_network (boolean)
+    Setter method for fixed_access_network, mapped from YANG variable /app_descriptor/network_policy/steered_network/fixed_access_network (boolean)
     If this variable is read-only (config: false) in the
     source YANG file, then _set_fixed_access_network is considered as a private
     method. Backends looking to populate this variable should
@@ -12046,6 +13009,94 @@ class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(Pybind
 
 
   _pyangbind_elements = OrderedDict([('cellular_network', cellular_network), ('wifi_network', wifi_network), ('fixed_access_network', fixed_access_network), ])
+
+
+class yc_network_policy_mec_app_descriptor__app_descriptor_network_policy(PybindBase):
+  """
+  This class was auto-generated by the PythonClass plugin for PYANG
+  from YANG module mec-app-descriptor - based on the path /app-descriptor/network-policy. Each member element of
+  the container is represented as a class variable - with a specific
+  YANG type.
+
+  YANG Description: 
+  """
+  __slots__ = ('_path_helper', '_extmethods', '__steered_network',)
+
+  _yang_name = 'network-policy'
+  _yang_namespace = 'http://example.com/ns/mec-app-descriptor'
+
+  _pybind_generated_by = 'container'
+
+  def __init__(self, *args, **kwargs):
+
+    self._path_helper = False
+
+    self._extmethods = False
+    self.__steered_network = YANGDynClass(base=yc_steered_network_mec_app_descriptor__app_descriptor_network_policy_steered_network, is_container='container', yang_name="steered-network", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+
+    load = kwargs.pop("load", None)
+    if args:
+      if len(args) > 1:
+        raise TypeError("cannot create a YANG container with >1 argument")
+      all_attr = True
+      for e in self._pyangbind_elements:
+        if not hasattr(args[0], e):
+          all_attr = False
+          break
+      if not all_attr:
+        raise ValueError("Supplied object did not have the correct attributes")
+      for e in self._pyangbind_elements:
+        nobj = getattr(args[0], e)
+        if nobj._changed() is False:
+          continue
+        setmethod = getattr(self, "_set_%s" % e)
+        if load is None:
+          setmethod(getattr(args[0], e))
+        else:
+          setmethod(getattr(args[0], e), load=load)
+
+  def _path(self):
+    if hasattr(self, "_parent"):
+      return self._parent._path()+[self._yang_name]
+    else:
+      return ['app-descriptor', 'network-policy']
+
+  def _get_steered_network(self):
+    """
+    Getter method for steered_network, mapped from YANG variable /app_descriptor/network_policy/steered_network (container)
+    """
+    return self.__steered_network
+      
+  def _set_steered_network(self, v, load=False):
+    """
+    Setter method for steered_network, mapped from YANG variable /app_descriptor/network_policy/steered_network (container)
+    If this variable is read-only (config: false) in the
+    source YANG file, then _set_steered_network is considered as a private
+    method. Backends looking to populate this variable should
+    do so via calling thisObj._set_steered_network() directly.
+    """
+    if hasattr(v, "_utype"):
+      v = v._utype(v)
+    try:
+      t = YANGDynClass(v,base=yc_steered_network_mec_app_descriptor__app_descriptor_network_policy_steered_network, is_container='container', yang_name="steered-network", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+    except (TypeError, ValueError):
+      raise ValueError({
+          'error-string': """steered_network must be of a type compatible with container""",
+          'defined-type': "container",
+          'generated-type': """YANGDynClass(base=yc_steered_network_mec_app_descriptor__app_descriptor_network_policy_steered_network, is_container='container', yang_name="steered-network", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)""",
+        })
+
+    self.__steered_network = t
+    if hasattr(self, '_set'):
+      self._set()
+
+  def _unset_steered_network(self):
+    self.__steered_network = YANGDynClass(base=yc_steered_network_mec_app_descriptor__app_descriptor_network_policy_steered_network, is_container='container', yang_name="steered-network", parent=self, path_helper=self._path_helper, extmethods=self._extmethods, register_paths=True, extensions=None, namespace='http://example.com/ns/mec-app-descriptor', defining_module='mec-app-descriptor', yang_type='container', is_config=True)
+
+  steered_network = __builtin__.property(_get_steered_network, _set_steered_network)
+
+
+  _pyangbind_elements = OrderedDict([('steered_network', steered_network), ])
 
 
 class yc_opendb_helm_mec_app_descriptor__app_descriptor_artifacts_opendb_helm(PybindBase):

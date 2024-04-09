@@ -1,6 +1,8 @@
 module virtual-storage-descriptor {
   namespace "urn:etsi:nfv:virtual-storage-descriptor";
-  prefix vsd;
+  prefix vs;
+
+  import common { prefix comm; }
 
   grouping virtual-storage-descriptor {
     description "Describes virtual storage resources to be used by the VNF";
@@ -40,83 +42,130 @@ module virtual-storage-descriptor {
       }
     }
 
-    leaf size-of-storage {
-      type uint64;
-      units bytes;
+    container nfvi-maintenance-info {
+      description "";
+      uses nfvi-maintenance-info-descriptor;
+    }
+
+    leaf per-vnfc-instance {
+      type boolean;
+      description "Indicates if the storage resource is dedicated to a VNFC instance";
+    }
+  }
+
+  grouping nfvi-maintenance-info-descriptor {
+    description "Describes NFVI maintenance information";
+
+    leaf impact-notification-lead-time {
+      type uint32;
       mandatory true;
-      description "Size of virtualised storage resource (e.g. size of block storage device)";
+      units seconds;
+      description "Time before maintenance activity that the VNF should be notified";
     }
 
-    leaf-list operation-status {
-      type string;
-      description "Operation status of the virtualised storage resource";
+    leaf is-impact-mitigation-requested {
+      type boolean;
+      description "Indicates if the VNF provider has requested impact mitigation";
     }
 
+    leaf-list supported-migration-time {
+      type enumeration {
+        enum NO_MIGRATION;
+        enum OFFLINE_MIGRATION;
+        enum LIVE_MIGRATION;
+      }
+      description "List of the allowed migration times";
+    }
+
+    leaf max-undetectable-interruption-time {
+      type uint32;
+      units seconds;
+      description "Maximum time that the VNF can tolerate an undetectable interruption";
+    }
+
+    leaf min-recovery-time-between-impacts {
+      type uint32;
+      units seconds;
+      description "";
+    }
+
+    list max-number-of-impacted-instances {
+      description "List of the maximum number of impacted instances";
+      key "id";
+      leaf id {
+        type string;
+        description "Identifier of the impacted instances";
+      }
+      leaf group-size {
+        type uint32;
+        description "Number of impacted instances in a group";
+      }
+
+      leaf max-number-of-impacted-instances {
+        type uint32;
+        mandatory true;
+        description "Maximum number of impacted instances";
+      }
+    }
   }
 
   grouping block-storage-data {
     description "Describes block storage data";
 
-    leaf hosting-provides-iops {
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of block storage resource";
+    }
+
+    list vdu-storage-requirements {
+      description "Describes storage requirements for a VDU";
+      key "key";
+      uses comm:key-value-pair;
+    }
+
+    leaf rdma-enabled {
       type boolean;
-      mandatory true;
-      description "If set to true, the NFVI provides dedicated IOPS (I/O operations per second) to the virtualised block storage resource";
+      description "Indicates if RDMA is enabled for the block storage resource";
     }
 
-    leaf guaranteed-iops {
-      when "../hosting-provides-iops = 'true'";
-      type uint64;
-      units "IOPS";
-      mandatory true;
-      description "Minimum IOPS that the NFVI provides to the virtualised block storage resource";
-    }
-
-    leaf max-iops {
-      type uint64;
-      units "IOPS";
-      description "Maximum IOPS that the NFVI provides to the virtualised block storage resource";
+    leaf sw-image-id {
+      type string;
+      description "Identifier of the software image to be used to configure the block storage resource";
     }
   }
 
   grouping object-storage-data {
     description "Describes object storage data";
 
-    leaf max-size-of-object {
+    leaf max-size-of-storage {
       type uint64;
       units bytes;
-      mandatory true;
-      description "Maximum size of object that can be stored in the object storage resource";
-    }
-
-    leaf max-concurrent-incoming-transfers {
-      type uint64;
-      description "Maximum number of concurrent incoming transfers (downloads) that the object storage resource can handle";
-    }
-
-    leaf max-concurrent-outgoing-transfers {
-      type uint64;
-      description "Maximum number of concurrent outgoing transfers (uploads) that the object storage resource can handle";
+      description "";
     }
   }
 
   grouping file-storage-data {
     description "Describes file storage data";
 
-    leaf max-size-of-file {
+    leaf size-of-storage {
       type uint64;
       units bytes;
       mandatory true;
-      description "Maximum size of file that can be stored in the file storage resource";
+      description "Size of file storage resource";
     }
 
-    leaf max-concurrent-incoming-transfers {
-      type uint64;
-      description "Maximum number of concurrent incoming transfers (downloads) that the file storage resource can handle";
+    leaf file-system-protocol {
+      type string;
+      mandatory true;
+      description "";
     }
 
-    leaf max-concurrent-outgoing-transfers {
-      type uint64;
-      description "Maximum number of concurrent outgoing transfers (uploads) that the file storage resource can handle";
+    leaf int-virtual-link-id {
+      type string;
+      mandatory true;
+      description "Identifier referencing VNF virtual linkd descriptor.";
     }
   }
 }

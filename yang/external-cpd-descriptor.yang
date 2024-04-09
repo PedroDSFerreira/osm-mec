@@ -14,13 +14,8 @@ module external-cpd-descriptor {
   grouping external-cpd-descriptor {
     description "Describes an external connection point of a MEC application";
 
-    leaf id {
-      type string;
-      description "Identifier of the external connection point";
-    }
-
     list virtual-network-interface-requirements {
-      key name;
+      key id;
       description "Specifies requirements on a virtual network interface realizing the CPs instantiated from this CPD.";
       uses virtual-network-interface-requirements;
     }
@@ -33,6 +28,11 @@ module external-cpd-descriptor {
     reference "ETSI GS NFV-IFA 011: Network Functions Virtualisation (NFV) Release 3;
                Management and Orchestration;
                VNF Descriptor and Packaging Specification, clause 7.1.6.6";
+
+    leaf id {
+      type string;
+      description "Identifier of the virtual network interface requirement";
+    }
 
     leaf name {
       type string;
@@ -77,25 +77,29 @@ module external-cpd-descriptor {
     }
   }
 
+  typedef layer-protocol-type {
+    type enumeration {
+      enum ETHERNET { value 0; }
+      enum MPLS { value 1; }
+      enum ODU2 { value 2; }
+      enum IPV4 { value 3; }
+      enum IPV6 { value 4; }
+      enum PSEUDO_WIRE { value 5; }
+    }
+  }
+
   grouping cpd {
     description "Describes a Connection Point";
     reference "ETSI GS NFV-IFA 011: Network Functions Virtualisation (NFV) Release 3;
                Management and Orchestration;
                VNF Descriptor and Packaging Specification, clause 7.1.6.3";
 
-    leaf cpd-id {
+    leaf id {
       type string;
       description "Identifier of this Cpd information element.";
     }
-    leaf layer-protocol {
-      type enumeration {
-        enum ETHERNET;
-        enum MPLS;
-        enum ODU2;
-        enum IPV4;
-        enum IPV6;
-        enum PSEUDO_WIRE;
-      }
+    leaf-list layer-protocol {
+      type layer-protocol-type;
       description "Identifies which protocol the CP uses for connectivity purposes.";
     }
     leaf cp-role {
@@ -106,57 +110,77 @@ module external-cpd-descriptor {
       type string;
       description "Provides human-readable information on the purpose of the CP.";
     }
-    list address-data {
-      key "address-type";
-      description "Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.";
-
-      leaf address-type {
-        type enumeration {
-          enum MAC_ADDRESS;
-          enum IP_ADDRESS;
-        }
-        description "Describes the type of the address to be assigned to the CP instantiated from this CPD.";
+    leaf trunk-mode {
+      type boolean;
+      description "Specifies whether the CP is a trunk port (true) or not (false).";
+    }
+    leaf-list security-group-rule-id {
+      type string;
+      description "Identifies the security group rules bound to the CP.";
+    }
+    list cp-protocol {
+      key "associated-layer-protocol";
+      leaf associated-layer-protocol {
+        type layer-protocol-type;
+        description "Identifies the layer protocol associated with the CP.";
       }
+      list address-data {
+        key "id";
+        description "Provides information on the addresses to be assigned to the CP(s) instantiated from this CPD.";
 
-      leaf l2-address-data {
-        when "../address-type = 'MAC_ADDRESS'";
-        type yang:mac-address;
-        description "Specifies the L2 address to be assigned to the CP instantiated from this CPD.";
-      }
+        leaf id {
+          type string;
+          description "Identifier of this address data information element.";
+        }
 
-      container l3-address-data {
-        when "../address-type = 'IP_ADDRESS'";
-        description "The L3 address data for the CP instantiated from this CPD.";
-
-        leaf ip-address-type {
+        leaf address-type {
           type enumeration {
-            enum IPV4;
-            enum IPV6;
+            enum MAC_ADDRESS;
+            enum IP_ADDRESS;
           }
-          description "The type of the IP address.";
+          description "Describes the type of the address to be assigned to the CP instantiated from this CPD.";
         }
 
-        leaf number-of-ip-addresses {
-          type uint32;
-          description "The number of IP addresses to assign to the CP instantiated from this CPD.";
+        leaf l2-address-data {
+          when "../address-type = 'MAC_ADDRESS'";
+          type yang:mac-address;
+          description "Specifies the L2 address to be assigned to the CP instantiated from this CPD.";
         }
 
-        leaf-list ip-address-assignment {
-          type enumeration {
-            enum DYNAMIC;
-            enum STATIC;
+        container l3-address-data {
+          when "../address-type = 'IP_ADDRESS'";
+          description "The L3 address data for the CP instantiated from this CPD.";
+
+          leaf ip-address-type {
+            type enumeration {
+              enum IPV4;
+              enum IPV6;
+            }
+            description "The type of the IP address.";
           }
-          description "Specifies how the IP address(es) will be assigned.";
-        }
 
-        leaf-list floating-ip-activated {
-          type boolean;
-          description "Specify if the floating IP scheme is activated on the CP instantiated from this CPD.";
-        }
+          leaf number-of-ip-addresses {
+            type uint32;
+            description "The number of IP addresses to assign to the CP instantiated from this CPD.";
+          }
 
-        leaf-list ip-address-reservation {
-          type inet:ip-address;
-          description "Specifies the IP addresses to be assigned.";
+          leaf-list ip-address-assignment {
+            type enumeration {
+              enum DYNAMIC;
+              enum STATIC;
+            }
+            description "Specifies how the IP address(es) will be assigned.";
+          }
+
+          leaf-list floating-ip-activated {
+            type boolean;
+            description "Specify if the floating IP scheme is activated on the CP instantiated from this CPD.";
+          }
+
+          leaf-list fixed-ip-address {
+            type inet:ip-address;
+            description "Specifies the fixed IP address(es) to assign to the CP instantiated from this CPD.";
+          }
         }
       }
     }

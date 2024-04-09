@@ -9,11 +9,13 @@ module dns-rule-descriptor {
 
     leaf id {
       type string;
+      mandatory true;
       description "Identifies the DNS Rule.";
     }
 
     leaf domain-name {
       type string;
+      mandatory true;
       description "FQDN of the DNS rule.";
     }
 
@@ -26,11 +28,13 @@ module dns-rule-descriptor {
           description "IPv6 address type.";
         }
       }
+      mandatory true;
       description "Specifies the IP address type, value: IP_V6, IP_V4.";
     }
 
     leaf ip-address {
       type string;
+      mandatory true;
       description "IP address given by the DNS rule.";
     }
 
