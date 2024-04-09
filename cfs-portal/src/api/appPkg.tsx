@@ -18,3 +18,7 @@ export const newAppPkg = async (formData: FormData) => {
         }
     );
 };
+
+export const deleteAppPkg = async (id: string) => {
+    return await axios.delete(`${API_URL}/${id}`);
+}
