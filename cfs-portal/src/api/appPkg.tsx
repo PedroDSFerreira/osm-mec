@@ -1,31 +1,20 @@
 import axios, { AxiosResponse } from "axios";
 
+const API_URL = 'http://localhost:8080/api/v1/vnf_pkgs';
+
 export const getAppPkg = async () => {
-    return await axios.get(
-        'http://localhost:8080/api/v1/vnf_pkgs'
-    ).then(res => {
-        return res.data;
-    }).catch(err => {
-        return Promise.reject(err);
-    });
+    return await axios.get(API_URL);
 };
 
-export const newAppPkg = async (formData: FormData): Promise<AxiosResponse> => {
-    try {
-        const response = await axios.post(
-            'http://localhost:8080/api/v1/vnf_pkgs',
-            formData,
-            {
-                headers: {
-                    // 'Content-Type': 'multipart/form-data',
-                    // 'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    'Content-Type': 'application/zip',
-                    'Authorization': 'eVNkTu8RLQDWYA8GfnjzsGMlFsN3kY00'
-                }
+export const newAppPkg = async (formData: FormData) => {
+    return await axios.post(
+        API_URL,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        );
-        return response;
-    } catch (error) {
-        return Promise.reject(error);
-    }
+        }
+    );
 };
