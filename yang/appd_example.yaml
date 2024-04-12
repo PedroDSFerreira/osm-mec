@@ -1,4 +1,4 @@
-app-descriptor:
+mec-appd:
   id: "dummy-appID"
   name: "Dummy App"
   provider: "Dummy Provider"
@@ -300,7 +300,7 @@ app-descriptor:
   #     # wifi-network: true
   #     # fixed-access-network: false
   # artifacts:
-  #   # opendb_helm:
-  #   #   description: "Helm Chart for opendb Pod"
-  #   #   type: "tosca.artifacts.nvf.HelmChart"
-  #   #   file: "Artifacts/Scripts/openbd.tgz"
+  #   - name: app_helm
+  #     description: "Helm Chart for app"
+  #     type: "helm2"
+  #     file: "helm.tgz"

@@ -7,14 +7,11 @@ module artifact-descriptor {
   grouping artifact-descriptor {
     description "Artifact descriptor attributes.";
 
-    container opendb_helm {
-      description "";
-      uses artifact;
+    leaf name {
+      type string;
+      description "Name of the artifact.";
     }
-  }
 
-  grouping artifact {
-    description "Artifact attributes.";
     leaf description {
       type string;
       description "Description of the artifact.";
@@ -32,4 +29,5 @@ module artifact-descriptor {
       description "File name of the artifact.";
     }
   }
+
 }
