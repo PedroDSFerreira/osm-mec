@@ -76,7 +76,7 @@ button,
 input,
 textarea{
   font-family: var(--body-font);
-  font-size: var(--normal-font-size);
+  font-size: var(--h3-font-size);
 }
 
 body{
@@ -159,7 +159,7 @@ the website, in dark theme
 
 .section__title,
 .section__title-center{
-  font-size: var(--h2-font-size);
+  font-size: var(--big-font-size);
   margin-bottom: var(--mb-2);
   line-height: 140%;
 }
@@ -169,7 +169,7 @@ the website, in dark theme
 }
 
 .container{
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: var(--mb-1-5);
   margin-right: var(--mb-1-5);
 }
@@ -433,7 +433,7 @@ the website, in dark theme
 .about__details-description{
   display: inline-flex;
   column-gap: .5rem;
-  font-size: var(--normal-font-si);
+  font-size: var(--h3-font-size);
 }
 
 .about__details-icon{
@@ -482,7 +482,7 @@ the website, in dark theme
 }
 
 .steps__card-description{
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-size);
   text-align: justify;
 }
 
@@ -508,7 +508,7 @@ the website, in dark theme
 
 .product__img{
   position: relative;
-  width: 120px;
+  width: 350px;
   justify-self: center;
   margin-bottom: var(--mb-0-75);
   transition: .3s;
@@ -575,7 +575,7 @@ the website, in dark theme
 }
 
 .questions__item-title{
-  font-size: var(--small-font-size);
+  font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
 }
 
@@ -585,7 +585,7 @@ the website, in dark theme
 }
 
 .questions__description{
-  font-size: var(--smaller-font-size);
+  font-size: var(--normal-font-size);
   padding: 0 1.25rem 1.25rem 2.5rem;
   text-align: justify;
 }
@@ -893,7 +893,7 @@ the website, in dark theme
     padding: 0 4rem;
   }
   .product__container{
-    grid-template-columns: repeat(2, 170px);
+    grid-template-columns: repeat(2, 230px);
     justify-content: center;
     column-gap: 5rem;
   }
@@ -970,7 +970,7 @@ the website, in dark theme
   }
   .section__title,
   .section__title-center{
-    font-size: var(--h1-font-size);
+    font-size: var(--big-font-size);
   }
 
   .home{
@@ -1002,11 +1002,11 @@ the website, in dark theme
   }
   .product__container{
     padding: 4rem 0;
-    grid-template-columns: repeat(3, 185px);
+    grid-template-columns: repeat(3, 300px);
     gap: 4rem 6rem;
   }
   .product__img{
-    width: 160px;
+    width: 400px;
   }
   .product__circle{
     width: 110px;
