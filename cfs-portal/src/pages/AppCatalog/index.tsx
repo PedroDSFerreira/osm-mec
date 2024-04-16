@@ -1,65 +1,45 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button, Typography } from '@mui/material';
 import { Skeleton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { getAppPkg, newAppPkg } from '../../api/appPkg';
-
-import toast from '../../utils/toast';
 import { ToastContainer } from 'react-toastify';
-
-const columns: GridColDef[] = [
-    { field: 'product-name', headerName: 'Name', flex: 1 },
-    { field: '_id', headerName: 'ID', flex: 1 },
-    { field: 'provider', headerName: 'Provider', flex: 1 },
-    { field: 'version', headerName: 'Version', flex: 1 },
-];
-
-type AppData = {
-    _id: string;
-    'product-name': string;
-    provider: string;
-    version: number;
-}
+import ConfirmationDialog from '../../components/ConfirmationDialog';
+import { useAppCatalog } from '../../hooks/useAppCatalog';
 
 const AppCatalog = () => {
-    const [appData, setAppData] = useState<AppData[]>([]);
-    const [loading, setLoading] = useState(true);
+    const {
+        appData,
+        loading,
+        isDialogOpen,
+        handleFileUpload,
+        openDialog,
+        closeDialog,
+        handleDelete,
+    } = useAppCatalog();
 
-    useEffect(() => {
-        getAppData();
-    }, []);
-
-    const getAppData = async () => {
-        try {
-            const data = await getAppPkg();
-            setAppData(data);
-        } catch (error) {
-            setAppData([]);
-            toast.error('Error fetching app data');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) {
-            toast.error('No file selected');
-            return;
-        } else {
-            const formData = new FormData();
-            formData.append('file', file);
-            try {
-                newAppPkg(formData);
-                toast.success('New app created successfully');
-            } catch (error) {
-                toast.error('Error creating new app');
-            }
-        }
-    }
+    const columns: GridColDef[] = [
+        { field: 'product-name', headerName: 'Name', flex: 1 },
+        { field: '_id', headerName: 'ID', flex: 1 },
+        { field: 'provider', headerName: 'Provider', flex: 1 },
+        { field: 'version', headerName: 'Version', flex: 1 },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 1,
+            sortable: false,
+            renderCell: (params) => (
+                <Button
+                    variant='contained'
+                    color='primary'
+                    size='small'
+                    onClick={() => openDialog(params.row._id as string)}
+                >
+                    Delete
+                </Button>
+            ),
+        },
+    ];
 
     return (
         <>
@@ -92,7 +72,7 @@ const AppCatalog = () => {
                     </>
                 ) : (
                     <DataGrid
-                        //getRowId={(row) => row._id}
+                        getRowId={(row) => row._id}
                         rows={appData}
                         columns={columns}
                         initialState={{
@@ -108,9 +88,16 @@ const AppCatalog = () => {
                     />
                 )}
             </Box>
+            <ConfirmationDialog
+                title='Delete App'
+                content='Are you sure you want to delete this app?'
+                onConfirm={handleDelete}
+                onClose={closeDialog}
+                open={isDialogOpen}
+            />
             <ToastContainer />
         </>
     );
-}
+};
 
 export default AppCatalog;
