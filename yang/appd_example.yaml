@@ -11,7 +11,9 @@ mec-appd:
     id: "dummyComputeID"
     # logical-node-reqs:
     #   - id: "dummyNodeReqID"
-    #     logical-node-requirement-detail: "dummyDetail"
+    #     logical-node-requirement-details:
+    #       - key: "dummyKey"
+    #         value: "dummyValue"
     # request-additional-capabilities:
     #   - name: "DummyCapability"
     #     support-mandatory: true
@@ -70,13 +72,13 @@ mec-appd:
   virtual-storage:
     - id: "dummyStorageID"
       type-of-storage: "BLOCK"
-      # block-storage:
-      #   size-of-storage: 2048
-      #   # vdu-storage-requirements:
-      #   #   - key: "dummyKey"
-      #   #     value: "dummyValue"
-      #   # rdma-enabled: true
-      #   # sw-image-id: "swImageID"
+      block-storage:
+        size-of-storage: 2048
+        # vdu-storage-requirements:
+        #   - key: "dummyKey"
+        #     value: "dummyValue"
+        # rdma-enabled: true
+        # sw-image-id: "swImageID"
       # object-storage:
       #   max-size-of-storage: 2048
       # file-storage:
@@ -95,17 +97,20 @@ mec-appd:
       #   #     max-number-of-impacted-instances: 1
   # ext-cpd:
   #   - id: "dummyCPDID"
+  #     # k8s-cluster-net: mgmtnet
   #     # virtual-network-interface-requirements:
   #     #   - id: "dummyInterfaceID"
   #     #     # name: "Dummy Interface"
   #     #     # description: "Dummy Description"
   #     #     support-mandatory: true
-  #     #     network-interface-requirement:
-  #     #       key: "dummyKey"
-  #     #       value: "dummyValue"
+  #     #     network-interface-requirements:
+  #     #       - key: "dummyKey"
+  #     #         value: "dummyValue"
   #     #     # niclo-requirements:
-  #     #     #   id: nodeRequirementID
-  #     #     #   logical-node-requirement-detail: "dummyDetail"
+  #     #     #   - id: nodeRequirementID
+  #     #     #     logical-node-requirement-details:
+  #     #     #       - key: "dummyKey"
+  #     #     #         value: "dummyValue"
   #     layer-protocol:
   #       - "IPV4"
   #     # cp-role: "dummyRole"

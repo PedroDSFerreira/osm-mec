@@ -11,7 +11,12 @@ module common {
       description "Key in the key-value pair";
     }
     leaf value {
-      type string;
+      type union {
+        type boolean;
+        type int32;
+        type uint32;
+        type string;
+      }
       description "Value in the key-value pair";
     }
   }

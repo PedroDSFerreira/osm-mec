@@ -8,6 +8,7 @@ module external-cpd-descriptor {
   import ietf-yang-types {
     prefix yang;
   }
+  import common { prefix comm; }
 
   description "Data model for ETSI MEC Application External CPD";
 
@@ -47,21 +48,14 @@ module external-cpd-descriptor {
       default true;
       description "Indicates whether fulfilling the constraint is mandatory (true) for successful operation.";
     }
-    container network-interface-requirement {
-      description "The network interface requirement. An element from an array of key-value pairs that articulate the network interface deployment requirements.";
-      leaf key {
-        mandatory true;
-        type string;
-        description "The key of the requirement";
-      }
-      leaf value {
-        mandatory true;
-        type string;
-        description "The value of the requirement";
-      }
+    list network-interface-requirements {
+      description "";
+      key "key";
+      uses comm:key-value-pair;
     }
-    container niclo-requirements {
+    list niclo-requirements {
       description "This references (couples) the CPD with any logical node I/O requirements (for network devices) that may have been created. Linking these attributes is necessary so that I/O requirements that need to be articulated at the logical node level can be associated with the network interface requirements associated with the CPD.";
+      key "id";
       uses logical-node-requirements;
     }
   }
@@ -71,9 +65,10 @@ module external-cpd-descriptor {
       type string;
       description "Identifier of the logical node requirement";
     }
-    leaf-list logical-node-requirement-detail {
-      type string;
+    list logical-node-requirement-details {
       description "The logical node-level compute, memory and I/O requirements. An array of key-value pairs that articulate the deployment requirements. This could include the number of CPU cores on this logical node, a memory configuration specific to a logical node (e.g. such as available in the Linux kernel via the libnuma library) or a requirement related to the association of an I/O device with the logical node.";
+      key "key";
+      uses comm:key-value-pair;
     }
   }
 
@@ -97,6 +92,10 @@ module external-cpd-descriptor {
     leaf id {
       type string;
       description "Identifier of this Cpd information element.";
+    }
+    leaf k8s-cluster-net {
+      type string;
+      description "K8s cluster network";
     }
     leaf-list layer-protocol {
       type layer-protocol-type;
