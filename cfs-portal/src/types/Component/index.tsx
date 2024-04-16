@@ -17,3 +17,18 @@ export type ToastType = {
   type?: 'default' | 'success' | 'info' | 'warning' | 'error',
   transition?: ToastTransition
 }
+
+export type ConfirmationDialogProps = {
+  open?: boolean,
+  onClose?: () => void,
+  onConfirm?: () => void,
+  title?: string,
+  content?: React.ReactNode
+}
+
+export type AppData = {
+  _id: string,
+  'product-name': string,
+  provider: string,
+  version: number
+}
