@@ -34,4 +34,20 @@
 
 ## [API Documentation](https://documenter.getpostman.com/view/22366745/2sA358cQVv)
 
+## API Requests
+
+This section presents the Postman Workspace of the API. It consists of 2 packages:
+
+- OSM, which are a set of endpoints from Open Source Mano
+- OSS, which are the endpoints developed to interact with the MEAO
+
+### How to test the endpoints
+
+1. Enter on the Workspace
+2. Go to OSM/Token package
+3. Open POST request-token endpoint and send it. 
+It returns a token used on the other endpoints for authentication
+4. Select a package of your choice until you find the desired endpoint
+5. Select it and send it. The body of the request has the necessary fields.
+
 

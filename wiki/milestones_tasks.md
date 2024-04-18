@@ -1,13 +1,10 @@
 # Milestones
 
-## CFS PORTAL
+## Frontend
 
 ![Milestones Frontend](./images/milestones_frontend.png)
 
-## OSS
+## Backend
 
-![Milestones Frontend](./images/milestones_frontend.png)
+![Milestones ](./images/milestones_backend.png)
 
-## MEAO
-
-![Milestones Frontend](./images/milestones_frontend.png)
