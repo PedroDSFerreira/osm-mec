@@ -43,7 +43,6 @@ The MEC Application Orchestrator is responsible for:
 
 - Managing the lifecycle of MEC Apps.
 
-
 ## Interaction Between Components
 
 ![Backend Diagram](./images/Drawing7.png)
