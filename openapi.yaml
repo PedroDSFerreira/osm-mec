@@ -1,0 +1,224 @@
+openapi: 3.0.0
+
+servers:
+  - description: OSS NB API
+    url: 'TODO'
+    
+info:
+  title: TODO
+  description: OSS NB API
+  version: 1.0.0
+
+tags:
+  - name: 'App packages'
+    description: Management operations of App descriptors and packages
+
+paths:
+
+# BEGIN App Packages
+  /oss/v1/app_pkgs:
+    get:
+      tags:
+        - "App packages"
+      summary: Get a list of App Packages
+      description: A list of App Packages
+      operationId: list_app_pkgs
+      parameters:
+      - name: filter
+        in: query
+        description: Filter criteria for the list of App Packages
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfAppPkgInfo'
+              example:
+              - _id: "string"
+                id: "string"
+                name: "string"
+                description: "string"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+          
+    post:
+      summary: Create a new App Package
+      operationId: new_app_pkg
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      parameters:
+        - name: appd
+          in: formData
+          description: The file descriptor .tar.gz (mandatory)
+          required: true
+          schema:
+            type: string
+            format: binary
+        - name: optional_param
+          in: query
+          description: "The optional parameter (default: None, can be true or false)"
+          required: false
+          schema:
+            type: boolean
+            default: null        
+      responses:
+        '201':
+          description: Created
+    
+    
+components:
+
+  responses:
+    BadRequest:
+      description: Bad request. The server cannot process the request due to a client error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+            
+    Unauthorized:
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+    Forbidden:
+      description: Not enough permissions to do this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    MethodNotAllowed:
+      description: This method is not supported for the requested resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    NotAcceptable:
+      description: The requested resource content cannot match the Accept headers sent in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Conflict:
+      description: The operation cannot be executed currently, due to a conflict with the state of the resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    UnprocessableEntity:
+      description: The request was well-formed but was unable to be followed due to semantic errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ServiceUnavailable:
+      description: Service temporarily unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    UnexpectedError:
+      description: Unexpected error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    
+            
+  # END RESPONSES
+  
+  schemas:  
+
+    AppPkgInfo:
+      description: |
+        App Package Information
+        Fields (_id, id, name, description) are described
+      type: object
+      properties:
+        _id:
+          description: Identifier of the App package. This identifier is allocated by the NFVO.
+          type: string
+          format: uuid
+        id:
+          description: App Package Identifier
+          type: string
+        name:
+          description: App Package Name
+          type: string
+        description:
+          description: App Package description
+          type: string
+      required:
+        - _id
+        - id
+      
+    ArrayOfAppPkgInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppPkgInfo'
+        
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+      additionalProperties: true
+      required:
+        - status
+        - detail
+        
+  # END SCHEMAS
