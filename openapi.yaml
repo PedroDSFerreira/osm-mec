@@ -15,21 +15,21 @@ tags:
 
 paths:
 
-# BEGIN App Packages
-  /oss/v1/app_pkgs:
+#BEGIN APP PACKAGES
+  '/oss/v1/app_pkgs':
     get:
       tags:
         - "App packages"
-      summary: Get a list of App Packages
-      description: A list of App Packages
+      summary: Query information about multiple App package resources
+      description: Query information about multiple App package resources
       operationId: list_app_pkgs
       parameters:
-      - name: filter
-        in: query
-        description: Filter criteria for the list of App Packages
-        required: false
-        schema:
-          type: string
+        - name: filter
+          in: formData
+          description: Filter criteria for the list of App Packages
+          schema:
+            type: string
+            default: null
       responses:
         '200':
           description: OK
@@ -38,10 +38,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArrayOfAppPkgInfo'
               example:
-              - _id: "string"
-                id: "string"
-                name: "string"
-                description: "string"
+                - _id: "string"
+                  id: "string"
+                  name: "string"
+                  description: "string"
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -68,7 +68,10 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
           
     post:
+      tags:
+        - "App packages"
       summary: Create a new App Package
+      description: Create a new App Package
       operationId: new_app_pkg
       requestBody:
         required: true
@@ -80,14 +83,14 @@ paths:
       parameters:
         - name: appd
           in: formData
-          description: The file descriptor .tar.gz (mandatory)
+          description: App file descriptor in a compressed format, preferential .tar.gz
           required: true
           schema:
             type: string
             format: binary
-        - name: optional_param
-          in: query
-          description: "The optional parameter (default: None, can be true or false)"
+        - name: overwrite
+          in: formData
+          description: "Overwrite an App Package"
           required: false
           schema:
             type: boolean
@@ -95,8 +98,198 @@ paths:
       responses:
         '201':
           description: Created
-    
-    
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectId'
+              example:
+                id: "string"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+          
+
+  '/oss/v1/app_pkgs/{app_pkg_id}':
+    parameters:
+      - name: app_pkg_id
+        in: path
+        required: true
+        description: App Package ID
+        schema:
+          type: string
+    get:
+      tags:
+        - "App packages"
+      summary: Read information about an individual App package resource
+      description: Read information about an individual App package resource
+      operationId: get_app_pkg
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppPkgInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+          
+    delete:
+      tags:
+        - "App packages"
+      summary: Delete an individual App package resource
+      description: Delete an individual App package resource
+      operationId: delete_app_pkg
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+            
+#BEGIN NS PACKAGES
+ 
+  '/oss/v1/ns_pkgs':
+    get:
+      summary: Get a list of NS packages
+      operationId: listNsPkgs
+      responses:
+        '200':
+          description: A list of NS packages
+    post:
+      summary: Create a new NS package
+      operationId: createNsPkg
+      responses:
+        '201':
+          description: Created
+  
+  '/oss/v1/ns_pkgs/{ns_pkg_id}':
+    get:
+      summary: Get an NS package by ID
+      operationId: getNsPkgById
+      parameters:
+        - name: ns_pkg_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An NS package
+  
+  '/oss/v1/appis':
+    get:
+      summary: Get a list of app instances
+      operationId: listAppInstances
+      responses:
+        '200':
+          description: A list of app instances
+  
+  '/oss/v1/appis/{appi_id}':
+    get:
+      summary: Get an app instance by ID
+      operationId: getAppInstanceById
+      parameters:
+        - name: appi_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An app instance
+  
+  '/oss/v1/nsis':
+    get:
+      summary: Get a list of NS instances
+      operationId: listNsInstances
+      responses:
+        '200':
+          description: A list of NS instances
+  
+  '/oss/v1/nsis/{nsi_id}':
+    get:
+      summary: Get an NS instance by ID
+      operationId: getNsInstanceById
+      parameters:
+        - name: nsi_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An NS instance
+          
+      
 components:
 
   responses:
@@ -172,6 +365,13 @@ components:
   # END RESPONSES
   
   schemas:  
+  
+    ObjectId:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
 
     AppPkgInfo:
       description: |
