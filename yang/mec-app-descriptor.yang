@@ -62,81 +62,81 @@ module mec-app-descriptor {
       description "Human readable description of the MEC application.";
     }
     container virtual-compute {
-      description "";
       uses vc:virtual-compute-descriptor;
+      description "Describes CPU and memory requirements, as well as optional additional requirements, such as disk and acceleration related capabilities, of the virtualisation container used to realize this MEC application.";
     }
     container sw-image {
-      description "";
       uses si:sw-image-descriptor;
+      description "Describes the descriptors of the software image to be used by the virtualisation container used to realize this MEC application.";
     }
     list virtual-storage {
-      description "";
       key "id";
       uses vs:virtual-storage-descriptor;
+      description "Defines descriptors of virtual storage resources to be used by the MEC application.";
     }
     list ext-cpd{
       key "id";
-      description "";
       uses ecpd:external-cpd-descriptor;
+      description "Describes external interface(s) exposed by this MEC application.";
     }
     list service-required {
-      description "";
       key "name";
       uses srv:service-dependency-descriptor;
+      description "Describes services a MEC application requires to run";
     }
     list service-optional {
-      description "";
       key "name";
       uses srv:service-dependency-descriptor;
+      description "Describes services a MEC application may use if available. ";
     }
     list service-produced {
-      description "";
       key "name";
       uses sd:service-descriptor;
+      description "Describes services a MEC application is able to produce to the platform or other MEC applications. Only relevant for serviceproducing apps. ";
     }
     container feature-required {
-      description "";
       uses fd:feature-dependency-descriptor;
+      description "Describes features a MEC application requires to run";
     }
     container feature-optional {
-      description "";
       uses fd:feature-dependency-descriptor;
+      description "Describes features a MEC application may use if available.";
     }
     list transport-dependencies {
       key "id";
       min-elements 1;
-      description "";
       uses td:transport-dependency-descriptor;
+      description "Transports, if any, that this application requires to be provided by the platform. These transports will be used by the application to deliver services provided by this application. Only relevant for service-producing apps. See note 2. ";
     }
     list traffic-rule {
-      description "";
       key "id";
       uses trd:traffic-rule-descriptor;
+      description "Describes traffic rules the MEC application requires.";
     }
     list dns-rule {
-      description "";
       key "id";
       uses dr:dns-rule-descriptor;
+      description "Describes DNS rules the MEC application requires.";
     }
     container latency {
-      description "";
       uses l:latency-descriptor;
+      description "Describes the maximum latency tolerated by the MEC application. ";
     }
     container terminate-app-instance-op-config {
-      description "";
       uses taio:terminate-app-instance-op-config-descriptor;
+      description "Configuration parameters for the Terminate application instance operation. ";
     }
     container change-app-instance-state-op-config {
-      description "";
       uses caisoc:change-app-instance-state-op-config-descriptor;
+      description "Configuration parameters for the change application instance state operation. ";
     }
     container user-context-transfer-capability {
-      description "";
       uses uctc:user-context-transfer-capability-descriptor;
+      description "If the application supports the user context transfer capability, this attribute shall be included.";
     }
     container network-policy {
-      description "";
       uses np:network-policy-descriptor;
+      description "If present, it represents the application network policy of carrying the application traffic.";
     }
     list artifacts {
       description "List of artifacts required by the MEC application.";

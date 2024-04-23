@@ -26,7 +26,7 @@ module virtual-compute-descriptor {
     list request-additional-capabilities {
       key "name";
       uses requested-additional-capability-data;
-      description "Specifies requirements for additional capabilities";
+      description "Specifies requirements for additional capabilities. These may be for a range of purposes. One example is acceleration related capabilities";
     }
 
     list compute-requirements {
@@ -72,12 +72,12 @@ module virtual-compute-descriptor {
     }
     list vdu-mem-requirements {
       key "key";
-      description "Specifies the memory requirements for the VDU";
+      description "Array of key-value pair requirements on the memory for the VDU.";
       uses comm:key-value-pair;
     }
     leaf numa-enabled {
       type boolean;
-      description "It specifies the memory allocation to be cognisant of the relevant process/core allocation";
+      description "It specifies the memory allocation to be cognisant of the relevant process/core allocation. The cardinality can be 0 during the allocation request, if no particular value is requested.";
     }
   }
 
@@ -102,11 +102,11 @@ module virtual-compute-descriptor {
     }
     list vdu-cpu-requirements {
       key "key";
-      description "Specifies the CPU requirements for the VDU";
+      description "Array of key-value pair requirements on the Compute (CPU) for the VDU. ";
       uses comm:key-value-pair;
     }
     container cpu-pinning {
-      description "The virtual CPU pinning configuration";
+      description "The virtual CPU pinning configuration for the virtualised compute resource.";
       uses virtual-cpu-pinning-data;
     }
   }
