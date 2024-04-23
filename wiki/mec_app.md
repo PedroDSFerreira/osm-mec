@@ -1,12 +1,70 @@
 # MEC App
 
 
-## MEC Apps
-### Create a MEC App and a MEC App Descriptor
-### Instantiate a MEC App
-### Deploy a MEC App
-### Update a MEC APP
-### Terminate a MEC APP
+## Steps to Deploy a MEC App
+### Create and Containerize App
+
+Firstly, you should create the MEC Application (i.e. Object Detection App)
+
+### Create Helm Chart
+
+**Create Helm Chart**
+
+```bash
+helm create <chart-name>
+```
+
+**Create Github Repository to store Helm Charts**
+
+```perl
+my-helm-repo/
+├── charts/
+│   # Place Helm chart packages (.tgz files) here
+│   chart1-1.0.0.tgz
+├── index.yaml
+```
+
+**Package Helm Charts**
+
+```bash
+helm package <path-to-chart>
+```
+
+**Generate index.yaml file**
+
+```bash
+helm repo index . --url https://<your-github-username>.github.io/<your-repo-name>/
+```
+
+**Enable Github Pages to use the repository as a Helm Repository (chosen directory must have index.html)**
+
+**Add Repository to OSM**
+
+```bash
+osm repo-add --type helm-chart --Description "Something Nice" <helm-repo-name> https://<username>.github.io/<repo>/
+```
+**If the Repository is private**
+
+```bash
+osm repo-add --type helm-chart --Description "Something Nice" <helm-repo-name> https://<username>:<token>@github.com/<username>/<repo>/
+```
+
+**To use Helm chart in the CNFD**
+```yaml
+kdu:
+  helm-chart: "<helm-repo-name>/<chart-name>"
+```
+### Deploy a MEC App 
+
+Create a MEC App Descriptor
+
+### Deploy  App on the Portal
+
+**Go To App Catalog and input the MEC App Descriptor:**
+
+  
+  - Your MEC App will be available at MEC Instances 
+
 
 
 ## MEC App Descriptor Fields
