@@ -4,17 +4,19 @@
 ## Steps to Deploy a MEC App
 ### Create and Containerize App
 
-Firstly, you should create the MEC Application (i.e. Object Detection App)
+1. **Create the MEC Application**
+2. **[Containerize the app](https://docs.docker.com/get-started/02_our_app/)**
+3. **Push the container image to a repository, such as the [Docker Hub](https://docs.docker.com/get-started/04_sharing_app/) or [Github Packages](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images)**
 
 ### Create Helm Chart
 
-**Create Helm Chart**
+**To create Helm Chart:**
 
 ```bash
 helm create <chart-name>
 ```
 
-**Create Github Repository to store Helm Charts**
+**Create Github Repository to store Helm Charts:**
 
 ```perl
 my-helm-repo/
@@ -24,13 +26,15 @@ my-helm-repo/
 ├── index.yaml
 ```
 
-**Package Helm Charts**
+**Note: The repository should have this structure to be identified as a Helm repository**
+
+**Package Helm Charts:**
 
 ```bash
 helm package <path-to-chart>
 ```
 
-**Generate index.yaml file**
+**Generate index.yaml file:**
 
 ```bash
 helm repo index . --url https://<your-github-username>.github.io/<your-repo-name>/
@@ -38,18 +42,18 @@ helm repo index . --url https://<your-github-username>.github.io/<your-repo-name
 
 **Enable Github Pages to use the repository as a Helm Repository (chosen directory must have index.html)**
 
-**Add Repository to OSM**
+**Add Repository to OSM:**
 
 ```bash
 osm repo-add --type helm-chart --Description "Something Nice" <helm-repo-name> https://<username>.github.io/<repo>/
 ```
-**If the Repository is private**
+**If the Repository is private:**
 
 ```bash
 osm repo-add --type helm-chart --Description "Something Nice" <helm-repo-name> https://<username>:<token>@github.com/<username>/<repo>/
 ```
 
-**To use Helm chart in the CNFD**
+**To use Helm chart in the CNFD:**
 ```yaml
 kdu:
   helm-chart: "<helm-repo-name>/<chart-name>"
@@ -60,10 +64,10 @@ Create a MEC App Descriptor
 
 ### Deploy  App on the Portal
 
-**Go To App Catalog and input the MEC App Descriptor:**
+**Enter the CFS Portal, go to App Catalog and input the MEC App Descriptor on the button in the top right corner:**
 
   
-  - Your MEC App will be available at MEC Instances 
+  - **Your MEC App will be available at MEC Instances**
 
 
 
