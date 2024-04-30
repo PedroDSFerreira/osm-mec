@@ -1,13 +1,15 @@
 # API
 
-## [API Documentation](https://documenter.getpostman.com/view/22366745/2sA358cQVv)
+## [API Documentation](https://app.swaggerhub.com/apis/HenriqueCruz/oss-nb_api/1.0.0)
 
-## API Requests
+**Click the link to access our OpenAPI specification and discover the functionalities offered by our platform.**: **https://app.swaggerhub.com/apis/HenriqueCruz/oss-nb_api/1.0.0**
+
+## [API Requests](https://documenter.getpostman.com/view/22366745/2sA358cQVv)
 
 **This section presents the Postman Workspace of the API. It consists of 2 packages:**
 
-- OSM, which are a set of endpoints from Open Source Mano
-- OSS, which are the endpoints developed to interact with the MEAO
+- OSM: Set of endpoints from Open Source Mano
+- OSS: Set of endpoints developed to interact with Operations Support System
 
 ### How to test the endpoints
 
