@@ -37,37 +37,6 @@ endpoints = {
             "AppPkgController",
             "DELETE",
         ),
-        # NS PACKAGES
-        (
-            "list_ns_pkgs",
-            "/ns_pkgs",
-            "NsPkgController",
-            "GET",
-        ),
-        (
-            "get_ns_pkg",
-            "/ns_pkgs/{ns_pkg_id}",
-            "NsPkgController",
-            "GET",
-        ),
-        (
-            "new_ns_pkg",
-            "/ns_pkgs",
-            "NsPkgController",
-            "POST",
-        ),
-        (
-            "update_ns_pkg",
-            "/ns_pkgs/{ns_pkg_id}",
-            "NsPkgController",
-            "PATCH",
-        ),
-        (
-            "delete_ns_pkg",
-            "/ns_pkgs/{ns_pkg_id}",
-            "NsPkgController",
-            "DELETE",
-        ),
         # APP INSTANCES
         (
             "list_appis",
@@ -81,37 +50,6 @@ endpoints = {
             "AppiController",
             "GET",
         ),
-        # NS INSTANCES
-        (
-            "list_nsis",
-            "/nsis",
-            "NsiController",
-            "GET",
-        ),
-        (
-            "get_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "GET",
-        ),
-        # (
-        #     "new_nsi",
-        #     "/nsis",
-        #     "NsiController",
-        #     "POST",
-        # ),
-        # (
-        #     "update_nsi",
-        #     "/nsis/{nsi_id}",
-        #     "NsiController",
-        #     "PATCH",
-        # ),
-        # (
-        #     "delete_nsi",
-        #     "/nsis/{nsi_id}",
-        #     "NsiController",
-        #     "DELETE",
-        # ),
     ],
 }
 

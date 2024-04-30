@@ -2,7 +2,7 @@ import json
 import os
 import uuid
 
-import cherrypy
+from cherrypy import HTTPError
 from kafka import KafkaConsumer, KafkaProducer
 
 responses = {}
@@ -46,12 +46,14 @@ class KafkaUtils:
         if msg_id and msg_id not in responses:
             responses[msg_id] = None
 
+            # poll until response is received
             while responses[msg_id] is None:
                 pass
 
             response = responses.pop(msg_id)
+
             if response.get("error"):
-                raise cherrypy.HTTPError(response["status"], response["error"])
+                raise HTTPError(response["status"], response["error"])
             return response
         else:
-            raise cherrypy.HTTPError(400, "msg_id not found")
+            raise HTTPError(400, "msg_id not found")

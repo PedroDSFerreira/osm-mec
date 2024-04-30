@@ -1,5 +1,5 @@
 import cherrypy
-from utils.osm import osm_client
+from utils.osm import get_osm_client
 
 
 class AppiController:
@@ -8,11 +8,11 @@ class AppiController:
         """
         /appis (GET)
         """
-        return osm_client.vnf.list(ns=ns, filter=filter)
+        return get_osm_client().vnf.list(ns=ns, filter=filter)
 
     @cherrypy.tools.json_out()
     def get_appi(self, appi_id):
         """
         /appis/{appi_id} (GET)
         """
-        return osm_client.vnf.get(name=appi_id)
+        return get_osm_client().vnf.get(name=appi_id)
