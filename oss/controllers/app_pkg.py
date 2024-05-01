@@ -4,6 +4,7 @@ from utils.db import DB
 from utils.file_management import *
 from utils.kafka_utils import KafkaUtils, producer
 from utils.osm import get_osm_client
+from views.app_pkg import AppPkgView
 
 
 class AppPkgController:
@@ -18,26 +19,33 @@ class AppPkgController:
         """
         /app_pkgs (GET)
         """
-        return get_osm_client().vnfd.list(filter=filter)
+        app_pkgs = DB._list(self.collection)
+        app_pkgs = [AppPkgView._list(app_pkg) for app_pkg in app_pkgs]
+        return {"app_pkgs": app_pkgs}
 
     @cherrypy.tools.json_out()
     def get_app_pkg(self, app_pkg_id):
         """
         /app_pkgs/{app_pkg_id} (GET)
         """
-        vnfd_id = DB._get(app_pkg_id, self.collection).get("vnfd_id")
-        return get_osm_client().vnfd.get(name=vnfd_id)
+        if not DB._exists(app_pkg_id, self.collection):
+            raise cherrypy.HTTPError(404, "App Package not found")
+
+        app_pkg = DB._get(app_pkg_id, self.collection)
+        return AppPkgView._get(app_pkg)
 
     @cherrypy.tools.json_out()
     def new_app_pkg(self, appd):
         """
         /app_pkgs (POST)
         """
-        data = read_stream(appd.file)
-        appd_data = get_descriptor_data(data)
+        appd_gz = read_stream(appd.file)
+        appd_data = get_descriptor_data(appd_gz)
         validate_descriptor(appd_data)
 
-        app_pkg_id = DB._add(self.collection, {"appd": data})
+        app_pkg_id = DB._add(
+            self.collection, AppPkgView._save(appd_data.get("mec-appd"), appd_gz)
+        )
 
         try:
             msg_id = KafkaUtils.send_message(
@@ -57,8 +65,8 @@ class AppPkgController:
         """
         /app_pkgs/{app_pkg_id} (PATCH)
         """
-        data = read_stream(appd.file)
-        appd_data = get_descriptor_data(data)
+        appd_gz = read_stream(appd.file)
+        appd_data = get_descriptor_data(appd_gz)
         validate_descriptor(appd_data)
 
         if not DB._exists(app_pkg_id, self.collection):
@@ -71,7 +79,11 @@ class AppPkgController:
         )
         response = KafkaUtils.wait_for_response(msg_id)
 
-        DB._update(app_pkg_id, self.collection, {"appd": data})
+        DB._update(
+            app_pkg_id,
+            self.collection,
+            AppPkgView._save(appd_data.get("mec-appd"), appd_gz),
+        )
 
         cherrypy.response.status = response["status"]
         return {"id": app_pkg_id}
