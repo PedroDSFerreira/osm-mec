@@ -28,10 +28,11 @@ def callback(message):
         vnfd_file = appd_parser.export_vnfd(get_dir("vnfd"), app_pkg_id, artifacts_data)
         nsd_file = appd_parser.export_nsd(get_dir("nsd"), app_pkg_id)
 
-        get_osm_client().vnfd.update(vnf_pkg_id, vnfd_file)
-        get_osm_client().nsd.update(ns_pkg_id, nsd_file)
-
-        delete_file(vnfd_file)
-        delete_file(nsd_file)
+        try:
+            get_osm_client().vnfd.update(vnf_pkg_id, vnfd_file)
+            get_osm_client().nsd.update(ns_pkg_id, nsd_file)
+        finally:
+            delete_file(vnfd_file)
+            delete_file(nsd_file)
 
         return {"msg_id": message["msg_id"], "status": 201}

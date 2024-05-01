@@ -1,6 +1,7 @@
 import json
 
 import cherrypy
+from bson import ObjectId
 
 
 def jsonify_error(status, message, traceback, version):
@@ -21,3 +22,11 @@ def jsonify_error(status, message, traceback, version):
     cherrypy.response.status = status
 
     return response_body
+
+
+def is_valid_id(id):
+    try:
+        ObjectId(id)
+    except Exception:
+        return False
+    return True

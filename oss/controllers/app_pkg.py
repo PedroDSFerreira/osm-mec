@@ -1,21 +1,26 @@
 import cherrypy
 from utils.appd_validation import *
+from utils.cherrypy_utils import is_valid_id
 from utils.db import DB
 from utils.file_management import *
 from utils.kafka_utils import KafkaUtils, producer
-from utils.osm import get_osm_client
 from views.app_pkg import AppPkgView
 
 
 class AppPkgController:
     def __init__(self):
         self.collection = "app_pkgs"
-        self.topics = ["new_app_pkg", "delete_app_pkg", "update_app_pkg"]
+        self.topics = [
+            "new_app_pkg",
+            "delete_app_pkg",
+            "update_app_pkg",
+            "instantiate_app_pkg",
+        ]
         self.producer = producer
         self.consumer = KafkaUtils.create_consumer(self.topics)
 
     @cherrypy.tools.json_out()
-    def list_app_pkgs(self, filter=None):
+    def list_app_pkgs(self):
         """
         /app_pkgs (GET)
         """
@@ -27,7 +32,7 @@ class AppPkgController:
         """
         /app_pkgs/{app_pkg_id} (GET)
         """
-        if not DB._exists(app_pkg_id, self.collection):
+        if not is_valid_id(app_pkg_id) or not DB._exists(app_pkg_id, self.collection):
             raise cherrypy.HTTPError(404, "App Package not found")
 
         app_pkg = DB._get(app_pkg_id, self.collection)
@@ -68,7 +73,7 @@ class AppPkgController:
         appd_data = get_descriptor_data(appd_gz)
         validate_descriptor(appd_data)
 
-        if not DB._exists(app_pkg_id, self.collection):
+        if not is_valid_id(app_pkg_id) or not DB._exists(app_pkg_id, self.collection):
             raise cherrypy.HTTPError(404, "App Package not found")
 
         msg_id = KafkaUtils.send_message(
@@ -85,13 +90,12 @@ class AppPkgController:
         )
 
         cherrypy.response.status = response["status"]
-        return {"id": app_pkg_id}
 
     def delete_app_pkg(self, app_pkg_id):
         """
         /app_pkgs/{app_pkg_id} (DELETE)
         """
-        if not DB._exists(app_pkg_id, self.collection):
+        if not is_valid_id(app_pkg_id) or not DB._exists(app_pkg_id, self.collection):
             raise cherrypy.HTTPError(404, "App Package not found")
 
         msg_id = KafkaUtils.send_message(
@@ -104,4 +108,29 @@ class AppPkgController:
         DB._delete(app_pkg_id, self.collection)
 
         cherrypy.response.status = response["status"]
-        return {"id": app_pkg_id}
+
+    @cherrypy.tools.json_out()
+    def instantiate_app_pkg(self, app_pkg_id, vim_id, name, description, wait=False):
+        """
+        /app_pkgs/{app_pkg_id}/instantiate (POST)
+        """
+        if not is_valid_id(app_pkg_id) or not DB._exists(app_pkg_id, self.collection):
+            raise cherrypy.HTTPError(404, "App Package not found")
+
+        wait = str(wait).lower() == "true"
+        msg_id = KafkaUtils.send_message(
+            self.producer,
+            "instantiate_app_pkg",
+            {
+                "app_pkg_id": app_pkg_id,
+                "vim_id": vim_id,
+                "name": name,
+                "description": description,
+                "wait": wait,
+            },
+        )
+        response = KafkaUtils.wait_for_response(msg_id)
+        instance_id = response.get("instance_id")
+
+        cherrypy.response.status = response["status"]
+        return {"id": instance_id}
