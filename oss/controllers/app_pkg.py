@@ -37,7 +37,7 @@ class AppPkgController:
         appd_data = get_descriptor_data(data)
         validate_descriptor(appd_data)
 
-        app_pkg_id = DB._add(collection=self.collection, data={"appd": data})
+        app_pkg_id = DB._add(self.collection, {"appd": data})
 
         try:
             msg_id = KafkaUtils.send_message(
@@ -53,19 +53,40 @@ class AppPkgController:
             DB._delete(app_pkg_id, self.collection)
             raise e
 
-    def update_app_pkg(self, app_pkg_id, appd):
+    def update_app_pkg(self, appd, app_pkg_id):
         """
         /app_pkgs/{app_pkg_id} (PATCH)
         """
+        data = read_stream(appd.file)
+        appd_data = get_descriptor_data(data)
+        validate_descriptor(appd_data)
 
-    def delete_app_pkg(self, app_pkg_id, force=False):
+        if not DB._exists(app_pkg_id, self.collection):
+            raise cherrypy.HTTPError(404, "App Package not found")
+
+        msg_id = KafkaUtils.send_message(
+            self.producer,
+            "update_app_pkg",
+            {"app_pkg_id": app_pkg_id, "appd_data": appd_data},
+        )
+        response = KafkaUtils.wait_for_response(msg_id)
+
+        DB._update(app_pkg_id, self.collection, {"appd": data})
+
+        cherrypy.response.status = response["status"]
+        return {"id": app_pkg_id}
+
+    def delete_app_pkg(self, app_pkg_id):
         """
         /app_pkgs/{app_pkg_id} (DELETE)
         """
+        if not DB._exists(app_pkg_id, self.collection):
+            raise cherrypy.HTTPError(404, "App Package not found")
+
         msg_id = KafkaUtils.send_message(
             self.producer,
             "delete_app_pkg",
-            {"app_pkg_id": app_pkg_id, "force": force},
+            {"app_pkg_id": app_pkg_id},
         )
         response = KafkaUtils.wait_for_response(msg_id)
 
