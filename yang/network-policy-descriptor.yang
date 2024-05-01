@@ -1,0 +1,30 @@
+module network-policy-descriptor {
+  namespace "http://example.com/ns/app-network-policy";
+  prefix npd;
+
+  description "YANG module for Application Network Policy.";
+
+  grouping network-policy-descriptor {
+    description "This attribute provides an option for the application to specify a type of network to carry the application traffic.";
+
+    container steered-network {
+      leaf cellular-network {
+        type boolean;
+        default false;
+        description "If present, and the application prefers to a cellular network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.";
+      }
+
+      leaf wifi-network {
+        type boolean;
+        default false;
+        description "If present, and the application prefers to a Wi-Fi network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.";
+      }
+
+      leaf fixed-access-network {
+        type boolean;
+        default false;
+        description "If present, and the application prefers to a fixed access network to carry its traffic, this attribute shall be set to true. Otherwise, it shall be set to false.";
+      }
+    }
+  }
+}

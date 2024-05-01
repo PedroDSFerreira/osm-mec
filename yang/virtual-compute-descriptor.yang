@@ -1,0 +1,155 @@
+module virtual-compute-descriptor {
+  namespace "urn:etsi:nfv:virtual-compute-descriptor";
+  prefix vc;
+
+  import external-cpd-descriptor { prefix ecpd; }
+  import virtual-storage-descriptor { prefix vs; }
+  import common { prefix comm; }
+
+  description "Data model for ETSI GS NFV-IFA 011 virtual-compute-desc";
+
+  grouping virtual-compute-descriptor {
+    description "Describes virtual compute resources to be used by the VNF";
+
+    leaf id {
+      type string;
+      mandatory true;
+      description "Unique identifier of this virtual-compute-descriptor in the VNFD";
+    }
+
+    list logical-node-reqs {
+      key "id";
+      uses ecpd:logical-node-requirements;
+      description "The logical node requirements";
+    }
+
+    list request-additional-capabilities {
+      key "name";
+      uses requested-additional-capability-data;
+      description "Specifies requirements for additional capabilities. These may be for a range of purposes. One example is acceleration related capabilities";
+    }
+
+    list compute-requirements {
+      key "key";
+      description "Specifies compute requirements";
+      uses comm:key-value-pair;
+    }
+
+    container virtual-memory {
+      description "The virtual memory of the virtualised compute";
+      uses virtual-memory-data;
+    }
+
+    container virtual-cpu {
+      description "The virtual CPU(s) of the virtualised compute";
+      uses virtual-cpu-data;
+    }
+
+    list virtual-disk {
+      key "id";
+      description "The local or ephemeral disk(s) of the virtualised compute";
+
+      leaf id {
+        type string;
+        mandatory true;
+        description "Unique identifier of the virtual disk in the VNFD";
+      }
+
+      uses vs:block-storage-data;
+    }
+  }
+
+  grouping virtual-memory-data {
+    leaf mem-size {
+      type uint64;
+      units "MB";
+      mandatory true;
+      description "Amount of virtual Memory (e.g. in MB)";
+    }
+    leaf mem-oversubscription-policy {
+      type string;
+      description "The memory core oversubscription policy in terms of virtual memory to physical memory on the platform";
+    }
+    list vdu-mem-requirements {
+      key "key";
+      description "Array of key-value pair requirements on the memory for the VDU.";
+      uses comm:key-value-pair;
+    }
+    leaf numa-enabled {
+      type boolean;
+      description "It specifies the memory allocation to be cognisant of the relevant process/core allocation. The cardinality can be 0 during the allocation request, if no particular value is requested.";
+    }
+  }
+
+  grouping virtual-cpu-data {
+    leaf architecture {
+      type string;
+      description "CPU architecture type. Examples are x86, ARM";
+    }
+    leaf cpu-count {
+      type uint16;
+      mandatory true;
+      description "Number of virtual CPUs";
+    }
+    leaf cpu-clock {
+      type uint64;
+      units "MHz";
+      description "Minimum virtual CPU clock rate (e.g. in MHz)";
+    }
+    leaf cpu-oversubscription-policy {
+      type string;
+      description "The CPU core oversubscription policy e.g. the relation of virtual CPU cores to physical CPU cores/threads";
+    }
+    list vdu-cpu-requirements {
+      key "key";
+      description "Array of key-value pair requirements on the Compute (CPU) for the VDU. ";
+      uses comm:key-value-pair;
+    }
+    container cpu-pinning {
+      description "The virtual CPU pinning configuration for the virtualised compute resource.";
+      uses virtual-cpu-pinning-data;
+    }
+  }
+
+  grouping virtual-cpu-pinning-data {
+    leaf pinning-policy {
+      type enumeration {
+        enum STATIC;
+        enum DYNAMIC;
+      }
+      description "Indicates the policy for CPU pinning";
+    }
+    list pinning-rule {
+      key "key";
+      description "List of rules that should be considered during the allocation of the virtual CPUs to logical CPUs in case of 'STATIC' virtualCpuPinningPolicy";
+      uses comm:key-value-pair;
+    }
+  }
+
+  grouping requested-additional-capability-data {
+    leaf name {
+      type string;
+      mandatory true;
+      description "Specifies a requested additional capability for the VDU";
+    }
+    leaf support-mandatory {
+      type boolean;
+      mandatory true;
+      description "Indicates whether the requested additional capability is mandatory for successful operation";
+    }
+    leaf min-requested-additional-capability-version {
+      type string;
+      description "Specifies the minimum version of the requested additional capability";
+    }
+    leaf preferred-requested-additional-capability-version {
+      type string;
+      description "Specifies the preferred version of the requested additional capability";
+    }
+    list target-performance-parameters {
+      key "key";
+      description "Specifies especific attributes, dependent on the requested additional capability type.";
+      uses comm:key-value-pair;
+    }
+  }
+
+}
