@@ -1,5 +1,6 @@
-from utils.osm import get_osm_client
 import cherrypy
+from utils.osm import get_osm_client
+
 
 class VimController:
     @cherrypy.tools.json_out()

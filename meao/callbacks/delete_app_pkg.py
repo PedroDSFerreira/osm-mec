@@ -6,6 +6,7 @@ from utils.osm import get_osm_client
 @handle_exceptions
 def callback(message):
     app_pkg_id = message.get("app_pkg_id")
+
     if app_pkg_id:
         app_pkg = DB._get(id=app_pkg_id, collection="app_pkgs")
         ns_pkg_id = app_pkg.get("ns_pkg_id")
