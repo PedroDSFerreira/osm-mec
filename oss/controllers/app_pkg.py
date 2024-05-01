@@ -62,3 +62,14 @@ class AppPkgController:
         """
         /app_pkgs/{app_pkg_id} (DELETE)
         """
+        msg_id = KafkaUtils.send_message(
+            self.producer,
+            "delete_app_pkg",
+            {"app_pkg_id": app_pkg_id, "force": force},
+        )
+        response = KafkaUtils.wait_for_response(msg_id)
+
+        DB._delete(app_pkg_id, self.collection)
+
+        cherrypy.response.status = response["status"]
+        return {"id": app_pkg_id}

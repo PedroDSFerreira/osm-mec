@@ -40,8 +40,8 @@ def callback(message):
             id=app_pkg_id,
             collection="app_pkgs",
             data={
-                "vnfd_id": vnf_pkg_id,
-                "nsd_id": ns_pkg_id,
+                "vnf_pkg_id": vnf_pkg_id,
+                "ns_pkg_id": ns_pkg_id,
             },
         )
 
