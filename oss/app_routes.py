@@ -37,12 +37,12 @@ endpoints = {
             "AppPkgController",
             "DELETE",
         ),
-        # (
-        #     "instantiate_app_pkg",
-        #     "/app_pkgs/{app_pkg_id}/instantiate"
-        #     "AppPkgController",
-        #     "POST",
-        # ),
+        (
+            "instantiate_app_pkg",
+            "/app_pkgs/{app_pkg_id}/instantiate",
+            "AppPkgController",
+            "POST",
+        ),
         # APP INSTANCES
         (
             "list_appis",
@@ -55,6 +55,12 @@ endpoints = {
             "/appis/{appi_id}",
             "AppiController",
             "GET",
+        ),
+        (
+            "terminate_appi",
+            "/appis/{appi_id}",
+            "AppiController",
+            "DELETE",
         ),
         # VIM
         (
