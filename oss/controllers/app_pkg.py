@@ -20,8 +20,7 @@ class AppPkgController:
         /app_pkgs (GET)
         """
         app_pkgs = DB._list(self.collection)
-        app_pkgs = [AppPkgView._list(app_pkg) for app_pkg in app_pkgs]
-        return {"app_pkgs": app_pkgs}
+        return [AppPkgView._list(app_pkg) for app_pkg in app_pkgs]
 
     @cherrypy.tools.json_out()
     def get_app_pkg(self, app_pkg_id):
