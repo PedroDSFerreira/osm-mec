@@ -12,8 +12,12 @@ info:
 tags:
   - name: 'App packages'
     description: Management operations of App descriptors and packages
+  - name: 'App instances'
+    description: Management operations of App instances
   - name: 'NS packages'
     description: Management operations of NS descriptors and packages
+  - name: 'NS instances'
+    description: Management operations of NS instances
 
 paths:
 
@@ -29,6 +33,7 @@ paths:
         - name: filter
           in: formData
           description: Filter criteria for the list of App Packages
+          required: false
           schema:
             type: string
             default: null
@@ -273,6 +278,7 @@ paths:
         - name: filter
           in: formData
           description: Filter criteria for the list of NS packages
+          required: false
           schema:
             type: string
             default: null
@@ -504,25 +510,43 @@ paths:
 
   '/oss/v1/appis':
     get:
-      summary: Get a list of app instances
-      operationId: listAppInstances
-      responses:
-        '200':
-          description: A list of app instances
-  
-  '/oss/v1/appis/{appi_id}':
-    get:
-      summary: Get an app instance by ID
-      operationId: getAppInstanceById
+      tags:
+        - "App instances"
+      summary: Query information about multiple App instances 
+      description: Query information about multiple App instances 
+      operationId: list_appis
       parameters:
-        - name: appi_id
-          in: path
-          required: true
+        - name: ns
+          in: formData
+          description: TODO
+          required: false
           schema:
             type: string
+            default: null
+        - name: filter
+          in: formData
+          description: Filter criteria for the list of App Packages
+          required: false
+          schema:
+            type: string
+            default: null 
       responses:
         '200':
           description: An app instance
+  
+  '/oss/v1/appis/{appi_id}':
+    summary: Query information about multiple App instances 
+    description: Query information about multiple App instances 
+    operationId: list_appis
+    parameters:
+      - name: appi_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: An app instance
   
   '/oss/v1/nsis':
     get:
