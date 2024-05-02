@@ -2,11 +2,11 @@ openapi: 3.0.0
 
 servers:
   - description: OSS NB API
-    url: 'TODO'
+    url: 'http://127.0.0.1:8080/api/v1'
     
 info:
-  title: TODO
-  description: OSS NB API
+  title: OSS NB API
+  description: OSS NB API. 
   version: 1.0.0
 
 tags:
