@@ -35,4 +35,4 @@ def callback(message):
             delete_file(vnfd_file)
             delete_file(nsd_file)
 
-        return {"msg_id": message["msg_id"], "status": 201}
+        return {"msg_id": message["msg_id"], "status": 200}

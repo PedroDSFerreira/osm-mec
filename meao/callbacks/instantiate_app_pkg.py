@@ -28,4 +28,4 @@ def callback(message):
             )
         instance_id = out[0]
 
-        return {"msg_id": message["msg_id"], "status": 200, "instance_id": instance_id}
+        return {"msg_id": message["msg_id"], "status": 201, "instance_id": instance_id}
