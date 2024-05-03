@@ -1,13 +1,5 @@
-# Create and Onboard MEC App
+# Create a MEC App Descriptor
 
-## Requirements
-- OSM
-- K3s
-- Helm
-
-## 
-### Create and Containerize App
-**replace
 1. Create the application
 2. **[Containerize the app](https://docs.docker.com/get-started/02_our_app/)**
 3. Push the container image to a repository, such as the **[Docker Hub](https://docs.docker.com/get-started/04_sharing_app/)** or **[Github Packages](https://docs.github.com/en/actions/publishing-packages/publishing-docker-images)**

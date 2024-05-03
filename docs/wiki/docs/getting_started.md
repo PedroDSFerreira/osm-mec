@@ -8,8 +8,8 @@ slug: /
 ## Requirements
 
 - [OSM](https://osm.etsi.org/docs/user-guide/latest/03-installing-osm.html#how-to-install-osm)
-- Git
-- Docker
+- [Git](https://git-scm.com/downloads)
+- [Docker](https://www.docker.com/get-started/)
 - docker compose
 - cp
 - Kubernetes Cluster
