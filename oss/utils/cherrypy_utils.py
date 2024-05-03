@@ -1,8 +1,9 @@
 import json
+import uuid
 
 import cherrypy
 from bson import ObjectId
-import uuid
+
 
 def jsonify_error(status, message, traceback, version):
     """JSONify all CherryPy error responses (created by raising the
