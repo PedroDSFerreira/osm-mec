@@ -1,4 +1,5 @@
 import json
+import uuid
 
 import cherrypy
 from bson import ObjectId
@@ -27,6 +28,14 @@ def jsonify_error(status, message, traceback, version):
 def is_valid_id(id):
     try:
         ObjectId(id)
+    except Exception:
+        return False
+    return True
+
+
+def is_valid_uuid(id):
+    try:
+        uuid.UUID(id)
     except Exception:
         return False
     return True

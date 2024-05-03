@@ -1,5 +1,6 @@
 import cherrypy
 from utils.osm import get_osm_client
+from views.vim import VimView
 
 
 class VimController:
@@ -8,4 +9,4 @@ class VimController:
         """
         /vims (GET)
         """
-        return get_osm_client().vim.list()
+        return [VimView._list(vim) for vim in get_osm_client().vim.list()]
