@@ -5,6 +5,16 @@ slug: /
 
 # Getting Started
 
+## Requirements
+
+- [OSM](https://osm.etsi.org/docs/user-guide/latest/03-installing-osm.html#how-to-install-osm)
+- Git
+- Docker
+- docker compose
+- cp
+- Kubernetes Cluster
+
+
 ## Preparation:
 
 1. **Download Repository:**
@@ -26,6 +36,12 @@ slug: /
     docker compose up --build
     ```
 
+4. **Add kubernetes cluster to OSM:**
+
+    
+   -  Add Vim Account
+   - [Associate cluster to VIM Account](https://osm.etsi.org/docs/user-guide/latest/05-osm-usage.html#adding-kubernetes-cluster-to-osm)
+    
 
 >CFS Portal is available at `http://localhost:3000`
 
