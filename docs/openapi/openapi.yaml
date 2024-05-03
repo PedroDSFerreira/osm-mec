@@ -1,7 +1,7 @@
 openapi: 3.0.0
 
 servers:
-  - description: OSS NB API
+  - description: ""
     url: 'http://127.0.0.1:8080/api/v1'
     
 info:
@@ -13,11 +13,9 @@ tags:
   - name: 'App packages'
     description: Management operations of App descriptors and packages
   - name: 'App instances'
-    description: Management operations of App instances
-  - name: 'NS packages'
-    description: Management operations of NS descriptors and packages
-  - name: 'NS instances'
     description: Management operations of NS instances
+  - name: 'VIM'
+    description: Management operations of VIM
 
 paths:
 
@@ -29,14 +27,6 @@ paths:
       summary: Query information about multiple App package resources
       description: Query information about multiple App package resources
       operationId: list_app_pkgs
-      parameters:
-        - name: filter
-          in: formData
-          description: Filter criteria for the list of App Packages
-          required: false
-          schema:
-            type: string
-            default: null
       responses:
         '200':
           description: OK
@@ -77,21 +67,6 @@ paths:
       operationId: new_app_pkg
       requestBody:
         $ref: '#/components/requestBodies/AppPkgCreation'
-      parameters:
-        - name: appd
-          in: formData
-          description: App file descriptor in a compressed format, preferential .tar.gz
-          required: true
-          schema:
-            type: string
-            format: binary
-        - name: overwrite
-          in: formData
-          description: "Overwrite an App Package"
-          required: false
-          schema:
-            type: boolean
-            default: null        
       responses:
         '201':
           description: Created
@@ -184,14 +159,6 @@ paths:
       summary: Delete an individual App package resource
       description: Delete an individual App package resource
       operationId: delete_app_pkg
-      parameters:
-        - name: force
-          in: formData
-          description: "Force the elimination of an App Package"
-          required: false
-          schema:
-            type: boolean
-            default: false  
       responses:
         '204':
           description: No Content
@@ -219,7 +186,7 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
         default:
           $ref: '#/components/responses/UnexpectedError'
-            
+          
     patch:
       tags:
         - "App packages"
@@ -228,14 +195,6 @@ paths:
       operationId: update_app_pkg
       requestBody:
         $ref: '#/components/requestBodies/AppPkgUpdate'
-      parameters:
-        - name: appd
-          in: formData
-          description: App file descriptor in a compressed format, preferential .tar.gz
-          required: true
-          schema:
-            type: string
-            format: binary
       responses:
         '204':
           description: No Content
@@ -264,72 +223,22 @@ paths:
         default:
           $ref: '#/components/responses/UnexpectedError'
           
-          
-#BEGIN NS PACKAGES
- 
-  '/oss/v1/ns_pkgs':
-    get:
-      tags:
-        - "NS packages"
-      summary: Query information about multiple NS packages
-      description: Query information about multiple NS packages
-      operationId: list_ns_pkgs
-      parameters:
-        - name: filter
-          in: formData
-          description: Filter criteria for the list of NS packages
-          required: false
+  '/oss/v1/app_pkgs/{app_pkg_id}/instantiate':
+    parameters:
+        - name: app_pkg_id
+          in: path
+          required: true
+          description: App Package ID
           schema:
             type: string
-            default: null
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArrayOfNsdInfo'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '405':
-          $ref: '#/components/responses/MethodNotAllowed'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-        '503':
-          $ref: '#/components/responses/ServiceUnavailable'
-        '5XX':
-          $ref: '#/components/responses/UnexpectedError'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-          
     post:
       tags:
-        - "NS packages"
-      summary: Create a new NS package
-      description: Create a new NS package
-      operationId: new_ns_pkg
+        - "App packages"
+      summary: Instantiate an App Package
+      description: Instantiate an App Package
+      operationId: instantiate_app_pkg
       requestBody:
-        $ref: '#/components/requestBodies/CreateNsPackage'
-      parameters:
-        - name: nsd
-          in: formData
-          description: Network Service file descriptor in a compressed format, preferential .tar.gz
-          required: true
-          schema:
-            type: string
-            format: binary
+        $ref: '#/components/requestBodies/AppPkgInstantiation'
       responses:
         '201':
           description: Created
@@ -342,9 +251,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectId'
-            application/yaml:
+              example:
+                id: "string"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'  
+            
+            
+#BEGIN APP INSTANCES
+  '/oss/v1/appis':
+    get:
+      tags:
+        - "App instances"
+      summary: Query information about multiple App instances resources
+      description: Query information about multiple App instances resources
+      operationId: list_appis
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
               schema:
-                $ref: '#/components/schemas/ObjectId'
+                $ref: '#/components/schemas/ArrayOfAppInstancesInfo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -369,31 +318,29 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
         default:
           $ref: '#/components/responses/UnexpectedError'
-  
-  '/oss/v1/ns_pkgs/{ns_pkg_id}':
+
+
+  '/oss/v1/appis/{appi_id}':
     parameters:
-      - name: ns_pkg_id
+      - name: appi_id
         in: path
         required: true
-        description: NS Package ID
+        description: App Instance ID
         schema:
           type: string
     get:
       tags:
-        - "NS packages"
-      summary: Read information about an individual NS package 
-      description: Read information about an individual NS package
-      operationId: get_ns_pkg
+        - "App instances"
+      summary: Read information about an individual App instance resource
+      description: Read information about an individual App instance resource
+      operationId: get_appi
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NsdInfo'
-            application/yaml:
-              schema:
-                $ref: '#/components/schemas/NsdInfo'
+                $ref: '#/components/schemas/AppInstanceInfo'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -421,155 +368,78 @@ paths:
           
     delete:
       tags:
-        - "NS packages"
-      summary: Delete an individual NS package
-      description: Delete an individual NS package 
-      operationId: delete_ns_pkg
-      parameters:
-        - name: force
-          in: formData
-          description: "Force the elimination of an App Package"
-          required: false
-          schema:
-            type: boolean
-            default: false  
-      responses:
-        '204':
-          description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '405':
-          $ref: '#/components/responses/MethodNotAllowed'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-        '503':
-          $ref: '#/components/responses/ServiceUnavailable'
-        '5XX':
-          $ref: '#/components/responses/UnexpectedError'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-    
-    patch:
-      tags:
-        - "NS packages"
-      summary: Modify the data of an individual NS Package
-      description: Modify the data of an individual NS package
-      operationId: update_ns_pkg
-      requestBody:
-        $ref: '#/components/requestBodies/NsPkgUpdate'
-      parameters:
-        - name: nsd
-          in: formData
-          description: Network Service file descriptor in a compressed format, preferential .tar.gz
-          required: true
-          schema:
-            type: string
-            format: binary
-      responses:
-        '204':
-          description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '405':
-          $ref: '#/components/responses/MethodNotAllowed'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-        '503':
-          $ref: '#/components/responses/ServiceUnavailable'
-        '5XX':
-          $ref: '#/components/responses/UnexpectedError'
-        default:
-          $ref: '#/components/responses/UnexpectedError'
-          
-          
-# BEGIN APP INSTANCES          
-
-  '/oss/v1/appis':
-    get:
-      tags:
         - "App instances"
-      summary: Query information about multiple App instances 
-      description: Query information about multiple App instances 
-      operationId: list_appis
-      parameters:
-        - name: ns
-          in: formData
-          description: TODO
-          required: false
-          schema:
-            type: string
-            default: null
-        - name: filter
-          in: formData
-          description: Filter criteria for the list of App Packages
-          required: false
-          schema:
-            type: string
-            default: null 
+      summary: Terminate an individual App instance resource
+      description: Terminate an individual App instance resource
+      operationId: terminate_appi
       responses:
-        '200':
-          description: An app instance
-  
-  '/oss/v1/appis/{appi_id}':
-    summary: Query information about multiple App instances 
-    description: Query information about multiple App instances 
-    operationId: list_appis
-    parameters:
-      - name: appi_id
-        in: path
-        required: true
-        schema:
-          type: string
-    responses:
-      '200':
-        description: An app instance
-  
-  '/oss/v1/nsis':
-    get:
-      summary: Get a list of NS instances
-      operationId: listNsInstances
-      responses:
-        '200':
-          description: A list of NS instances
-  
-  '/oss/v1/nsis/{nsi_id}':
-    get:
-      summary: Get an NS instance by ID
-      operationId: getNsInstanceById
-      parameters:
-        - name: nsi_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: An NS instance
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
           
+#BEGIN VIM  
+  '/oss/v1/vims':
+    get:
+      tags:
+        - "VIM"
+      summary: Query information about multiple VIMs
+      description: Query information about multiple VIMs
+      operationId: list_vims
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfVimsInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '5XX':
+          $ref: '#/components/responses/UnexpectedError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
       
 components:
 
@@ -657,48 +527,35 @@ components:
     AppPkgCreation: 
       description: |
         App Package Information
-        Fields (appd, overwrite) are described
+        Fields (appd) are described
       type: object
       properties:
         appd:
-          description: App file descriptor in a compressed format, preferential .tar.gz
-          type: File
-        overwrite:
-          description: Boolean value, if set true, allows to overwrite existing App Packages. By default this value is NULL
-          type: boolean
+          description: App file descriptor in a compressed format, example .tar.gz
+          type: string
+          format: binary
       required: 
         - appd
 
-    
     AppPkgUpdate:
       description: |
         App Package Information
         Fields (id, appd) are described
-        
       type: object
       properties:
-        id:
-          description: App Package Identifier
-          type: string
         appd:
-          description: App file descriptor in a compressed format, preferential .tar.gz
-          type: File 
+          description: App file descriptor in a compressed format, example .tar.gz
+          type: string
+          format: binary
       required: 
         - appd
 
-    AppPkgInfo:
+    AppPkgInstantiation:
       description: |
         App Package Information
-        Fields (_id, id, name, description) are described
+        Fields (name, description) are described
       type: object
       properties:
-        _id:
-          description: Identifier of the App package. This identifier is allocated by the NFVO.
-          type: string
-          format: uuid
-        id:
-          description: App Package Identifier
-          type: string
         name:
           description: App Package Name
           type: string
@@ -706,13 +563,91 @@ components:
           description: App Package description
           type: string
       required:
-        - _id
-        - id
+        - name
+        - description
+
+    AppPkgInfo:
+      description: |
+        App Package Information
+        Fields (id, name, provider, version, info-name, description) are described
+      type: object
+      properties:
+        id:
+          description: App Package identifier
+          type: string
+        name:
+          description: App Package name
+          type: string
+        provider:
+          description: App Package provider
+          type: string
+        version:
+          description: App Package version
+          type: string
+        info-name:
+          description: App Package info-name
+          type: string
+        description:
+          description: App Package description
+          type: string
+  
       
     ArrayOfAppPkgInfo:
       type: array
       items:
         $ref: '#/components/schemas/AppPkgInfo'
+        
+    AppInstanceInfo:
+      description: |
+        App Instance Information
+        Fields (id, name, description, operational-status, config-status, details, created-at) are described
+      type: object
+      properties:
+        id:
+          description: App Instance identifier
+          type: string
+        name:
+          description: App Instance name
+          type: string
+        description:
+          description: App Instance description
+          type: string
+        operational-status:
+          description: App Instance operational-status
+          type: string
+        config-status:
+          description: App Instance config-status
+          type: string
+        details:
+          description: App Instance details
+          type: string
+        created-at:
+          description: App Instance created-at
+          type: string
+        
+    ArrayOfAppInstancesInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceInfo'
+        
+    VimsInfo:
+      description: |
+        VIM Information
+        Fields (id, name) are described
+      type: object
+      properties:
+        id:
+          description: VIM identifier
+          type: string
+        name:
+          description: VIM  name
+          type: string
+    
+    ArrayOfVimsInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/VimsInfo'
+    
         
     ProblemDetails:
       type: object
@@ -734,69 +669,6 @@ components:
         - status
         - detail
         
-    NsdInfo:
-      description: |
-        NS Package Information
-        Fields fields (_id, id, name, description) are described
-      type: object
-      properties:
-        _id:
-          description: |
-            Identifier of the onboarded individual NS Package
-            resource. This identifier is allocated by the NFVO.
-          type: string
-          format: uuid
-        id:
-          description: |
-            Identifies the NS Package in a globally unique way.
-          type: string
-        name:
-          description: |
-            Name of the onboarded NS Package
-          type: string
-        description:
-          description: |
-            Description of the onboarded NS Package.
-            This information is copied from the NSD content.
-          type: string
-      required:
-        - _id
-        - id    
-    
-    ArrayOfNsdInfo:
-      type: array
-      items:
-        $ref: '#/components/schemas/NsdInfo'
-        
-    CreateNsPackage:
-      description: |
-        NS Package Information
-        Fields (nsd) are described
-        
-      type: object
-      properties:
-        nsd:
-          description: Network Service file descriptor in a compressed format, preferential .tar.gz
-          type: File 
-      required: 
-        - nsd
-      
-    NsPkgUpdate:
-      description: |
-        NS Package Information
-        Fields (id, name, description) are described
-      type: object
-      properties:
-        id:
-          description: NS Package Identifier
-          type: string
-        name:
-          description: NS Package Name
-          type: string
-        description:
-          description: NS Package Description
-          type: string
-        
   # END SCHEMAS
   
   requestBodies:
@@ -812,17 +684,10 @@ components:
             schema:
               $ref: '#/components/schemas/AppPkgCreation'
               
-    CreateNsPackage:
+    AppPkgInstantiation:
       content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CreateNsPackage'
-            
-    NsPkgUpdate:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NsPkgUpdate'
-              
-      
+         application/json:
+              schema:
+                $ref: '#/components/schemas/AppPkgInstantiation'
+                
   # END REQUEST BODIES
