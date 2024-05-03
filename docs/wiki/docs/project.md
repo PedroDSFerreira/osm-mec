@@ -61,6 +61,8 @@ The Kafka topics available are:
 - update_app_pkg <a id="update_app_pkg"></a>
 - terminate_app_pkg <a id="terminate_app_pkg"></a>
 - delete_app_pkg <a id="delete_app_pkg"></a>
+- responses <a id="responses"></a>
+
 
 ### MongoDB
 
