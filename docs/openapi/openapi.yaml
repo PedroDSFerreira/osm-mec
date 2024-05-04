@@ -31,7 +31,7 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ArrayOfAppPkgInfo'
         '400':
@@ -76,7 +76,7 @@ paths:
                 type: string
                 format: uri
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ObjectId'
               example:
@@ -125,7 +125,7 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/AppPkgInfo'
         '400':
@@ -224,13 +224,6 @@ paths:
           $ref: '#/components/responses/UnexpectedError'
           
   '/oss/v1/app_pkgs/{app_pkg_id}/instantiate':
-    parameters:
-        - name: app_pkg_id
-          in: path
-          required: true
-          description: App Package ID
-          schema:
-            type: string
     post:
       tags:
         - "App packages"
@@ -238,6 +231,12 @@ paths:
       description: Instantiate an App Package
       operationId: instantiate_app_pkg
       parameters:
+      - name: app_pkg_id
+        in: path
+        required: true
+        description: App Package ID
+        schema:
+          type: string
       - in: query
         name: wait
         schema:
@@ -256,7 +255,7 @@ paths:
                 type: string
                 format: uri
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ObjectId'
               example:
@@ -299,7 +298,7 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ArrayOfAppInstancesInfo'
         '400':
@@ -346,7 +345,7 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/AppInstanceInfo'
         '400':
@@ -428,7 +427,7 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ArrayOfVimsInfo'
         '400':
@@ -463,68 +462,68 @@ components:
     BadRequest:
       description: Bad request. The server cannot process the request due to a client error.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
             
     Unauthorized:
           description: Authorization information is missing or invalid.
           content:
-            multipart/form-data:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
     Forbidden:
       description: Not enough permissions to do this operation.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     NotFound:
       description: The specified resource was not found.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     MethodNotAllowed:
       description: This method is not supported for the requested resource.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     NotAcceptable:
       description: The requested resource content cannot match the Accept headers sent in the request.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     Conflict:
       description: The operation cannot be executed currently, due to a conflict with the state of the resource.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     UnprocessableEntity:
       description: The request was well-formed but was unable to be followed due to semantic errors.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     InternalServerError:
       description: Internal server error.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     ServiceUnavailable:
       description: Service temporarily unavailable.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     UnexpectedError:
       description: Unexpected error.
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     
