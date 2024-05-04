@@ -31,7 +31,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ArrayOfAppPkgInfo'
         '400':
@@ -76,7 +76,7 @@ paths:
                 type: string
                 format: uri
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ObjectId'
               example:
@@ -125,7 +125,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/AppPkgInfo'
         '400':
@@ -237,6 +237,14 @@ paths:
       summary: Instantiate an App Package
       description: Instantiate an App Package
       operationId: instantiate_app_pkg
+      parameters:
+      - in: query
+        name: wait
+        schema:
+          type: boolean
+          default: false
+        description: If set to true the operation will be synchronous. 
+        required: false
       requestBody:
         $ref: '#/components/requestBodies/AppPkgInstantiation'
       responses:
@@ -248,7 +256,7 @@ paths:
                 type: string
                 format: uri
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ObjectId'
               example:
@@ -291,7 +299,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ArrayOfAppInstancesInfo'
         '400':
@@ -338,7 +346,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/AppInstanceInfo'
         '400':
@@ -372,6 +380,14 @@ paths:
       summary: Terminate an individual App instance resource
       description: Terminate an individual App instance resource
       operationId: terminate_appi
+      parameters:
+      - in: query
+        name: wait
+        schema:
+          type: boolean
+          default: false
+        description: If set to true the operation will be synchronous. 
+        required: false
       responses:
         '204':
           description: No Content
@@ -412,7 +428,7 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ArrayOfVimsInfo'
         '400':
@@ -447,68 +463,68 @@ components:
     BadRequest:
       description: Bad request. The server cannot process the request due to a client error.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
             
     Unauthorized:
           description: Authorization information is missing or invalid.
           content:
-            application/json:
+            multipart/form-data:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
     Forbidden:
       description: Not enough permissions to do this operation.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     NotFound:
       description: The specified resource was not found.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     MethodNotAllowed:
       description: This method is not supported for the requested resource.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     NotAcceptable:
       description: The requested resource content cannot match the Accept headers sent in the request.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     Conflict:
       description: The operation cannot be executed currently, due to a conflict with the state of the resource.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     UnprocessableEntity:
       description: The request was well-formed but was unable to be followed due to semantic errors.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     InternalServerError:
       description: Internal server error.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     ServiceUnavailable:
       description: Service temporarily unavailable.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     UnexpectedError:
       description: Unexpected error.
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
     
@@ -556,6 +572,9 @@ components:
         Fields (name, description) are described
       type: object
       properties:
+        vim_id:
+          description: VIM identifier
+          type: string
         name:
           description: Name field extracted from the app file descriptor within the App Package.
           type: string
@@ -563,6 +582,7 @@ components:
           description: Description field extracted from the app file descriptor within the App Package.
           type: string
       required:
+        - vim_id
         - name
         - description
 
@@ -676,45 +696,39 @@ components:
       items:
         $ref: '#/components/schemas/VimsInfo'
     
-        
+    
     ProblemDetails:
       type: object
       properties:
-        type:
-          type: string
-          format: uri
-        title:
-          type: string
-        status:
-          type: integer
-        detail:
-          type: string
-        instance:
-          type: string
-          format: uri
-      additionalProperties: true
+        error:
+          type: object
+          properties:
+            http_status:
+              type: integer
+            message:
+              type: string
       required:
-        - status
-        - detail
-        
+        - error
+
+
   # END SCHEMAS
   
   requestBodies:
     AppPkgUpdate:
       content:
-        application/json:
+        multipart/form-data:
           schema:
             $ref: '#/components/schemas/AppPkgUpdate'
 
     AppPkgCreation:
       content:
-       application/json:
+       multipart/form-data:
             schema:
               $ref: '#/components/schemas/AppPkgCreation'
               
     AppPkgInstantiation:
       content:
-         application/json:
+         multipart/form-data:
               schema:
                 $ref: '#/components/schemas/AppPkgInstantiation'
                 
