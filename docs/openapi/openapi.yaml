@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 servers:
   - description: ""
-    url: 'http://127.0.0.1:8080/api/v1'
+    url: 'http://127.0.0.1:8080'
     
 info:
   title: OSS NB API
@@ -557,10 +557,10 @@ components:
       type: object
       properties:
         name:
-          description: App Package Name
+          description: Name field extracted from the app file descriptor within the App Package.
           type: string
         description:
-          description: App Package description
+          description: Description field extracted from the app file descriptor within the App Package.
           type: string
       required:
         - name
@@ -569,34 +569,61 @@ components:
     AppPkgInfo:
       description: |
         App Package Information
-        Fields (id, name, provider, version, info-name, description) are described
+        Fields (id, appd_id, name, provider, version, mec-version, info-name, description) are described
       type: object
       properties:
         id:
           description: App Package identifier
           type: string
+        appd_id:
+          description: Identifier field extracted from the app file descriptor within the App Package
+          type: string
         name:
-          description: App Package name
+          description: Name field extracted from the app file descriptor within the App Package
           type: string
         provider:
-          description: App Package provider
+          description: Provider field extracted from the app file descriptor within the App Package
           type: string
         version:
-          description: App Package version
+          description: Version field extracted from the app file descriptor within the App Package
+          type: string
+        mec-version:
+          description: Mec-version field extracted from the app file descriptor within the App Package
           type: string
         info-name:
-          description: App Package info-name
+          description: Info-name field extracted from the app file descriptor within the App Package
           type: string
         description:
-          description: App Package description
+          description: Description field extracted from the app file descriptor within the App Package
           type: string
   
-      
     ArrayOfAppPkgInfo:
+      description: |
+        App Package Information
+        Fields (id, name, provider, version, info-name, description) are described
       type: array
       items:
-        $ref: '#/components/schemas/AppPkgInfo'
-        
+        type: object
+        properties:
+          id:
+            description: App Package identifier
+            type: string
+          name:
+            description: Name field extracted from the app file descriptor within the App Package
+            type: string
+          provider:
+            description: Provider field extracted from the app file descriptor within the App Package
+            type: string
+          version:
+            description: Version field extracted from the app file descriptor within the App Package
+            type: string
+          info-name:
+            description: Info-name field extracted from the app file descriptor within the App Package
+            type: string
+          description:
+            description: Description field extracted from the app file descriptor within the App Package
+            type: string
+          
     AppInstanceInfo:
       description: |
         App Instance Information
@@ -607,13 +634,13 @@ components:
           description: App Instance identifier
           type: string
         name:
-          description: App Instance name
+          description: Name of the App Instance. This field is extracted from the app file descriptor within the App Package
           type: string
         description:
-          description: App Instance description
+          description: Description of the App Instance. This field is extracted from the app file descriptor within the App Package
           type: string
         operational-status:
-          description: App Instance operational-status
+          description: App Instance operation status
           type: string
         config-status:
           description: App Instance config-status
@@ -622,8 +649,9 @@ components:
           description: App Instance details
           type: string
         created-at:
-          description: App Instance created-at
-          type: string
+          description: App Instance timestamp of creation
+          type: number
+          format: float
         
     ArrayOfAppInstancesInfo:
       type: array
