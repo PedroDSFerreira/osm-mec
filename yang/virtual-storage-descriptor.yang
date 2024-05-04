@@ -1,0 +1,171 @@
+module virtual-storage-descriptor {
+  namespace "urn:etsi:nfv:virtual-storage-descriptor";
+  prefix vs;
+
+  import common { prefix comm; }
+
+  grouping virtual-storage-descriptor {
+    description "Describes virtual storage resources to be used by the VNF";
+
+    leaf id {
+      type string;
+      description "Unique identifier for this VirtualStorageDesc";
+    }
+
+    leaf type-of-storage {
+      type enumeration {
+        enum BLOCK;
+        enum OBJECT;
+        enum FILE;
+      }
+      mandatory true;
+      description "Type of virtualised storage resource";
+    }
+
+    choice storage {
+      description "Virtualised storage resource";
+      mandatory true;
+
+      container block-storage {
+        description "Specifies the details of block storage. Applicable only if typeOfStorage=BLOCK";
+        uses block-storage-data;
+      }
+
+      container object-storage {
+        description "Specifies the details of object storage. Applicable only if typeOfStorage=OBJECT";
+        uses object-storage-data;
+      }
+
+      container file-storage {
+        description "Specifies the details of file storage. Applicable only if typeOfStorage=FILE";
+        uses file-storage-data;
+      }
+    }
+
+    container nfvi-maintenance-info {
+      description "";
+      uses nfvi-maintenance-info-descriptor;
+    }
+
+    leaf per-vnfc-instance {
+      type boolean;
+      description "Indicates if the storage resource is dedicated to a VNFC instance";
+    }
+  }
+
+  grouping nfvi-maintenance-info-descriptor {
+    description "When present, provides information on the rules to be observed when an instance based on this VirtualStorageDesc is impacted during NFVI operation and maintenance (e.g. NFVI resource upgrades). ";
+
+    leaf impact-notification-lead-time {
+      type uint32;
+      mandatory true;
+      units seconds;
+      description "The value specifies the minimum notification lead time requested for upcoming impact of the virtualised resource or their group (i.e. between the notification and the action causing the impact).";
+    }
+
+    leaf is-impact-mitigation-requested {
+      type boolean;
+      description "When set to True, it is requested that at the time of the notification of an upcoming change that is expected to have an impact on the VNF, virtualised resource(s) of the same characteristics as the impacted ones is/are provided to compensate for the impact. Cardinality 0 corresponds to the value False. ";
+    }
+
+    leaf-list supported-migration-time {
+      type enumeration {
+        enum NO_MIGRATION;
+        enum OFFLINE_MIGRATION;
+        enum LIVE_MIGRATION;
+      }
+      description "When present, specifies the allowed migration types in the order of preference in case of an impact starting with the most preferred type";
+    }
+
+    leaf max-undetectable-interruption-time {
+      type uint32;
+      units seconds;
+      description "When present, it specifies the maximum interruption time that can go undetected at the VNF level and therefore which will not trigger VNFinternal recovery during live migration";
+    }
+
+    leaf min-recovery-time-between-impacts {
+      type uint32;
+      units seconds;
+      description "When present, it specifies the time required by the group to recover from an impact, thus, the minimum time requested between consecutive impacts of the group";
+    }
+
+    list max-number-of-impacted-instances {
+      description "When present, specifies for different group sizes the maximum number of instances that can be impacted simultaneously within the group of virtualised resources without losing functionality. Zero cardinality indicates no constraint";
+      key "id";
+      leaf id {
+        type string;
+        description "Identifier of the impacted instances";
+      }
+      leaf group-size {
+        type uint32;
+        description "Number of impacted instances in a group";
+      }
+
+      leaf max-number-of-impacted-instances {
+        type uint32;
+        mandatory true;
+        description "Maximum number of impacted instances";
+      }
+    }
+  }
+
+  grouping block-storage-data {
+    description "Describes block storage data";
+
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of virtualised storage resource in GB.";
+    }
+
+    list vdu-storage-requirements {
+      key "key";
+      uses comm:key-value-pair;
+      description "An array of key-value pairs that articulate the storage deployment requirements";
+    }
+
+    leaf rdma-enabled {
+      type boolean;
+      description "Indicates if the storage support RDMA";
+    }
+
+    leaf sw-image-id {
+      type string;
+      description "References the software image to be loaded on the VirtualStorage resource created based on this VirtualStorageDesc. Shall be absent when used for virtual disks.";
+    }
+  }
+
+  grouping object-storage-data {
+    description "Describes object storage data";
+
+    leaf max-size-of-storage {
+      type uint64;
+      units bytes;
+      description "Max size of virtualised storage resource in GB.";
+    }
+  }
+
+  grouping file-storage-data {
+    description "Describes file storage data";
+
+    leaf size-of-storage {
+      type uint64;
+      units bytes;
+      mandatory true;
+      description "Size of virtualised storage resource in GB.";
+    }
+
+    leaf file-system-protocol {
+      type string;
+      mandatory true;
+      description "The shared file system protocol (e.g. NFS, CIFS).";
+    }
+
+    leaf int-virtual-link-id {
+      type string;
+      mandatory true;
+      description "Reference of the internal VLD which this file storage connects to. The attached VDUs shall connect to the same internal VLD.";
+    }
+  }
+}

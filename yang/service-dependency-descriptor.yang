@@ -1,0 +1,75 @@
+module service-dependency-descriptor {
+  namespace "urn:etsi:mec:service-dependency";
+  prefix srv;
+
+  import transport-dependency-descriptor { prefix td; }
+
+  description "Data model for ETSI MEC Service Dependency";
+
+  grouping service-dependency-descriptor {
+    description "Describes service dependencies of a MEC app";
+
+    list transport-dependencies {
+      key "id";
+      description "Indicates transport and serialization format dependencies of consuming the service. Defaults to REST + JSON if absent.";
+      uses td:transport-dependency-descriptor;
+    }
+
+    leaf-list requested-permissions {
+      type string;
+      description "Requested permissions regarding the access of the application to the service. The format is left for the data model design stage.";
+      reference "ETSI GS MEC 009 clause 7.2";
+    }
+
+    uses common-service-descriptor;
+  }
+
+  grouping common-service-descriptor {
+    description "Common fields between service-dependency-descriptor and service-descriptor.";
+
+    leaf name {
+      type string;
+      mandatory true;
+      description "The name of the service, e.g. RNIS, LocationService, AMS";
+    }
+
+    container category {
+      description "A Category reference of the service";
+      uses category-ref;
+    }
+
+    leaf version {
+      type string;
+      mandatory true;
+      description "The version of the service";
+    }
+  }
+
+  grouping category-ref {
+    description "A Category reference";
+
+    leaf href {
+      type string;
+      mandatory true;
+      description "Reference of the catalogue";
+    }
+
+    leaf id {
+      type string;
+      mandatory true;
+      description "Unique identifier of the category";
+    }
+
+    leaf name {
+      type string;
+      mandatory true;
+      description "Name of the category";
+    }
+
+    leaf version {
+      type string;
+      mandatory true;
+      description "Category version";
+    }
+  }
+}

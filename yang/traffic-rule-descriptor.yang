@@ -1,0 +1,225 @@
+module traffic-rule-descriptor {
+  namespace "urn:etsi:mec:traffic-rule-descriptor";
+  prefix tr;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  description "Data model for ETSI MEC Traffic Rule Descriptor";
+
+  grouping traffic-rule-descriptor {
+    description "Describes traffic rules related to a MEC app";
+
+    leaf id {
+      type string;
+      description "Identifies the traffic rule";
+    }
+
+    leaf filter-type {
+      type enumeration {
+        enum FLOW;
+        enum PACKET;
+      }
+      mandatory true;
+      description "Filter type: per FLOW or PACKET";
+    }
+
+    leaf priority {
+      type uint8{
+        range "0..255";
+      }
+      mandatory true;
+      description "Priority of traffic rule from 0 to 255";
+    }
+
+    leaf action {
+      type enumeration {
+        enum DROP;
+        enum FORWARD_DECAPSULATED;
+        enum FORWARD_AS_IS;
+        enum PASSTHROUGH;
+        enum DUPLICATED_DECAPSULATED;
+        enum DUPLICATE_AS_IS;
+      }
+      mandatory true;
+      description "Action when packet matches traffic filter";
+    }
+
+    list traffic-filter {
+      key "id";
+      min-elements 1;
+      description "Filter to identify specific flow/packets";
+
+      uses traffic-filter;
+    }
+
+    list dst-interface {
+      key "id";
+      max-elements 2;
+      description "Destination interface if action is FORWARD";
+
+      uses interface-descriptor;
+    }
+
+  }
+
+  grouping traffic-filter {
+    description "The filter used to identify specific flow/packets";
+
+    leaf id {
+      type string;
+      description "Unique identifier for the traffic filter";
+    }
+
+    leaf-list src-address {
+      type inet:ip-address;
+      description "An IP address or a range of IP addresses";
+    }
+
+    leaf-list dst-address {
+      type inet:ip-address;
+      description "An IP address or a range of IP addresses";
+    }
+
+    leaf-list src-port {
+      type inet:port-number;
+      description "A port or a range of ports";
+    }
+
+    leaf-list dst-port {
+      type inet:port-number;
+      description "A port or a range of ports";
+    }
+
+    leaf-list protocol {
+      type string;
+      description "Specify the protocol of the traffic filter";
+    }
+
+    leaf-list tag {
+      type string;
+      description "Used for tag based traffic rule";
+    }
+
+    leaf-list uri {
+      type string;
+      description "An URI label used to filter the traffic";
+    }
+
+    leaf-list packet-label {
+      type string;
+      description "A customized packet label used to filter traffic";
+    }
+
+    leaf-list src-tunnel-address {
+      type inet:ip-address;
+      description "Used for GTP tunnel based traffic rule";
+    }
+
+    leaf-list tgt-tunnel-address {
+      type inet:ip-address;
+      description "Used for GTP tunnel based traffic rule";
+    }
+
+    leaf-list src-tunnel-port {
+      type inet:port-number;
+      description "Used for GTP tunnel based traffic rule";
+    }
+
+    leaf-list dst-tunnel-port {
+      type inet:port-number;
+      description "Used for GTP tunnel based traffic rule";
+    }
+
+    leaf qci {
+      type uint8;
+      description "Used to match all packets that have the same QCI";
+    }
+
+    leaf dscp {
+      type uint8;
+      description "Used to match all IPv4 packets with same DSCP";
+    }
+
+    leaf tc {
+      type uint8;
+      description "Used to match all IPv6 packets with same TC";
+    }
+  }
+
+  grouping interface-descriptor {
+    description "Describes an interface of a MEC application";
+
+    leaf id {
+      type string;
+      description "Unique identifier for the interface";
+    }
+
+    leaf interface-type {
+      type enumeration {
+        enum TUNNEL;
+        enum MAC;
+        enum IP;
+      }
+      mandatory true;
+      description "Type of interface: TUNNEL, MAC, IP, etc";
+    }
+
+    container tunnel-info {
+      when "../interface-type = 'TUNNEL'";
+      description "Included only if interfaceType is TUNNEL";
+      uses tunnel-info;
+    }
+
+    leaf src-mac-address {
+      when "../interface-type = 'MAC'";
+      type yang:mac-address;
+      description "Source MAC address if interfaceType is MAC";
+    }
+
+    leaf dst-mac-address {
+      when "../interface-type = 'MAC'";
+      type yang:mac-address;
+      description "Destination MAC address if interfaceType is MAC";
+    }
+
+    leaf dst-ip-address {
+      when "../interface-type = 'IP'";
+      type inet:ip-address;
+      description "Destination IP address if interfaceType is IP";
+    }
+  }
+
+  grouping tunnel-info {
+    description "Parameters for traffic rules using tunnels";
+
+    leaf tunnel-type {
+      type enumeration {
+        enum GTP-U;
+        enum GRE;
+      }
+      mandatory true;
+      description "Type of tunnel: GTP-U, GRE, etc";
+    }
+
+    leaf tunnel-dst-address {
+      type inet:ip-address;
+      mandatory true;
+      description "Destination address of the tunnel";
+    }
+
+    leaf tunnel-src-address {
+      type inet:ip-address;
+      mandatory true;
+      description "Source address of the tunnel";
+    }
+
+    container tunnel-specific-data {
+      description "Parameters specific to the tunnel type";
+    }
+  }
+}

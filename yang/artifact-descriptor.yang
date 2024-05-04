@@ -1,0 +1,33 @@
+module artifact-descriptor {
+  namespace "http://example.com/ns/artifact-descriptor";
+  prefix ad;
+
+  description "YANG module for Artifact Descriptor.";
+
+  grouping artifact-descriptor {
+    description "Artifact descriptor attributes.";
+
+    leaf name {
+      type string;
+      description "Name of the artifact.";
+    }
+
+    leaf description {
+      type string;
+      description "Description of the artifact.";
+    }
+
+    leaf type {
+      type string;
+      mandatory true;
+      description "Type of the artifact.";
+    }
+
+    leaf file {
+      type string;
+      mandatory true;
+      description "File name of the artifact.";
+    }
+  }
+
+}

@@ -5,118 +5,75 @@ controllers = load_controllers()
 
 # {prefix: [(function_name, route, controller, method),...]}
 endpoints = {
-    "/api/v1": [
-        # VNF PACKAGES
+    "/oss/v1": [
+        # APP PACKAGES
         (
-            "list_vnf_pkgs",
-            "/vnf_pkgs",
-            "VnfPkgController",
+            "list_app_pkgs",
+            "/app_pkgs",
+            "AppPkgController",
             "GET",
         ),
         (
-            "get_vnf_pkg",
-            "/vnf_pkgs/{vnf_pkg_id}",
-            "VnfPkgController",
+            "get_app_pkg",
+            "/app_pkgs/{app_pkg_id}",
+            "AppPkgController",
             "GET",
         ),
         (
-            "new_vnf_pkg",
-            "/vnf_pkgs",
-            "VnfPkgController",
+            "new_app_pkg",
+            "/app_pkgs",
+            "AppPkgController",
             "POST",
         ),
         (
-            "update_vnf_pkg",
-            "/vnf_pkgs/{vnf_pkg_id}",
-            "VnfPkgController",
+            "update_app_pkg",
+            "/app_pkgs/{app_pkg_id}",
+            "AppPkgController",
             "PATCH",
         ),
         (
-            "delete_vnf_pkg",
-            "/vnf_pkgs/{vnf_pkg_id}",
-            "VnfPkgController",
+            "delete_app_pkg",
+            "/app_pkgs/{app_pkg_id}",
+            "AppPkgController",
             "DELETE",
         ),
-        # NS PACKAGES
         (
-            "list_nsds",
-            "/nsds",
-            "NsdController",
-            "GET",
-        ),
-        (
-            "get_nsd",
-            "/nsds/{nsd_id}",
-            "NsdController",
-            "GET",
-        ),
-        (
-            "new_nsd",
-            "/nsds",
-            "NsdController",
+            "instantiate_app_pkg",
+            "/app_pkgs/{app_pkg_id}/instantiate",
+            "AppPkgController",
             "POST",
         ),
+        # APP INSTANCES
         (
-            "update_nsd",
-            "/nsds/{nsd_id}",
-            "NsdController",
-            "PATCH",
+            "list_appis",
+            "/appis",
+            "AppiController",
+            "GET",
         ),
         (
-            "delete_nsd",
-            "/nsds/{nsd_id}",
-            "NsdController",
+            "get_appi",
+            "/appis/{appi_id}",
+            "AppiController",
+            "GET",
+        ),
+        (
+            "terminate_appi",
+            "/appis/{appi_id}",
+            "AppiController",
             "DELETE",
         ),
-        # VNF INSTANCES
+        # VIM
         (
-            "list_vnfis",
-            "/vnfis",
-            "VnfiController",
+            "list_vims",
+            "/vims",
+            "VimController",
             "GET",
-        ),
-        (
-            "get_vnfi",
-            "/vnfis/{vnfi_id}",
-            "VnfiController",
-            "GET",
-        ),
-        # NS INSTANCES
-        (
-            "list_nsis",
-            "/nsis",
-            "NsiController",
-            "GET",
-        ),
-        (
-            "get_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "GET",
-        ),
-        (
-            "new_nsi",
-            "/nsis",
-            "NsiController",
-            "POST",
-        ),
-        (
-            "update_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "PATCH",
-        ),
-        (
-            "delete_nsi",
-            "/nsis/{nsi_id}",
-            "NsiController",
-            "DELETE",
         ),
     ],
 }
 
 
-def set_routes(client):
+def set_routes():
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
     for prefix, routes_info in endpoints.items():
@@ -125,7 +82,7 @@ def set_routes(client):
                 name=route_info[0],
                 route=prefix + route_info[1],
                 action=route_info[0],
-                controller=controllers[route_info[2]](client),
+                controller=controllers[route_info[2]](),
                 conditions={"method": [route_info[3]]},
             )
 

@@ -1,0 +1,21 @@
+module user-context-transfer-capability-descriptor {
+  namespace "http://example.com/ns/user-context-transfer-capability";
+  prefix uctc;
+
+  description "YANG module for User Context Transfer Capability.";
+
+  grouping user-context-transfer-capability-descriptor {
+    description "Attributes related to the user context transfer capability of an application.";
+
+    leaf stateful-application {
+      type boolean;
+      mandatory true;
+      description "If the application is stateful, this attribute shall be set to true. Otherwise, this attribute shall be set to false.";
+    }
+
+    leaf user-context-transfer-support {
+      type boolean;
+      description "This attribute shall be present if the application is stateful and supports the user context transfer. Otherwise, this attribute shall be set to false or be absent.";
+    }
+  }
+}

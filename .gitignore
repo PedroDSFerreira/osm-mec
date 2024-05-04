@@ -1,3 +1,6 @@
+# tmp folder
+tmp/
+
 # YOLO weights
 yolov3.weights
 

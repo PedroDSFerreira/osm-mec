@@ -1,0 +1,39 @@
+module service-descriptor {
+  namespace "urn:etsi:mec:service-descriptor";
+  prefix sd;
+
+  import service-dependency-descriptor { prefix srv; }
+  import transport-dependency-descriptor { prefix td; }
+
+  description "Data model for ETSI MEC Service Descriptor";
+
+  grouping service-descriptor {
+    description "Describes a service";
+
+    list transports-supported {
+      key "id";
+      min-elements 1;
+      description "Transports and serializers supported by the service";
+
+      leaf id {
+        type string;
+        description "Unique identifier for the transport binding";
+      }
+
+      container transport {
+        description
+          "Information about the transport in this transport binding";
+        uses td:transport-descriptor;
+      }
+
+      leaf-list serializers {
+        type td:serializer-type;
+        min-elements 1;
+        description
+          "Type of serializers used in this transport binding";
+      }
+    }
+
+    uses srv:common-service-descriptor;
+  }
+}

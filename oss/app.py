@@ -1,24 +1,18 @@
-#!/usr/bin/env python
-
-"""
-CherryPy-based webservice
-"""
-
 import os
 
 import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
-from osmclient import client
-from utils import jsonify_error
+from utils.cherrypy_utils import jsonify_error
+from utils.error_handler import BackgroundThread
 
 
 def main():
     cherrypy_cors.install()
 
-    dispatcher = set_routes(
-        client=client.Client(host=os.getenv("OSM_HOSTNAME"), sol005=True)
-    )
+    BackgroundThread(cherrypy.engine).subscribe()
+
+    dispatcher = set_routes()
 
     config = {
         "/": {

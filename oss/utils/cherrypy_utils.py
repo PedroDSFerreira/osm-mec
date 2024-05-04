@@ -1,7 +1,8 @@
 import json
+import uuid
 
 import cherrypy
-from osmclient.common.exceptions import ClientException
+from bson import ObjectId
 
 
 def jsonify_error(status, message, traceback, version):
@@ -24,11 +25,17 @@ def jsonify_error(status, message, traceback, version):
     return response_body
 
 
-def handle_osm_exceptions(f):
-    def wrapper(*args, **kw):
-        try:
-            return f(*args, **kw)
-        except ClientException as e:
-            raise cherrypy.HTTPError(500, "OSM: " + str(e))
+def is_valid_id(id):
+    try:
+        ObjectId(id)
+    except Exception:
+        return False
+    return True
 
-    return wrapper
+
+def is_valid_uuid(id):
+    try:
+        uuid.UUID(id)
+    except Exception:
+        return False
+    return True
