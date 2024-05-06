@@ -82,17 +82,17 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 - ns_pkg_id
 - vnf_pkg_id
 
+
 ## Requests Process Flow
 
 ### App Package
 
 #### POST
-
 1. OSS receives a POST request from the CFS Portal
 2. OSS validates the app descriptor
-3. OSS sends the package and some [fields](#document-fields), belonging to the app descriptor, to the Database
+3. OSS sends the app package and some [fields](#document-fields), belonging to the app descriptor, to the Database
 4. Database returns an _id that identifies the document
-5. OSS sends the _id through Kafka on the topic, [new_app_pkg](#new_app_pkg), to MEAO
+5. OSS sends the _id through Kafka, on the topic [new_app_pkg](#new_app_pkg), to MEAO
 6. MEAO retrieves the app package previously stored in the Database, using the _id
 7. MEAO obtains the helm chart and the app descriptor from the app package
 8. MEAO validates the app descriptor
@@ -106,27 +106,50 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 16. OSS returns a response 
 
 
+#### GET (List) 
+1. OSS receives a GET request from CFS Portal
+2. OSS extracts the App Packages from the database and list them
+
+### App Package/{app_pkg_id}
+
+#### GET (Individual Package)
+1. OSS receives a GET request from CFS Portal
+2. OSS extracts the App Package, using the app_pkg_id, from the database and list it
+
+
 #### PUT
 1. OSS receives a PUT request from the CFS Portal
 2. OSS unpacks archive
 3. OSS validates the app descriptor
 3. OSS parses the app descriptor
 4. OSS checks if the app_pkg_id is valid and exists in the Database  
-5. OSS sends the app descriptor and the app_pkg_id through Kafka
+5. OSS sends the app descriptor and the app_pkg_id through Kafka, on the topic [update_app_pkg](#update_app_pkg)
 6. MEAO validates the app descriptor
 7. MEAO retrieves the [vnf_package_id](#document-fields) and the [nsd_package_id](#document-fields) from the Database
 8. MEAO converts the descriptor to an nsd and a vnfd
 9. MEAO compresses and saves the vnfd and nsd in the file storage 
 9. MEAO sends a request to update the vnfd and nsd using OSM
 10. MEAO receives the response from OSM, and deletes the files from file storage
-11. MEAO return a response to OSS
+11. MEAO returns a response to OSS
 12. OSS receives the response from MEAO
 13. OSS updates the Database with the new descriptor 
 14. OSS returns a response
 
-#### DELETE
 
-#### GET and LIST
+#### DELETE
+1. OSS receives a DELETE request from the CFS Portal
+2. OSS checks if the app_pkg_id is valid and exists in the Database
+3. OSS sends the app_pkg_id through Kafka, on the topic [delete_app_pkg](#delete_app_pkg)
+4. MEAO receives the app_pkg_id through Kafka, on the topic [delete_app_pkg](#delete_app_pkg)
+5. MEAO uses the app_pkg_id to retrive the [vnf_package_id](#document-fields) and the [nsd_package_id](#document-fields) from the Database
+6. MEAO sends a request to delete the NS using OSM
+7. MEAO updates the [nsd_package_id](#document-fields) from the Database, setting it to None
+8. MEAO sends a request to delete the VNF using OSM
+9. MEAO updates the [vnf_package_id](#document-fields) from the Database, setting it to None
+10. MEAO returns a response to OSS
+11. OSS receives the response from MEAO
+12. OSS updates the Database
+13. OSS return the response
 
 
 ## [Demonstration App](https://github.com/PedroDSFerreira/video-object-detection)
