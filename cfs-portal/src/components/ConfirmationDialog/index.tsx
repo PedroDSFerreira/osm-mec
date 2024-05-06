@@ -8,12 +8,21 @@ import {
     Button,
 } from '@mui/material';
 import { ConfirmationDialogProps } from '../../types/Component';
+import capitalize from '../../utils/capitalize';
 
-const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ open, onClose, onConfirm, title, content }) => {
+const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ open, onClose, onConfirm, action, item }) => {
+    const getTitle = () => {
+        return `${capitalize(action.toString())} ${capitalize(item.toString())}`;
+    };
+
+    const getContent = () => {
+        return `Are you sure you want to ${action} this ${item}?`;
+    };
+
     return (
         <Dialog open={open || false} onClose={onClose}>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogContent>{content}</DialogContent>
+            <DialogTitle> {getTitle()} </DialogTitle>
+            <DialogContent> {getContent()} </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary">
                     Cancel
@@ -24,14 +33,6 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ open, onClose, 
             </DialogActions>
         </Dialog>
     );
-};
-
-ConfirmationDialog.propTypes = {
-    open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onConfirm: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.node.isRequired,
 };
 
 export default ConfirmationDialog;

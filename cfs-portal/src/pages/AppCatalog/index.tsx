@@ -6,6 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { ToastContainer } from 'react-toastify';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import { useAppCatalog } from '../../hooks/useAppCatalog';
+import { ActionType, Item } from '../../types/Component';
 
 const AppCatalog = () => {
     const {
@@ -89,8 +90,8 @@ const AppCatalog = () => {
                 )}
             </Box>
             <ConfirmationDialog
-                title='Delete App'
-                content='Are you sure you want to delete this app?'
+                item={Item.APP}
+                action={ActionType.DELETE}
                 onConfirm={handleDelete}
                 onClose={closeDialog}
                 open={isDialogOpen}

@@ -18,12 +18,22 @@ export type ToastType = {
   transition?: ToastTransition
 }
 
+export enum ActionType {
+  DELETE = 'delete',
+  DEPLOY = 'deploy'
+}
+
+export enum Item {
+  APP = 'app',
+  INSTANCE = 'instance'
+}
+
 export type ConfirmationDialogProps = {
-  open?: boolean,
-  onClose?: () => void,
-  onConfirm?: () => void,
-  title?: string,
-  content?: React.ReactNode
+  open: boolean,
+  onClose: () => void,
+  onConfirm: () => void,
+  action: ActionType,
+  item: Item
 }
 
 export type AppData = {
