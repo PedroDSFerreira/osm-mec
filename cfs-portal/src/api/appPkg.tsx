@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const API_URL = 'http://localhost:8080/api/v1/vnf_pkgs';
+const API_URL = 'http://localhost:8080/oss/v1/app_pkgs';
 
 export const getAppPkg = async () => {
     return await axios.get(API_URL);
