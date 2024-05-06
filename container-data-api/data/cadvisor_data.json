@@ -1,0 +1,237 @@
+{
+    "timestamp": "2024-02-07T11:02:52.988344431Z",
+    "machine_name": "cadvisor-6lfbv",
+    "container_Name": "/kubepods.slice/kubepods-besteffort.slice/kubepods-besteffort-podad460c05_fef8_4d2e_9ae2_b4578a7a023a.slice/cri-containerd-f57eafb2533a73e4b75bc8bb8735ff2cb17eee4be90f381c21c892f1a6ec04c5.scope",
+    "container_stats": {
+      "timestamp": "2024-02-07T11:02:52.988259747Z",
+      "cpu": {
+        "usage": {
+          "total": 238226000,
+          "user": 77012000,
+          "system": 161214000
+        },
+        "cfs": {
+          "periods": 0,
+          "throttled_periods": 0,
+          "throttled_time": 0
+        },
+        "schedstat": {
+          "run_time": 0,
+          "runqueue_time": 0,
+          "run_periods": 0
+        },
+        "load_average": 0
+      },
+      "diskio": {
+        "io_service_bytes": [
+          {
+            "device": "/dev/sda",
+            "major": 8,
+            "minor": 0,
+            "stats": {
+              "Read": 0,
+              "Write": 12288
+            }
+          }
+        ],
+        "io_serviced": [
+          {
+            "device": "/dev/sda",
+            "major": 8,
+            "minor": 0,
+            "stats": {
+              "Read": 0,
+              "Write": 3
+            }
+          }
+        ]
+      },
+      "memory": {
+        "usage": 7483392,
+        "max_usage": 0,
+        "cache": 45056,
+        "rss": 6107136,
+        "swap": 0,
+        "mapped_file": 4096,
+        "working_set": 7442432,
+        "failcnt": 0,
+        "container_data": {
+          "pgfault": 4713,
+          "pgmajfault": 0,
+          "numa_stats": {}
+        },
+        "hierarchical_data": {
+          "pgfault": 4713,
+          "pgmajfault": 0,
+          "numa_stats": {}
+        }
+      },
+      "network": {
+        "name": "",
+        "rx_bytes": 0,
+        "rx_packets": 0,
+        "rx_errors": 0,
+        "rx_dropped": 0,
+        "tx_bytes": 0,
+        "tx_packets": 0,
+        "tx_errors": 0,
+        "tx_dropped": 0,
+        "tcp": {
+          "Established": 0,
+          "SynSent": 0,
+          "SynRecv": 0,
+          "FinWait1": 0,
+          "FinWait2": 0,
+          "TimeWait": 0,
+          "Close": 0,
+          "CloseWait": 0,
+          "LastAck": 0,
+          "Listen": 0,
+          "Closing": 0
+        },
+        "tcp6": {
+          "Established": 0,
+          "SynSent": 0,
+          "SynRecv": 0,
+          "FinWait1": 0,
+          "FinWait2": 0,
+          "TimeWait": 0,
+          "Close": 0,
+          "CloseWait": 0,
+          "LastAck": 0,
+          "Listen": 0,
+          "Closing": 0
+        },
+        "udp": {
+          "Listen": 0,
+          "Dropped": 0,
+          "RxQueued": 0,
+          "TxQueued": 0
+        },
+        "udp6": {
+          "Listen": 0,
+          "Dropped": 0,
+          "RxQueued": 0,
+          "TxQueued": 0
+        },
+        "tcp_advanced": {
+          "RtoAlgorithm": 0,
+          "RtoMin": 0,
+          "RtoMax": 0,
+          "MaxConn": 0,
+          "ActiveOpens": 0,
+          "PassiveOpens": 0,
+          "AttemptFails": 0,
+          "EstabResets": 0,
+          "CurrEstab": 0,
+          "InSegs": 0,
+          "OutSegs": 0,
+          "RetransSegs": 0,
+          "InErrs": 0,
+          "OutRsts": 0,
+          "InCsumErrors": 0,
+          "EmbryonicRsts": 0,
+          "SyncookiesSent": 0,
+          "SyncookiesRecv": 0,
+          "SyncookiesFailed": 0,
+          "PruneCalled": 0,
+          "RcvPruned": 0,
+          "OfoPruned": 0,
+          "OutOfWindowIcmps": 0,
+          "LockDroppedIcmps": 0,
+          "TW": 0,
+          "TWRecycled": 0,
+          "TWKilled": 0,
+          "TCPTimeWaitOverflow": 0,
+          "TCPTimeouts": 0,
+          "TCPSpuriousRTOs": 0,
+          "TCPLossProbes": 0,
+          "TCPLossProbeRecovery": 0,
+          "TCPRenoRecoveryFail": 0,
+          "TCPSackRecoveryFail": 0,
+          "TCPRenoFailures": 0,
+          "TCPSackFailures": 0,
+          "TCPLossFailures": 0,
+          "DelayedACKs": 0,
+          "DelayedACKLocked": 0,
+          "DelayedACKLost": 0,
+          "ListenOverflows": 0,
+          "ListenDrops": 0,
+          "TCPHPHits": 0,
+          "TCPPureAcks": 0,
+          "TCPHPAcks": 0,
+          "TCPRenoRecovery": 0,
+          "TCPSackRecovery": 0,
+          "TCPSACKReneging": 0,
+          "TCPFACKReorder": 0,
+          "TCPSACKReorder": 0,
+          "TCPRenoReorder": 0,
+          "TCPTSReorder": 0,
+          "TCPFullUndo": 0,
+          "TCPPartialUndo": 0,
+          "TCPDSACKUndo": 0,
+          "TCPLossUndo": 0,
+          "TCPFastRetrans": 0,
+          "TCPSlowStartRetrans": 0,
+          "TCPLostRetransmit": 0,
+          "TCPRetransFail": 0,
+          "TCPRcvCollapsed": 0,
+          "TCPDSACKOldSent": 0,
+          "TCPDSACKOfoSent": 0,
+          "TCPDSACKRecv": 0,
+          "TCPDSACKOfoRecv": 0,
+          "TCPAbortOnData": 0,
+          "TCPAbortOnClose": 0,
+          "TCPAbortOnMemory": 0,
+          "TCPAbortOnTimeout": 0,
+          "TCPAbortOnLinger": 0,
+          "TCPAbortFailed": 0,
+          "TCPMemoryPressures": 0,
+          "TCPMemoryPressuresChrono": 0,
+          "TCPSACKDiscard": 0,
+          "TCPDSACKIgnoredOld": 0,
+          "TCPDSACKIgnoredNoUndo": 0,
+          "TCPMD5NotFound": 0,
+          "TCPMD5Unexpected": 0,
+          "TCPMD5Failure": 0,
+          "TCPSackShifted": 0,
+          "TCPSackMerged": 0,
+          "TCPSackShiftFallback": 0,
+          "TCPBacklogDrop": 0,
+          "PFMemallocDrop": 0,
+          "TCPMinTTLDrop": 0,
+          "TCPDeferAcceptDrop": 0,
+          "IPReversePathFilter": 0,
+          "TCPReqQFullDoCookies": 0,
+          "TCPReqQFullDrop": 0,
+          "TCPFastOpenActive": 0,
+          "TCPFastOpenActiveFail": 0,
+          "TCPFastOpenPassive": 0,
+          "TCPFastOpenPassiveFail": 0,
+          "TCPFastOpenListenOverflow": 0,
+          "TCPFastOpenCookieReqd": 0,
+          "TCPSynRetrans": 0,
+          "TCPOrigDataSent": 0,
+          "PAWSActive": 0,
+          "PAWSEstab": 0
+        }
+      },
+      "task_stats": {
+        "nr_sleeping": 0,
+        "nr_running": 0,
+        "nr_stopped": 0,
+        "nr_uninterruptible": 0,
+        "nr_io_wait": 0
+      },
+      "processes": {
+        "process_count": 0,
+        "fd_count": 0,
+        "socket_count": 0
+      },
+      "resctrl": {},
+      "cpuset": {
+        "memory_migrate": 0
+      }
+    }
+  }
+  

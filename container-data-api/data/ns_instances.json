@@ -1,0 +1,236 @@
+{
+    "_id": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25", #
+    "name": "stress",
+    "name-ref": "stress",
+    "short-name": "stress",
+    "admin-status": "ENABLED",
+    "nsState": "READY",
+    "currentOperation": "IDLE",
+    "currentOperationID": null,
+    "errorDescription": null,
+    "errorDetail": null,
+    "deploymentStatus": null,
+    "configurationStatus": [],
+    "vcaStatus": {
+        "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25": {
+            "info": {
+                "deleted": "",
+                "description": "Install complete",
+                "first_deployed": "2024-02-19T15:28:33.512088419Z",
+                "last_deployed": "2024-02-19T15:28:33.512088419Z",
+                "status": "deployed"
+            },
+            "manifest": [
+                {
+                    "apiVersion": "v1",
+                    "kind": "Pod",
+                    "metadata": {
+                        "name": "stress",
+                        "labels": {
+                            "app": "stress"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "stress",
+                                "image": "alexeiled/stress-ng:latest-ubuntu",
+                                "imagePullPolicy": "Always",
+                                "args": [
+                                    "tail",
+                                    "-f",
+                                    "/dev/null"
+                                ],
+                                "securityContext": {
+                                    "capabilities": {
+                                        "add": [
+                                            "SYS_ADMIN"
+                                        ]
+                                    }
+                                },
+                                "volumeMounts": [
+                                    {
+                                        "name": "dockersocket",
+                                        "mountPath": "/var/run/docker.sock"
+                                    },
+                                    {
+                                        "name": "cgroupfs",
+                                        "mountPath": "/sys/fs/cgroup"
+                                    }
+                                ]
+                            }
+                        ],
+                        "volumes": [
+                            {
+                                "hostPath": {
+                                    "path": "/var/run/docker.sock"
+                                },
+                                "name": "dockersocket"
+                            },
+                            {
+                                "hostPath": {
+                                    "path": "/sys/fs/cgroup"
+                                },
+                                "name": "cgroupfs"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "name": "stress-helm-chart-0034230008",
+            "namespace": "17d7aed1-869a-4ced-b492-c3a8b0a433c2",
+            "version": 1
+        }
+    },
+    "nsd": {
+        "_id": "f99f76c9-a870-4c27-877d-58082a68c517", #
+        "id": "stress_ns",
+        "version": "1.0",
+        "name": "stress_ns",
+        "vnfd-id": [
+            "stress_knf"
+        ],
+        "virtual-link-desc": [
+            {
+                "id": "mgmtnet",
+                "mgmt-network": true
+            }
+        ],
+        "df": [
+            {
+                "id": "default-df",
+                "vnf-profile": [
+                    {
+                        "id": "stress",
+                        "virtual-link-connectivity": [
+                            {
+                                "constituent-cpd-id": [
+                                    {
+                                        "constituent-base-element-id": "stress",
+                                        "constituent-cpd-id": "mgmt-ext"
+                                    }
+                                ],
+                                "virtual-link-profile-id": "mgmtnet"
+                            }
+                        ],
+                        "vnfd-id": "stress_knf"
+                    }
+                ]
+            }
+        ],
+        "description": "NS consisting of a single KNF stress_knf connected to mgmt network",
+        "_admin": {
+            "userDefinedData": {},
+            "revision": 1,
+            "created": 1708356495.2389865,
+            "modified": 1708356495.531366,
+            "projects_read": [
+                "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+            ],
+            "projects_write": [
+                "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+            ],
+            "onboardingState": "ONBOARDED",
+            "operationalState": "ENABLED",
+            "usageState": "NOT_IN_USE",
+            "storage": {
+                "fs": "mongo",
+                "path": "/app/storage/",
+                "folder": "f99f76c9-a870-4c27-877d-58082a68c517:1",
+                "pkg-dir": "stress_ns",
+                "descriptor": "stress_ns/stress_nsd.yaml",
+                "zipfile": "stress_ns.tar.gz"
+            }
+        }
+    },
+    "datacenter": "1b8cdf5d-e04d-42ab-8679-beec726ce5f4",
+    "resource-orchestrator": "osmopenmano",
+    "description": "default description",
+    "constituent-vnfr-ref": [
+        "dc2b1a02-f9ed-4b9a-b07d-0e307ebdc144"
+    ],
+    "operational-status": "running",
+    "config-status": "configured",
+    "detailed-status": "Done",
+    "orchestration-progress": {},
+    "create-time": 1708356500.4607623,
+    "nsd-name-ref": "stress_ns",
+    "operational-events": [],
+    "nsd-ref": "stress_ns",
+    "nsd-id": "f99f76c9-a870-4c27-877d-58082a68c517",
+    "vnfd-id": [
+        "344a64f9-5d98-4ff6-a6bd-6ef15fd256d5"
+    ],
+    "instantiate_params": {
+        "nsdId": "f99f76c9-a870-4c27-877d-58082a68c517",
+        "nsName": "stress",
+        "nsDescription": "default description",
+        "vimAccountId": "1b8cdf5d-e04d-42ab-8679-beec726ce5f4"
+    },
+    "additionalParamsForNs": null,
+    "ns-instance-config-ref": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25",
+    "id": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25",
+    "ssh-authorized-key": null,
+    "flavor": [],
+    "image": [],
+    "affinity-or-anti-affinity-group": [],
+    "shared-volumes": [],
+    "vnffgd": [],
+    "revision": 1,
+    "vld": [
+        {
+            "id": "mgmtnet",
+            "mgmt-network": true,
+            "name": "mgmtnet",
+            "type": null,
+            "vim_info": {
+                "vim:1b8cdf5d-e04d-42ab-8679-beec726ce5f4": {
+                    "vim_account_id": "1b8cdf5d-e04d-42ab-8679-beec726ce5f4",
+                    "vim_network_name": null,
+                    "vim_details": "{name: mgmtnet, status: ACTIVE}\n",
+                    "vim_id": "de72d759-2ae9-4a3c-966e-df94d3f980c2",
+                    "vim_message": null,
+                    "vim_status": "ACTIVE",
+                    "vim_name": "mgmtnet"
+                }
+            }
+        }
+    ],
+    "_admin": {
+        "created": 1708356500.558118,
+        "modified": 1708357318.0996454,
+        "projects_read": [
+            "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+        ],
+        "projects_write": [
+            "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+        ],
+        "nsState": "INSTANTIATED",
+        "current-operation": null,
+        "nslcmop": null,
+        "operation-type": null,
+        "deployed": {
+            "RO": {
+                "vnfd": [],
+                "operational-status": "running"
+            },
+            "VCA": [],
+            "K8s": [
+                {
+                    "kdu-instance": "stress-helm-chart-0034230008", #
+                    "k8scluster-uuid": "5648dcab-d759-4886-ac6b-061aa4dd42f3",
+                    "k8scluster-type": "helm-chart-v3",
+                    "member-vnf-index": "stress", #
+                    "kdu-name": "stress", #
+                    "kdu-model": "/app/storage/344a64f9-5d98-4ff6-a6bd-6ef15fd256d5:1/stress_knf/helm-chart-v3s/stress-helm-chart",
+                    "namespace": "17d7aed1-869a-4ced-b492-c3a8b0a433c2",
+                    "kdu-deployment-name": "",
+                    "detailed-status": "{'info': {'deleted': '', 'description': 'Install complete', 'first_deployed': '2024-02-19T15:28:33.512088419Z', 'last_deployed': '2024-02-19T15:28:33.512088419Z', 'status': 'deployed'}, 'manifest': [{'apiVersion': 'v1', 'kind': 'Pod', 'metadata': {'name': 'stress', 'labels': {'app': 'stress'}}, 'spec': {'containers': [{'name': 'stress', 'image': 'alexeiled/stress-ng:latest-ubuntu', 'imagePullPolicy': 'Always', 'args': ['tail', '-f', '/dev/null'], 'securityContext': {'capabilities': {'add': ['SYS_ADMIN']}}, 'volumeMounts': [{'name': 'dockersocket', 'mountPath': '/var/run/docker.sock'}, {'name': 'cgroupfs', 'mountPath': '/sys/fs/cgroup'}]}], 'volumes': [{'hostPath': {'path': '/var/run/docker.sock'}, 'name': 'dockersocket'}, {'hostPath': {'path': '/sys/fs/cgroup'}, 'name': 'cgroupfs'}]}}], 'name': 'stress-helm-chart-0034230008', 'namespace': '17d7aed1-869a-4ced-b492-c3a8b0a433c2', 'version': 1}",
+                    "operation": "install",
+                    "status": "Install complete",
+                    "status-time": "1708356520.1895528"
+                }
+            ]
+        }
+    }
+}

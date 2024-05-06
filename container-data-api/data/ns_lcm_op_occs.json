@@ -1,0 +1,40 @@
+{
+    "_id": "13352ce6-9291-4332-a72c-f47c8b3cb449",
+    "id": "13352ce6-9291-4332-a72c-f47c8b3cb449",
+    "operationState": "COMPLETED",
+    "queuePosition": 0,
+    "stage": "",
+    "errorMessage": null,
+    "detailedStatus": null,
+    "statusEnteredTime": 1708356544.0365267,
+    "nsInstanceId": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25",
+    "lcmOperationType": "instantiate",
+    "startTime": 1708356500.6925967,
+    "isAutomaticInvocation": false,
+    "operationParams": {
+        "nsdId": "f99f76c9-a870-4c27-877d-58082a68c517",
+        "nsName": "stress",
+        "nsDescription": "default description",
+        "vimAccountId": "1b8cdf5d-e04d-42ab-8679-beec726ce5f4",
+        "nsr_id": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25",
+        "lcmOperationType": "instantiate",
+        "nsInstanceId": "d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25"
+    },
+    "isCancelPending": false,
+    "links": {
+        "self": "/osm/nslcm/v1/ns_lcm_op_occs/13352ce6-9291-4332-a72c-f47c8b3cb449",
+        "nsInstance": "/osm/nslcm/v1/ns_instances/d608d6d3-7f50-4f7f-a3b8-ecaf9dbaec25"
+    },
+    "_admin": {
+        "created": 1708356500.6927285,
+        "modified": 1708356544.0365305,
+        "projects_read": [
+            "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+        ],
+        "projects_write": [
+            "17d7aed1-869a-4ced-b492-c3a8b0a433c2"
+        ],
+        "worker": "b94b144273f5"
+    },
+    "detailed-status": "Done"
+}
