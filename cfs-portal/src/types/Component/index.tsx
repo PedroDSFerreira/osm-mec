@@ -37,8 +37,21 @@ export type ConfirmationDialogProps = {
 }
 
 export type AppData = {
-  _id: string,
-  'product-name': string,
+  id: string,
+  name: string,
   provider: string,
   version: number
+}
+
+export type InstanceData = {
+  name: string;
+  'operational-status': string;
+  'config-status': string;
+  details: string;
+  'created-at': Date;
+}
+
+export type VimData = {
+  id: string,
+  name: string
 }
