@@ -11,7 +11,11 @@ class NBIConnector:
         self.authToken = self.getAuthToken()
         self.kubectl_command = kubectl_command
         self.kubectl_config_path = kubectl_config_path
-        kubectl_config = json.loads(self.callEndpoints("/admin/v1/k8sclusters", "GET"))[0]
+        try:
+            kubectl_config = json.loads(self.callEndpoints("/admin/v1/k8sclusters", "GET"))[0]
+        except Exception as e:
+            print("ERROR: Could not get kube config")
+            exit(1)
         with open(self.kubectl_config_path, 'w') as file:
             yaml.dump(kubectl_config["credentials"], file)
 
@@ -64,6 +68,31 @@ class NBIConnector:
         info = r.text
 
         return info
+
+    def getNodeSpecs(self):
+        nodeSpecs = {}
+
+        command = (
+            "{} --kubeconfig={} get nodes -o=json".format(
+                self.kubectl_command,
+                self.kubectl_config_path,
+            )
+        )
+        try:
+            # Execute the kubectl command and capture the output
+            node_info = json.loads(subprocess.check_output(command.split()))
+        except subprocess.CalledProcessError as e:
+            # Handle any errors if the command fails
+            print("Error executing kubectl command:", e)
+            return None
+
+        for node in node_info["items"]:
+            nodeSpecs[node["metadata"]["labels"]["kubernetes.io/hostname"]] = {
+                "num_cpu_cores": int(node["status"]["allocatable"]["cpu"]),
+                "memory_size": int(node["status"]["allocatable"]["memory"][:-2])/pow(1024,2),
+            }
+
+        return nodeSpecs
 
     def getContainerInfo(self):
         ns_instances = self.callEndpoints("/nslcm/v1/ns_instances", "GET")
