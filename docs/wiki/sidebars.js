@@ -20,7 +20,6 @@ const sidebars = {
   
   tutorialSidebar: [
     'getting_started',
-    'milestones_tasks',
     'project',
     'api_related',
     'mec_app',

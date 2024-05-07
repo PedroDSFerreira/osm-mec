@@ -12,7 +12,7 @@
 
 ## Main Components
 
-![Project Diagram](./images/Drawing6.png)
+![Project Diagram](./images/osm_mec_architecture.drawio.png)
 
 
 ### CFS Portal
@@ -84,32 +84,32 @@ Document fields are: <a id="document-fields"></a>
 ### App Package
 
 #### POST
-![New App Package](./images/new_app_pkg.drawio.png)
+![New App Package](./images/new_app_pkg.png)
 
 #### GET (List) 
-![List App Packages](./images/list_app_pkgs.drawio.png)
+![List App Packages](./images/list_app_pkgs.png)
 
-### App Package/{app_pkg_id}
+### App Package/`{app_pkg_id}`
 
 #### GET (Individual Package)
-![Get App Package](./images/get_app_pkg.drawio.png)
+![Get App Package](./images/get_app_pkg.png)
 
 
 #### PUT
-![Update App Package](./images/update_app_pkg.drawio.png)
+![Update App Package](./images/update_app_pkg.png)
 
 
 #### DELETE
-![Delete App Package](./images/delete_app_pkg.drawio.png)
+![Delete App Package](./images/delete_app_pkg.png)
 
-### App Package/{app_pkg_id}/instantiate
+### App Package/`{app_pkg_id}`/instantiate
 
 #### Instantiate
-![Instantiate App Package](./images/instantiate_app_pkg.drawio.png)
+![Instantiate App Package](./images/instantiate_app_pkg.png)
 
 #### Terminate
 
-![Terminate App Package](./images/terminate_app_pkg.drawio.png)
+![Terminate App Package](./images/terminate_app_pkg.png)
 
 
 

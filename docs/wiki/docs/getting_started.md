@@ -8,11 +8,11 @@ slug: /
 ## Requirements
 
 - [OSM](https://osm.etsi.org/docs/user-guide/latest/03-installing-osm.html#how-to-install-osm)
-- [Git](https://git-scm.com/downloads)
+- `Git`
 - [Docker](https://www.docker.com/get-started/)
-- docker compose
-- cp
-- Kubernetes Cluster
+- [docker compose](https://docs.docker.com/compose/install/)
+- `cp` command
+- [Kubernetes Cluster](https://docs.k3s.io/quick-start)
 
 
 ## Preparation:
@@ -40,6 +40,9 @@ slug: /
 
     
    -  Add Vim Account
+   ```bash
+   osm vim-create --name vim-account-name --user admin --password pwd --auth_url http://example.com --tenant admin --account_type dummy --config='{}'
+   ```
    - [Associate cluster to VIM Account](https://osm.etsi.org/docs/user-guide/latest/05-osm-usage.html#adding-kubernetes-cluster-to-osm)
     
 

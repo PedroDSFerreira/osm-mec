@@ -8,6 +8,8 @@
 helm create <chart-name>
 ```
 
+> You should edit the helm chart to include the container image and other configurations
+
 ![Example Image](./images/create_helm.png)
 And then package it:
 
@@ -27,6 +29,8 @@ appd/
 ├── helm.tgz
 ├── appd.yaml
 ```
+
+>Instead, you can use our [example app](https://github.com/PedroDSFerreira/osm-mec/blob/main/assets/appd-package.tar.gz)
 
 
 
