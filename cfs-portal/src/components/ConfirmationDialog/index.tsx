@@ -10,7 +10,7 @@ import {
 import { ConfirmationDialogProps } from '../../types/Component';
 import capitalize from '../../utils/capitalize';
 
-const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({ open, onClose, onConfirm, action, item }) => {
+const ConfirmationDialog = ({ open, onClose, onConfirm, action, item }: ConfirmationDialogProps) => {
     const getTitle = () => {
         return `${capitalize(action.toString())} ${capitalize(item.toString())}`;
     };
