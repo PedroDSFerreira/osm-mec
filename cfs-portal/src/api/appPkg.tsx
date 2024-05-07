@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 const API_URL = 'http://localhost:8080/oss/v1/app_pkgs';
 
@@ -13,7 +13,6 @@ export const newAppPkg = async (formData: FormData) => {
         {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
     );
@@ -21,4 +20,16 @@ export const newAppPkg = async (formData: FormData) => {
 
 export const deleteAppPkg = async (id: string) => {
     return await axios.delete(`${API_URL}/${id}`);
+}
+
+export const instantiateAppPkg = async (id: string, formData: FormData) => {
+    return await axios.post(
+        `${API_URL}/${id}/instantiate`,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+    );
 }
