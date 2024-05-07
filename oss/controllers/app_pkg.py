@@ -3,7 +3,7 @@ from utils.appd_validation import *
 from utils.cherrypy_utils import is_valid_id
 from utils.db import DB
 from utils.file_management import *
-from utils.kafka_utils import KafkaUtils, producer
+from utils.kafka import KafkaUtils, producer
 from views.app_pkg import AppPkgView
 
 
