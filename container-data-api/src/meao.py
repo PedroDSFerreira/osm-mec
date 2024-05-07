@@ -1,13 +1,13 @@
-from time import sleep
 import threading
+from time import sleep
+
 
 class MEAO:
-    def __init__(self, nbi_k8s_connector,update_container_ids_freq) -> None:
+    def __init__(self, nbi_k8s_connector, update_container_ids_freq) -> None:
         self.nbi_k8s_connector = nbi_k8s_connector
         self.update_container_ids_freq = update_container_ids_freq
         self.nodeSpecs = self.nbi_k8s_connector.getNodeSpecs()
         self.containerInfo = self.nbi_k8s_connector.getContainerInfo()
-
 
     def start(self):
         # Create threads

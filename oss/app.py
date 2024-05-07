@@ -4,10 +4,10 @@ import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
 from utils.cherrypy_utils import jsonify_error
+from utils.container_info_thread import ContainerInfoThread
 from utils.kafka import KafkaConsumerThread
 from utils.kafka.error_handler import callback as error_handler
 from utils.kafka.get_metrics import callback as get_metrics
-from utils.container_info_thread import ContainerInfoThread
 
 
 def main():
