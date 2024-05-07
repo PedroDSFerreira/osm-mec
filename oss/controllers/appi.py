@@ -1,6 +1,6 @@
 import cherrypy
 from utils.cherrypy_utils import is_valid_uuid
-from utils.kafka_utils import KafkaUtils, producer
+from utils.kafka import KafkaUtils, producer
 from utils.osm import get_osm_client
 from views.appi import AppiView
 
