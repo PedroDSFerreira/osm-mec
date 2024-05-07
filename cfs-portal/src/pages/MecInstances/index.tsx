@@ -5,29 +5,22 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import { getAppI } from "../../api/appI";
+import { InstanceData } from "../../types/Component";
 import toast from "../../utils/toast";
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', flex: 1 },
-    { field: 'vnfd-ref', headerName: 'VNFD', flex: 1 },
-    { field: 'member-vnf-index-ref', headerName: 'Member Index', flex: 1 },
-    { field: 'nsr-id-ref', headerName: 'NS', flex: 1 },
+    { field: 'name', headerName: 'Name', flex: 1 },
+    { field: 'operational-status', headerName: 'Operational Status', flex: 1 },
+    { field: 'config-status', headerName: 'Config Status', flex: 1 },
+    { field: 'details', headerName: 'Details', flex: 1 },
     {
-        field: 'created-time',
+        field: 'created-at',
         headerName: 'Created At',
         flex: 1,
         type: 'date',
         valueFormatter: ({ value }) => (value as Date).toLocaleString()
     },
 ];
-
-type InstanceData = {
-    id: string;
-    'vnfd-ref': string;
-    'member-vnf-index-ref': string;
-    'nsr-id-ref': string;
-    'created-time': Date;
-}
 
 const MecInstances = () => {
     const [instanceData, setInstanceData] = useState<InstanceData[]>([]);
@@ -41,7 +34,7 @@ const MecInstances = () => {
             const data = await getAppI();
             const formattedData = data.map((d: any) => ({
                 ...d,
-                'created-time': new Date(d['created-time'] * 1000)
+                'created-at': new Date(d['created-at'] * 1000)
             }));
             setInstanceData(formattedData);
         } catch (error) {
@@ -70,7 +63,7 @@ const MecInstances = () => {
                     </>
                 ) : (
                     <DataGrid
-                        //getRowId={(row) => row._id}
+                        getRowId={(row) => row.id}
                         rows={instanceData}
                         columns={columns}
                         initialState={{
