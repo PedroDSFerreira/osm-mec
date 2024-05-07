@@ -151,6 +151,33 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 12. OSS updates the Database
 13. OSS return the response
 
+### App Package/{app_pkg_id}/instantiate
+
+#### Instantiate
+1. OSS receives a POST request from the CFS Portal
+2. OSS checks if app_pkg_id exists in the DB
+3. OSS sends the app_pkg_id through Kafka, on the topic instantiate_app_pkg
+4. MEAO requests the app pkg from the DB
+5. DB returns the app pkg
+6. MEAO gets ns_pkg_id from the app pkg
+7. MEAO sends request to OSM to create the NS instance with ns_pkg_id
+8. OSM returns response
+9. MEAO returns response
+10. OSS returns response
+
+#### Terminate
+
+1. DELETE request
+2. OSS checks if appi_id is valid
+3. OSS sends appi_id through Kafka, on topic terminate_app_pkg
+4. MEAO validates appi_id
+5. MEAO requests OSM to delete the NS instance with the appi_id
+6. OSM returns response
+7. MEAO returns response
+8. OSS returns response
+
+
+
 
 ## [Demonstration App](https://github.com/PedroDSFerreira/video-object-detection)
 
