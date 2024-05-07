@@ -1,10 +1,8 @@
+import warnings
+import requests
 import json
 import subprocess
-import warnings
-
-import requests
 import yaml
-
 
 class NBIConnector:
 
@@ -14,34 +12,29 @@ class NBIConnector:
         self.kubectl_command = kubectl_command
         self.kubectl_config_path = kubectl_config_path
         try:
-            kubectl_config = json.loads(
-                self.callEndpoints("/admin/v1/k8sclusters", "GET")
-            )[0]
+            kubectl_config = json.loads(self.callEndpoints("/admin/v1/k8sclusters", "GET"))[0]
         except Exception as e:
             print("ERROR: Could not get kube config")
             exit(1)
-        with open(self.kubectl_config_path, "w") as file:
+        with open(self.kubectl_config_path, 'w') as file:
             yaml.dump(kubectl_config["credentials"], file)
 
     def getAuthToken(self):
         # Authentication
-        endpoint = self.nbi_url + "/admin/v1/tokens"
-        result = {"error": True, "data": ""}
+        endpoint = self.nbi_url + '/admin/v1/tokens'
+        result = {'error': True, 'data': ''}
         headers = {"Content-Type": "application/yaml", "accept": "application/json"}
-        data = {"username": "admin", "password": "admin"}
+        data = {"username": 'admin', "password": 'admin'}
         try:
             with warnings.catch_warnings():
-                warnings.filterwarnings(
-                    "ignore",
-                    category=requests.packages.urllib3.exceptions.InsecureRequestWarning,
-                )
-                r = requests.post(endpoint, headers=headers, json=data, verify=False)
+                warnings.filterwarnings("ignore", category=requests.packages.urllib3.exceptions.InsecureRequestWarning)
+                r = requests.post(endpoint, headers=headers,  json=data, verify=False)
         except Exception as e:
             result["data"] = str(e)
             return result
 
         if r.status_code == requests.codes.ok:
-            result["error"] = False
+            result['error'] = False
 
         result["data"] = r.text
         token = json.loads(r.text)
@@ -53,45 +46,25 @@ class NBIConnector:
 
         # Get NS Instances
         endpoint = self.nbi_url + endpoint
-        result = {"error": True, "data": ""}
-        headers = {
-            "Content-Type": "application/yaml",
-            "accept": "application/json",
-            "Authorization": "Bearer {}".format(self.authToken),
-        }
+        result = {'error': True, 'data': ''}
+        headers = {"Content-Type": "application/yaml", "accept": "application/json",
+                'Authorization': 'Bearer {}'.format(self.authToken)}
         try:
             with warnings.catch_warnings():
-                warnings.filterwarnings(
-                    "ignore",
-                    category=requests.packages.urllib3.exceptions.InsecureRequestWarning,
-                )
+                warnings.filterwarnings("ignore", category=requests.packages.urllib3.exceptions.InsecureRequestWarning)
                 match method:
                     case "GET":
-                        r = requests.get(
-                            endpoint,
-                            data=data,
-                            params=None,
-                            verify=False,
-                            stream=True,
-                            headers=headers,
-                        )
+                        r = requests.get(endpoint, data=data, params=None, verify=False, stream=True, headers=headers)
                     case "POST":
-                        r = requests.post(
-                            endpoint,
-                            data=data,
-                            params=None,
-                            verify=False,
-                            stream=True,
-                            headers=headers,
-                        )
+                        r = requests.post(endpoint, data=data, params=None, verify=False, stream=True, headers=headers)
         except Exception as e:
-            result["data"] = str(e)
+            result['data'] = str(e)
             return result
 
         if r.status_code == requests.codes.ok:
-            result["error"] = False
+            result['error'] = False
 
-        result["data"] = r.text
+        result['data'] = r.text
         info = r.text
 
         return info
@@ -99,9 +72,11 @@ class NBIConnector:
     def getNodeSpecs(self):
         nodeSpecs = {}
 
-        command = "{} --kubeconfig={} get nodes -o=json".format(
-            self.kubectl_command,
-            self.kubectl_config_path,
+        command = (
+            "{} --kubeconfig={} get nodes -o=json".format(
+                self.kubectl_command,
+                self.kubectl_config_path,
+            )
         )
         try:
             # Execute the kubectl command and capture the output
@@ -114,8 +89,7 @@ class NBIConnector:
         for node in node_info["items"]:
             nodeSpecs[node["metadata"]["labels"]["kubernetes.io/hostname"]] = {
                 "num_cpu_cores": int(node["status"]["allocatable"]["cpu"]),
-                "memory_size": int(node["status"]["allocatable"]["memory"][:-2])
-                / pow(1024, 2),
+                "memory_size": int(node["status"]["allocatable"]["memory"][:-2])/pow(1024,2),
             }
 
         return nodeSpecs
@@ -128,9 +102,9 @@ class NBIConnector:
             print(e)
 
         if len(ns_instances) < 1:
-            print("ERROR: No deployed ns instances")
-        elif "code" in ns_instances[0].keys():
-            print("ERROR: Error calling ns_instances endpoint")
+            print('ERROR: No deployed ns instances')
+        elif 'code' in ns_instances[0].keys():
+            print('ERROR: Error calling ns_instances endpoint')
 
         containerInfo = []
 
@@ -139,9 +113,7 @@ class NBIConnector:
             vnf_ids = ns_instance["constituent-vnfr-ref"]
             vnf_instances = {}
             for vnf_id in vnf_ids:
-                vnfContent = self.callEndpoints(
-                    "/nslcm/v1/vnf_instances/{}".format(vnf_id), "GET"
-                )
+                vnfContent = self.callEndpoints("/nslcm/v1/vnf_instances/{}".format(vnf_id), "GET")
                 try:
                     vnfContent = json.loads(vnfContent)
                 except Exception as e:
@@ -156,11 +128,13 @@ class NBIConnector:
                 namespace = kdu["namespace"]
                 vnf_id = vnf_instances[member_vnf_index]
 
-                command = "{} --kubeconfig={} --namespace={} get pods -l ns_id={} -o=json".format(
-                    self.kubectl_command,
-                    self.kubectl_config_path,
-                    namespace,
-                    ns_id,
+                command = (
+                    "{} --kubeconfig={} --namespace={} get pods -l ns_id={} -o=json".format(
+                        self.kubectl_command,
+                        self.kubectl_config_path,
+                        namespace,
+                        ns_id,
+                    )
                 )
                 try:
                     # Execute the kubectl command and capture the output
@@ -176,13 +150,12 @@ class NBIConnector:
                     for container in containers:
                         if "containerID" in container:
                             id = container["containerID"]
-                            containerInfo.append(
-                                {
-                                    "id": id.strip('"').split("/")[-1],
-                                    "ns_id": ns_id,
-                                    "vnf_id": vnf_id,
-                                    "kdu_id": kdu_instance,
-                                    "node": nodeName,
+                            containerInfo.append({
+                                "id": id.strip('"').split('/')[-1],
+                                "ns_id": ns_id,
+                                "vnf_id": vnf_id,
+                                "kdu_id": kdu_instance,
+                                "node": nodeName,
                                 }
                             )
 

@@ -4,7 +4,6 @@ import uuid
 
 from cherrypy import HTTPError
 from kafka import KafkaConsumer, KafkaProducer
-
 from .error_handler import responses
 
 producer = KafkaProducer(
