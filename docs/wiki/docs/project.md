@@ -108,13 +108,13 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 
 #### GET (List) 
 1. OSS receives a GET request from CFS Portal
-2. OSS extracts the App Packages from the database and list them
+2. OSS extracts [document fields](#document-fields) from the database and list them, for every App package
 
 ### App Package/{app_pkg_id}
 
 #### GET (Individual Package)
 1. OSS receives a GET request from CFS Portal
-2. OSS extracts the App Package, using the app_pkg_id, from the database and list it
+2. OSS extracts the [document fields](#document-fields) using the app_pkg_id, from the database, and list them, for the requested App package
 
 
 #### PUT
@@ -127,9 +127,9 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 6. MEAO validates the app descriptor
 7. MEAO retrieves the [vnf_package_id](#document-fields) and the [nsd_package_id](#document-fields) from the Database
 8. MEAO converts the descriptor to an nsd and a vnfd
-9. MEAO compresses and saves the vnfd and nsd in the file storage 
+9. MEAO compresses and saves the vnfd and nsd in the local storage
 9. MEAO sends a request to update the vnfd and nsd using OSM
-10. MEAO receives the response from OSM, and deletes the files from file storage
+10. MEAO receives the response from OSM, and deletes the files from local storage
 11. MEAO returns a response to OSS
 12. OSS receives the response from MEAO
 13. OSS updates the Database with the new descriptor 
@@ -141,9 +141,9 @@ Each collection has documents. Document fields are: <a id="document-fields"></a>
 2. OSS checks if the app_pkg_id is valid and exists in the Database
 3. OSS sends the app_pkg_id through Kafka, on the topic [delete_app_pkg](#delete_app_pkg)
 4. MEAO receives the app_pkg_id through Kafka, on the topic [delete_app_pkg](#delete_app_pkg)
-5. MEAO uses the app_pkg_id to retrive the [vnf_package_id](#document-fields) and the [nsd_package_id](#document-fields) from the Database
+5. MEAO uses the app_pkg_id to retrive the [vnf_package_id](#document-fields) and the [ns_package_id](#document-fields) from the Database
 6. MEAO sends a request to delete the NS using OSM
-7. MEAO updates the [nsd_package_id](#document-fields) from the Database, setting it to None
+7. MEAO updates the [ns_package_id](#document-fields) from the Database, setting it to None
 8. MEAO sends a request to delete the VNF using OSM
 9. MEAO updates the [vnf_package_id](#document-fields) from the Database, setting it to None
 10. MEAO returns a response to OSS
