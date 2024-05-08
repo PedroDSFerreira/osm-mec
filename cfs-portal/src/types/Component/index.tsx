@@ -17,3 +17,41 @@ export type ToastType = {
   type?: 'default' | 'success' | 'info' | 'warning' | 'error',
   transition?: ToastTransition
 }
+
+export enum ActionType {
+  DELETE = 'delete',
+  DEPLOY = 'deploy'
+}
+
+export enum Item {
+  APP = 'app',
+  INSTANCE = 'instance'
+}
+
+export type ConfirmationDialogProps = {
+  open: boolean,
+  onClose: () => void,
+  onConfirm: () => void,
+  action: ActionType,
+  item: Item
+}
+
+export type AppData = {
+  id: string,
+  name: string,
+  provider: string,
+  version: number
+}
+
+export type InstanceData = {
+  name: string;
+  'operational-status': string;
+  'config-status': string;
+  details: string;
+  'created-at': Date;
+}
+
+export type VimData = {
+  id: string,
+  name: string
+}

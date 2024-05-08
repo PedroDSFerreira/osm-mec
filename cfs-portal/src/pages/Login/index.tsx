@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Container, CssBaseline, InputLabel, FormControl, OutlinedInput, useTheme } from '@mui/material';
 import { ThemeContext } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -15,9 +18,23 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = () => {
-    // Adicione sua lógica de autenticação aqui
-    console.log(`Username: ${username}, Password: ${password}`);
+  const handleLogin = async () => {
+    axios.post(
+      'http://10.255.41.31/osm/admin/v1/users/admin',
+      {
+        username: username,
+        password: password
+      }
+    ).then(res => {
+      console.log(res.data);
+      navigateToDashboard();
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+
+  const navigateToDashboard = () => {
+    navigate('/dashboard');
   };
 
   return (
@@ -67,6 +84,7 @@ const Login = () => {
                   type="button"
                   variant="contained"
                   style={{ fontSize: '15px', width: '40%', backgroundColor: theme.palette.primary.main, color: '#fff', textTransform: 'none', fontWeight: 'bold' }}
+                  // onClick={handleLogin}>
                   onClick={handleLogin}>
                   Login
                 </Button>
