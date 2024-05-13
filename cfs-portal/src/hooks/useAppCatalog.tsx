@@ -1,16 +1,22 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import { getAppPkg, newAppPkg, deleteAppPkg } from "../api/appPkg";
+import { useState, useEffect } from "react";
+import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg } from "../api/appPkg";
+import { getVims } from "../api/vim";
 import toast from "../utils/toast";
-import { AppData } from "../types/Component";
+import { AppData, VimData } from "../types/Component";
 
 export const useAppCatalog = () => {
     const [appData, setAppData] = useState<AppData[]>([]);
     const [loading, setLoading] = useState(true);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState<string | null>(null);
+    const [vimData, setVimData] = useState<VimData[]>([]);
+    const [isFormDialogOpen, setIsFormDialogOpen] = useState(false);
+    const [formData, setFormData] = useState<FormData>(new FormData());
+    const [rowId, setRowId] = useState<string>('');
 
     useEffect(() => {
         getAppData();
+        getVimsData();
     }, []);
 
     const getAppData = async () => {
@@ -25,14 +31,19 @@ export const useAppCatalog = () => {
         }
     };
 
-    const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) {
-            toast.error('No file selected');
-            return;
+    const getVimsData = async () => {
+        try {
+            const { data } = await getVims();
+            setVimData(data);
+        } catch (error) {
+            setVimData([]);
+            toast.error('Error fetching VIM data');
         }
+    };
+
+    const handleFileUpload = async (file: File) => {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('appd', file);
         try {
             await newAppPkg(formData);
             toast.success('New app created successfully');
@@ -66,13 +77,40 @@ export const useAppCatalog = () => {
         }
     };
 
+    const openFormDialog = () => {
+        setIsFormDialogOpen(true);
+    }
+
+    const closeFormDialog = () => {
+        setIsFormDialogOpen(false);
+    }
+
+    const handleInstantiate = async (id: string, formData: FormData) => {
+        try {
+            await instantiateAppPkg(id, formData);
+            toast.success('App instantiated successfully');
+            getAppData();
+        } catch (error) {
+            toast.error('Error instantiating app');
+        }
+    }
+
     return {
         appData,
+        vimData,
+        formData,
+        rowId,
         loading,
         isDialogOpen,
+        isFormDialogOpen,
+        setRowId,
+        setFormData,
         handleFileUpload,
         openDialog,
         closeDialog,
         handleDelete,
+        openFormDialog,
+        closeFormDialog,
+        handleInstantiate
     };
 };
