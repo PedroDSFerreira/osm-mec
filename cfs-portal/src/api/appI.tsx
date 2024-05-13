@@ -9,3 +9,11 @@ export const getAppI = async () => {
         return Promise.reject(err);
     });
 };
+
+export const terminateAppI = async (id: string) => {
+    return await axios.delete(
+        `http://localhost:8080/oss/v1/appis/${id}`
+    ).catch(err => {
+        return Promise.reject(err);
+    });
+}
