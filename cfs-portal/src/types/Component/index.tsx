@@ -20,7 +20,8 @@ export type ToastType = {
 
 export enum ActionType {
   DELETE = 'delete',
-  DEPLOY = 'deploy'
+  DEPLOY = 'deploy',
+  TERMINATE = 'terminate'
 }
 
 export enum Item {
@@ -54,4 +55,30 @@ export type InstanceData = {
 export type VimData = {
   id: string,
   name: string
+}
+
+export type DropdownOption = {
+  label: string,
+  handleClick: () => void
+}
+
+export type DropdownButtonProps = {
+  title: string,
+  options: DropdownOption[]
+}
+
+export type FormDialogField = {
+  id: string,
+  label: string,
+  type: 'text' | 'select',
+  options?: string[],
+  required: boolean
+}
+
+export type FormDialogProps = {
+  open: boolean,
+  onClose: () => void,
+  onSubmit: (data: any) => void,
+  title: string,
+  fields: FormDialogField[]
 }
