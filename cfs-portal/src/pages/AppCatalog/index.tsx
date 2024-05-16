@@ -7,9 +7,11 @@ import { ToastContainer } from 'react-toastify';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import FormDialog from '../../components/FormDialog';
 import DropdownButton from '../../components/DropdownButton';
+import UploadDialog from '../../components/UploadDialog';
+import capitalize from '../../utils/capitalize';
 
 import { useAppCatalog } from '../../hooks/useAppCatalog';
-import { ActionType, Item, DropdownOption, FormDialogField, InstanceData } from '../../types/Component';
+import { ActionType, Item, DropdownOption, FormDialogField } from '../../types/Component';
 
 const AppCatalog = () => {
     const {
@@ -19,6 +21,10 @@ const AppCatalog = () => {
         loading,
         isDialogOpen,
         isFormDialogOpen,
+        isUploadDialogOpen,
+        action,
+        setAction,
+        setIsUploadDialogOpen,
         setRowId,
         handleFileUpload,
         openDialog,
@@ -75,6 +81,14 @@ const AppCatalog = () => {
                                 }
                             },
                             {
+                                label: 'Update',
+                                handleClick: () => {
+                                    setRowId(params.row.id);
+                                    setIsUploadDialogOpen(!isUploadDialogOpen);
+                                    setAction(ActionType.UPDATE);
+                                }
+                            },
+                            {
                                 label: 'Delete',
                                 handleClick: () => openDialog(params.row.id),
                             },
@@ -100,12 +114,9 @@ const AppCatalog = () => {
                     tabIndex={-1}
                     startIcon={<AddCircleIcon />}
                     disableRipple
+                    onClick={() => { setIsUploadDialogOpen(!isUploadDialogOpen); setAction(ActionType.CREATE); }}
                 >
                     Create new app
-                    <input type="file" accept='.zip,.gz' hidden onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleFileUpload(file);
-                    }} />
                 </Button>
             </Box>
             <Box>
@@ -148,6 +159,12 @@ const AppCatalog = () => {
                 onSubmit={(formData) => handleInstantiate(rowId, formData)}
                 title='Create New Instance'
                 fields={fields}
+            />
+            <UploadDialog
+                title={`${capitalize(action)} ${Item.APP}`}
+                open={isUploadDialogOpen}
+                onClose={() => setIsUploadDialogOpen(!isUploadDialogOpen)}
+                onSubmit={(file) => handleFileUpload(file, action)}
             />
             <ToastContainer />
         </>

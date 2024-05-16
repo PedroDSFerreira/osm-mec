@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg } from "../api/appPkg";
+import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg, updateAppPkg } from "../api/appPkg";
 import { getVims } from "../api/vim";
 import toast from "../utils/toast";
-import { AppData, VimData } from "../types/Component";
+import { AppData, VimData, ActionType } from "../types/Component";
 
 export const useAppCatalog = () => {
     const [appData, setAppData] = useState<AppData[]>([]);
@@ -13,6 +13,8 @@ export const useAppCatalog = () => {
     const [isFormDialogOpen, setIsFormDialogOpen] = useState(false);
     const [formData, setFormData] = useState<FormData>(new FormData());
     const [rowId, setRowId] = useState<string>('');
+    const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
+    const [action, setAction] = useState<ActionType>(ActionType.CREATE);
 
     useEffect(() => {
         getAppData();
@@ -41,15 +43,40 @@ export const useAppCatalog = () => {
         }
     };
 
-    const handleFileUpload = async (file: File) => {
+    const handleFileUpload = async (file: File, action: ActionType) => {
         const formData = new FormData();
         formData.append('appd', file);
+        switch (action) {
+            case ActionType.CREATE:
+                await handleNewAppPkg(formData);
+                break;
+            case ActionType.UPDATE:
+                await handleUpdateAppPkg(formData);
+                break;
+            default:
+                break;
+        }
+        setIsUploadDialogOpen(false);
+    };
+
+    const handleNewAppPkg = async (formData: FormData) => {
+        console.log('handleNewAppPkg');
         try {
             await newAppPkg(formData);
             toast.success('New app created successfully');
             getAppData();
         } catch (error) {
             toast.error('Error creating new app');
+        }
+    };
+
+    const handleUpdateAppPkg = async (formData: FormData) => {
+        try {
+            await updateAppPkg(rowId, formData);
+            toast.success('App updated successfully');
+            getAppData();
+        } catch (error) {
+            toast.error('Error updating app');
         }
     };
 
@@ -103,6 +130,10 @@ export const useAppCatalog = () => {
         loading,
         isDialogOpen,
         isFormDialogOpen,
+        isUploadDialogOpen,
+        action,
+        setAction,
+        setIsUploadDialogOpen,
         setRowId,
         setFormData,
         handleFileUpload,
