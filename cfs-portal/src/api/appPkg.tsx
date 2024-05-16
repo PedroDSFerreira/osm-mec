@@ -33,3 +33,15 @@ export const instantiateAppPkg = async (id: string, formData: FormData) => {
         }
     );
 }
+
+export const updateAppPkg = async (id: string, formData: FormData) => {
+    return await axios.patch(
+        `${API_URL}/${id}`,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+    );
+}

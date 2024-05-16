@@ -5,39 +5,96 @@ import { Skeleton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { ToastContainer } from 'react-toastify';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
+import FormDialog from '../../components/FormDialog';
+import DropdownButton from '../../components/DropdownButton';
+import UploadDialog from '../../components/UploadDialog';
+import capitalize from '../../utils/capitalize';
+
 import { useAppCatalog } from '../../hooks/useAppCatalog';
-import { ActionType, Item } from '../../types/Component';
+import { ActionType, Item, DropdownOption, FormDialogField } from '../../types/Component';
 
 const AppCatalog = () => {
     const {
         appData,
+        vimData,
+        rowId,
         loading,
         isDialogOpen,
+        isFormDialogOpen,
+        isUploadDialogOpen,
+        action,
+        setAction,
+        setIsUploadDialogOpen,
+        setRowId,
         handleFileUpload,
         openDialog,
         closeDialog,
         handleDelete,
+        openFormDialog,
+        closeFormDialog,
+        handleInstantiate,
     } = useAppCatalog();
 
+    const fields: FormDialogField[] = [
+        {
+            id: 'name',
+            label: 'Name',
+            type: 'text',
+            required: true,
+        },
+        {
+            id: 'description',
+            label: 'Description',
+            type: 'text',
+            required: true,
+        },
+        {
+            id: 'vim_id',
+            label: 'VIM',
+            type: 'select',
+            options: vimData.map((vim_id) => vim_id.name),
+            required: true,
+        },
+    ];
+
     const columns: GridColDef[] = [
-        { field: 'product-name', headerName: 'Name', flex: 1 },
-        { field: '_id', headerName: 'ID', flex: 1 },
-        { field: 'provider', headerName: 'Provider', flex: 1 },
-        { field: 'version', headerName: 'Version', flex: 1 },
+        { field: 'info-name', headerName: 'Name', width: 500 },
+        { field: 'description', headerName: 'Description', flex: 1, },
+        { field: 'provider', headerName: 'Provider', width: 100 },
+        { field: 'version', headerName: 'Version', width: 100 },
         {
             field: 'actions',
-            headerName: 'Actions',
-            flex: 1,
+            headerName: '',
+            width: 150,
             sortable: false,
+            align: 'center',
             renderCell: (params) => (
-                <Button
-                    variant='contained'
-                    color='primary'
-                    size='small'
-                    onClick={() => openDialog(params.row._id as string)}
-                >
-                    Delete
-                </Button>
+                <DropdownButton
+                    title='Actions'
+                    options={
+                        [
+                            {
+                                label: 'Instantiate',
+                                handleClick: () => {
+                                    setRowId(params.row.id);
+                                    openFormDialog();
+                                }
+                            },
+                            {
+                                label: 'Update',
+                                handleClick: () => {
+                                    setRowId(params.row.id);
+                                    setIsUploadDialogOpen(!isUploadDialogOpen);
+                                    setAction(ActionType.UPDATE);
+                                }
+                            },
+                            {
+                                label: 'Delete',
+                                handleClick: () => openDialog(params.row.id),
+                            },
+                        ] as DropdownOption[]
+                    }
+                />
             ),
         },
     ];
@@ -57,9 +114,9 @@ const AppCatalog = () => {
                     tabIndex={-1}
                     startIcon={<AddCircleIcon />}
                     disableRipple
+                    onClick={() => { setIsUploadDialogOpen(!isUploadDialogOpen); setAction(ActionType.CREATE); }}
                 >
                     Create new app
-                    <input type="file" accept='.zip,.gz' hidden onChange={handleFileUpload} />
                 </Button>
             </Box>
             <Box>
@@ -73,7 +130,7 @@ const AppCatalog = () => {
                     </>
                 ) : (
                     <DataGrid
-                        getRowId={(row) => row._id}
+                        getRowId={(row) => row.id}
                         rows={appData}
                         columns={columns}
                         initialState={{
@@ -95,6 +152,19 @@ const AppCatalog = () => {
                 onConfirm={handleDelete}
                 onClose={closeDialog}
                 open={isDialogOpen}
+            />
+            <FormDialog
+                open={isFormDialogOpen}
+                onClose={closeFormDialog}
+                onSubmit={(formData) => handleInstantiate(rowId, formData)}
+                title='Create New Instance'
+                fields={fields}
+            />
+            <UploadDialog
+                title={`${capitalize(action)} ${Item.APP}`}
+                open={isUploadDialogOpen}
+                onClose={() => setIsUploadDialogOpen(!isUploadDialogOpen)}
+                onSubmit={(file) => handleFileUpload(file, action)}
             />
             <ToastContainer />
         </>

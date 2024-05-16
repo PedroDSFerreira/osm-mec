@@ -19,8 +19,10 @@ export type ToastType = {
 }
 
 export enum ActionType {
+  CREATE = 'create',
   DELETE = 'delete',
   DEPLOY = 'deploy',
+  UPDATE = 'update',
   TERMINATE = 'terminate'
 }
 
@@ -81,4 +83,11 @@ export type FormDialogProps = {
   onSubmit: (data: any) => void,
   title: string,
   fields: FormDialogField[]
+}
+
+export type UploadDialogProps = {
+  title: string,
+  open: boolean,
+  onClose: () => void,
+  onSubmit: (data: any) => void
 }

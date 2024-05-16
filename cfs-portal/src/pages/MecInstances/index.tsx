@@ -4,21 +4,49 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
-import { getAppI } from "../../api/appI";
-import { InstanceData } from "../../types/Component";
+import DropdownButton from "../../components/DropdownButton";
+import { getAppI, terminateAppI } from "../../api/appI";
+import { DropdownOption, InstanceData } from "../../types/Component";
 import toast from "../../utils/toast";
 
 const columns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'operational-status', headerName: 'Operational Status', flex: 1 },
-    { field: 'config-status', headerName: 'Config Status', flex: 1 },
+    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'description', headerName: 'Description', flex: 1 },
     { field: 'details', headerName: 'Details', flex: 1 },
     {
         field: 'created-at',
         headerName: 'Created At',
-        flex: 1,
+        width: 200,
         type: 'date',
         valueFormatter: ({ value }) => (value as Date).toLocaleString()
+    },
+    { field: 'operational-status', headerName: 'Operational Status', width: 100 },
+    { field: 'config-status', headerName: 'Config Status', width: 100 },
+    {
+        field: 'actions',
+        headerName: '',
+        width: 150,
+        sortable: false,
+        renderCell: (params) => (
+            <DropdownButton
+                title='Actions'
+                options={
+                    [
+                        {
+                            label: 'Terminate',
+                            handleClick: async () => {
+                                try {
+                                    await terminateAppI(params.row.id);
+                                    toast.success('Instance termination initiated successfully');
+                                } catch (error) {
+                                    toast.error('Error terminating instance');
+                                }
+                            },
+                        },
+                    ] as DropdownOption[]
+                }
+            />
+        ),
     },
 ];
 
