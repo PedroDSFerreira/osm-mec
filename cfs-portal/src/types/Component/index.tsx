@@ -18,6 +18,18 @@ export type ToastType = {
   transition?: ToastTransition
 }
 
+export enum OperationalStatus {
+  INIT = 'init',
+  RUNNING = 'running',
+  FAILED = 'failed',
+}
+
+export enum ConfigStatus {
+  INIT = 'init',
+  CONFIGURED = 'configured',
+  FAILED = 'failed',
+}
+
 export enum ActionType {
   CREATE = 'create',
   DELETE = 'delete',
@@ -90,4 +102,11 @@ export type UploadDialogProps = {
   open: boolean,
   onClose: () => void,
   onSubmit: (data: any) => void
+}
+
+export type DetailsDialogProps = {
+  title: string,
+  open: boolean,
+  onClose: () => void,
+  data: string
 }
