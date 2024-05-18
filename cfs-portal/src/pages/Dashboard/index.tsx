@@ -94,8 +94,11 @@ const Dashboard = () => {
                                         disableColumnMenu
                                         hideFooter
                                         sx={{
-                                            '& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus': {
+                                            "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
                                                 outline: 'none',
+                                            },
+                                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                                                outline: "none !important",
                                             },
                                         }}
                                     />
@@ -126,8 +129,11 @@ const Dashboard = () => {
                                         disableColumnMenu
                                         hideFooter
                                         sx={{
-                                            '& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus': {
+                                            "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
                                                 outline: 'none',
+                                            },
+                                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                                                outline: "none !important",
                                             },
                                         }}
                                     />

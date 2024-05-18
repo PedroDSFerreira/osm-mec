@@ -3,7 +3,6 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button, Typography } from '@mui/material';
 import { Skeleton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { ToastContainer } from 'react-toastify';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import FormDialog from '../../components/FormDialog';
 import DropdownButton from '../../components/DropdownButton';
@@ -142,7 +141,12 @@ const AppCatalog = () => {
                         }}
                         pageSizeOptions={[5, 10, 20, 50, 100]}
                         disableRowSelectionOnClick
-                        sx={{ display: 'grid' }}
+                        sx={{
+                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                                outline: "none !important",
+                            },
+                            display: 'grid'
+                        }}
                     />
                 )}
             </Box>
@@ -166,7 +170,6 @@ const AppCatalog = () => {
                 onClose={() => setIsUploadDialogOpen(!isUploadDialogOpen)}
                 onSubmit={(file) => handleFileUpload(file, action)}
             />
-            <ToastContainer />
         </>
     );
 };
