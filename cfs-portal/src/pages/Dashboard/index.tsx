@@ -8,6 +8,7 @@ import { getAppPkg } from '../../api/appPkg';
 import { getAppI } from '../../api/appI';
 import { AppData, InstanceData } from '../../types/Component';
 import toast from '../../utils/toast';
+import InstanceGrid from '../../components/InstanceGrid';
 
 const appColumns: GridColDef[] = [
     { field: 'info-name', headerName: 'Name', flex: 1 },
@@ -122,21 +123,7 @@ const Dashboard = () => {
                                     }
                                 />
                                 <CardContent>
-                                    <DataGrid
-                                        rows={instanceData}
-                                        columns={instanceColumns}
-                                        disableRowSelectionOnClick
-                                        disableColumnMenu
-                                        hideFooter
-                                        sx={{
-                                            "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
-                                                outline: 'none',
-                                            },
-                                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                                                outline: "none !important",
-                                            },
-                                        }}
-                                    />
+                                    <InstanceGrid minimalConfig />
                                 </CardContent>
                             </CardActionArea>
                         </Card>

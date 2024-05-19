@@ -110,3 +110,7 @@ export type DetailsDialogProps = {
   onClose: () => void,
   data: string
 }
+
+export type InstanceGridProps = {
+  minimalConfig?: boolean,
+}
