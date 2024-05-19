@@ -160,7 +160,7 @@ const AppCatalog = () => {
             <FormDialog
                 open={isFormDialogOpen}
                 onClose={closeFormDialog}
-                onSubmit={(formData) => handleInstantiate(rowId, formData)}
+                onSubmit={(formData: FormData) => handleInstantiate(rowId, formData)}
                 title='Create New Instance'
                 fields={fields}
             />
@@ -168,7 +168,7 @@ const AppCatalog = () => {
                 title={`${capitalize(action)} ${Item.APP}`}
                 open={isUploadDialogOpen}
                 onClose={() => setIsUploadDialogOpen(!isUploadDialogOpen)}
-                onSubmit={(file) => handleFileUpload(file, action)}
+                onSubmit={(file: File) => handleFileUpload(file, action)}
             />
         </>
     );
