@@ -115,3 +115,13 @@ export type InstanceGridProps = {
   minimalConfig?: boolean,
   instanceCount?: (count: number) => void,
 }
+
+export type SidebarProps = {
+  item: {
+    path: string,
+    name: string,
+    icon: ReactNode
+  },
+  isOpen: boolean,
+  isSelected: boolean
+}

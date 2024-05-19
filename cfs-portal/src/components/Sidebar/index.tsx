@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { useSidebar } from '../../contexts/sidebarContext';
+import { SidebarProps } from '../../types/Component';
 
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +14,7 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import ViewListRoundedIcon from '@mui/icons-material/ViewListRounded';
 import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded';
 
-import { useTheme } from '@mui/material';
+import { useTheme, styled } from '@mui/material';
 import { buttonSx, Drawer } from './sidebarStyles';
 
 const listItems = [
@@ -22,9 +23,41 @@ const listItems = [
     { name: 'App Instances', icon: <AccountTreeRoundedIcon />, path: '/app-instances' }
 ];
 
+
+const StyledNavLink = styled(NavLink)(({ theme }) => ({
+    textDecoration: 'none',
+    color: theme.palette.text.primary
+}));
+
+const SidebarItem = ({ item, isOpen, isSelected }: SidebarProps) => {
+    const theme = useTheme();
+    return (
+        <StyledNavLink to={item.path} aria-label={item.name}>
+            <ListItem sx={{ padding: '6px' }} >
+                <ListItemButton
+                    selected={isSelected}
+                    sx={buttonSx(theme, isOpen)}
+                    disableGutters
+                    aria-selected={isSelected}
+                >
+                    <ListItemIcon
+                        sx={{
+                            minWidth: 0,
+                            mr: isOpen ? 3 : 'auto',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {item.icon}
+                    </ListItemIcon>
+                    {isOpen && <ListItemText primary={item.name} />}
+                </ListItemButton>
+            </ListItem>
+        </StyledNavLink>
+    )
+};
+
 export const Sidebar = () => {
     const location = useLocation();
-    const theme = useTheme();
     const { sidebarOpen } = useSidebar();
 
     return (
@@ -36,32 +69,12 @@ export const Sidebar = () => {
             <Box sx={{ overflow: 'hidden' }}>
                 <List>
                     {listItems.map((listItem, index) => (
-                        <NavLink
-                            to={listItem.path}
-                            style={{ textDecoration: 'none', color: theme.palette.text.primary }}
+                        <SidebarItem
                             key={index}
-                        >
-                            <ListItem sx={{ padding: '6px' }}>
-                                <ListItemButton
-                                    selected={location.pathname === listItem.path}
-                                    sx={
-                                        buttonSx(theme, sidebarOpen)
-                                    }
-                                    disableGutters
-                                >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: sidebarOpen ? 3 : 'auto',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        {listItem.icon}
-                                    </ListItemIcon>
-                                    {sidebarOpen && <ListItemText primary={listItem.name} />}
-                                </ListItemButton>
-                            </ListItem>
-                        </NavLink>
+                            item={listItem}
+                            isOpen={sidebarOpen}
+                            isSelected={location.pathname === listItem.path}
+                        />
                     ))}
                 </List>
             </Box>
