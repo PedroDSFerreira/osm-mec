@@ -18,7 +18,7 @@ const AppCatalog = () => {
         vimData,
         rowId,
         loading,
-        isDialogOpen,
+        isConfirmationDialogOpen,
         isFormDialogOpen,
         isUploadDialogOpen,
         action,
@@ -26,8 +26,8 @@ const AppCatalog = () => {
         setIsUploadDialogOpen,
         setRowId,
         handleFileUpload,
-        openDialog,
-        closeDialog,
+        openConfirmationDialog,
+        closeConfirmationDialog,
         handleDelete,
         openFormDialog,
         closeFormDialog,
@@ -89,7 +89,7 @@ const AppCatalog = () => {
                             },
                             {
                                 label: 'Delete',
-                                handleClick: () => openDialog(params.row.id),
+                                handleClick: () => openConfirmationDialog(params.row.id),
                             },
                         ] as DropdownOption[]
                     }
@@ -154,8 +154,8 @@ const AppCatalog = () => {
                 item={Item.APP}
                 action={ActionType.DELETE}
                 onConfirm={handleDelete}
-                onClose={closeDialog}
-                open={isDialogOpen}
+                onClose={closeConfirmationDialog}
+                open={isConfirmationDialogOpen}
             />
             <FormDialog
                 open={isFormDialogOpen}
