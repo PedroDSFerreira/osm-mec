@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg, updateAppPkg } from "../api/appPkg";
-import { getVims } from "../api/vim";
+import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg, updateAppPkg, getVims } from "../api/api";
 import toast from "../utils/toast";
 import { AppData, VimData, ActionType } from "../types/Component";
 

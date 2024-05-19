@@ -4,8 +4,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Card, CardActionArea, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { getAppPkg } from '../../api/appPkg';
-import { getAppI } from '../../api/appI';
+import { getAppPkg, getAppI } from '../../api/api';
 import { AppData, InstanceData } from '../../types/Component';
 import toast from '../../utils/toast';
 import InstanceGrid from '../../components/InstanceGrid';
@@ -14,12 +13,6 @@ const appColumns: GridColDef[] = [
     { field: 'info-name', headerName: 'Name', flex: 1 },
     { field: 'provider', headerName: 'Provider', flex: 1 },
     { field: 'version', headerName: 'Version', flex: 1 },
-];
-
-const instanceColumns: GridColDef[] = [
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'operational-status', headerName: 'Operational Status', flex: 1 },
-    { field: 'config-status', headerName: 'Config Status', flex: 1 },
 ];
 
 const Dashboard = () => {
@@ -31,8 +24,8 @@ const Dashboard = () => {
     const [instanceData, setInstanceData] = useState<InstanceData[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getAppData();
-        getInstanceData();
+        getAppData()
+        getInstanceData()
     }, []);
 
     const getAppData = async () => {
@@ -49,17 +42,9 @@ const Dashboard = () => {
 
     const getInstanceData = async () => {
         try {
-            const data = await getAppI();
-            const formattedData = data.map((d: any) => ({
-                ...d,
-                'created-at': new Date(d['created-at'] * 1000)
-            }));
-            setInstanceData(formattedData);
+            const { data } = await getAppI();
+            setInstanceData(data);
         } catch (error) {
-            setInstanceData([]);
-            toast.error('Error fetching instance data');
-        } finally {
-            setLoading(false);
         }
     };
 

@@ -8,7 +8,7 @@ import DropdownButton from "../../components/DropdownButton";
 import DetailsDialog from "../DetailsDialog";
 import ConfirmationDialog from "../ConfirmationDialog";
 import { IconButton } from "@mui/material";
-import { getAppI, terminateAppI } from "../../api/appI";
+import { getAppI, terminateAppI } from "../../api/api";
 import { DropdownOption, InstanceData, OperationalStatus, ConfigStatus, ActionType, Item, InstanceGridProps } from "../../types/Component";
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -167,7 +167,7 @@ const InstanceGrid = ({ minimalConfig = false }: InstanceGridProps) => {
 
     const getInstanceData = async () => {
         try {
-            const data = await getAppI();
+            const { data } = await getAppI();
             const formattedData = data.map((d: any) => ({
                 ...d,
                 'created-at': new Date(d['created-at'] * 1000)
