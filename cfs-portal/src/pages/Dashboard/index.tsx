@@ -21,11 +21,10 @@ const Dashboard = () => {
     const navigateToMecInstances = () => { navigate('/mec-instances'); }
 
     const [appData, setAppData] = useState<AppData[]>([]);
-    const [instanceData, setInstanceData] = useState<InstanceData[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [instanceCount, setInstanceCount] = useState<Number>(0);
+
     useEffect(() => {
         getAppData()
-        getInstanceData()
     }, []);
 
     const getAppData = async () => {
@@ -35,18 +34,12 @@ const Dashboard = () => {
         } catch (error) {
             setAppData([]);
             toast.error('Error fetching app data');
-        } finally {
-            setLoading(false);
         }
     };
 
-    const getInstanceData = async () => {
-        try {
-            const { data } = await getAppI();
-            setInstanceData(data);
-        } catch (error) {
-        }
-    };
+    const handleInstanceCount = (count: number) => {
+        setInstanceCount(count);
+    }
 
     return (
         <>
@@ -102,13 +95,13 @@ const Dashboard = () => {
                                                 MEC Instances
                                             </Typography>
                                             <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
-                                                {`${instanceData.length}`}
+                                                {instanceCount.toString()}
                                             </Typography>
                                         </Box>
                                     }
                                 />
                                 <CardContent>
-                                    <InstanceGrid minimalConfig />
+                                    <InstanceGrid minimalConfig instanceCount={handleInstanceCount} />
                                 </CardContent>
                             </CardActionArea>
                         </Card>

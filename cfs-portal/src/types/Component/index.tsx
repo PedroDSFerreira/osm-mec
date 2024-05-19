@@ -113,4 +113,5 @@ export type DetailsDialogProps = {
 
 export type InstanceGridProps = {
   minimalConfig?: boolean,
+  instanceCount?: (count: number) => void,
 }

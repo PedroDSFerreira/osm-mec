@@ -54,7 +54,7 @@ const terminateInstance = async (id: string) => {
     }
 }
 
-const InstanceGrid = ({ minimalConfig = false }: InstanceGridProps) => {
+const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProps) => {
     const [instanceData, setInstanceData] = useState<InstanceData[]>([]);
     const [loading, setLoading] = useState(true);
     const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
@@ -173,9 +173,13 @@ const InstanceGrid = ({ minimalConfig = false }: InstanceGridProps) => {
                 'created-at': new Date(d['created-at'] * 1000)
             }));
             setInstanceData(formattedData);
+            if (instanceCount)
+                instanceCount(data.length);
         } catch (error) {
             setInstanceData([]);
             toast.error('Error fetching instance data');
+            if (instanceCount)
+                instanceCount(0);
         } finally {
             setLoading(false);
         }
