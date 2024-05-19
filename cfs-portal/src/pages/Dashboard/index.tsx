@@ -18,7 +18,7 @@ const appColumns: GridColDef[] = [
 const Dashboard = () => {
     const navigate = useNavigate();
     const navigateToAppCatalog = () => { navigate('/app-catalog'); }
-    const navigateToMecInstances = () => { navigate('/mec-instances'); }
+    const navigateToAppInstances = () => { navigate('/app-instances'); }
 
     const [appData, setAppData] = useState<AppData[]>([]);
     const [instanceCount, setInstanceCount] = useState<Number>(0);
@@ -87,12 +87,12 @@ const Dashboard = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Card sx={{ borderRadius: '6px', boxShadow: '6' }}>
-                            <CardActionArea onClick={navigateToMecInstances}>
+                            <CardActionArea onClick={navigateToAppInstances}>
                                 <CardHeader
                                     title={
                                         <Box display="flex" justifyContent="space-between" alignItems="center">
                                             <Typography variant="h5">
-                                                MEC Instances
+                                                App Instances
                                             </Typography>
                                             <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
                                                 {instanceCount.toString()}

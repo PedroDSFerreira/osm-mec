@@ -7,7 +7,7 @@ import Test from './pages/Test'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import AppCatalog from './pages/AppCatalog';
-import MecInstances from './pages/MecInstances';
+import AppInstances from './pages/AppInstances';
 import { Sidebar } from './components/Sidebar';
 import TopBar from './components/Topbar';
 import { SidebarProvider } from './contexts/sidebarContext';
@@ -48,7 +48,7 @@ const App = () => {
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/app-catalog' element={<AppCatalog />} />
-            <Route path='/mec-instances' element={<MecInstances />} />
+            <Route path='/app-instances' element={<AppInstances />} />
             <Route path='*' element={<h1>Not Found</h1>} />
           </Route>
         </Routes>

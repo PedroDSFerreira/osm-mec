@@ -19,7 +19,7 @@ import { buttonSx, Drawer } from './sidebarStyles';
 const listItems = [
     { name: 'Dashboard', icon: <DashboardRoundedIcon />, path: '/dashboard' },
     { name: 'App Catalog', icon: <ViewListRoundedIcon />, path: '/app-catalog' },
-    { name: 'MEC Instances', icon: <AccountTreeRoundedIcon />, path: '/mec-instances' }
+    { name: 'App Instances', icon: <AccountTreeRoundedIcon />, path: '/app-instances' }
 ];
 
 export const Sidebar = () => {
