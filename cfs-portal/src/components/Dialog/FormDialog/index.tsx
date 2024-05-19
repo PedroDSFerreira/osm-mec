@@ -9,7 +9,7 @@ import {
     SelectChangeEvent,
     MenuItem,
 } from '@mui/material';
-import { FormDialogProps } from '../../types/Component';
+import { FormDialogProps } from '../../../types/Component';
 
 const FormDialog = ({ open, onClose, onSubmit, title, fields }: FormDialogProps) => {
     const [formData, setFormData] = React.useState<FormData>(new FormData());

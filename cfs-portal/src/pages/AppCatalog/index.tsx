@@ -3,10 +3,10 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button, Typography } from '@mui/material';
 import { Skeleton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import ConfirmationDialog from '../../components/ConfirmationDialog';
-import FormDialog from '../../components/FormDialog';
+import ConfirmationDialog from '../../components/Dialog/ConfirmationDialog';
+import FormDialog from '../../components/Dialog/FormDialog';
 import DropdownButton from '../../components/DropdownButton';
-import UploadDialog from '../../components/UploadDialog';
+import UploadDialog from '../../components/Dialog/UploadDialog';
 import capitalize from '../../utils/capitalize';
 
 import { useAppCatalog } from '../../hooks/useAppCatalog';

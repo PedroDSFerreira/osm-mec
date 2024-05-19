@@ -5,8 +5,8 @@ import {
     DialogActions,
     Button,
 } from '@mui/material';
-import { ConfirmationDialogProps } from '../../types/Component';
-import capitalize from '../../utils/capitalize';
+import { ConfirmationDialogProps } from '../../../types/Component';
+import capitalize from '../../../utils/capitalize';
 
 const ConfirmationDialog = ({ open, onClose, onConfirm, action, item }: ConfirmationDialogProps) => {
     const getTitle = () => {
