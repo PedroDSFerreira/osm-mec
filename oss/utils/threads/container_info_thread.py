@@ -26,12 +26,13 @@ def get_containers_info():
             response = requests.get("http://container-data-api:8000/containerInfo")
             for container in response.json()["ContainerInfo"]:
                 node_specs = requests.get("http://container-data-api:8000/nodeSpecs/" + container["node"]).json()
-                containers[container["id"]] = {
-                        "ns":container["ns_id"],
-                        "node_specs": node_specs["NodeSpecs"],
-                }
-                containers[container["id"]]["node_specs"]["prev_cpu"] = 0
-                containers[container["id"]]["node_specs"]["prev_timestamp"] = 0
+                if container["id"] not in containers:
+                    containers[container["id"]] = {
+                            "ns":container["ns_id"],
+                            "node_specs": node_specs["NodeSpecs"],
+                    }
+                    containers[container["id"]]["node_specs"]["prev_cpu"] = 0
+                    containers[container["id"]]["node_specs"]["prev_timestamp"] = 0
         except Exception as e:
             pass
 

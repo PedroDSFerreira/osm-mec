@@ -3,11 +3,11 @@ import time
 
 from cherrypy.process import plugins
 
-from .kafka_utils import KafkaUtils
+from ..kafka import KafkaUtils
 
 
 class KafkaConsumerThread(plugins.SimplePlugin):
-    """CherryPy plugin to create a background worker thread"""
+    """Background thread that consumes messages from Kafka"""
 
     def __init__(self, bus, topic, callback):
         super().__init__(bus)
@@ -24,8 +24,6 @@ class KafkaConsumerThread(plugins.SimplePlugin):
 
 
 def consume_messages(topic, callback):
-    """Background worker thread"""
-
     consumer = KafkaUtils.create_consumer(topics=[topic])
 
     while True:

@@ -4,7 +4,7 @@ import uuid
 
 from cherrypy import HTTPError
 from kafka import KafkaConsumer, KafkaProducer
-from .error_handler import responses
+from .callbacks.error_handler import responses
 
 producer = KafkaProducer(
     bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS"),

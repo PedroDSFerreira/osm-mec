@@ -4,10 +4,9 @@ import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
 from utils.cherrypy_utils import jsonify_error
-from utils.kafka import KafkaConsumerThread
-from utils.kafka.error_handler import callback as error_handler
-from utils.kafka.get_metrics import callback as get_metrics
-from utils.container_info_thread import ContainerInfoThread
+from utils.kafka.callbacks.error_handler import callback as error_handler
+from utils.kafka.callbacks.get_metrics import callback as get_metrics
+from utils.threads import ContainerInfoThread, KafkaConsumerThread, WebSocketServiceThread
 
 
 def main():
@@ -16,6 +15,7 @@ def main():
     KafkaConsumerThread(cherrypy.engine, "responses", error_handler).subscribe()
     KafkaConsumerThread(cherrypy.engine, "k8s-cluster", get_metrics).subscribe()
     ContainerInfoThread(cherrypy.engine).subscribe()
+    WebSocketServiceThread(cherrypy.engine).subscribe()
 
     dispatcher = set_routes()
 

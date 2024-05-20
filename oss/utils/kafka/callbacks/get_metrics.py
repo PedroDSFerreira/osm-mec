@@ -1,12 +1,22 @@
-from ..container_info_thread import containers
+from ...threads.container_info_thread import containers
+from ...threads.websocket_service_thread import metrics_queue
 
 def callback(data):
     for container_id in containers.keys():
         if container_id in data.get("container_Name"):
             node_specs = containers[container_id]["node_specs"]
-            print(f"Container: {container_id}:")
-            print(f"\tMemory Load: {get_mem_load(data, node_specs)}%")
-            print(f"\tCPU Load: {get_cpu_load(data, node_specs, container_id)}%")
+            appi_id = containers[container_id]["ns"]
+
+            metrics = {
+                "appi_id": appi_id,
+                "mem_load": get_mem_load(data, node_specs),
+                "cpu_load": get_cpu_load(data, node_specs, container_id),
+            }
+
+            metrics_queue.put(metrics)
+
+
+
 
 def get_mem_load(c_info, node_specs):
     mem_load = (c_info["container_stats"]["memory"]["usage"]/(node_specs["memory_size"]*pow(1024,3))) * 100
