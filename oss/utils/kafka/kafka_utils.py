@@ -4,8 +4,7 @@ import uuid
 
 from cherrypy import HTTPError
 from kafka import KafkaConsumer, KafkaProducer
-
-responses = {}
+from .callbacks.error_handler import responses
 
 producer = KafkaProducer(
     bootstrap_servers=os.getenv("KAFKA_BOOTSTRAP_SERVERS"),
@@ -34,12 +33,10 @@ class KafkaUtils:
         return msg_id
 
     @staticmethod
-    def consume_messages(consumer):
+    def consume_messages(consumer, callback):
         for message in consumer:
             response = message.value
-
-            msg_id = response.pop("msg_id")
-            responses[msg_id] = response
+            callback(response)
 
     @staticmethod
     def wait_for_response(msg_id=None):

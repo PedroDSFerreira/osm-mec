@@ -4,13 +4,18 @@ import cherrypy
 import cherrypy_cors
 from app_routes import set_routes
 from utils.cherrypy_utils import jsonify_error
-from utils.error_handler import BackgroundThread
+from utils.kafka.callbacks.error_handler import callback as error_handler
+from utils.kafka.callbacks.get_metrics import callback as get_metrics
+from utils.threads import ContainerInfoThread, KafkaConsumerThread, WebSocketServiceThread
 
 
 def main():
     cherrypy_cors.install()
 
-    BackgroundThread(cherrypy.engine).subscribe()
+    KafkaConsumerThread(cherrypy.engine, "responses", error_handler).subscribe()
+    KafkaConsumerThread(cherrypy.engine, "k8s-cluster", get_metrics).subscribe()
+    ContainerInfoThread(cherrypy.engine).subscribe()
+    WebSocketServiceThread(cherrypy.engine).subscribe()
 
     dispatcher = set_routes()
 
@@ -27,7 +32,7 @@ def main():
     cherrypy.tree.mount(root=None, config=config)
     cherrypy.config.update(
         {
-            "server.socket_host": os.getenv("OSS_HOSTNAME"),
+            "server.socket_host": "0.0.0.0",
             "server.socket_port": int(os.getenv("OSS_PORT")),
         }
     )

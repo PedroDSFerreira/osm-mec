@@ -1,7 +1,6 @@
 import os
 
 from osmclient import client
-from osmclient.common.exceptions import ClientException
 
 
 def get_osm_client():
