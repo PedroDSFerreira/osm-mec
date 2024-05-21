@@ -1,586 +1,507 @@
 <!DOCTYPE html>
-<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/fevicon.png" type="image/x-icon">
-  <title>Finter</title>
+        <!--=============== FAVICON ===============-->
+        <!-- <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon"> -->
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <!-- nice select -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+        <title>OSM MEC</title>
+    </head>
+    <body>
+        <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo">
+                    <i class="nav__logo-icon"></i> OSM-MEC
+                </a>
 
-  <!-- Google Icons-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-</head>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#products" class="nav__link">Team</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#faqs" class="nav__link">Related Questions</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact" class="nav__link">Credits</a>
+                        </li>
+                    </ul>
 
-<body>
-  <div class="hero_area">
-    <div class="hero_bg_box">
-      <img src="images/earth.jpg" alt=""> <!-- CHANGE IMAGE HERE!!!-->
-    </div>
-    <!-- header section strats -->
-    <header class="header_section">
-      
-      <div class="header_bottom">
-        <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand " href="index.html" style="font-size: 30px;"> OSM-MEC </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class=""> </span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav  ">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#osm-mec" style="font-size: 25px;">Intro <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#our-work" style="font-size: 25px;">Our Work</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#about-us" style="font-size: 25px;">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#our-team" style="font-size: 25px;"> Team </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#used-tech" style="font-size: 25px;"> Technologies</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </header>
-    <!-- end header section -->
-    <!-- slider section -->
-    <section class="slider_section ">
-      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container ">
-              <div class="row">
-                <div class="col-lg-10 col-md-11 mx-auto">
-                  <div class="detail-box" style="font-size: 40px;">
-                    <h1>
-                      Your Gateway to Efficient Orchestration
-                    </h1>
-                    <p style="font-size: 30px;">
-                      Discover the Multi-access Edge Computing Orchestrator (MEAO), a crucial tool translating MEC functionalities
-                      into NFV
-                    </p>
-                  </div>
+                    <div class="nav__close" id="nav-close">
+                        <i class="ri-close-line"></i>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-lg-10 col-md-11 mx-auto">
-                  <div class="detail-box" style="font-size: 40px;">
-                    <h1>
-                      Beyond Concept, into Reality
-                    </h1>
-                    <p style="font-size: 30px;">
-                      Explore our MEC platform, showcasing the results of our Orchestrator and NFV convergence
-                    </p>
-                  </div>
+
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-menu-line"></i>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-lg-10 col-md-11 mx-auto">
-                  <div class="detail-box" style="font-size: 40px;">
-                    <h1>
-                      MEC-NFV Synergy
-                    </h1>
-                    <p style="font-size: 30px;">
-                      Analyze the seamless integration of Multi-access Edge Computing (MEC) and Network
-                      Functions Virtualization (NFV)
-                    </p>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!--==================== HOME ====================-->
+            <section class="home" id="home">
+                <div class="home__container container grid">
+                    <img src="assets/img/network.png" alt="" class="home__img">
+
+                    <div class="home__data">
+                        <h1 class="home__title">
+                            MEC Applications <br> Orchestration
+                        </h1>
+                        <p class="home__description">
+                            Integration of Multi Access-Edge Computing (MEC) applications
+                            with Virtual Network Functions (VNF) Orchestration
+                        </p>
+                        <a href="#about" class="button button--flex">
+                            Explore <i class="ri-arrow-right-down-line button__icon"></i>
+                        </a>
+                    </div>
+
                     
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel_btn-box">
-          <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </section>
-    <!-- end slider section -->
-  </div>
+            </section>
+
+            <!--==================== ABOUT ====================-->
+            <section class="about section container" id="about">
+                <div class="about__container grid">
+                    <img src="assets/img/browser.png" alt="" class="about__img">
+
+                    <div class="about__data">
+                        <h2 class="section__title about__title">
+                            What is our work?
+                        </h2>
+
+                        <!-- <p class="about__description">
+                            MEC has been a tendency for 5G and next generation mobile communications,
+                            as well as virtualiztion of network devices/functions. With this work, we
+                            aimed to:
+                        </p> -->
+
+                        <div class="about__details">
+                            <!-- <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Acquire knowledge related to Open Source Mano (OSM) and MEC tecnologies
+                            </p> -->
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Design and develop a MEC Orchestrator that translates MEC applications
+                                into Network Function Virtualizations (NFV's)
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Create a Operations Support System (OSS) and a CFS Portal
+                            </p>
+                            <p class="about__details-description">
+                                <i class="ri-checkbox-fill about__details-icon"></i>
+                                Create and deploy a showcase-purpose MEC application
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== STEPS ====================-->
+            <section class="steps section container">
+                <div class="steps__bg">
+                    <h1 class="section__title-center steps__title">
+                        Milestones
+                    </h1>
+
+                    <h2 class="sections__title-center steps__title">
+                        Frontend
+                    </h2>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Wireframes and Project Structure</h3>
+                            <p class="steps__card-description">
+                                Plan of a well structured design of the pages necessary for our CFS Portal, based on the
+                                OSM's aesthetics
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">Pages Development</h3>
+                            <p class="steps__card-description">
+                                Development of the designed pages using React.js (components and interactions between them)
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">API Integration and Authentication</h3>
+                            <p class="steps__card-description">
+                                Integration of the API endpoints with our interface accordingly, along with user authentication
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 class="sections__title-center steps__title">
+                        Object Detection App
+                    </h2>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Client/Server Integration</h3>
+                            <p class="steps__card-description">
+                                Development of a client-server application for object detection using YOLOv3 algorithm
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">Containerization and Publish</h3>
+                            <p class="steps__card-description">
+                                Docker containerization and publishment of the app on a K3s Cluster 
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">Onboarding as CNF</h3>
+                            <p class="steps__card-description">
+                                Onboard of the Object Detection App (MEC App) as a Containerized Network Function 
+                            </p>
+                        </div>
+                    </div>
+
+                    <h2 class="sections__title-center steps__title">
+                        Backend
+                    </h2>
+
+                    <div class="steps__container grid">
+                        <div class="steps__card">
+                            <div class="steps__card-number">01</div>
+                            <h3 class="steps__card-title">Endpoints and REST Server</h3>
+                            <p class="steps__card-description">
+                                Development of a REST Server to request OSM's services via endpoint calling.
+                                Endpoints based on OSM's "needs" using cherrypy
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">02</div>
+                            <h3 class="steps__card-title">OSS-MEAO connectivity</h3>
+                            <p class="steps__card-description">
+                                Implementation of the OSS and MEAO (without the MEC App logic), as well as
+                                communication between both using Kafka and MongoDB based interaction
+                            </p>
+                        </div>
+
+                        <div class="steps__card">
+                            <div class="steps__card-number">03</div>
+                            <h3 class="steps__card-title">MEC App Yang Model and MEAO</h3>
+                            <p class="steps__card-description">
+                                Build of the MEC App YANG Model, based on ETSI'S documentation, followed by 
+                                the implementation of MEAO's translation capabilities
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== PRODUCTS ====================-->
+            <section class="product section container" id="products">
+                <h2 class="section__title-center">
+                    Our Team
+                </h2>
 
 
-  <!-- service section -->
+                <div class="product__container grid">
+                    <article class="product__card">
 
-  <section class="service_section layout_padding pb-0">
-    <div class="container" id="osm-mec">
-      <div class="heading_container heading_center">
-        <h2 class="mb-3" style="font-size: 45px;">
-          Introduction
-        </h2>
-        <p class="col-8 px-0" style="font-size: 25px;">
-          Welcome to OSM-MEC. In a world dominated by data consumption, 
-          efficiency and low-latency computing are non-negotiable. That's where Multi-access Edge Computing (MEC) steps in.
-        </p>
-        <p class="col-8 px-0" style="font-size: 25px;">
-          Our focus is clear - to bridge the gap between MEC and Network Functions Virtualization (NFV)
-              We will develop a MEC Application Orchestrator (MEAO), along with a MEC-platform for showcasing purposes and a monitoring platform for bothe MEC and MEC applications.
-        </p>
-      </div>
-      <div class="service_container">
-        <div class="carousel-wrap ">
-          <div class="service_owl-carousel owl-carousel">
-            <div class="item">
-              <div class="box ">
-                <span class="material-symbols-outlined" style="font-size: 45px;">
-                  bar_chart_4_bars
-                  </span>
-                <div class="detail-box">
-                  <h5>
-                    Analysis
-                  </h5>
-                  <p>
-                    Analyze state of the art and standards on MEC, NFV, orchestration, and
-                    management, as well as OSM's architecture
-                  </p>
+                        <img src="assets/img/afonso.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Afonso Castanheta</h3>
+                        <span class="product__price">Backend</span>
+
+                        <a href="https://github.com/castanheta">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
+
+                    <article class="product__card">
+                        <img src="assets/img/xico.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Francisco Cardita</h3>
+                        <span class="product__price">Frontend</span>
+
+                        <a href="https://github.com/FranciscoCardita">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
+
+                    <article class="product__card">
+                        <img src="assets/img/henrique.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Henrique Cruz</h3>
+                        <span class="product__price">Backend</span>
+
+                        <a href="https://github.com/hmecruz">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
+
+                    <article class="product__card">
+
+                        <img src="assets/img/luis.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Luís Oliveira</h3>
+                        <span class="product__price">Frontend</span>
+
+                        <a href="https://github.com/luisOliveira-22">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
+
+                    <article class="product__card">
+
+                        <img src="assets/img/pedro.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Pedro Ferreira</h3>
+                        <span class="product__price">Backend</span>
+
+                        <a href="https://github.com/PedroDSFerreira/">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
+
+                    <article class="product__card">
+
+                        <img src="assets/img/samuel.jpeg" alt="" class="product__img">
+
+                        <h3 class="product__title">Samuel Teixeira</h3>
+                        <span class="product__price">Backend</span>
+
+                        <a href="https://github.com/SamuTheCoder/">
+                            <button class="button--flex product__button">
+                                <i class="ri-github-fill"></i>
+                            </button>
+                        </a>
+                    </article>
                 </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <span class="material-symbols-outlined" style="font-size: 45px;">
-                  hub
-                  </span>
-                <div class="detail-box">
-                  <h5>
-                    Create a MEAO
-                  </h5>
-                  <p>
-                    Design and implement a MEC Application Orchestrator (MEAO) that translates
-                    the MEC-related functionalities to the analogous NFV ones
-                  </p>
+            </section>
+
+            <!--==================== QUESTIONS ====================-->
+            <section class="questions section" id="faqs">
+                <h2 class="section__title-center questions__title container">
+                    Related
+                </h2>
+
+                <div class="questions__container container grid">
+                    <div class="questions__group">
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What is Multi Access-Edge Computing (MEC)?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    Multi-access Edge Computing is a technology where network services, such as cloud services, 
+                                    are placed in a network edge, closer to the end user. <br>This approach results in low 
+                                    latency, with the possibility of increasing bandwidth, reduced network 
+                                    congestion, real-time operations and analytics, and others.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What Technologies were used?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    Frontend: React.js, TypeScript <br>
+                                    Backend: Python, MongoDB, Kafka, YANG, osmclient library <br>
+                                    Infrastructure: K3s, Docker <br>
+                                    Project Management: Github, Github Projects
+                                </p>
+                            </div>
+                        </div>
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    Benefits of MEC through NFV
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    The lack of standardization is making it difficult to be implemented worldwide. 
+                                    Translation of MEC Apps to Network Function Virtualization (NFV) offers a promising solution,
+                                    with advantages such as less power consumption and no dedicated hardware. 
+                                    <br>
+                                    Open Source MANO (OSM) emerges as a suitable option for NFV-based MEC deployment, 
+                                    aligning with ETSI's standardization efforts.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="questions__group">
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    What is Open Source MANO (OSM)?
+                                </h3>
+                            </header>
+    
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    Open Source MANO (OSM) is an ETSI hosted project for creation and management/orchestration
+                                    of Network Functions Virtualizations (NFV's). <br> NFV's consist in virtualized network hardware
+                                    , such as routers or firewalls
+                                </p>
+                            </div>
+                        </div>
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    How did we manage our tasks?
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    We had weekly team meetings to discuss our progress and to make decisions.
+                                    <br>The use of Github Projects made it possible for us to describe our tasks,
+                                    dividing them into topics and assigning them to the team members.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="questions__item">
+                            <header class="questions__header">
+                                <i class="ri-add-line questions__icon"></i>
+                                <h3 class="questions__item-title">
+                                    Problems addressed with our system
+                                </h3>
+                            </header>
+
+                            <div class="questions__content">
+                                <p class="questions__description">
+                                    The real-world applications of our system include optimizing network resources, 
+                                    enhancing edge computing capabilities for various industries such as healthcare, 
+                                    transportation, and smart cities, and enabling low-latency services like 
+                                    augmented reality and IoT.<br> Additionally, our system addresses challenges such 
+                                    as network congestion, data privacy concerns, and the need for efficient 
+                                    resource allocation in edge computing environments.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <span class="material-symbols-outlined" style="font-size: 45px;">
-                  slideshow
-                  </span>
-                <div class="detail-box">
-                  <h5>
-                    Create a MEC Platform
-                  </h5>
-                  <p>
-                    Design and Develop a MEC platform for show-casing purposes
-                  </p>
+            </section>
+
+            <!--==================== CONTACT ====================-->
+            <section class="contact section container" id="contact">                
+                <div class="contact__container grid">
+                    <div class="contact__box">
+                        <h2 class="section__title">
+                            Some useful links
+                        </h2>
+
+                        <div class="contact__data">
+                            <div class="contact__information">
+                                <h3 class="contact__subtitle">Github repository of the project</h3>
+                                <span class="contact__description">
+                                    <a href="https://github.com/PedroDSFerreira/osm-mec">
+                                        <i class="ri-github-fill contact__icon"> Click Here</i>
+                                    </a>
+                                    
+                                </span>
+                            </div>
+
+                            <div class="contact__information">
+                                <h3 class="contact__subtitle">Open Source MANO's Website</h3>
+                                <span class="contact__description">
+                                    <a href="https://osm.etsi.org/">
+                                        <i class="ri-external-link-line contact__icon"> Click Here</i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact__box">
+                        <h2 class="section__title">
+                            Special Thanks
+                        </h2>
+
+                        <div class="contact__data">
+                            <div class="contact__information">
+                                <span class="contact__description">
+                                    We give a special thanks to Pedro Escaleira for his time and dedication to teach us to
+                                    the advanced topics taught with this project.
+                                    <br></br>We also want to thank Diogo Magalhães for creating the CNF for our project.
+                                    <br></br> Finally, we want to thank Pedro Pereira for making the OSM's node metrics available for us                          
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <span class="material-symbols-outlined" style="font-size: 45px;">
-                  touch_app
-                  </span>
-                <div class="detail-box">
-                  <h5>
-                    Monitoring App
-                  </h5>
-                  <p>
-                    Deploy a monitoring platform for bothe the MEC and MEC Applications
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <span class="material-symbols-outlined" style="font-size: 45px;">
-                  fact_check
-                  </span>
-                <div class="detail-box">
-                  <h5>
-                    Evaluate Results
-                  </h5>
-                  <p>
-                    Have critical sense in our develop our job
-                  </p>
-                </div>
-              </div>
-            </div>
+            </section>
+        </main>
+
+        <!--==================== FOOTER ====================-->
+        <footer class="footer section">
             
-          </div>
-        </div>
-      </div>
-      
-      <div class="heading_container heading_center my-5" id="our-work">
-        <h2 class="text-center justify-content-center mb-3" style="font-size: 45px;">
-          Our Work
-        </h2>
-        <div class="col-md-12 col-sm-12 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/architecture.png" alt="">
-              <figcaption>Figure 1 - Architecture of MEC through NFV</figcaption>
-            </div>
-          </div>
-        </div>
-        <p class="col-12 px-0 my-3 text-justify" style="font-size: 25px; text-align: justify;">
-          MEC is a promising technology that lacks standardization. Questions on how 
-          this technology should be implemented are risen from this. MEC through NFV gives some good advantages, such as less power
-          consumption, less expensive than hardware dedicated devices, easier to scale and reduced maintenance costs.
-        </p>
-        <h1 class="my-5">Project Description</h1>
-        <p class="col-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
-          Our Work consists on the developement of the System Level of Multi-access Edge Computing. This system is composed
-          by two main components:
-          <ul class="text-justify" style="font-size: 25px; align-self:self-start;">
-            <li>OSS (Operations Support System)</li>
-            <li>MEAO (MEC Application Orchestrator)</li>
-          </ul>
-        </p>
-        <p class="col-12 px-0 m-3 text-left text-justify" style="font-size: 25px;">
-          Let's give you a description of these components along with one key tool we used: OSM
-        </p>
-        <div class="row my-3">
-          <div class="col-md-4 mx-auto">
-            <div class="info-card">
-              <div class="detail-box">
-                <h2>
-                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
-                    cloud_upload
-                    </span>
-                  OSM
-                </h2>
-              </div>
-              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
-                <li>Open Source Project for NFV Management and Orchestration</li>
-                <li>Information Models for all Virtual Instruction Managers</li>
-                <li>Hosted by ETSI, a key MEC standardizer</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4 mx-auto">
-            <div class="info-card">
-              <div class="detail-box">
-                <h2>
-                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
-                    hub
-                    </span>
-                  MEAO
-                </h2>
-              </div>
-              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
-                <li>Processes information about MEC apps</li>
-                <li>Ensures integrity, authenticity, application rules, resources, etc</li>
-                <li>Seamless integration for optimal performance</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4 mx-auto">
-            <div class="info-card">
-              <div class="detail-box">
-                <h2>
-                  <span class="material-symbols-outlined" style="font-size: 30px; color:white">
-                    captive_portal
-                    </span>
-                  OSS
-                </h2>
-              </div>
-              <ul class="text-justify mr-4 my-4" style="font-size: 20px;">
-                <li>Receives requests from the device apps or the portal for instantiation/termination of MEC apps</li>
-                <li>Seamless interaction with the MEAO for operations related to MEC apps</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <h1 class="my-5">Non Functional Requirements</h1>
-        <p class="col-12 px-0 text-justify" style="font-size: 25px;">
-          The previous description talks about the functional requirements of the components. But, for optimal results, we need more than just
-          the basic. Those are described above:
 
-          <ul class="text-justify" style="font-size: 25px; align-self:self-start;">
-            <li>Modular implementation to improve flexibility and scalability</li>
-            <li>The OSS must have an user friendly interface for good understanding</li>
-            <li>Good Documentation for developers, operators and administrators</li>
-            <li>Encryption between channels of communication through the system</li>
-            <li>Performance and resource utilization must be as optimal as possible</li>
-            <li>An application with signal details to show the functionality of the Orchestrator</li>
-          </ul>
-        </p>
-      </div>
-    </div>
-  </section>
+            <p class="footer__copy">&#169; Bedimcode. All rigths reserved</p>
+        </footer>
+        
+        <!--=============== SCROLL UP ===============-->
+        <a href="#" class="scrollup" id="scroll-up"> 
+            <i class="ri-arrow-up-fill scrollup__icon"></i>
+        </a>
 
-  <!-- service section ends -->
-
-  <!-- about section -->
-
-  <section class="about_section" id="about-us">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-5 offset-md-1">
-          <div class="detail-box pr-md-2">
-            <div class="heading_container">
-              <h2 class="mb-3" style="font-size: 45px;">
-                About Us
-              </h2>
-            </div>
-            <p class="detail_p_mt text-justify" style="font-size: 25px;"> <!-- FONT SIZE CHANGED BY SAMUEL-->
-              Our work was born in a proposal for Projeto em Engenharia de Computadores e Informática (PECI) course project made by Professor Diogo Gomes.
-              It's noticeable that we only developed a part of the MEC architecture. The rest of the MEC platform was done by students from
-              the Masters Degree in Computers and Telematics Engineering, as well as one Phd student, all guided by Prof. Diogo.
-            <p class = "detail_p_mt text-justify" style="font-size: 25px;">
-              What made us choose this proposal was the fact that this project was (in our opinion) more relevant than the others in terms of value to 
-              society. Not only that, we actually like the area of Networking.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <div class="box">
-            <div class="img-box ">
-              <img src="images/people.jpg" class="box_img" alt="about img">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- about section ends -->
-
-  <!-- team section -->
-
-  <section class="team_section layout_padding" id="our-team">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2 style="font-size: 45px;">
-          Our Team <!-- CHANGE TEAM DATA HERE!!!-->
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/afonso.jpeg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Afonso Castanheta
-              </h5>
-              <h6 class="">
-                Machinery
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/xico.jpeg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Francisco Cardita
-              </h5>
-              <h6 class="">
-                Front-end
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/mec.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Henrique Cruz
-              </h5>
-              <h6 class="">
-                Back-end
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/luis.jpeg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Luís Oliveira
-              </h5>
-              <h6 class="">
-                Front-end
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/pedro.jpeg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Pedro Ferreira
-              </h5>
-              <h6 class="">
-                Back-end
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/samuel.jpeg" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Samuel Teixeira
-              </h5>
-              <h6 class="">
-                Back-end/Front-end
-              </h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end team section -->
-
-  <!-- contact section -->
-  <section class="contact_section " id="used-tech">
-    <div class="container-fluid">
-
-      <div class="row">
-        <div class="col-md-6 col-sm-12 px-0">
-          <div class="box">
-            <div class="img-box ">
-              <img src="images/technologies.jpg" class="box_img" alt="about img">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5 offset-md-1">
-          <div class="detail-box pr-md-2">
-            <div class="heading_container ">
-              <h2 class="mb-5" style="font-size: 45px;">Technologies</h2>
-              <p style="font-size: 30px;">Back-end</p>
-              <ul style="font-size:25px;">
-                <li>MongoDB</li>
-                <li>CherryPy</li>
-              </ul>
-              <p style="font-size: 30px;">Front-end</p>
-              <ul style="font-size: 25px;">
-                <li>Angular</li>
-                <li>TypeScript</li>
-              </ul>
-              <p style="font-size: 30px;">Infrastructure</p>
-              <ul style="font-size: 25px;">
-                <li>K3s</li>
-                <li>Github Actions</li>
-              </ul>
-              <p style="font-size: 30px;">Project Management</p>
-              <ul style="font-size: 25px;">
-                <li>Github</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end contact section -->
-
-  <!-- client section -->
-
-
-  <!-- end client section -->
-
-  <!-- info section -->
-  <section class="info_section ">
-    <div class="container">
-      <div class="col-md-4 ">
-            <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-        </div>
-    </div>
-  </section>
-
-  <!-- end info_section -->
-
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <!-- nice select -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
-  <!-- custom js -->
-  <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
-</body>
-
+        <!--=============== SCROLL REVEAL ===============-->
+        <script src="assets/js/scrollreveal.min.js"></script>
+        
+        <!--=============== MAIN JS ===============-->
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
