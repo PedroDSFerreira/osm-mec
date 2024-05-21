@@ -7,7 +7,7 @@ import Skeleton from "@mui/material/Skeleton";
 import DropdownButton from "../../components/DropdownButton";
 import DetailsDialog from "../Dialog/DetailsDialog";
 import ConfirmationDialog from "../Dialog/ConfirmationDialog";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip, LinearProgress } from "@mui/material";
 import { getAppI, terminateAppI } from "../../api/api";
 import { DropdownOption, InstanceData, OperationalStatus, ConfigStatus, ActionType, Item, InstanceGridProps, Metrics } from "../../types/Component";
 
@@ -112,6 +112,16 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
         }
     }, [socket]);
 
+    const getLoadColor = (load: number) => {
+        if (load < 40) {
+            return 'success';
+        } else if (load < 75) {
+            return 'warning';
+        } else {
+            return 'error';
+        }
+    }
+
     const columns: GridColDef[] = [
         { field: 'name', headerName: 'Name', width: 300 },
         ...minimalConfig ? [] : [{ field: 'description', headerName: 'Description', flex: 1 }],
@@ -144,22 +154,84 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
             headerName: 'Mem (%)',
             width: 70,
             type: 'number',
-            renderCell: (params: any) => (
-                <Typography variant="body2">
-                    {metrics && metrics[params.row.id as string] ? metrics[params.row.id as string].memLoad : '-'}
-                </Typography>
-            )
+            renderCell: (params: any) => {
+                const memLoad = metrics && metrics[params.row.id as string]?.memLoad;
+
+                return (
+                    <Box sx={{ position: 'relative', width: '100%' }}>
+                        {memLoad != undefined ? (
+                            <>
+                                <LinearProgress
+                                    variant="determinate"
+                                    value={memLoad}
+                                    sx={{ width: '100%', height: '30px' }}
+                                    color={getLoadColor(memLoad)}
+                                />
+                                <Typography
+                                    variant="body2"
+                                    fontWeight='bold'
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        lineHeight: '30px'
+                                    }}
+                                >
+                                    {memLoad}
+                                </Typography>
+                            </>) : (
+                            <Typography variant="body2" textAlign='center'>
+                                -
+                            </Typography>
+                        )}
+                    </Box>
+                )
+            }
         },
         {
             field: 'cpu-load',
             headerName: 'CPU (%)',
             width: 70,
             type: 'number',
-            renderCell: (params: any) => (
-                <Typography variant="body2">
-                    {metrics && metrics[params.row.id as string] ? metrics[params.row.id as string].cpuLoad : '-'}
-                </Typography>
-            )
+            renderCell: (params: any) => {
+                const cpuLoad = metrics && metrics[params.row.id as string]?.cpuLoad;
+
+                return (
+                    <Box sx={{ position: 'relative', width: '100%' }}>
+                        {cpuLoad != undefined ? (
+                            <>
+                                <LinearProgress
+                                    variant="determinate"
+                                    value={cpuLoad}
+                                    sx={{ width: '100%', height: '30px' }}
+                                    color={getLoadColor(cpuLoad)}
+                                />
+                                <Typography
+                                    variant="body2"
+                                    fontWeight='bold'
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        lineHeight: '30px'
+                                    }}
+                                >
+                                    {cpuLoad}
+                                </Typography>
+                            </>) : (
+                            <Typography variant="body2" textAlign='center'>
+                                -
+                            </Typography>
+                        )}
+                    </Box>
+                )
+            }
         },
         ...minimalConfig ? [] : [{
             field: 'created-at',
