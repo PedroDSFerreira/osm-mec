@@ -33,7 +33,7 @@ class WebSocketServiceThread(plugins.SimplePlugin):
             pass
 
 async def send_metrics():
-    async with websockets.serve(receive_connection, "0.0.0.0", os.getenv("OSS_PORT")):
+    async with websockets.serve(receive_connection, "0.0.0.0", os.getenv("OSS_WS_PORT")):
         try:
             while True:
                 if not metrics_queue.empty():
