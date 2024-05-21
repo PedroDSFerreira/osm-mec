@@ -59,6 +59,7 @@ export type AppData = {
 }
 
 export type InstanceData = {
+  id: string;
   name: string;
   'operational-status': string;
   'config-status': string;
@@ -124,4 +125,11 @@ export type SidebarProps = {
   },
   isOpen: boolean,
   isSelected: boolean
+}
+
+export type Metrics = {
+  [appiID: string]: {
+    memLoad: number,
+    cpuLoad: number
+  }
 }

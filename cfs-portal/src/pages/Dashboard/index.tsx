@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Card, CardActionArea, CardContent, CardHeader, Grid, Typography } from '@mui/material';
+import { Card, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAppPkg, getAppI } from '../../api/api';
 import { AppData, InstanceData } from '../../types/Component';
@@ -51,59 +51,55 @@ const Dashboard = () => {
             <Box>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <Card sx={{ borderRadius: '6px', boxShadow: '6' }}>
-                            <CardActionArea onClick={navigateToAppCatalog} >
-                                <CardHeader
-                                    title={
-                                        <Box display="flex" justifyContent="space-between" alignItems="center">
-                                            <Typography variant="h5">
-                                                App Catalog
-                                            </Typography>
-                                            <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
-                                                {`${appData.length}`}
-                                            </Typography>
-                                        </Box>
-                                    }
+                        <Card sx={{ borderRadius: '6px', boxShadow: '6', cursor: 'pointer' }} onClick={navigateToAppCatalog}>
+                            <CardHeader
+                                title={
+                                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                                        <Typography variant="h5">
+                                            App Catalog
+                                        </Typography>
+                                        <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
+                                            {`${appData.length}`}
+                                        </Typography>
+                                    </Box>
+                                }
+                            />
+                            <CardContent>
+                                <DataGrid
+                                    rows={appData}
+                                    columns={appColumns}
+                                    disableRowSelectionOnClick
+                                    disableColumnMenu
+                                    hideFooter
+                                    sx={{
+                                        "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
+                                            outline: 'none',
+                                        },
+                                        "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                                            outline: "none !important",
+                                        },
+                                    }}
                                 />
-                                <CardContent>
-                                    <DataGrid
-                                        rows={appData}
-                                        columns={appColumns}
-                                        disableRowSelectionOnClick
-                                        disableColumnMenu
-                                        hideFooter
-                                        sx={{
-                                            "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus": {
-                                                outline: 'none',
-                                            },
-                                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                                                outline: "none !important",
-                                            },
-                                        }}
-                                    />
-                                </CardContent>
-                            </CardActionArea>
+                            </CardContent>
                         </Card>
                     </Grid>
                     <Grid item xs={6}>
-                        <Card sx={{ borderRadius: '6px', boxShadow: '6' }}>
-                            <CardActionArea onClick={navigateToAppInstances}>
-                                <CardHeader
-                                    title={
-                                        <Box display="flex" justifyContent="space-between" alignItems="center">
-                                            <Typography variant="h5">
-                                                App Instances
-                                            </Typography>
-                                            <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
-                                                {instanceCount.toString()}
-                                            </Typography>
-                                        </Box>
-                                    }
-                                />
-                                <CardContent>
-                                    <InstanceGrid minimalConfig instanceCount={handleInstanceCount} />
-                                </CardContent>
-                            </CardActionArea>
+                        <Card sx={{ borderRadius: '6px', boxShadow: '6', cursor: 'pointer' }} onClick={navigateToAppInstances}>
+                            <CardHeader
+                                title={
+                                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                                        <Typography variant="h5">
+                                            App Instances
+                                        </Typography>
+                                        <Typography variant="h5" sx={{ marginLeft: 'auto' }}>
+                                            {instanceCount.toString()}
+                                        </Typography>
+                                    </Box>
+                                }
+                            />
+                            <CardContent>
+                                <InstanceGrid minimalConfig instanceCount={handleInstanceCount} />
+                            </CardContent>
                         </Card>
                     </Grid>
                 </Grid>

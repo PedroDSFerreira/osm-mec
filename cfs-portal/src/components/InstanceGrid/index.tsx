@@ -7,9 +7,9 @@ import Skeleton from "@mui/material/Skeleton";
 import DropdownButton from "../../components/DropdownButton";
 import DetailsDialog from "../Dialog/DetailsDialog";
 import ConfirmationDialog from "../Dialog/ConfirmationDialog";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { getAppI, terminateAppI } from "../../api/api";
-import { DropdownOption, InstanceData, OperationalStatus, ConfigStatus, ActionType, Item, InstanceGridProps } from "../../types/Component";
+import { DropdownOption, InstanceData, OperationalStatus, ConfigStatus, ActionType, Item, InstanceGridProps, Metrics } from "../../types/Component";
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -62,6 +62,7 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
     const [confirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [id, setId] = useState('');
     const [socket, setSocket] = useState<WebSocket | null>(null);
+    const [metrics, setMetrics] = useState<Metrics | null>(null);
 
     useEffect(() => {
         getInstanceData();
@@ -73,20 +74,40 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
     }, []);
 
     useEffect(() => {
-        const ws = new WebSocket('ws://localhost:8765');
+        const ws = new WebSocket('ws://localhost:8001');
         setSocket(ws);
     }, []);
 
     useEffect(() => {
         if (socket) {
             socket.onopen = () => {
-                console.log('Connected to WS');
+                console.log('Connected to WebSocket');
             };
             socket.onmessage = (event) => {
-                console.log('Message:', event.data);
+                const data = JSON.parse(event.data);
+                setMetrics((prevMetrics) => {
+                    if (prevMetrics && data.appi_id in prevMetrics) {
+                        return {
+                            ...prevMetrics,
+                            [data.appi_id]: {
+                                ...prevMetrics[data.appi_id],
+                                memLoad: data.mem_load,
+                                cpuLoad: data.cpu_load
+                            }
+                        };
+                    } else {
+                        return {
+                            ...prevMetrics,
+                            [data.appi_id]: {
+                                memLoad: data.mem_load,
+                                cpuLoad: data.cpu_load
+                            }
+                        };
+                    }
+                });
             };
             socket.onclose = () => {
-                console.log('Disconnected from WS');
+                console.log('Disconnected from WebSocket');
             };
         }
     }, [socket]);
@@ -118,29 +139,56 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
                 </Box >
             )
         }],
+        {
+            field: 'mem-load',
+            headerName: 'Mem (%)',
+            width: 70,
+            type: 'number',
+            renderCell: (params: any) => (
+                <Typography variant="body2">
+                    {metrics && metrics[params.row.id as string] ? metrics[params.row.id as string].memLoad : '-'}
+                </Typography>
+            )
+        },
+        {
+            field: 'cpu-load',
+            headerName: 'CPU (%)',
+            width: 70,
+            type: 'number',
+            renderCell: (params: any) => (
+                <Typography variant="body2">
+                    {metrics && metrics[params.row.id as string] ? metrics[params.row.id as string].cpuLoad : '-'}
+                </Typography>
+            )
+        },
         ...minimalConfig ? [] : [{
             field: 'created-at',
             headerName: 'Created At',
-            width: 200,
+            width: 90,
             type: 'date',
-            valueFormatter: ({ value }: { value: Date }) => (value as Date).toLocaleString()
+            renderCell: (params: any) => (
+                <Tooltip title={params.row['created-at'].toLocaleString()}>
+                    <Typography variant="body2">
+                        {params.row['created-at'].toLocaleDateString()}
+                    </Typography>
+                </Tooltip>
+            )
         }],
         {
             field: 'operational-status',
             headerName: 'Operational Status',
             width: minimalConfig ? undefined : 100,
+            headerAlign: 'center',
             flex: minimalConfig ? 1 : undefined,
             align: 'center',
             renderCell: (params) => renderOperationalStatus(params.row['operational-status'] as OperationalStatus)
         },
-        {
+        ...minimalConfig ? [] : [{
             field: 'config-status',
             headerName: 'Config Status',
-            width: minimalConfig ? undefined : 100,
-            flex: minimalConfig ? 1 : undefined,
-            align: 'center',
-            renderCell: (params) => renderConfigStatus(params.row['config-status'] as ConfigStatus)
-        },
+            width: 100,
+            renderCell: (params: any) => renderConfigStatus(params.row['config-status'] as ConfigStatus)
+        }],
         ...minimalConfig ? [] : [{
             field: 'actions',
             headerName: '',
@@ -188,6 +236,7 @@ const InstanceGrid = ({ minimalConfig = false, instanceCount }: InstanceGridProp
     return (
         <>
             <DataGrid
+                hideFooter={minimalConfig}
                 getRowId={(row) => row.id}
                 rows={instanceData}
                 columns={columns}
