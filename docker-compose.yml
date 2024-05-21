@@ -13,6 +13,7 @@ services:
     build: ./oss
     ports:
       - "${OSS_PORT}:${OSS_PORT}"
+      - "${OSS_WS_PORT}:${OSS_WS_PORT}"
     volumes:
       - ./oss:/usr/app
     depends_on:
@@ -21,6 +22,7 @@ services:
     environment:
       - OSM_HOSTNAME=${OSM_IP}
       - OSS_PORT=${OSS_PORT}
+      - OSS_WS_PORT=${OSS_WS_PORT}
       - KAFKA_BOOTSTRAP_SERVERS=${OSM_IP}:${KAFKA_PORT}
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}

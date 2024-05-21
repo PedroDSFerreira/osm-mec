@@ -3,11 +3,10 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button, Typography } from '@mui/material';
 import { Skeleton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { ToastContainer } from 'react-toastify';
-import ConfirmationDialog from '../../components/ConfirmationDialog';
-import FormDialog from '../../components/FormDialog';
+import ConfirmationDialog from '../../components/Dialog/ConfirmationDialog';
+import FormDialog from '../../components/Dialog/FormDialog';
 import DropdownButton from '../../components/DropdownButton';
-import UploadDialog from '../../components/UploadDialog';
+import UploadDialog from '../../components/Dialog/UploadDialog';
 import capitalize from '../../utils/capitalize';
 
 import { useAppCatalog } from '../../hooks/useAppCatalog';
@@ -19,7 +18,7 @@ const AppCatalog = () => {
         vimData,
         rowId,
         loading,
-        isDialogOpen,
+        isConfirmationDialogOpen,
         isFormDialogOpen,
         isUploadDialogOpen,
         action,
@@ -27,8 +26,8 @@ const AppCatalog = () => {
         setIsUploadDialogOpen,
         setRowId,
         handleFileUpload,
-        openDialog,
-        closeDialog,
+        openConfirmationDialog,
+        closeConfirmationDialog,
         handleDelete,
         openFormDialog,
         closeFormDialog,
@@ -90,7 +89,7 @@ const AppCatalog = () => {
                             },
                             {
                                 label: 'Delete',
-                                handleClick: () => openDialog(params.row.id),
+                                handleClick: () => openConfirmationDialog(params.row.id),
                             },
                         ] as DropdownOption[]
                     }
@@ -142,7 +141,12 @@ const AppCatalog = () => {
                         }}
                         pageSizeOptions={[5, 10, 20, 50, 100]}
                         disableRowSelectionOnClick
-                        sx={{ display: 'grid' }}
+                        sx={{
+                            "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
+                                outline: "none !important",
+                            },
+                            display: 'grid'
+                        }}
                     />
                 )}
             </Box>
@@ -150,13 +154,13 @@ const AppCatalog = () => {
                 item={Item.APP}
                 action={ActionType.DELETE}
                 onConfirm={handleDelete}
-                onClose={closeDialog}
-                open={isDialogOpen}
+                onClose={closeConfirmationDialog}
+                open={isConfirmationDialogOpen}
             />
             <FormDialog
                 open={isFormDialogOpen}
                 onClose={closeFormDialog}
-                onSubmit={(formData) => handleInstantiate(rowId, formData)}
+                onSubmit={(formData: FormData) => handleInstantiate(rowId, formData)}
                 title='Create New Instance'
                 fields={fields}
             />
@@ -164,9 +168,8 @@ const AppCatalog = () => {
                 title={`${capitalize(action)} ${Item.APP}`}
                 open={isUploadDialogOpen}
                 onClose={() => setIsUploadDialogOpen(!isUploadDialogOpen)}
-                onSubmit={(file) => handleFileUpload(file, action)}
+                onSubmit={(file: File) => handleFileUpload(file, action)}
             />
-            <ToastContainer />
         </>
     );
 };

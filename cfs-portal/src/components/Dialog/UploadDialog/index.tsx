@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
-import { UploadDialogProps } from "../../types/Component";
+import { UploadDialogProps } from "../../../types/Component";
 import { UploadFile, FolderZipOutlined } from "@mui/icons-material";
 
 const UploadDialog = ({ title, open, onClose, onSubmit }: UploadDialogProps) => {

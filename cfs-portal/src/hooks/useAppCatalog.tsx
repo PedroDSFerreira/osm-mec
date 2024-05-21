@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg, updateAppPkg } from "../api/appPkg";
-import { getVims } from "../api/vim";
+import { getAppPkg, newAppPkg, deleteAppPkg, instantiateAppPkg, updateAppPkg, getVims } from "../api/api";
 import toast from "../utils/toast";
 import { AppData, VimData, ActionType } from "../types/Component";
 
 export const useAppCatalog = () => {
     const [appData, setAppData] = useState<AppData[]>([]);
     const [loading, setLoading] = useState(true);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState<string | null>(null);
     const [vimData, setVimData] = useState<VimData[]>([]);
     const [isFormDialogOpen, setIsFormDialogOpen] = useState(false);
@@ -80,13 +79,13 @@ export const useAppCatalog = () => {
         }
     };
 
-    const openDialog = (id: string) => {
-        setIsDialogOpen(true);
+    const openConfirmationDialog = (id: string) => {
+        setIsConfirmationDialogOpen(true);
         setDeleteItemId(id);
     };
 
-    const closeDialog = () => {
-        setIsDialogOpen(false);
+    const closeConfirmationDialog = () => {
+        setIsConfirmationDialogOpen(false);
     };
 
     const handleDelete = async () => {
@@ -98,7 +97,7 @@ export const useAppCatalog = () => {
             } catch (error) {
                 toast.error('Error deleting app');
             } finally {
-                setIsDialogOpen(false);
+                setIsConfirmationDialogOpen(false);
                 setDeleteItemId(null);
             }
         }
@@ -128,7 +127,7 @@ export const useAppCatalog = () => {
         formData,
         rowId,
         loading,
-        isDialogOpen,
+        isConfirmationDialogOpen,
         isFormDialogOpen,
         isUploadDialogOpen,
         action,
@@ -137,8 +136,8 @@ export const useAppCatalog = () => {
         setRowId,
         setFormData,
         handleFileUpload,
-        openDialog,
-        closeDialog,
+        openConfirmationDialog,
+        closeConfirmationDialog,
         handleDelete,
         openFormDialog,
         closeFormDialog,

@@ -18,6 +18,18 @@ export type ToastType = {
   transition?: ToastTransition
 }
 
+export enum OperationalStatus {
+  INIT = 'init',
+  RUNNING = 'running',
+  FAILED = 'failed',
+}
+
+export enum ConfigStatus {
+  INIT = 'init',
+  CONFIGURED = 'configured',
+  FAILED = 'failed',
+}
+
 export enum ActionType {
   CREATE = 'create',
   DELETE = 'delete',
@@ -47,6 +59,7 @@ export type AppData = {
 }
 
 export type InstanceData = {
+  id: string;
   name: string;
   'operational-status': string;
   'config-status': string;
@@ -90,4 +103,33 @@ export type UploadDialogProps = {
   open: boolean,
   onClose: () => void,
   onSubmit: (data: any) => void
+}
+
+export type DetailsDialogProps = {
+  title: string,
+  open: boolean,
+  onClose: () => void,
+  data: string
+}
+
+export type InstanceGridProps = {
+  minimalConfig?: boolean,
+  instanceCount?: (count: number) => void,
+}
+
+export type SidebarProps = {
+  item: {
+    path: string,
+    name: string,
+    icon: ReactNode
+  },
+  isOpen: boolean,
+  isSelected: boolean
+}
+
+export type Metrics = {
+  [appiID: string]: {
+    memLoad: number,
+    cpuLoad: number
+  }
 }
