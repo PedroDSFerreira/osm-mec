@@ -1,6 +1,7 @@
 from ...threads.container_info_thread import containers
 from ...threads.websocket_service_thread import metrics_queue
 
+
 def callback(data):
     for container_id in containers.keys():
         if container_id in data.get("container_Name"):
@@ -16,15 +17,21 @@ def callback(data):
             metrics_queue.put(metrics)
 
 
-
-
 def get_mem_load(c_info, node_specs):
-    mem_load = (c_info["container_stats"]["memory"]["usage"]/(node_specs["memory_size"]*pow(1024,3))) * 100
+    mem_load = (
+        c_info["container_stats"]["memory"]["usage"]
+        / (node_specs["memory_size"] * pow(1024, 3))
+    ) * 100
     return round(mem_load, 2)
 
+
 def get_cpu_load(c_info, node_specs, container_id):
-    timestampParts = timestampParts = c_info["timestamp"].split(':')
-    timestamp = (float(timestampParts[-3][-2:])*pow(60,2) + float(timestampParts[-2])*60 + float(timestampParts[-1][:-1])) * pow(10, 9)
+    timestampParts = timestampParts = c_info["timestamp"].split(":")
+    timestamp = (
+        float(timestampParts[-3][-2:]) * pow(60, 2)
+        + float(timestampParts[-2]) * 60
+        + float(timestampParts[-1][:-1])
+    ) * pow(10, 9)
     current_cpu = c_info["container_stats"]["cpu"]["usage"]["total"]
     prev_cpu = node_specs.get("prev_cpu")
     prev_timestamp = node_specs.get("prev_timestamp")

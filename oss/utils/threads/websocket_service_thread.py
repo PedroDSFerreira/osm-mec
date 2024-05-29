@@ -1,18 +1,18 @@
-import websockets
-import json
 import asyncio
+import json
+import os
 import queue
 import threading
-import asyncio
+
+import websockets
 from cherrypy.process import plugins
-import os
 
 ws = []
 metrics_queue = queue.Queue()
 
+
 class WebSocketServiceThread(plugins.SimplePlugin):
     """Background thread that sends metrics to the websockets"""
-
 
     def __init__(self, bus):
         super().__init__(bus)
@@ -32,8 +32,11 @@ class WebSocketServiceThread(plugins.SimplePlugin):
             print(f"Could not start websockets server: {e}")
             pass
 
+
 async def send_metrics():
-    async with websockets.serve(receive_connection, "0.0.0.0", os.getenv("OSS_WS_PORT")):
+    async with websockets.serve(
+        receive_connection, "0.0.0.0", os.getenv("OSS_WS_PORT")
+    ):
         try:
             while True:
                 if not metrics_queue.empty():
@@ -45,6 +48,7 @@ async def send_metrics():
         except Exception as e:
             print(f"Could not send metrics: {e}")
             pass
+
 
 async def receive_connection(websocket, path):
     ws.append(websocket)

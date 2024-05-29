@@ -18,7 +18,9 @@ class KafkaConsumerThread(plugins.SimplePlugin):
     def start(self):
         """Plugin entrypoint"""
 
-        self.t = threading.Thread(target=consume_messages, args=(self.topic, self.callback))
+        self.t = threading.Thread(
+            target=consume_messages, args=(self.topic, self.callback)
+        )
         self.t.daemon = True
         self.t.start()
 
