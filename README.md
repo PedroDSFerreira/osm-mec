@@ -1,3 +1,8 @@
+<div align="center">
+<h1>⚠️ Project is no longer in active development ⚠️</h1>
+</div>
+<br>
+
 ![osm-logo](osm-mec-logo.png)
 
 <div align="center">
