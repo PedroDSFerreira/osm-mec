@@ -11,7 +11,9 @@
   
   
   <br>
-  
+
+
+  **<kbd> <br> [Paper](https://www.researchgate.net/publication/385682160_Automatic_Service_Migration_in_a_MEC-NFV_Environment_for_a_User_Mobility_Scenario) <br> </kbd>**
   **<kbd> <br> [Promo Video](https://www.youtube.com/watch?v=NGTCEbkJ_D4) <br> </kbd>**
   **<kbd> <br> [Get Started / Wiki](https://samuthecoder.github.io/osm-mec-wiki/) <br> </kbd>**
   **<kbd> <br> [Demo](https://www.youtube.com/watch?v=o9OZxs9vXEQ) <br> </kbd>**
